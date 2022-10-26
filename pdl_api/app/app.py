@@ -19,7 +19,7 @@ else:
     logging.basicConfig(datefmt='%Y-%m-%dT%H:%M:%S', format=log_format, level=logging.INFO)
 
 app = connexion.FlaskApp(__name__, debug=debug, specification_dir=cfg.API_LOC)
-app.add_api('pdl.yaml', base_path=cfg.PROFILE_URL_PREFIX, arguments={'title': 'Policy Design Lab API'},
+app.add_api('pdl.yaml', base_path=cfg.URL_PREFIX, arguments={'title': 'Policy Design Lab API'},
             resolver=PdlApiResolver('controllers'), resolver_error=501)
 
 if __name__ == '__main__':
