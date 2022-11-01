@@ -13,26 +13,3 @@ Set packages:
 
 Install packages:
 `poetry install`
-
-### Setup Environment
-
-Look at env-example for an example environment file and update parameters with your database settings.
-For example:
-
-```
-#!/bin/bash
-
-export POSTGRES_SERVER=localhost
-export POSTGRES_USER=maestro
-export POSTGRES_PASSWORD=maestro
-export POSTGRES_DB=maestro
-export POSTGRES_PORT=5432
-export ROUTER_PREFIX=/maestro
-```
-
-Run:
-`uvicorn app.main:app --reload`
-
-You should be able to run:
-http://localhost:8000/ for base route that return welcome message
-http://localhost:8000/docs for swagger docs

@@ -12,16 +12,7 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-import json
-import hmac
-import logging
-import uuid as uuidlib
-import pdl_api.app.utils.jsonutils as jsonutils
-import copy
-
-from flask import request, g
-
-import pdl_api.app.controllers.configs as cfg
+import app.utils.jsonutils as jsonutils
 
 
 def search():
