@@ -4,7 +4,7 @@ from app.models.db import db
 class State(db.Model):
     __tablename__ = 'states'
 
-    state_code = db.Column(db.Integer, primary_key=True)
+    state_code = db.Column(db.String(), primary_key=True)
     state_name = db.Column(db.String())
 
     def __init__(self, state_code, state_name):

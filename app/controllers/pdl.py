@@ -1,36 +1,17 @@
 import app.utils.jsonutils as jsonutils
 
 from app.models.summary import Summary
-# from app.models.summary import Summary
-# from app.models.repositories import SummaryRepo
-# from app.models.schemas import SummarySchema
-from flask import request
+from app.models.state import State
 
-# summaryRepo = SummaryRepo()
-# summarySchema = SummarySchema()
-# summaryListSchema = SummarySchema(many=True)
-# ITEM_NOT_FOUND = "Item not found for id: {}"
 
 def search():
     out_json = jsonutils.create_test_message()
 
     return out_json
 
+
+# GET all the entries from summary table
 def summary_search():
-    # out_json = jsonutils.create_test_message()
-    #
-    # return out_json
-
-    # summaries = Summary.query.all()
-    # results = [
-    #     {
-    #         "title": summary.title,
-    #         "state": summary.state,
-    #         "fiscal_year": summary.fiscal_year
-    #     } for summary in summaries]
-    #
-    # return {"count": len(results), "summary": results}
-
     summaries = Summary.query.all()
     results = [
         {
@@ -41,4 +22,17 @@ def summary_search():
         } for summary in summaries]
 
     # return {"count": len(results), "summary": results}
+    return results
+
+
+# GET all the entries from states table
+def states_search():
+    states = State.query.all()
+    results = [
+        {
+            "val": state.state_code,
+            "id": state.state_name
+        } for state in states]
+
+    # return {"count": len(results), "states": results}
     return results
