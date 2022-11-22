@@ -12,7 +12,7 @@ DB_CONNECTION_URL = "postgresql://%s:%s@%s:%s/%s" % \
 
 def create_state_table():
     incsv = 'data\\states.csv'
-    df = pd.read_csv(incsv)
+    df = pd.read_csv(incsv, dtype=str)
 
     # establish connections
     conn = create_engine(DB_CONNECTION_URL)
@@ -24,7 +24,7 @@ def create_state_table():
     # create a table schema
     states = Table(
         'states', meta,
-        Column('state_code', Integer, primary_key=True),
+        Column('state_code', VARCHAR, primary_key=True),
         Column('state_name', VARCHAR)
     )
 
@@ -270,9 +270,9 @@ def create_allprograms_table():
 
 
 if __name__ == '__main__':
-    # create_state_table()
+    create_state_table()
     # create_practice_table()
     # create_category1_table()
     # separte_values_in_column()
     # create_allprograms_table()
-    create_summary_table()
+    # create_summary_table()
