@@ -1,21 +1,44 @@
-#  Copyright 2020 Board of Trustees of the University of Illinois.
-#
-#  Licensed under the Apache License, Version 2.0 (the "License");
-#  you may not use this file except in compliance with the License.
-#  You may obtain a copy of the License at
-#
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
-#  Unless required by applicable law or agreed to in writing, software
-#  distributed under the License is distributed on an "AS IS" BASIS,
-#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-#  See the License for the specific language governing permissions and
-#  limitations under the License.
-
 import app.utils.jsonutils as jsonutils
 
+from app.models.summary import Summary
+# from app.models.summary import Summary
+# from app.models.repositories import SummaryRepo
+# from app.models.schemas import SummarySchema
+from flask import request
+
+# summaryRepo = SummaryRepo()
+# summarySchema = SummarySchema()
+# summaryListSchema = SummarySchema(many=True)
+# ITEM_NOT_FOUND = "Item not found for id: {}"
 
 def search():
     out_json = jsonutils.create_test_message()
 
     return out_json
+
+def summary_search():
+    # out_json = jsonutils.create_test_message()
+    #
+    # return out_json
+
+    # summaries = Summary.query.all()
+    # results = [
+    #     {
+    #         "title": summary.title,
+    #         "state": summary.state,
+    #         "fiscal_year": summary.fiscal_year
+    #     } for summary in summaries]
+    #
+    # return {"count": len(results), "summary": results}
+
+    summaries = Summary.query.all()
+    results = [
+        {
+            "title": summary.title,
+            "state": summary.state,
+            "fiscal year": summary.fiscal_year,
+            "amount": summary.amount
+        } for summary in summaries]
+
+    # return {"count": len(results), "summary": results}
+    return results
