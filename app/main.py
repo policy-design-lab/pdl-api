@@ -2,7 +2,6 @@ import connexion
 import logging
 
 from time import gmtime
-from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from pdlapiresolver import PdlApiResolver
 from controllers.configs import Config as cfg
