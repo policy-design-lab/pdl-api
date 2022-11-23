@@ -38,8 +38,6 @@ app.config['PROPAGATE_EXCEPTIONS'] = True
 
 db.init_app(app)
 
-CORS(app)
-
 # app.add_api('pdl.yaml', base_path=cfg.URL_PREFIX, arguments={'title': 'Policy Design Lab API'},
 #             resolver=PdlApiResolver('controllers'), resolver_error=501)
 
