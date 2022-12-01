@@ -2,10 +2,8 @@ import connexion
 import logging
 
 from time import gmtime
-from flask_sqlalchemy import SQLAlchemy
 from pdlapiresolver import PdlApiResolver
 from controllers.configs import Config as cfg
-from app.models.summary import Summary
 from app.models.db import db
 
 db_connenction_url = "postgresql://%s:%s@%s:%s/%s" % \
@@ -17,17 +15,16 @@ log = logging.getLogger('werkzeug')
 log.disabled = True
 
 logging.Formatter.converter = gmtime
-log_format ='%(asctime)-15s.%(msecs)03dZ %(levelname)-7s [%(threadName)-10s] : %(name)s - %(message)s'
+log_format = '%(asctime)-15s.%(msecs)03dZ %(levelname)-7s [%(threadName)-10s] : %(name)s - %(message)s'
 
 if debug:
     logging.basicConfig(datefmt='%Y-%m-%dT%H:%M:%S', format=log_format, level=logging.DEBUG)
 else:
     logging.basicConfig(datefmt='%Y-%m-%dT%H:%M:%S', format=log_format, level=logging.INFO)
 
-# app = connexion.FlaskApp(__name__, debug=debug, specification_dir=cfg.API_LOC)
 connexion_app = connexion.App("__name__",specification_dir='./')
 connexion_app.add_api('pdl.yaml', base_path=cfg.URL_PREFIX, arguments={'title': 'Policy Design Lab API'},
-            resolver=PdlApiResolver('controllers'), resolver_error=501)
+                      resolver=PdlApiResolver('controllers'), resolver_error=501)
 
 app = connexion_app.app
 
@@ -37,9 +34,5 @@ app.config['PROPAGATE_EXCEPTIONS'] = True
 
 db.init_app(app)
 
-# app.add_api('pdl.yaml', base_path=cfg.URL_PREFIX, arguments={'title': 'Policy Design Lab API'},
-#             resolver=PdlApiResolver('controllers'), resolver_error=501)
-
 if __name__ == '__main__':
-    # app.run(port=5000, host=None, server='flask', debug=debug)
     app.run(port=5000, host=None, debug=debug)
