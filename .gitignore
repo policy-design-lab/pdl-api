@@ -128,3 +128,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# requirements file
+*requirements.txt
+
+# poetry lock file
+*poetry.lock
