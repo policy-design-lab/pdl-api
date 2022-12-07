@@ -17,7 +17,7 @@ class Config:
     class to list all configuration settings required for preprocessing and formatting for EddyPro and PyFluxPro
     """
     # database parameters
-    DB_URL = os.getenv('DB_URL', 'localhost')
+    DB_HOST = os.getenv('DB_HOST', 'localhost')
     DB_PORT = os.getenv('DB_PORT', '5432')
     DB_NAME = os.getenv('DB_NAME')
     DB_USERNAME = os.getenv('DB_USERNAME')
