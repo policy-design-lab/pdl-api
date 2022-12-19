@@ -38,7 +38,7 @@ For swagger doc, go to http://localhost:5000/ui
 Create the PDL API Docker image and run the Docker container:
         
       docker build -t pdl/pdl-api .
-      docker run -p 80:5000 pdl/pdl-api 
+      docker run -e DB_HOST=db_host -e DB_PORT=5432 -e DB_NAME=pdl -e DB_USERNAME=username -e DB_PASSWORD=password -p 80:5000 pdl/pdl-api 
 
 Now you can view the API at http://localhost/pdl/
 
