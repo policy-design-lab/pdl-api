@@ -136,4 +136,4 @@ dmypy.json
 *poetry.lock
 
 # data folder
-*/data/*
+*data/*
