@@ -56,28 +56,28 @@ def summary_search(state=None, year=None):
 
 
 # GET all the entries from states table
-def states_search(name=None, fips=None):
-    # there is no name or no fips
-    if not name and not fips:
+def states_search(scode=None, fips=None):
+    # there is no code or no fips
+    if not scode and not fips:
         states = State.query.all()
         results = [construct_state_result(state) for state in states]
         return results
 
-    # yes name and no fips
-    elif name is not None and not fips:
-        states = State.query.filter_by(state_name = name.upper()).all()
+    # yes code and no fips
+    elif scode is not None and not fips:
+        states = State.query.filter_by(state_code = scode.upper()).all()
         results = [construct_state_result(state) for state in states]
         return results
 
-    # no name and yes fips
-    elif not name and fips is not None:
-        states = State.query.filter_by(state_code=fips).all()
+    # no code and yes fips
+    elif not scode and fips is not None:
+        states = State.query.filter_by(state_fips=fips).all()
         results = [construct_state_result(state) for state in states]
         return results
 
-    # yes name and yes fips
-    elif name is not None and fips is not None:
-        states = State.query.filter((State.state_code==fips) & (State.state_name == name.upper())).all()
+    # yes code and yes fips
+    elif scode is not None and fips is not None:
+        states = State.query.filter((State.state_fips==fips) & (State.state_code == scode.upper())).all()
         results = [construct_state_result(state) for state in states]
         return results
 
@@ -91,7 +91,7 @@ def states_search(name=None, fips=None):
         return rs_handlers.bad_request(msg)
 
 
-# GET states by statename
+# GET states by state code
 def states_get(statename=None):
     if not statename:
         msg = {
@@ -141,8 +141,8 @@ def allprograms_search(state=None):
 # construct name
 def construct_state_result(state):
     result = {
-        "val": state.state_code,
-        "id": state.state_name
+        "val": state.state_fips,
+        "id": state.state_code
     }
 
     return result

@@ -57,7 +57,7 @@ paths:
     get:
       tags:
         - States
-      summary: Get the list of name records
+      summary: Get the list of state fips and code records
       description: |
         By passing in the appropriate options, you can search for state records matching your criteria in the system
       parameters:
