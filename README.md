@@ -16,6 +16,17 @@ Set packages:
 Install packages:
 `poetry install`
 
+Set variles:
+- for local run you have to be connected to the database
+- create .env file under api/controllers folder. 
+- The content of .env file should be like
+
+`DB_HOST=host machine
+DB_PORT=5432
+DB_NAME=pdl
+DB_USERNAME=username
+DB_PASSWORD=password`
+
 Change directory into pdl-api/app 
 `python main.py`
 
