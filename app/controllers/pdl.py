@@ -6,6 +6,7 @@ import app.utils.rest_handlers as rs_handlers
 from flask import request
 from app.models.summary import Summary
 from app.models.state import State
+from app.models.statecode import StateCode
 from app.models.allprograms import AllProgram
 
 
@@ -56,28 +57,28 @@ def summary_search(state=None, year=None):
 
 
 # GET all the entries from states table
-def states_search(scode=None, fips=None):
+def states_search(code=None, fips=None):
     # there is no code or no fips
-    if not scode and not fips:
+    if not code and not fips:
         states = State.query.all()
         results = [construct_state_result(state) for state in states]
         return results
 
     # yes code and no fips
-    elif scode is not None and not fips:
-        states = State.query.filter_by(state_code = scode.upper()).all()
+    elif code is not None and not fips:
+        states = State.query.filter_by(state_code=code.upper()).all()
         results = [construct_state_result(state) for state in states]
         return results
 
     # no code and yes fips
-    elif not scode and fips is not None:
+    elif not code and fips is not None:
         states = State.query.filter_by(state_fips=fips).all()
         results = [construct_state_result(state) for state in states]
         return results
 
     # yes code and yes fips
-    elif scode is not None and fips is not None:
-        states = State.query.filter((State.state_fips==fips) & (State.state_code == scode.upper())).all()
+    elif code is not None and fips is not None:
+        states = State.query.filter((State.state_fips == fips) & (State.state_code == code.upper())).all()
         results = [construct_state_result(state) for state in states]
         return results
 
@@ -92,8 +93,8 @@ def states_search(scode=None, fips=None):
 
 
 # GET states by state code
-def states_get(statename=None):
-    if not statename:
+def states_get(statecode=None):
+    if not statecode:
         msg = {
             "reason": "Must provide name abbreviation",
             "error": "Bad Request: " + request.url,
@@ -101,10 +102,10 @@ def states_get(statename=None):
         logging.error("State " + json.dumps(msg))
         return rs_handlers.bad_request(msg)
     else:
-        state = State.query.filter_by(state_name = statename.upper()).first()
+        state = State.query.filter_by(state_code=statecode.upper()).first()
         if state is None:
             msg = {
-                "reason": "No record for the given name abbreviation " + statename,
+                "reason": "No record for the given state code " + statecode,
                 "error": "Not found: " + request.url,
             }
             logging.error("State" + json.dumps(msg))
@@ -112,6 +113,42 @@ def states_get(statename=None):
         else:
             result = construct_state_result(state)
             return result
+
+
+# GET all the entries from statecodes table
+def statecodes_search(code=None, name=None):
+    # there is no code or no name
+    if not code and not name:
+        states = StateCode.query.all()
+        results = [construct_statecode_result(state) for state in states]
+        return results
+
+    # yes code and no name
+    elif code is not None and not name:
+        states = StateCode.query.filter_by(state_code=code.upper()).all()
+        results = [construct_statecode_result(state) for state in states]
+        return results
+
+    # no code and yes name
+    elif not code and name is not None:
+        states = StateCode.query.filter_by(state_name=name).all()
+        results = [construct_statecode_result(state) for state in states]
+        return results
+
+    # yes code and yes name
+    elif code is not None and name is not None:
+        states = StateCode.query.filter((StateCode.state_name == name) & (StateCode.state_code == code.upper())).all()
+        results = [construct_statecode_result(state) for state in states]
+        return results
+
+    # none of them
+    else:
+        msg = {
+            "reason": "The query is not correct.",
+            "error": "Bad Request: " + request.url,
+        }
+        logging.error("States " + json.dumps(msg))
+        return rs_handlers.bad_request(msg)
 
 
 # GET all the entries from states table
@@ -138,11 +175,21 @@ def allprograms_search(state=None):
         return rs_handlers.bad_request(msg)
 
 
-# construct name
+# construct state
 def construct_state_result(state):
     result = {
         "val": state.state_fips,
         "id": state.state_code
+    }
+
+    return result
+
+
+# construct statecode
+def construct_statecode_result(state):
+    result = {
+        "code": state.state_code,
+        "name": state.state_name
     }
 
     return result
