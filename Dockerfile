@@ -21,5 +21,5 @@ ENV DB_HOST=localhost \
 
 WORKDIR /usr/src/pdl-api/app
 
-CMD ["gunicorn", "main:app", "--config", "/usr/src/pdl-api/app/controllers/gunicorn.config.py"]
+CMD ["gunicorn", "main:app", "--config", "/usr/src/pdl-api/app/controllers/gunicorn_config.py"]
 
