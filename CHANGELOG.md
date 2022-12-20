@@ -8,3 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Create repository. [#1](https://github.com/policy-design-lab/pdl-api/issues/1)
+- Create database. [#3](https://github.com/policy-design-lab/pdl-api/issues/3)
+- Endpoints for summary, state, and all programs. [#7](https://github.com/policy-design-lab/pdl-api/issues/7)
+- Search option for existing endpoints. [#11](https://github.com/policy-design-lab/pdl-api/issues/11)
+- Docker container. [#12](https://github.com/policy-design-lab/pdl-api/issues/12)
+- GitHub action for automated container build. [#13](https://github.com/policy-design-lab/pdl-api/issues/13)
