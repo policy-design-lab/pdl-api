@@ -15,6 +15,7 @@ class Config:
     API_LOC = os.getenv('API_LOC', '.')
     URL_PREFIX = os.getenv('URL_PREFIX', '')
     DEBUG = bool(os.getenv('DEBUG', 'False') == 'True')
+    WORKER = os.getenv('WORKER', 2)
 
     # database parameters
     DB_HOST = os.getenv('DB_HOST', 'localhost')

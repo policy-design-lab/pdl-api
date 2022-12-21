@@ -132,9 +132,6 @@ dmypy.json
 # requirements file
 *requirements.txt
 
-# poetry lock file
-*poetry.lock
-
 # data folder
 *data/*
 *.csv
