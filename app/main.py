@@ -5,6 +5,7 @@ from time import gmtime
 from pdlapiresolver import PdlApiResolver
 from controllers.configs import Config as cfg
 from app.models.db import db
+from flask_cors import CORS
 
 db_connenction_url = "postgresql://%s:%s@%s:%s/%s" % \
                      (cfg.DB_USERNAME, cfg.DB_PASSWORD, cfg.DB_HOST, cfg.DB_PORT, cfg.DB_NAME)
@@ -33,6 +34,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['PROPAGATE_EXCEPTIONS'] = True
 
 db.init_app(app)
+
+CORS(app)
 
 if __name__ == '__main__':
     app.run(port=5000, host=None, debug=debug)
