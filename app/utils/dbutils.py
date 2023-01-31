@@ -146,7 +146,7 @@ def create_category1_table():
 
 
 def separte_values_in_column():
-    incsv = 'data\practices.csv'
+    incsv = 'data\\practices.csv'
     df = pd.read_csv(incsv)
 
     for i, row in df.iterrows():
@@ -158,6 +158,7 @@ def separte_values_in_column():
         print("Insert " + str(val_code) + " " + val_name)
 
     df.to_csv('data\\test.csv', sep=',', encoding='utf-8')
+
 
 if __name__ == '__main__':
     create_state_table()

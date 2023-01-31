@@ -27,21 +27,21 @@ def summary_search(state=None, year=None):
 
     # only name provide
     elif state is not None and not year:
-        summaries = Summary.query.filter_by(state = state.upper()).all()
+        summaries = Summary.query.filter_by(state=state.upper()).all()
         results = [construct_summary_result(summary) for summary in summaries]
 
         return results
 
     # only year provide
     elif not state and year is not None:
-        summaries = Summary.query.filter_by(fiscal_year = year).all()
+        summaries = Summary.query.filter_by(fiscal_year=year).all()
         results = [construct_summary_result(summary) for summary in summaries]
 
         return results
 
     # both year and name provided
     elif state and year:
-        summaries = Summary.query.filter((Summary.fiscal_year==year) & (Summary.state==state.upper())).all()
+        summaries = Summary.query.filter((Summary.fiscal_year == year) & (Summary.state == state.upper())).all()
         results = [construct_summary_result(summary) for summary in summaries]
 
         return results

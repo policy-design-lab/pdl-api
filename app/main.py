@@ -23,7 +23,7 @@ if debug:
 else:
     logging.basicConfig(datefmt='%Y-%m-%dT%H:%M:%S', format=log_format, level=logging.INFO)
 
-connexion_app = connexion.App("__name__",specification_dir='./')
+connexion_app = connexion.App("__name__", specification_dir='./')
 connexion_app.add_api('pdl.yaml', base_path=cfg.URL_PREFIX, arguments={'title': 'Policy Design Lab API'},
                       resolver=PdlApiResolver('controllers'), resolver_error=501)
 

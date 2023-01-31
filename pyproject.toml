@@ -20,6 +20,7 @@ connexion = {version = "^2.9.0", extras = ["swagger-ui"]}
 python-dotenv = ">=0.10.3"
 psycopg2-binary = ">=2.9"
 gevent= ">=20.9.0"
+pycodestyle= ">=2.8.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.1.0"
