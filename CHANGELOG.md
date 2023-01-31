@@ -15,3 +15,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - GitHub action for automated container build. [#13](https://github.com/policy-design-lab/pdl-api/issues/13)
 - Statecode endpoint in the endpoint. [#15](https://github.com/policy-design-lab/pdl-api/issues/15)
 - Created statecode table in database. [#16](https://github.com/policy-design-lab/pdl-api/issues/16)
+- CORS for developing with frontend. [#20](https://github.com/policy-design-lab/pdl-api/issues/20)
+- Format test function for the PEP8 formatting. [#24](https://github.com/policy-design-lab/pdl-api/issues/24)
