@@ -24,8 +24,8 @@ def create_state_table():
     # create a table schema
     states = Table(
         'states', meta,
-        Column('state_code', VARCHAR, primary_key=True),
-        Column('state_name', VARCHAR)
+        Column('state_fips', VARCHAR, primary_key=True),
+        Column('state_code', VARCHAR)
     )
 
     meta.create_all(conn)
@@ -35,7 +35,41 @@ def create_state_table():
         val_code = row['code']
         val_name = row['name']
         print("Insert " + str(val_code) + " " + val_name)
-        insert_command = states.insert().values(state_code=val_code, state_name=val_name)
+        insert_command = states.insert().values(state_fips=val_code, state_code=val_name)
+
+        # execute the insert records statement
+        conn.execute(insert_command)
+
+    conn.dispose()
+
+
+def create_state_code_table():
+    injson = 'data\\json\\statecodes.json'
+    sf = pd.read_json(injson, typ='series')
+    df = pd.DataFrame({'state_code': sf.index, 'state_name': sf.values})
+
+    # establish connections
+    conn = create_engine(DB_CONNECTION_URL)
+
+    # initialize the Metadata Object
+    meta = MetaData(bind=conn)
+    MetaData.reflect(meta)
+
+    # create a table schema
+    statecodes = Table(
+        'statecodes', meta,
+        Column('state_code', VARCHAR, primary_key=True),
+        Column('state_name', VARCHAR)
+    )
+
+    meta.create_all(conn)
+
+    # insert records into the table
+    for index, row in df.iterrows():
+        val_code = row['state_code']
+        val_name = row['state_name']
+        print("Insert " + str(val_code) + " " + val_name)
+        insert_command = statecodes.insert().values(state_code=val_code, state_name=val_name)
 
         # execute the insert records statement
         conn.execute(insert_command)
@@ -112,7 +146,7 @@ def create_category1_table():
 
 
 def separte_values_in_column():
-    incsv = 'data\practices.csv'
+    incsv = 'data\\practices.csv'
     df = pd.read_csv(incsv)
 
     for i, row in df.iterrows():
@@ -271,6 +305,7 @@ def create_allprograms_table():
 
 if __name__ == '__main__':
     create_state_table()
+    # create_state_code_table()
     # create_practice_table()
     # create_category1_table()
     # separte_values_in_column()

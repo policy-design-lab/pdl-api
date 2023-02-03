@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 # Load .env file
 load_dotenv()
 
+
 class Config:
     """
     class to list all configuration settings required for preprocessing and formatting for EddyPro and PyFluxPro

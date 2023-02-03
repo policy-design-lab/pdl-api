@@ -1,5 +1,6 @@
 from flask import make_response
 
+
 # create test response
 def create_test_message():
     out_json = make_response("{\"Test\": \"This is a test.\"}")

@@ -15,7 +15,7 @@ class AllProgram(db.Model):
     snap_2018 = db.Column(db.Float())
     snap_2019 = db.Column(db.Float())
     snap_2020 = db.Column(db.Float())
-    snap_2021 = db.Column( db.Float())
+    snap_2021 = db.Column(db.Float())
     snap_2022 = db.Column(db.Float())
     snap_total = db.Column(db.Float())
     title_1_2018 = db.Column(db.Float())
@@ -78,20 +78,21 @@ class AllProgram(db.Model):
 
     def __repr__(self):
         return 'Summary(state=%s, ' \
-               'crop_ins_2018=%d, crop_ins_2019=%s, crop_ins_2020=%d, crop_ins_2021=%s, crop_ins_2022=%d, crop_ins_total=%s,' \
-               'snap_2018=%d, snap_2019=%s, snap_2020=%d, snap_2021=%s, snap_2022=%d, snap_total=%s,' \
-               'title_1_2018=%d, title_1_2019=%s, title_1_2020=%d, title_1_2021=%s, title_1_2022=%d, title_1_total=%s,' \
-               'title_2_2018=%d, title_2_2019=%s, title_2_2020=%d, title_2_2021=%s, title_2_2022=%d, title_2_total=%s,' \
-               'all_programs_total_2018=%d, all_programs_total_2019=%s, all_programs_total_2020=%d, ' \
-               'all_programs_total_2021=%s, all_programs_total_2022=%d, all_programs_total_18_22=%s)' \
+               'crop_ins_2018=%d, crop_ins_2019=%s, crop_ins_2020=%d, crop_ins_2021=%s, crop_ins_2022=%d, ' \
+               'crop_ins_total=%s,snap_2018=%d, snap_2019=%s, snap_2020=%d, snap_2021=%s, snap_2022=%d, ' \
+               'snap_total=%s, title_1_2018=%d, title_1_2019=%s, title_1_2020=%d, title_1_2021=%s, title_1_2022=%d, ' \
+               'title_1_total=%s, title_2_2018=%d, title_2_2019=%s, title_2_2020=%d, title_2_2021=%s, ' \
+               'title_2_2022=%d, title_2_total=%s,all_programs_total_2018=%d, all_programs_total_2019=%s, ' \
+               'all_programs_total_2020=%d, all_programs_total_2021=%s, all_programs_total_2022=%d, ' \
+               'all_programs_total_18_22=%s)' \
                % (self.state,
-                  self.crop_ins_2018, self.crop_ins_2019, self.crop_ins_2020, self.crop_ins_2021, self.crop_ins_2022, self.crop_ins_total,
-                  self.snap_2018, self.snap_2019, self.snap_2020, self.snap_2021, self.snap_2022, self.snap_total,
-                  self.title_1_2018, self.title_1_2019, self.title_1_2020, self.title_1_2021, self.title_1_2022, self.title_1_total,
-                  self.title_2_2018, self.title_2_2019, self.title_2_2020, self.title_2_2021, self.title_2_2022, self.title_2_total,
-                  self.all_programs_total_2018, self.all_programs_total_2019, self.all_programs_total_2020,
-                  self.all_programs_total_2021, self.all_programs_total_2022, self.all_programs_total_18_22)
-
+                  self.crop_ins_2018, self.crop_ins_2019, self.crop_ins_2020, self.crop_ins_2021, self.crop_ins_2022,
+                  self.crop_ins_total, self.snap_2018, self.snap_2019, self.snap_2020, self.snap_2021, self.snap_2022,
+                  self.snap_total, self.title_1_2018, self.title_1_2019, self.title_1_2020, self.title_1_2021,
+                  self.title_1_2022, self.title_1_total, self.title_2_2018, self.title_2_2019, self.title_2_2020,
+                  self.title_2_2021, self.title_2_2022, self.title_2_total, self.all_programs_total_2018,
+                  self.all_programs_total_2019, self.all_programs_total_2020, self.all_programs_total_2021,
+                  self.all_programs_total_2022, self.all_programs_total_18_22)
 
     def json(self):
         return {'State': self.state,
@@ -107,7 +108,10 @@ class AllProgram(db.Model):
                 'Title II 2018': self.title_2_2018, 'Title II 2019': self.title_2_2019,
                 'Title II 2020': self.title_2_2020, 'Title II 2021': self.title_2_2021,
                 'Title II 2022': self.title_2_202, 'Title II Total': self.title_2_total,
-                '2018 All Programs Total': self.all_programs_total_2018, '2019 All Programs Total': self.all_programs_total_2019,
-                '2020 All Programs Total': self.all_programs_total_2020, '2021 All Programs Total': self.all_programs_total_2021,
-                '2022 All Programs Total': self.all_programs_total_2022, '18-22 All Programs Total': self.all_programs_total_18_22
+                '2018 All Programs Total': self.all_programs_total_2018,
+                '2019 All Programs Total': self.all_programs_total_2019,
+                '2020 All Programs Total': self.all_programs_total_2020,
+                '2021 All Programs Total': self.all_programs_total_2021,
+                '2022 All Programs Total': self.all_programs_total_2022,
+                '18-22 All Programs Total': self.all_programs_total_18_22
                 }
