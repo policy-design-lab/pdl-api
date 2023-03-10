@@ -182,7 +182,7 @@ def allprograms_search(state=None):
         return rs_handlers.bad_request(msg)
 
 # EQIP Map Data
-def eqip_map_search():
+def programs_conservation_eqip_map_search():
     # set the file path
     eqip_data = os.path.join(EQIP_JSON_DATA_PATH, EQIP_MAP_DATA_JSON)
 
@@ -197,7 +197,7 @@ def eqip_map_search():
 
 
 # EQIP state performance data
-def eqip_stateperformance_search():
+def programs_conservation_eqip_state_performance_search():
     # set the file path
     eqip_data = os.path.join(EQIP_JSON_DATA_PATH, EQIP_STATE_PERFORMANCE_DATA_JSON)
 
@@ -212,7 +212,7 @@ def eqip_stateperformance_search():
 
 
 # EQIP state performance data
-def eqip_statuteperformance_search():
+def programs_conservation_eqip_practice_categories_search():
     # set the file path
     eqip_data = os.path.join(EQIP_JSON_DATA_PATH, EQIP_STATUTE_PERFORMANCE_DATA_JSON)
 

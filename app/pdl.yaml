@@ -184,7 +184,7 @@ paths:
           description: Unauthorized
         500:
           description: Internal error
-  /pdl/eqip/map:
+  /pdl/programs/conservation/eqip/map:
     get:
       tags:
         - EQIP map data
@@ -204,7 +204,7 @@ paths:
           description: Unauthorized
         500:
           description: Internal error
-  /pdl/eqip/stateperformance:
+  /pdl/programs/conservation/eqip/state-performance:
     get:
       tags:
         - EQIP state performance data
@@ -224,7 +224,7 @@ paths:
           description: Unauthorized
         500:
           description: Internal error
-  /pdl/eqip/statuteperformance:
+  /pdl/programs/conservation/eqip/practice-categories:
     get:
       tags:
         - EQIP statute performance data
