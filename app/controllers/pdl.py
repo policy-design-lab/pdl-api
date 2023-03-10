@@ -1,5 +1,6 @@
 import logging
 import json
+import os
 import app.utils.jsonutils as jsonutils
 import app.utils.rest_handlers as rs_handlers
 
@@ -8,6 +9,12 @@ from app.models.summary import Summary
 from app.models.state import State
 from app.models.statecode import StateCode
 from app.models.allprograms import AllProgram
+
+
+EQIP_JSON_DATA_PATH = os.path.join("controllers", "data", "eqip")
+EQIP_MAP_DATA_JSON = "EQIP_MAP_DATA.json"
+EQIP_STATE_PERFORMANCE_DATA_JSON = "EQIP_STATE_PERFORMANCE_DATA.json"
+EQIP_STATUTE_PERFORMANCE_DATA_JSON = "EQIP_STATUTE_PERFORMANCE_DATA.json"
 
 
 def search():
@@ -173,6 +180,50 @@ def allprograms_search(state=None):
         }
         logging.error("All programs " + json.dumps(msg))
         return rs_handlers.bad_request(msg)
+
+# EQIP Map Data
+def eqip_map_search():
+    # set the file path
+    eqip_data = os.path.join(EQIP_JSON_DATA_PATH, EQIP_MAP_DATA_JSON)
+
+    # open file
+    with open(eqip_data, 'r') as map_data:
+        file_data = map_data.read()
+
+    # parse file
+    data_json = json.loads(file_data)
+
+    return data_json
+
+
+# EQIP state performance data
+def eqip_stateperformance_search():
+    # set the file path
+    eqip_data = os.path.join(EQIP_JSON_DATA_PATH, EQIP_STATE_PERFORMANCE_DATA_JSON)
+
+    # open file
+    with open(eqip_data, 'r') as map_data:
+        file_data = map_data.read()
+
+    # parse file
+    data_json = json.loads(file_data)
+
+    return data_json
+
+
+# EQIP state performance data
+def eqip_statuteperformance_search():
+    # set the file path
+    eqip_data = os.path.join(EQIP_JSON_DATA_PATH, EQIP_STATUTE_PERFORMANCE_DATA_JSON)
+
+    # open file
+    with open(eqip_data, 'r') as map_data:
+        file_data = map_data.read()
+
+    # parse file
+    data_json = json.loads(file_data)
+
+    return data_json
 
 
 # construct state
