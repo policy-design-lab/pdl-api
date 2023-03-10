@@ -1,13 +1,77 @@
+import json
+
 import pandas as pd
 import sqlalchemy
 
 from sqlalchemy.engine import result
 from sqlalchemy import create_engine, MetaData, \
-    Table, Column, Numeric, Integer, VARCHAR, update
+    Table, Column, Numeric, Integer, VARCHAR, update, insert
 from config import Config as cfg
 
 DB_CONNECTION_URL = "postgresql://%s:%s@%s:%s/%s" % \
                     (cfg.DB_USERNAME, cfg.DB_PASSWORD, cfg.DB_HOST, cfg.DB_PORT, cfg.DB_NAME)
+
+
+def create_table_test():
+    incsv = 'data\\states.csv'
+    df = pd.read_csv(incsv, dtype=str)
+
+    from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String
+    engine = create_engine(DB_CONNECTION_URL, echo=False)
+    meta = MetaData()
+
+    # create a table schema
+    states = Table(
+        'test', meta,
+        Column('state_fips', VARCHAR, primary_key=True),
+        Column('state_code', VARCHAR)
+    )
+    meta.create_all(engine)
+
+    # insert records into the table
+    with engine.connect() as conn:
+        for index, row in df.iterrows():
+            val_code = row['code']
+            val_name = row['name']
+            print("Insert " + str(val_code) + " " + val_name)
+            # insert_command = states.insert().values(state_fips=val_code, state_code=val_name)
+            insert_command = insert(states).values(state_fips=index, state_code="code")
+            # conn.execute(states.insert(), state_fips=val_code, state_code=val_name)
+
+            # execute the insert records statement
+            test = conn.execute(insert_command)
+            print(test)
+
+def create_table_from_csv(tablename, incsv):
+    print("Creating table " + tablename + " from " + incsv)
+    engine = create_engine(DB_CONNECTION_URL, echo=False)
+    df = pd.read_csv(incsv)
+
+    # Write data into the table in sqllite database
+    df.to_sql(tablename, engine)
+
+
+def create_table_from_json(tablename, injson_path):
+    with open(injson_path) as injson:
+        read_json = injson.read()
+
+    print(read_json)
+
+    outjson = json.loads(read_json)
+
+    df = pd.DataFrame.from_dict(data=outjson, orient='index').T
+
+    engine = create_engine(DB_CONNECTION_URL, echo=False)
+
+    # Write data into the table in sqllite database
+    df.to_sql(tablename, engine)
+
+
+def create_table_from_json_list(tablename, injson_list):
+    df_total = pd.DataFrame()
+    for injson in injson_list:
+        df = pd.DataFrame.from_dict(data=injson, orient='index').T
+        df_total = df_total.append(df)
 
 
 def create_state_table():
@@ -304,10 +368,17 @@ def create_allprograms_table():
 
 
 if __name__ == '__main__':
-    create_state_table()
+    # create_state_table()
     # create_state_code_table()
     # create_practice_table()
     # create_category1_table()
     # separte_values_in_column()
     # create_allprograms_table()
     # create_summary_table()
+    create_table_test()
+    # tablename = 'test'
+    # incsv = 'data\\allprograms.csv'
+    # create_table_from_csv(tablename, incsv)
+    # injson = 'data\\json\\EQIP_MAP_DATA.json'
+    # create_table_from_json(tablename, injson)
+    # create_table_from_json_list(tablename, injson_list)
