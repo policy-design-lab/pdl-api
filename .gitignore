@@ -130,7 +130,7 @@ dmypy.json
 .pyre/
 
 # data folder
-*/data
+*/utils/data
 # requirements file
 *requirements.txt
 
