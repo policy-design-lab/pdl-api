@@ -19,14 +19,14 @@ def create_table_test():
     from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String
     engine = create_engine(DB_CONNECTION_URL, echo=False)
     meta = MetaData()
-
-    # create a table schema
+    #
+    # # create a table schema
     states = Table(
         'test', meta,
         Column('state_fips', VARCHAR, primary_key=True),
         Column('state_code', VARCHAR)
     )
-    meta.create_all(engine)
+    # meta.create_all(engine)
 
     # insert records into the table
     with engine.connect() as conn:
@@ -35,7 +35,7 @@ def create_table_test():
             val_name = row['name']
             print("Insert " + str(val_code) + " " + val_name)
             # insert_command = states.insert().values(state_fips=val_code, state_code=val_name)
-            insert_command = insert(states).values(state_fips=index, state_code="code")
+            insert_command = insert(states).values(state_fips=str(index), state_code="code")
             # conn.execute(states.insert(), state_fips=val_code, state_code=val_name)
 
             # execute the insert records statement
