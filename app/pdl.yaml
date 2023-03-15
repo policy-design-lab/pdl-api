@@ -11,8 +11,14 @@ servers:
 - url: https://localhost
   description: Development server
 tags:
-- name: Pdl API
-  description: API endpoints for managing pdl object.
+- name: "Summary"
+  description: "Read Farm Bill summary data."
+- name: "All Programs"
+  description: "Read all programs data."
+- name: "Title II: Conservation - EQIP"
+  description: "Read Farm Bill Title II: Conservation - Environmental Quality Incentives Program (EQIP) data."
+- name: "States"
+  description: "Read data related to states."
 paths:
   /pdl/summary:
     get:
@@ -117,7 +123,7 @@ paths:
   /pdl/statecodes:
     get:
       tags:
-        - State Codes
+        - States
       summary: Get the list of state code and name records
       description: |
         By passing in the appropriate options, you can search for state name records matching your criteria in the system
@@ -187,10 +193,10 @@ paths:
   /pdl/programs/conservation/eqip/map:
     get:
       tags:
-        - EQIP map data
-      summary: Get the EQIP map data
+        - "Title II: Conservation - EQIP"
+      summary: Gets the EQIP payment distribution data for map visualization.
       description: |
-        Providing the EQIP map data json
+        Returns  the EQIP payment distribution data for map visualization in JSON format.
       responses:
         200:
           description: Ok
@@ -204,13 +210,13 @@ paths:
           description: Unauthorized
         500:
           description: Internal error
-  /pdl/programs/conservation/eqip/state-performance:
+  /pdl/programs/conservation/eqip/state-distribution:
     get:
       tags:
-        - EQIP state performance data
-      summary: Get the EQIP state performance data
+        - "Title II: Conservation - EQIP"
+      summary: Gets the EQIP payment distribution data for all states.
       description: |
-        Providing the EQIP state performance data json
+        Returns the EQIP payment distribution data for all states in JSON format.
       responses:
         200:
           description: Ok
@@ -227,10 +233,10 @@ paths:
   /pdl/programs/conservation/eqip/practice-categories:
     get:
       tags:
-        - EQIP statute performance data
-      summary: Get the EQIP statute performance data
+        - "Title II: Conservation - EQIP"
+      summary: Gets the EQIP payment distribution data for all practice categories.
       description: |
-        Providing the EQIP statute performance data json
+        Returns the EQIP payment distribution data for all practice categories in JSON format.
       responses:
         200:
           description: Ok
