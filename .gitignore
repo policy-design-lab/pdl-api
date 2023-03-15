@@ -133,7 +133,5 @@ dmypy.json
 *requirements.txt
 
 # data folder
-*/utils/data
 *.csv
-*.json
 *.xlsx
