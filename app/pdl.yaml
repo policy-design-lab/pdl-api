@@ -12,13 +12,13 @@ servers:
   description: Development server
 tags:
 - name: "Summary"
-  description: "Read Farm Bill summary data."
+  description: "Farm Bill summary data."
 - name: "All Programs"
-  description: "Read all programs data."
+  description: "All programs data."
 - name: "Title II: Conservation - EQIP"
-  description: "Read Farm Bill Title II: Conservation - Environmental Quality Incentives Program (EQIP) data."
+  description: "Farm Bill Title II: Conservation - Environmental Quality Incentives Program (EQIP) data."
 - name: "States"
-  description: "Read data related to states."
+  description: "Information related to States."
 paths:
   /pdl/summary:
     get:
