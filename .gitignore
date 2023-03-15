@@ -132,6 +132,6 @@ dmypy.json
 # requirements file
 *requirements.txt
 
-# data folder
+# raw daata files
 *.csv
 *.xlsx
