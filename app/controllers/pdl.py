@@ -12,9 +12,9 @@ from app.models.allprograms import AllProgram
 
 
 EQIP_JSON_DATA_PATH = os.path.join("controllers", "data", "eqip")
-EQIP_MAP_DATA_JSON = "EQIP_MAP_DATA.json"
-EQIP_STATE_PERFORMANCE_DATA_JSON = "EQIP_STATE_PERFORMANCE_DATA.json"
-EQIP_STATUTE_PERFORMANCE_DATA_JSON = "EQIP_STATUTE_PERFORMANCE_DATA.json"
+EQIP_MAP_DATA_JSON = "eqip_map_data.json"
+EQIP_STATE_DISTRIBUTION_DATA_JSON = "eqip_state_distribution_data.json"
+EQIP_PRACTICE_CATEGORIES_DATA_JSON = "eqip_practice_categories_data.json"
 
 
 def search():
@@ -197,9 +197,9 @@ def programs_conservation_eqip_map_search():
 
 
 # EQIP state performance data
-def programs_conservation_eqip_state_performance_search():
+def programs_conservation_eqip_state_distribution_search():
     # set the file path
-    eqip_data = os.path.join(EQIP_JSON_DATA_PATH, EQIP_STATE_PERFORMANCE_DATA_JSON)
+    eqip_data = os.path.join(EQIP_JSON_DATA_PATH, EQIP_STATE_DISTRIBUTION_DATA_JSON)
 
     # open file
     with open(eqip_data, 'r') as map_data:
@@ -214,7 +214,7 @@ def programs_conservation_eqip_state_performance_search():
 # EQIP state performance data
 def programs_conservation_eqip_practice_categories_search():
     # set the file path
-    eqip_data = os.path.join(EQIP_JSON_DATA_PATH, EQIP_STATUTE_PERFORMANCE_DATA_JSON)
+    eqip_data = os.path.join(EQIP_JSON_DATA_PATH, EQIP_PRACTICE_CATEGORIES_DATA_JSON)
 
     # open file
     with open(eqip_data, 'r') as map_data:
