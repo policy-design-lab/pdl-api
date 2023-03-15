@@ -196,7 +196,7 @@ def programs_conservation_eqip_map_search():
     return data_json
 
 
-# EQIP state performance data
+# EQIP payment distribution data for all states
 def programs_conservation_eqip_state_distribution_search():
     # set the file path
     eqip_data = os.path.join(EQIP_JSON_DATA_PATH, EQIP_STATE_DISTRIBUTION_DATA_JSON)
@@ -211,7 +211,7 @@ def programs_conservation_eqip_state_distribution_search():
     return data_json
 
 
-# EQIP state performance data
+# EQIP payment distribution data by practice categories
 def programs_conservation_eqip_practice_categories_search():
     # set the file path
     eqip_data = os.path.join(EQIP_JSON_DATA_PATH, EQIP_PRACTICE_CATEGORIES_DATA_JSON)
