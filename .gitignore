@@ -129,13 +129,9 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# data folder
-*/data
 # requirements file
 *requirements.txt
 
-# data folder
-*data/*
+# raw data files
 *.csv
-*.json
 *.xlsx
