@@ -18,3 +18,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CORS for developing with frontend. [#20](https://github.com/policy-design-lab/pdl-api/issues/20)
 - Format test function for the PEP8 formatting. [#24](https://github.com/policy-design-lab/pdl-api/issues/24)
 - EQIP json GET endpoints. [#35](https://github.com/policy-design-lab/pdl-api/issues/35)
+- SNAP json GET endpoints. [#42](https://github.com/policy-design-lab/pdl-api/issues/42)
