@@ -10,7 +10,7 @@ from app.models.state import State
 from app.models.statecode import StateCode
 from app.models.allprograms import AllProgram
 
-JSON_DATA_PATH = os.path.join("controllers", "data")
+SNAP_JSON_DATA_PATH = os.path.join("controllers", "data", "snap")
 SNAP_DATA_JSON = "snap_state_distribution_data.json"
 EQIP_JSON_DATA_PATH = os.path.join("controllers", "data", "eqip")
 EQIP_MAP_DATA_JSON = "eqip_map_data.json"
@@ -185,7 +185,7 @@ def allprograms_search(state=None):
 
 def programs_snap_state_distribution_search():
     # set the file path
-    eqip_data = os.path.join(JSON_DATA_PATH, SNAP_DATA_JSON)
+    eqip_data = os.path.join(SNAP_JSON_DATA_PATH, SNAP_DATA_JSON)
 
     # open file
     with open(eqip_data, 'r') as map_data:
