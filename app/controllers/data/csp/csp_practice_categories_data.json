@@ -1,0 +1,53 @@
+{
+    "statutes": [
+        {
+            "statuteName": "(6)(A) Practices",
+            "practiceCategories": [
+                {
+                    "practiceCategoryName": "Land management",
+                    "totalPaymentInDollars": 288840374.22,
+                    "totalPaymentInPercentage": 39.95
+                },
+                {
+                    "practiceCategoryName": "Other improvement",
+                    "totalPaymentInDollars": 189503325.03,
+                    "totalPaymentInPercentage": 26.21
+                },
+                {
+                    "practiceCategoryName": "Vegetative",
+                    "totalPaymentInDollars": 114325783.56,
+                    "totalPaymentInPercentage": 15.81
+                },
+                {
+                    "practiceCategoryName": "Forest management",
+                    "totalPaymentInDollars": 82980559.71,
+                    "totalPaymentInPercentage": 11.48
+                },
+                {
+                    "practiceCategoryName": "Soil remediation",
+                    "totalPaymentInDollars": 26570782.65,
+                    "totalPaymentInPercentage": 3.67
+                },
+                {
+                    "practiceCategoryName": "Structural",
+                    "totalPaymentInDollars": 20852424.91,
+                    "totalPaymentInPercentage": 2.88
+                }
+            ],
+            "totalPaymentInDollars": 723073250.08,
+            "totalPaymentInPercentage": 84.25
+        },
+        {
+            "statuteName": "Other",
+            "practiceCategories": [
+                {
+                    "practiceCategoryName": "Bundles",
+                    "totalPaymentInDollars": 11125692.47,
+                    "totalPaymentInPercentage": 100.0
+                }
+            ],
+            "totalPaymentInDollars": 11125692.47,
+            "totalPaymentInPercentage": 1.3
+        }
+    ]
+}

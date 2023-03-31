@@ -11,6 +11,10 @@ from app.models.statecode import StateCode
 from app.models.allprograms import AllProgram
 
 
+CSP_JSON_DATA_PATH = os.path.join("controllers", "data", "csp")
+CSP_MAP_DATA_JSON = "csp_map_data.json"
+CSP_STATE_DISTRIBUTION_DATA_JSON = "csp_state_distribution_data.json"
+CSP_PRACTICE_CATEGORIES_DATA_JSON = "csp_practice_categories_data.json"
 EQIP_JSON_DATA_PATH = os.path.join("controllers", "data", "eqip")
 EQIP_MAP_DATA_JSON = "eqip_map_data.json"
 EQIP_STATE_DISTRIBUTION_DATA_JSON = "eqip_state_distribution_data.json"
@@ -180,6 +184,49 @@ def allprograms_search(state=None):
         }
         logging.error("All programs " + json.dumps(msg))
         return rs_handlers.bad_request(msg)
+
+
+def  programs_conservation_csp_map_search():
+    # set the file path
+    csp_data = os.path.join(CSP_JSON_DATA_PATH, CSP_MAP_DATA_JSON)
+
+    # open file
+    with open(csp_data, 'r') as map_data:
+        file_data = map_data.read()
+
+    # parse file
+    data_json = json.loads(file_data)
+
+    return data_json
+
+
+def programs_conservation_csp_state_distribution_search():
+    # set the file path
+    csp_data = os.path.join(CSP_JSON_DATA_PATH, CSP_STATE_DISTRIBUTION_DATA_JSON)
+
+    # open file
+    with open(csp_data, 'r') as state_data:
+        file_data = state_data.read()
+
+    # parse file
+    data_json = json.loads(file_data)
+
+    return data_json
+
+
+def programs_conservation_csp_practice_categories_search():
+    # set the file path
+    csp_data = os.path.join(CSP_JSON_DATA_PATH, CSP_PRACTICE_CATEGORIES_DATA_JSON)
+
+    # open file
+    with open(csp_data, 'r') as practice_data:
+        file_data = practice_data.read()
+
+    # parse file
+    data_json = json.loads(file_data)
+
+    return data_json
+
 
 # EQIP Map Data
 def programs_conservation_eqip_map_search():

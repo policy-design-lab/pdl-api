@@ -1,0 +1,3493 @@
+{
+    "Mississippi": [
+        {
+            "years": "2018-2022",
+            "statutes": [
+                {
+                    "statuteName": "(6)(A) Practices",
+                    "statutePaymentInDollars": 123303139.63,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 44880535.48,
+                            "paymentInPercentageNationwide": 23.68,
+                            "paymentInPercentageWithinState": 34.65
+                        },
+                        {
+                            "practiceCategoryName": "Land management",
+                            "paymentInDollars": 41147519.44,
+                            "paymentInPercentageNationwide": 14.25,
+                            "paymentInPercentageWithinState": 31.77
+                        },
+                        {
+                            "practiceCategoryName": "Forest management",
+                            "paymentInDollars": 18448261.71,
+                            "paymentInPercentageNationwide": 22.23,
+                            "paymentInPercentageWithinState": 14.24
+                        },
+                        {
+                            "practiceCategoryName": "Vegetative",
+                            "paymentInDollars": 10118840.55,
+                            "paymentInPercentageNationwide": 8.85,
+                            "paymentInPercentageWithinState": 7.81
+                        },
+                        {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 7099165.33,
+                            "paymentInPercentageNationwide": 26.72,
+                            "paymentInPercentageWithinState": 5.48
+                        },
+                        {
+                            "practiceCategoryName": "Structural",
+                            "paymentInDollars": 1608817.12,
+                            "paymentInPercentageNationwide": 7.72,
+                            "paymentInPercentageWithinState": 1.24
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                },
+                {
+                    "statuteName": "Other",
+                    "statutePaymentInDollars": 4040808.81,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Bundles",
+                            "paymentInDollars": 4040808.81,
+                            "paymentInPercentageNationwide": 36.32,
+                            "paymentInPercentageWithinState": 3.12
+                        }
+                    ]
+                }
+            ],
+            "totalPaymentInPercentageNationwide": 15.09,
+            "totalPaymentInDollars": 129528057.23
+        }
+    ],
+    "Arkansas": [
+        {
+            "years": "2018-2022",
+            "statutes": [
+                {
+                    "statuteName": "(6)(A) Practices",
+                    "statutePaymentInDollars": 81201169.41999999,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Land management",
+                            "paymentInDollars": 40160539.96,
+                            "paymentInPercentageNationwide": 13.9,
+                            "paymentInPercentageWithinState": 47.1
+                        },
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 20169980.34,
+                            "paymentInPercentageNationwide": 10.64,
+                            "paymentInPercentageWithinState": 23.65
+                        },
+                        {
+                            "practiceCategoryName": "Forest management",
+                            "paymentInDollars": 6041940.22,
+                            "paymentInPercentageNationwide": 7.28,
+                            "paymentInPercentageWithinState": 7.09
+                        },
+                        {
+                            "practiceCategoryName": "Structural",
+                            "paymentInDollars": 5882798.41,
+                            "paymentInPercentageNationwide": 28.21,
+                            "paymentInPercentageWithinState": 6.9
+                        },
+                        {
+                            "practiceCategoryName": "Vegetative",
+                            "paymentInDollars": 4485471.94,
+                            "paymentInPercentageNationwide": 3.92,
+                            "paymentInPercentageWithinState": 5.26
+                        },
+                        {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 4460438.55,
+                            "paymentInPercentageNationwide": 16.79,
+                            "paymentInPercentageWithinState": 5.23
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                },
+                {
+                    "statuteName": "Other",
+                    "statutePaymentInDollars": 30966.98,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Bundles",
+                            "paymentInDollars": 30966.98,
+                            "paymentInPercentageNationwide": 0.28,
+                            "paymentInPercentageWithinState": 0.04
+                        }
+                    ]
+                }
+            ],
+            "totalPaymentInPercentageNationwide": 9.94,
+            "totalPaymentInDollars": 85272485.39
+        }
+    ],
+    "South Dakota": [
+        {
+            "years": "2018-2022",
+            "statutes": [
+                {
+                    "statuteName": "(6)(A) Practices",
+                    "statutePaymentInDollars": 53324192.379999995,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 21494461.93,
+                            "paymentInPercentageNationwide": 11.34,
+                            "paymentInPercentageWithinState": 33.85
+                        },
+                        {
+                            "practiceCategoryName": "Land management",
+                            "paymentInDollars": 21125889.31,
+                            "paymentInPercentageNationwide": 7.31,
+                            "paymentInPercentageWithinState": 33.27
+                        },
+                        {
+                            "practiceCategoryName": "Vegetative",
+                            "paymentInDollars": 7806438.51,
+                            "paymentInPercentageNationwide": 6.83,
+                            "paymentInPercentageWithinState": 12.3
+                        },
+                        {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 1935792.3,
+                            "paymentInPercentageNationwide": 7.29,
+                            "paymentInPercentageWithinState": 3.05
+                        },
+                        {
+                            "practiceCategoryName": "Forest management",
+                            "paymentInDollars": 617463.84,
+                            "paymentInPercentageNationwide": 0.74,
+                            "paymentInPercentageWithinState": 0.97
+                        },
+                        {
+                            "practiceCategoryName": "Structural",
+                            "paymentInDollars": 344146.49,
+                            "paymentInPercentageNationwide": 1.65,
+                            "paymentInPercentageWithinState": 0.54
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                },
+                {
+                    "statuteName": "Other",
+                    "statutePaymentInDollars": 3611883.36,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Bundles",
+                            "paymentInDollars": 3611883.36,
+                            "paymentInPercentageNationwide": 32.46,
+                            "paymentInPercentageWithinState": 5.69
+                        }
+                    ]
+                }
+            ],
+            "totalPaymentInPercentageNationwide": 7.4,
+            "totalPaymentInDollars": 63490254.01
+        }
+    ],
+    "Minnesota": [
+        {
+            "years": "2018-2022",
+            "statutes": [
+                {
+                    "statuteName": "(6)(A) Practices",
+                    "statutePaymentInDollars": 49826221.18,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 21205663.53,
+                            "paymentInPercentageNationwide": 11.19,
+                            "paymentInPercentageWithinState": 39.03
+                        },
+                        {
+                            "practiceCategoryName": "Land management",
+                            "paymentInDollars": 13498821.85,
+                            "paymentInPercentageNationwide": 4.67,
+                            "paymentInPercentageWithinState": 24.84
+                        },
+                        {
+                            "practiceCategoryName": "Vegetative",
+                            "paymentInDollars": 12590191.15,
+                            "paymentInPercentageNationwide": 11.01,
+                            "paymentInPercentageWithinState": 23.17
+                        },
+                        {
+                            "practiceCategoryName": "Forest management",
+                            "paymentInDollars": 1621812.91,
+                            "paymentInPercentageNationwide": 1.95,
+                            "paymentInPercentageWithinState": 2.98
+                        },
+                        {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 689962.04,
+                            "paymentInPercentageNationwide": 2.6,
+                            "paymentInPercentageWithinState": 1.27
+                        },
+                        {
+                            "practiceCategoryName": "Structural",
+                            "paymentInDollars": 219769.7,
+                            "paymentInPercentageNationwide": 1.05,
+                            "paymentInPercentageWithinState": 0.4
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                },
+                {
+                    "statuteName": "Other",
+                    "statutePaymentInDollars": 31335.2,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Bundles",
+                            "paymentInDollars": 31335.2,
+                            "paymentInPercentageNationwide": 0.28,
+                            "paymentInPercentageWithinState": 0.06
+                        }
+                    ]
+                }
+            ],
+            "totalPaymentInPercentageNationwide": 6.33,
+            "totalPaymentInDollars": 54338526.55
+        }
+    ],
+    "Georgia": [
+        {
+            "years": "2018-2022",
+            "statutes": [
+                {
+                    "statuteName": "(6)(A) Practices",
+                    "statutePaymentInDollars": 50447429.17,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Land management",
+                            "paymentInDollars": 18227702.65,
+                            "paymentInPercentageNationwide": 6.31,
+                            "paymentInPercentageWithinState": 34.13
+                        },
+                        {
+                            "practiceCategoryName": "Forest management",
+                            "paymentInDollars": 18221594.04,
+                            "paymentInPercentageNationwide": 21.96,
+                            "paymentInPercentageWithinState": 34.12
+                        },
+                        {
+                            "practiceCategoryName": "Vegetative",
+                            "paymentInDollars": 7626593.43,
+                            "paymentInPercentageNationwide": 6.67,
+                            "paymentInPercentageWithinState": 14.28
+                        },
+                        {
+                            "practiceCategoryName": "Structural",
+                            "paymentInDollars": 4646139.49,
+                            "paymentInPercentageNationwide": 22.28,
+                            "paymentInPercentageWithinState": 8.7
+                        },
+                        {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 1102351.75,
+                            "paymentInPercentageNationwide": 4.15,
+                            "paymentInPercentageWithinState": 2.06
+                        },
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 623047.81,
+                            "paymentInPercentageNationwide": 0.33,
+                            "paymentInPercentageWithinState": 1.17
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                },
+                {
+                    "statuteName": "Other",
+                    "statutePaymentInDollars": 426243.19,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Bundles",
+                            "paymentInDollars": 426243.19,
+                            "paymentInPercentageNationwide": 3.83,
+                            "paymentInPercentageWithinState": 0.8
+                        }
+                    ]
+                }
+            ],
+            "totalPaymentInPercentageNationwide": 6.22,
+            "totalPaymentInDollars": 53408184.71
+        }
+    ],
+    "North Dakota": [
+        {
+            "years": "2018-2022",
+            "statutes": [
+                {
+                    "statuteName": "(6)(A) Practices",
+                    "statutePaymentInDollars": 43897948.19,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Land management",
+                            "paymentInDollars": 17470178.9,
+                            "paymentInPercentageNationwide": 6.05,
+                            "paymentInPercentageWithinState": 36.15
+                        },
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 14371369.44,
+                            "paymentInPercentageNationwide": 7.58,
+                            "paymentInPercentageWithinState": 29.74
+                        },
+                        {
+                            "practiceCategoryName": "Vegetative",
+                            "paymentInDollars": 10020665.75,
+                            "paymentInPercentageNationwide": 8.77,
+                            "paymentInPercentageWithinState": 20.74
+                        },
+                        {
+                            "practiceCategoryName": "Forest management",
+                            "paymentInDollars": 1119675.71,
+                            "paymentInPercentageNationwide": 1.35,
+                            "paymentInPercentageWithinState": 2.32
+                        },
+                        {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 739964.81,
+                            "paymentInPercentageNationwide": 2.78,
+                            "paymentInPercentageWithinState": 1.53
+                        },
+                        {
+                            "practiceCategoryName": "Structural",
+                            "paymentInDollars": 176093.58,
+                            "paymentInPercentageNationwide": 0.84,
+                            "paymentInPercentageWithinState": 0.36
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                },
+                {
+                    "statuteName": "Other",
+                    "statutePaymentInDollars": 0.0,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Bundles",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                }
+            ],
+            "totalPaymentInPercentageNationwide": 5.63,
+            "totalPaymentInDollars": 48324682.24
+        }
+    ],
+    "Nebraska": [
+        {
+            "years": "2018-2022",
+            "statutes": [
+                {
+                    "statuteName": "(6)(A) Practices",
+                    "statutePaymentInDollars": 34686352.92999999,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Land management",
+                            "paymentInDollars": 19245029.97,
+                            "paymentInPercentageNationwide": 6.66,
+                            "paymentInPercentageWithinState": 47.31
+                        },
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 7670903.72,
+                            "paymentInPercentageNationwide": 4.05,
+                            "paymentInPercentageWithinState": 18.86
+                        },
+                        {
+                            "practiceCategoryName": "Vegetative",
+                            "paymentInDollars": 3666058.84,
+                            "paymentInPercentageNationwide": 3.21,
+                            "paymentInPercentageWithinState": 9.01
+                        },
+                        {
+                            "practiceCategoryName": "Structural",
+                            "paymentInDollars": 2281866.98,
+                            "paymentInPercentageNationwide": 10.94,
+                            "paymentInPercentageWithinState": 5.61
+                        },
+                        {
+                            "practiceCategoryName": "Forest management",
+                            "paymentInDollars": 1311596.15,
+                            "paymentInPercentageNationwide": 1.58,
+                            "paymentInPercentageWithinState": 3.22
+                        },
+                        {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 510897.27,
+                            "paymentInPercentageNationwide": 1.92,
+                            "paymentInPercentageWithinState": 1.26
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                },
+                {
+                    "statuteName": "Other",
+                    "statutePaymentInDollars": 414160.99,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Bundles",
+                            "paymentInDollars": 414160.99,
+                            "paymentInPercentageNationwide": 3.72,
+                            "paymentInPercentageWithinState": 1.02
+                        }
+                    ]
+                }
+            ],
+            "totalPaymentInPercentageNationwide": 4.74,
+            "totalPaymentInDollars": 40678972.05
+        }
+    ],
+    "Louisiana": [
+        {
+            "years": "2018-2022",
+            "statutes": [
+                {
+                    "statuteName": "(6)(A) Practices",
+                    "statutePaymentInDollars": 25613851.540000003,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Land management",
+                            "paymentInDollars": 11249402.18,
+                            "paymentInPercentageNationwide": 3.89,
+                            "paymentInPercentageWithinState": 38.85
+                        },
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 6173561.96,
+                            "paymentInPercentageNationwide": 3.26,
+                            "paymentInPercentageWithinState": 21.32
+                        },
+                        {
+                            "practiceCategoryName": "Forest management",
+                            "paymentInDollars": 5229918.64,
+                            "paymentInPercentageNationwide": 6.3,
+                            "paymentInPercentageWithinState": 18.06
+                        },
+                        {
+                            "practiceCategoryName": "Vegetative",
+                            "paymentInDollars": 1563825.41,
+                            "paymentInPercentageNationwide": 1.37,
+                            "paymentInPercentageWithinState": 5.4
+                        },
+                        {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 1098289.25,
+                            "paymentInPercentageNationwide": 4.13,
+                            "paymentInPercentageWithinState": 3.79
+                        },
+                        {
+                            "practiceCategoryName": "Structural",
+                            "paymentInDollars": 298854.1,
+                            "paymentInPercentageNationwide": 1.43,
+                            "paymentInPercentageWithinState": 1.03
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                },
+                {
+                    "statuteName": "Other",
+                    "statutePaymentInDollars": 75727.75,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Bundles",
+                            "paymentInDollars": 75727.75,
+                            "paymentInPercentageNationwide": 0.68,
+                            "paymentInPercentageWithinState": 0.26
+                        }
+                    ]
+                }
+            ],
+            "totalPaymentInPercentageNationwide": 3.37,
+            "totalPaymentInDollars": 28956696.54
+        }
+    ],
+    "Oregon": [
+        {
+            "years": "2018-2022",
+            "statutes": [
+                {
+                    "statuteName": "(6)(A) Practices",
+                    "statutePaymentInDollars": 23369239.16,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Land management",
+                            "paymentInDollars": 12255146.25,
+                            "paymentInPercentageNationwide": 4.24,
+                            "paymentInPercentageWithinState": 44.94
+                        },
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 8731221.88,
+                            "paymentInPercentageNationwide": 4.61,
+                            "paymentInPercentageWithinState": 32.02
+                        },
+                        {
+                            "practiceCategoryName": "Forest management",
+                            "paymentInDollars": 1336502.99,
+                            "paymentInPercentageNationwide": 1.61,
+                            "paymentInPercentageWithinState": 4.9
+                        },
+                        {
+                            "practiceCategoryName": "Vegetative",
+                            "paymentInDollars": 500416.45,
+                            "paymentInPercentageNationwide": 0.44,
+                            "paymentInPercentageWithinState": 1.84
+                        },
+                        {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 277697.85,
+                            "paymentInPercentageNationwide": 1.05,
+                            "paymentInPercentageWithinState": 1.02
+                        },
+                        {
+                            "practiceCategoryName": "Structural",
+                            "paymentInDollars": 268253.74,
+                            "paymentInPercentageNationwide": 1.29,
+                            "paymentInPercentageWithinState": 0.98
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                },
+                {
+                    "statuteName": "Other",
+                    "statutePaymentInDollars": 539558.13,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Bundles",
+                            "paymentInDollars": 539558.13,
+                            "paymentInPercentageNationwide": 4.85,
+                            "paymentInPercentageWithinState": 1.98
+                        }
+                    ]
+                }
+            ],
+            "totalPaymentInPercentageNationwide": 3.18,
+            "totalPaymentInDollars": 27270322.82
+        }
+    ],
+    "Missouri": [
+        {
+            "years": "2018-2022",
+            "statutes": [
+                {
+                    "statuteName": "(6)(A) Practices",
+                    "statutePaymentInDollars": 21003986.270000003,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Vegetative",
+                            "paymentInDollars": 10512407.55,
+                            "paymentInPercentageNationwide": 9.2,
+                            "paymentInPercentageWithinState": 39.52
+                        },
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 3954794.89,
+                            "paymentInPercentageNationwide": 2.09,
+                            "paymentInPercentageWithinState": 14.87
+                        },
+                        {
+                            "practiceCategoryName": "Land management",
+                            "paymentInDollars": 3241692.66,
+                            "paymentInPercentageNationwide": 1.12,
+                            "paymentInPercentageWithinState": 12.19
+                        },
+                        {
+                            "practiceCategoryName": "Forest management",
+                            "paymentInDollars": 1535728.53,
+                            "paymentInPercentageNationwide": 1.85,
+                            "paymentInPercentageWithinState": 5.77
+                        },
+                        {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 1020988.32,
+                            "paymentInPercentageNationwide": 3.84,
+                            "paymentInPercentageWithinState": 3.84
+                        },
+                        {
+                            "practiceCategoryName": "Structural",
+                            "paymentInDollars": 738374.32,
+                            "paymentInPercentageNationwide": 3.54,
+                            "paymentInPercentageWithinState": 2.78
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                },
+                {
+                    "statuteName": "Other",
+                    "statutePaymentInDollars": 0.0,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Bundles",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                }
+            ],
+            "totalPaymentInPercentageNationwide": 3.1,
+            "totalPaymentInDollars": 26597911.76
+        }
+    ],
+    "Illinois": [
+        {
+            "years": "2018-2022",
+            "statutes": [
+                {
+                    "statuteName": "(6)(A) Practices",
+                    "statutePaymentInDollars": 16252948.090000002,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Land management",
+                            "paymentInDollars": 7072056.45,
+                            "paymentInPercentageNationwide": 2.45,
+                            "paymentInPercentageWithinState": 28.66
+                        },
+                        {
+                            "practiceCategoryName": "Vegetative",
+                            "paymentInDollars": 5375563.18,
+                            "paymentInPercentageNationwide": 4.7,
+                            "paymentInPercentageWithinState": 21.79
+                        },
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 1690524.51,
+                            "paymentInPercentageNationwide": 0.89,
+                            "paymentInPercentageWithinState": 6.85
+                        },
+                        {
+                            "practiceCategoryName": "Forest management",
+                            "paymentInDollars": 1105976.44,
+                            "paymentInPercentageNationwide": 1.33,
+                            "paymentInPercentageWithinState": 4.48
+                        },
+                        {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 1003872.04,
+                            "paymentInPercentageNationwide": 3.78,
+                            "paymentInPercentageWithinState": 4.07
+                        },
+                        {
+                            "practiceCategoryName": "Structural",
+                            "paymentInDollars": 4955.47,
+                            "paymentInPercentageNationwide": 0.02,
+                            "paymentInPercentageWithinState": 0.02
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                },
+                {
+                    "statuteName": "Other",
+                    "statutePaymentInDollars": 0.0,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Bundles",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                }
+            ],
+            "totalPaymentInPercentageNationwide": 2.87,
+            "totalPaymentInDollars": 24672930.73
+        }
+    ],
+    "Montana": [
+        {
+            "years": "2018-2022",
+            "statutes": [
+                {
+                    "statuteName": "(6)(A) Practices",
+                    "statutePaymentInDollars": 19664105.21,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Land management",
+                            "paymentInDollars": 7824295.02,
+                            "paymentInPercentageNationwide": 2.71,
+                            "paymentInPercentageWithinState": 31.9
+                        },
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 6744614.29,
+                            "paymentInPercentageNationwide": 3.56,
+                            "paymentInPercentageWithinState": 27.5
+                        },
+                        {
+                            "practiceCategoryName": "Vegetative",
+                            "paymentInDollars": 2885127.25,
+                            "paymentInPercentageNationwide": 2.52,
+                            "paymentInPercentageWithinState": 11.76
+                        },
+                        {
+                            "practiceCategoryName": "Forest management",
+                            "paymentInDollars": 1624755.85,
+                            "paymentInPercentageNationwide": 1.96,
+                            "paymentInPercentageWithinState": 6.62
+                        },
+                        {
+                            "practiceCategoryName": "Structural",
+                            "paymentInDollars": 386215.04,
+                            "paymentInPercentageNationwide": 1.85,
+                            "paymentInPercentageWithinState": 1.57
+                        },
+                        {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 199097.76,
+                            "paymentInPercentageNationwide": 0.75,
+                            "paymentInPercentageWithinState": 0.81
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                },
+                {
+                    "statuteName": "Other",
+                    "statutePaymentInDollars": 167015.66,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Bundles",
+                            "paymentInDollars": 167015.66,
+                            "paymentInPercentageNationwide": 1.5,
+                            "paymentInPercentageWithinState": 0.68
+                        }
+                    ]
+                }
+            ],
+            "totalPaymentInPercentageNationwide": 2.86,
+            "totalPaymentInDollars": 24526045.41
+        }
+    ],
+    "Kansas": [
+        {
+            "years": "2018-2022",
+            "statutes": [
+                {
+                    "statuteName": "(6)(A) Practices",
+                    "statutePaymentInDollars": 18973392.220000003,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Land management",
+                            "paymentInDollars": 7871163.57,
+                            "paymentInPercentageNationwide": 2.73,
+                            "paymentInPercentageWithinState": 34.96
+                        },
+                        {
+                            "practiceCategoryName": "Vegetative",
+                            "paymentInDollars": 7629531.99,
+                            "paymentInPercentageNationwide": 6.67,
+                            "paymentInPercentageWithinState": 33.89
+                        },
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 2454361.88,
+                            "paymentInPercentageNationwide": 1.3,
+                            "paymentInPercentageWithinState": 10.9
+                        },
+                        {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 382167.8,
+                            "paymentInPercentageNationwide": 1.44,
+                            "paymentInPercentageWithinState": 1.7
+                        },
+                        {
+                            "practiceCategoryName": "Structural",
+                            "paymentInDollars": 323248.15,
+                            "paymentInPercentageNationwide": 1.55,
+                            "paymentInPercentageWithinState": 1.44
+                        },
+                        {
+                            "practiceCategoryName": "Forest management",
+                            "paymentInDollars": 312918.83,
+                            "paymentInPercentageNationwide": 0.38,
+                            "paymentInPercentageWithinState": 1.39
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                },
+                {
+                    "statuteName": "Other",
+                    "statutePaymentInDollars": 101801.72,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Bundles",
+                            "paymentInDollars": 101801.72,
+                            "paymentInPercentageNationwide": 0.92,
+                            "paymentInPercentageWithinState": 0.45
+                        }
+                    ]
+                }
+            ],
+            "totalPaymentInPercentageNationwide": 2.62,
+            "totalPaymentInDollars": 22514184.24
+        }
+    ],
+    "Iowa": [
+        {
+            "years": "2018-2022",
+            "statutes": [
+                {
+                    "statuteName": "(6)(A) Practices",
+                    "statutePaymentInDollars": 15900099.98,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Land management",
+                            "paymentInDollars": 5366949.73,
+                            "paymentInPercentageNationwide": 1.86,
+                            "paymentInPercentageWithinState": 24.32
+                        },
+                        {
+                            "practiceCategoryName": "Vegetative",
+                            "paymentInDollars": 4701939.1,
+                            "paymentInPercentageNationwide": 4.11,
+                            "paymentInPercentageWithinState": 21.31
+                        },
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 4178395.07,
+                            "paymentInPercentageNationwide": 2.2,
+                            "paymentInPercentageWithinState": 18.94
+                        },
+                        {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 953714.09,
+                            "paymentInPercentageNationwide": 3.59,
+                            "paymentInPercentageWithinState": 4.32
+                        },
+                        {
+                            "practiceCategoryName": "Forest management",
+                            "paymentInDollars": 677019.57,
+                            "paymentInPercentageNationwide": 0.82,
+                            "paymentInPercentageWithinState": 3.07
+                        },
+                        {
+                            "practiceCategoryName": "Structural",
+                            "paymentInDollars": 22082.42,
+                            "paymentInPercentageNationwide": 0.11,
+                            "paymentInPercentageWithinState": 0.1
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                },
+                {
+                    "statuteName": "Other",
+                    "statutePaymentInDollars": 190236.53,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Bundles",
+                            "paymentInDollars": 190236.53,
+                            "paymentInPercentageNationwide": 1.71,
+                            "paymentInPercentageWithinState": 0.86
+                        }
+                    ]
+                }
+            ],
+            "totalPaymentInPercentageNationwide": 2.57,
+            "totalPaymentInDollars": 22065964.34
+        }
+    ],
+    "Texas": [
+        {
+            "years": "2018-2022",
+            "statutes": [
+                {
+                    "statuteName": "(6)(A) Practices",
+                    "statutePaymentInDollars": 17707771.5,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Land management",
+                            "paymentInDollars": 10539271.39,
+                            "paymentInPercentageNationwide": 3.65,
+                            "paymentInPercentageWithinState": 49.14
+                        },
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 4032028.55,
+                            "paymentInPercentageNationwide": 2.13,
+                            "paymentInPercentageWithinState": 18.8
+                        },
+                        {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 1154326.56,
+                            "paymentInPercentageNationwide": 4.34,
+                            "paymentInPercentageWithinState": 5.38
+                        },
+                        {
+                            "practiceCategoryName": "Forest management",
+                            "paymentInDollars": 728982.17,
+                            "paymentInPercentageNationwide": 0.88,
+                            "paymentInPercentageWithinState": 3.4
+                        },
+                        {
+                            "practiceCategoryName": "Structural",
+                            "paymentInDollars": 641382.99,
+                            "paymentInPercentageNationwide": 3.08,
+                            "paymentInPercentageWithinState": 2.99
+                        },
+                        {
+                            "practiceCategoryName": "Vegetative",
+                            "paymentInDollars": 611779.84,
+                            "paymentInPercentageNationwide": 0.54,
+                            "paymentInPercentageWithinState": 2.85
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                },
+                {
+                    "statuteName": "Other",
+                    "statutePaymentInDollars": 0.0,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Bundles",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                }
+            ],
+            "totalPaymentInPercentageNationwide": 2.5,
+            "totalPaymentInDollars": 21445928.85
+        }
+    ],
+    "Wisconsin": [
+        {
+            "years": "2018-2022",
+            "statutes": [
+                {
+                    "statuteName": "(6)(A) Practices",
+                    "statutePaymentInDollars": 8722887.44,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Vegetative",
+                            "paymentInDollars": 5810983.26,
+                            "paymentInPercentageNationwide": 5.08,
+                            "paymentInPercentageWithinState": 34.19
+                        },
+                        {
+                            "practiceCategoryName": "Forest management",
+                            "paymentInDollars": 1365285.02,
+                            "paymentInPercentageNationwide": 1.65,
+                            "paymentInPercentageWithinState": 8.03
+                        },
+                        {
+                            "practiceCategoryName": "Land management",
+                            "paymentInDollars": 1165346.07,
+                            "paymentInPercentageNationwide": 0.4,
+                            "paymentInPercentageWithinState": 6.86
+                        },
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 224547.93,
+                            "paymentInPercentageNationwide": 0.12,
+                            "paymentInPercentageWithinState": 1.32
+                        },
+                        {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 120970.7,
+                            "paymentInPercentageNationwide": 0.46,
+                            "paymentInPercentageWithinState": 0.71
+                        },
+                        {
+                            "practiceCategoryName": "Structural",
+                            "paymentInDollars": 35754.46,
+                            "paymentInPercentageNationwide": 0.17,
+                            "paymentInPercentageWithinState": 0.21
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                },
+                {
+                    "statuteName": "Other",
+                    "statutePaymentInDollars": 40570.02,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Bundles",
+                            "paymentInDollars": 40570.02,
+                            "paymentInPercentageNationwide": 0.36,
+                            "paymentInPercentageWithinState": 0.24
+                        }
+                    ]
+                }
+            ],
+            "totalPaymentInPercentageNationwide": 1.98,
+            "totalPaymentInDollars": 16994745.29
+        }
+    ],
+    "Washington": [
+        {
+            "years": "2018-2022",
+            "statutes": [
+                {
+                    "statuteName": "(6)(A) Practices",
+                    "statutePaymentInDollars": 12553905.35,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Land management",
+                            "paymentInDollars": 6894858.12,
+                            "paymentInPercentageNationwide": 2.39,
+                            "paymentInPercentageWithinState": 42.12
+                        },
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 3460537.65,
+                            "paymentInPercentageNationwide": 1.83,
+                            "paymentInPercentageWithinState": 21.14
+                        },
+                        {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 909707.93,
+                            "paymentInPercentageNationwide": 3.42,
+                            "paymentInPercentageWithinState": 5.56
+                        },
+                        {
+                            "practiceCategoryName": "Vegetative",
+                            "paymentInDollars": 547219.1,
+                            "paymentInPercentageNationwide": 0.48,
+                            "paymentInPercentageWithinState": 3.34
+                        },
+                        {
+                            "practiceCategoryName": "Forest management",
+                            "paymentInDollars": 469967.31,
+                            "paymentInPercentageNationwide": 0.57,
+                            "paymentInPercentageWithinState": 2.87
+                        },
+                        {
+                            "practiceCategoryName": "Structural",
+                            "paymentInDollars": 271615.24,
+                            "paymentInPercentageNationwide": 1.3,
+                            "paymentInPercentageWithinState": 1.66
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                },
+                {
+                    "statuteName": "Other",
+                    "statutePaymentInDollars": 134453.0,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Bundles",
+                            "paymentInDollars": 134453.0,
+                            "paymentInPercentageNationwide": 1.21,
+                            "paymentInPercentageWithinState": 0.82
+                        }
+                    ]
+                }
+            ],
+            "totalPaymentInPercentageNationwide": 1.91,
+            "totalPaymentInDollars": 16369954.75
+        }
+    ],
+    "Colorado": [
+        {
+            "years": "2018-2022",
+            "statutes": [
+                {
+                    "statuteName": "(6)(A) Practices",
+                    "statutePaymentInDollars": 12672418.549999999,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Land management",
+                            "paymentInDollars": 6319423.93,
+                            "paymentInPercentageNationwide": 2.19,
+                            "paymentInPercentageWithinState": 43.54
+                        },
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 4042620.46,
+                            "paymentInPercentageNationwide": 2.13,
+                            "paymentInPercentageWithinState": 27.85
+                        },
+                        {
+                            "practiceCategoryName": "Vegetative",
+                            "paymentInDollars": 880377.5,
+                            "paymentInPercentageNationwide": 0.77,
+                            "paymentInPercentageWithinState": 6.07
+                        },
+                        {
+                            "practiceCategoryName": "Forest management",
+                            "paymentInDollars": 524919.33,
+                            "paymentInPercentageNationwide": 0.63,
+                            "paymentInPercentageWithinState": 3.62
+                        },
+                        {
+                            "practiceCategoryName": "Structural",
+                            "paymentInDollars": 466259.83,
+                            "paymentInPercentageNationwide": 2.24,
+                            "paymentInPercentageWithinState": 3.21
+                        },
+                        {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 438817.5,
+                            "paymentInPercentageNationwide": 1.65,
+                            "paymentInPercentageWithinState": 3.02
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                },
+                {
+                    "statuteName": "Other",
+                    "statutePaymentInDollars": 60356.18,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Bundles",
+                            "paymentInDollars": 60356.18,
+                            "paymentInPercentageNationwide": 0.54,
+                            "paymentInPercentageWithinState": 0.42
+                        }
+                    ]
+                }
+            ],
+            "totalPaymentInPercentageNationwide": 1.69,
+            "totalPaymentInDollars": 14514939.98
+        }
+    ],
+    "Oklahoma": [
+        {
+            "years": "2018-2022",
+            "statutes": [
+                {
+                    "statuteName": "(6)(A) Practices",
+                    "statutePaymentInDollars": 10909080.350000001,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Land management",
+                            "paymentInDollars": 3882939.83,
+                            "paymentInPercentageNationwide": 1.34,
+                            "paymentInPercentageWithinState": 28.55
+                        },
+                        {
+                            "practiceCategoryName": "Vegetative",
+                            "paymentInDollars": 3078058.83,
+                            "paymentInPercentageNationwide": 2.69,
+                            "paymentInPercentageWithinState": 22.64
+                        },
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 2911211.66,
+                            "paymentInPercentageNationwide": 1.54,
+                            "paymentInPercentageWithinState": 21.41
+                        },
+                        {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 631338.82,
+                            "paymentInPercentageNationwide": 2.38,
+                            "paymentInPercentageWithinState": 4.64
+                        },
+                        {
+                            "practiceCategoryName": "Forest management",
+                            "paymentInDollars": 292642.12,
+                            "paymentInPercentageNationwide": 0.35,
+                            "paymentInPercentageWithinState": 2.15
+                        },
+                        {
+                            "practiceCategoryName": "Structural",
+                            "paymentInDollars": 112889.09,
+                            "paymentInPercentageNationwide": 0.54,
+                            "paymentInPercentageWithinState": 0.83
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                },
+                {
+                    "statuteName": "Other",
+                    "statutePaymentInDollars": 101554.0,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Bundles",
+                            "paymentInDollars": 101554.0,
+                            "paymentInPercentageNationwide": 0.91,
+                            "paymentInPercentageWithinState": 0.75
+                        }
+                    ]
+                }
+            ],
+            "totalPaymentInPercentageNationwide": 1.58,
+            "totalPaymentInDollars": 13598496.11
+        }
+    ],
+    "Indiana": [
+        {
+            "years": "2018-2022",
+            "statutes": [
+                {
+                    "statuteName": "(6)(A) Practices",
+                    "statutePaymentInDollars": 9888823.31,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Land management",
+                            "paymentInDollars": 2825626.2,
+                            "paymentInPercentageNationwide": 0.98,
+                            "paymentInPercentageWithinState": 23.11
+                        },
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 2621827.08,
+                            "paymentInPercentageNationwide": 1.38,
+                            "paymentInPercentageWithinState": 21.44
+                        },
+                        {
+                            "practiceCategoryName": "Forest management",
+                            "paymentInDollars": 2193580.11,
+                            "paymentInPercentageNationwide": 2.64,
+                            "paymentInPercentageWithinState": 17.94
+                        },
+                        {
+                            "practiceCategoryName": "Vegetative",
+                            "paymentInDollars": 1903326.52,
+                            "paymentInPercentageNationwide": 1.66,
+                            "paymentInPercentageWithinState": 15.56
+                        },
+                        {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 237794.97,
+                            "paymentInPercentageNationwide": 0.89,
+                            "paymentInPercentageWithinState": 1.94
+                        },
+                        {
+                            "practiceCategoryName": "Structural",
+                            "paymentInDollars": 106668.43,
+                            "paymentInPercentageNationwide": 0.51,
+                            "paymentInPercentageWithinState": 0.87
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                },
+                {
+                    "statuteName": "Other",
+                    "statutePaymentInDollars": 0.0,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Bundles",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                }
+            ],
+            "totalPaymentInPercentageNationwide": 1.42,
+            "totalPaymentInDollars": 12228785.06
+        }
+    ],
+    "New Mexico": [
+        {
+            "years": "2018-2022",
+            "statutes": [
+                {
+                    "statuteName": "(6)(A) Practices",
+                    "statutePaymentInDollars": 9353691.959999999,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Land management",
+                            "paymentInDollars": 8715122.87,
+                            "paymentInPercentageNationwide": 3.02,
+                            "paymentInPercentageWithinState": 79.7
+                        },
+                        {
+                            "practiceCategoryName": "Forest management",
+                            "paymentInDollars": 396950.72,
+                            "paymentInPercentageNationwide": 0.48,
+                            "paymentInPercentageWithinState": 3.63
+                        },
+                        {
+                            "practiceCategoryName": "Vegetative",
+                            "paymentInDollars": 120992.92,
+                            "paymentInPercentageNationwide": 0.11,
+                            "paymentInPercentageWithinState": 1.11
+                        },
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 100954.69,
+                            "paymentInPercentageNationwide": 0.05,
+                            "paymentInPercentageWithinState": 0.92
+                        },
+                        {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 13630.98,
+                            "paymentInPercentageNationwide": 0.05,
+                            "paymentInPercentageWithinState": 0.12
+                        },
+                        {
+                            "practiceCategoryName": "Structural",
+                            "paymentInDollars": 6039.78,
+                            "paymentInPercentageNationwide": 0.03,
+                            "paymentInPercentageWithinState": 0.06
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                },
+                {
+                    "statuteName": "Other",
+                    "statutePaymentInDollars": 0.0,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Bundles",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                }
+            ],
+            "totalPaymentInPercentageNationwide": 1.27,
+            "totalPaymentInDollars": 10935583.46
+        }
+    ],
+    "South Carolina": [
+        {
+            "years": "2018-2022",
+            "statutes": [
+                {
+                    "statuteName": "(6)(A) Practices",
+                    "statutePaymentInDollars": 6999082.529999999,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Forest management",
+                            "paymentInDollars": 3391540.53,
+                            "paymentInPercentageNationwide": 4.09,
+                            "paymentInPercentageWithinState": 34.27
+                        },
+                        {
+                            "practiceCategoryName": "Land management",
+                            "paymentInDollars": 1898021.07,
+                            "paymentInPercentageNationwide": 0.66,
+                            "paymentInPercentageWithinState": 19.18
+                        },
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 1039695.25,
+                            "paymentInPercentageNationwide": 0.55,
+                            "paymentInPercentageWithinState": 10.51
+                        },
+                        {
+                            "practiceCategoryName": "Vegetative",
+                            "paymentInDollars": 563478.37,
+                            "paymentInPercentageNationwide": 0.49,
+                            "paymentInPercentageWithinState": 5.69
+                        },
+                        {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 62105.56,
+                            "paymentInPercentageNationwide": 0.23,
+                            "paymentInPercentageWithinState": 0.63
+                        },
+                        {
+                            "practiceCategoryName": "Structural",
+                            "paymentInDollars": 44241.75,
+                            "paymentInPercentageNationwide": 0.21,
+                            "paymentInPercentageWithinState": 0.45
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                },
+                {
+                    "statuteName": "Other",
+                    "statutePaymentInDollars": 0.0,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Bundles",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                }
+            ],
+            "totalPaymentInPercentageNationwide": 1.15,
+            "totalPaymentInDollars": 9896973.5
+        }
+    ],
+    "Alabama": [
+        {
+            "years": "2018-2022",
+            "statutes": [
+                {
+                    "statuteName": "(6)(A) Practices",
+                    "statutePaymentInDollars": 8175185.720000001,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Forest management",
+                            "paymentInDollars": 3494376.88,
+                            "paymentInPercentageNationwide": 4.21,
+                            "paymentInPercentageWithinState": 36.62
+                        },
+                        {
+                            "practiceCategoryName": "Land management",
+                            "paymentInDollars": 2842936.25,
+                            "paymentInPercentageNationwide": 0.98,
+                            "paymentInPercentageWithinState": 29.79
+                        },
+                        {
+                            "practiceCategoryName": "Vegetative",
+                            "paymentInDollars": 1052953.19,
+                            "paymentInPercentageNationwide": 0.92,
+                            "paymentInPercentageWithinState": 11.03
+                        },
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 679479.66,
+                            "paymentInPercentageNationwide": 0.36,
+                            "paymentInPercentageWithinState": 7.12
+                        },
+                        {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 72195.48,
+                            "paymentInPercentageNationwide": 0.27,
+                            "paymentInPercentageWithinState": 0.76
+                        },
+                        {
+                            "practiceCategoryName": "Structural",
+                            "paymentInDollars": 33244.26,
+                            "paymentInPercentageNationwide": 0.16,
+                            "paymentInPercentageWithinState": 0.35
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                },
+                {
+                    "statuteName": "Other",
+                    "statutePaymentInDollars": 5623.3,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Bundles",
+                            "paymentInDollars": 5623.3,
+                            "paymentInPercentageNationwide": 0.05,
+                            "paymentInPercentageWithinState": 0.06
+                        }
+                    ]
+                }
+            ],
+            "totalPaymentInPercentageNationwide": 1.11,
+            "totalPaymentInDollars": 9542269.25
+        }
+    ],
+    "Michigan": [
+        {
+            "years": "2018-2022",
+            "statutes": [
+                {
+                    "statuteName": "(6)(A) Practices",
+                    "statutePaymentInDollars": 3048392.38,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Vegetative",
+                            "paymentInDollars": 1105781.27,
+                            "paymentInPercentageNationwide": 0.97,
+                            "paymentInPercentageWithinState": 13.25
+                        },
+                        {
+                            "practiceCategoryName": "Land management",
+                            "paymentInDollars": 724526.11,
+                            "paymentInPercentageNationwide": 0.25,
+                            "paymentInPercentageWithinState": 8.68
+                        },
+                        {
+                            "practiceCategoryName": "Forest management",
+                            "paymentInDollars": 572795.63,
+                            "paymentInPercentageNationwide": 0.69,
+                            "paymentInPercentageWithinState": 6.86
+                        },
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 522231.12,
+                            "paymentInPercentageNationwide": 0.28,
+                            "paymentInPercentageWithinState": 6.26
+                        },
+                        {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 83219.09,
+                            "paymentInPercentageNationwide": 0.31,
+                            "paymentInPercentageWithinState": 1.0
+                        },
+                        {
+                            "practiceCategoryName": "Structural",
+                            "paymentInDollars": 39839.16,
+                            "paymentInPercentageNationwide": 0.19,
+                            "paymentInPercentageWithinState": 0.48
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                },
+                {
+                    "statuteName": "Other",
+                    "statutePaymentInDollars": 0.0,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Bundles",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                }
+            ],
+            "totalPaymentInPercentageNationwide": 0.97,
+            "totalPaymentInDollars": 8348581.45
+        }
+    ],
+    "Tennessee": [
+        {
+            "years": "2018-2022",
+            "statutes": [
+                {
+                    "statuteName": "(6)(A) Practices",
+                    "statutePaymentInDollars": 4726557.92,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Vegetative",
+                            "paymentInDollars": 1630535.58,
+                            "paymentInPercentageNationwide": 1.43,
+                            "paymentInPercentageWithinState": 19.94
+                        },
+                        {
+                            "practiceCategoryName": "Forest management",
+                            "paymentInDollars": 1029997.76,
+                            "paymentInPercentageNationwide": 1.24,
+                            "paymentInPercentageWithinState": 12.6
+                        },
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 906563.0,
+                            "paymentInPercentageNationwide": 0.48,
+                            "paymentInPercentageWithinState": 11.09
+                        },
+                        {
+                            "practiceCategoryName": "Land management",
+                            "paymentInDollars": 847622.12,
+                            "paymentInPercentageNationwide": 0.29,
+                            "paymentInPercentageWithinState": 10.37
+                        },
+                        {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 225293.25,
+                            "paymentInPercentageNationwide": 0.85,
+                            "paymentInPercentageWithinState": 2.76
+                        },
+                        {
+                            "practiceCategoryName": "Structural",
+                            "paymentInDollars": 86546.21,
+                            "paymentInPercentageNationwide": 0.42,
+                            "paymentInPercentageWithinState": 1.06
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                },
+                {
+                    "statuteName": "Other",
+                    "statutePaymentInDollars": 192429.05,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Bundles",
+                            "paymentInDollars": 192429.05,
+                            "paymentInPercentageNationwide": 1.73,
+                            "paymentInPercentageWithinState": 2.35
+                        }
+                    ]
+                }
+            ],
+            "totalPaymentInPercentageNationwide": 0.95,
+            "totalPaymentInDollars": 8177146.8
+        }
+    ],
+    "Virginia": [
+        {
+            "years": "2018-2022",
+            "statutes": [
+                {
+                    "statuteName": "(6)(A) Practices",
+                    "statutePaymentInDollars": 5900172.05,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Forest management",
+                            "paymentInDollars": 2252674.94,
+                            "paymentInPercentageNationwide": 2.71,
+                            "paymentInPercentageWithinState": 29.66
+                        },
+                        {
+                            "practiceCategoryName": "Land management",
+                            "paymentInDollars": 2077188.77,
+                            "paymentInPercentageNationwide": 0.72,
+                            "paymentInPercentageWithinState": 27.35
+                        },
+                        {
+                            "practiceCategoryName": "Vegetative",
+                            "paymentInDollars": 996106.35,
+                            "paymentInPercentageNationwide": 0.87,
+                            "paymentInPercentageWithinState": 13.11
+                        },
+                        {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 517953.7,
+                            "paymentInPercentageNationwide": 1.95,
+                            "paymentInPercentageWithinState": 6.82
+                        },
+                        {
+                            "practiceCategoryName": "Structural",
+                            "paymentInDollars": 56248.29,
+                            "paymentInPercentageNationwide": 0.27,
+                            "paymentInPercentageWithinState": 0.74
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        },
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                },
+                {
+                    "statuteName": "Other",
+                    "statutePaymentInDollars": 52771.56,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Bundles",
+                            "paymentInDollars": 52771.56,
+                            "paymentInPercentageNationwide": 0.47,
+                            "paymentInPercentageWithinState": 0.69
+                        }
+                    ]
+                }
+            ],
+            "totalPaymentInPercentageNationwide": 0.88,
+            "totalPaymentInDollars": 7595579.34
+        }
+    ],
+    "North Carolina": [
+        {
+            "years": "2018-2022",
+            "statutes": [
+                {
+                    "statuteName": "(6)(A) Practices",
+                    "statutePaymentInDollars": 5702938.869999999,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Forest management",
+                            "paymentInDollars": 3071602.45,
+                            "paymentInPercentageNationwide": 3.7,
+                            "paymentInPercentageWithinState": 44.85
+                        },
+                        {
+                            "practiceCategoryName": "Land management",
+                            "paymentInDollars": 1466580.88,
+                            "paymentInPercentageNationwide": 0.51,
+                            "paymentInPercentageWithinState": 21.41
+                        },
+                        {
+                            "practiceCategoryName": "Vegetative",
+                            "paymentInDollars": 633251.71,
+                            "paymentInPercentageNationwide": 0.55,
+                            "paymentInPercentageWithinState": 9.25
+                        },
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 358826.77,
+                            "paymentInPercentageNationwide": 0.19,
+                            "paymentInPercentageWithinState": 5.24
+                        },
+                        {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 171910.42,
+                            "paymentInPercentageNationwide": 0.65,
+                            "paymentInPercentageWithinState": 2.51
+                        },
+                        {
+                            "practiceCategoryName": "Structural",
+                            "paymentInDollars": 766.64,
+                            "paymentInPercentageNationwide": 0.0,
+                            "paymentInPercentageWithinState": 0.01
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                },
+                {
+                    "statuteName": "Other",
+                    "statutePaymentInDollars": 0.0,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Bundles",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                }
+            ],
+            "totalPaymentInPercentageNationwide": 0.8,
+            "totalPaymentInDollars": 6848768.46
+        }
+    ],
+    "Pennsylvania": [
+        {
+            "years": "2018-2022",
+            "statutes": [
+                {
+                    "statuteName": "(6)(A) Practices",
+                    "statutePaymentInDollars": 4181627.34,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Vegetative",
+                            "paymentInDollars": 1351155.77,
+                            "paymentInPercentageNationwide": 1.18,
+                            "paymentInPercentageWithinState": 21.7
+                        },
+                        {
+                            "practiceCategoryName": "Land management",
+                            "paymentInDollars": 1122052.45,
+                            "paymentInPercentageNationwide": 0.39,
+                            "paymentInPercentageWithinState": 18.02
+                        },
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 972099.83,
+                            "paymentInPercentageNationwide": 0.51,
+                            "paymentInPercentageWithinState": 15.61
+                        },
+                        {
+                            "practiceCategoryName": "Forest management",
+                            "paymentInDollars": 694359.75,
+                            "paymentInPercentageNationwide": 0.84,
+                            "paymentInPercentageWithinState": 11.15
+                        },
+                        {
+                            "practiceCategoryName": "Structural",
+                            "paymentInDollars": 27642.39,
+                            "paymentInPercentageNationwide": 0.13,
+                            "paymentInPercentageWithinState": 0.44
+                        },
+                        {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 14317.15,
+                            "paymentInPercentageNationwide": 0.05,
+                            "paymentInPercentageWithinState": 0.23
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                },
+                {
+                    "statuteName": "Other",
+                    "statutePaymentInDollars": 129564.01,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Bundles",
+                            "paymentInDollars": 129564.01,
+                            "paymentInPercentageNationwide": 1.16,
+                            "paymentInPercentageWithinState": 2.08
+                        }
+                    ]
+                }
+            ],
+            "totalPaymentInPercentageNationwide": 0.73,
+            "totalPaymentInDollars": 6227811.93
+        }
+    ],
+    "Kentucky": [
+        {
+            "years": "2018-2022",
+            "statutes": [
+                {
+                    "statuteName": "(6)(A) Practices",
+                    "statutePaymentInDollars": 3982315.91,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Land management",
+                            "paymentInDollars": 1379026.59,
+                            "paymentInPercentageNationwide": 0.48,
+                            "paymentInPercentageWithinState": 22.68
+                        },
+                        {
+                            "practiceCategoryName": "Vegetative",
+                            "paymentInDollars": 1134265.95,
+                            "paymentInPercentageNationwide": 0.99,
+                            "paymentInPercentageWithinState": 18.65
+                        },
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 1110466.59,
+                            "paymentInPercentageNationwide": 0.59,
+                            "paymentInPercentageWithinState": 18.26
+                        },
+                        {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 204158.63,
+                            "paymentInPercentageNationwide": 0.77,
+                            "paymentInPercentageWithinState": 3.36
+                        },
+                        {
+                            "practiceCategoryName": "Forest management",
+                            "paymentInDollars": 86437.58,
+                            "paymentInPercentageNationwide": 0.1,
+                            "paymentInPercentageWithinState": 1.42
+                        },
+                        {
+                            "practiceCategoryName": "Structural",
+                            "paymentInDollars": 67960.57,
+                            "paymentInPercentageNationwide": 0.33,
+                            "paymentInPercentageWithinState": 1.12
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                },
+                {
+                    "statuteName": "Other",
+                    "statutePaymentInDollars": 134775.68,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Bundles",
+                            "paymentInDollars": 134775.68,
+                            "paymentInPercentageNationwide": 1.21,
+                            "paymentInPercentageWithinState": 2.22
+                        }
+                    ]
+                }
+            ],
+            "totalPaymentInPercentageNationwide": 0.71,
+            "totalPaymentInDollars": 6081596.1
+        }
+    ],
+    "Utah": [
+        {
+            "years": "2018-2022",
+            "statutes": [
+                {
+                    "statuteName": "(6)(A) Practices",
+                    "statutePaymentInDollars": 3264755.13,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Land management",
+                            "paymentInDollars": 2297656.53,
+                            "paymentInPercentageNationwide": 0.8,
+                            "paymentInPercentageWithinState": 40.8
+                        },
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 337785.61,
+                            "paymentInPercentageNationwide": 0.18,
+                            "paymentInPercentageWithinState": 6.0
+                        },
+                        {
+                            "practiceCategoryName": "Structural",
+                            "paymentInDollars": 288147.59,
+                            "paymentInPercentageNationwide": 1.38,
+                            "paymentInPercentageWithinState": 5.12
+                        },
+                        {
+                            "practiceCategoryName": "Vegetative",
+                            "paymentInDollars": 233997.95,
+                            "paymentInPercentageNationwide": 0.2,
+                            "paymentInPercentageWithinState": 4.15
+                        },
+                        {
+                            "practiceCategoryName": "Forest management",
+                            "paymentInDollars": 89625.74,
+                            "paymentInPercentageNationwide": 0.11,
+                            "paymentInPercentageWithinState": 1.59
+                        },
+                        {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 17541.71,
+                            "paymentInPercentageNationwide": 0.07,
+                            "paymentInPercentageWithinState": 0.31
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                },
+                {
+                    "statuteName": "Other",
+                    "statutePaymentInDollars": 0.0,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Bundles",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                }
+            ],
+            "totalPaymentInPercentageNationwide": 0.66,
+            "totalPaymentInDollars": 5631913.68
+        }
+    ],
+    "Ohio": [
+        {
+            "years": "2018-2022",
+            "statutes": [
+                {
+                    "statuteName": "(6)(A) Practices",
+                    "statutePaymentInDollars": 2792135.63,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Vegetative",
+                            "paymentInDollars": 1295943.82,
+                            "paymentInPercentageNationwide": 1.13,
+                            "paymentInPercentageWithinState": 25.51
+                        },
+                        {
+                            "practiceCategoryName": "Land management",
+                            "paymentInDollars": 718545.11,
+                            "paymentInPercentageNationwide": 0.25,
+                            "paymentInPercentageWithinState": 14.14
+                        },
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 326584.31,
+                            "paymentInPercentageNationwide": 0.17,
+                            "paymentInPercentageWithinState": 6.43
+                        },
+                        {
+                            "practiceCategoryName": "Forest management",
+                            "paymentInDollars": 303185.02,
+                            "paymentInPercentageNationwide": 0.37,
+                            "paymentInPercentageWithinState": 5.97
+                        },
+                        {
+                            "practiceCategoryName": "Structural",
+                            "paymentInDollars": 79215.85,
+                            "paymentInPercentageNationwide": 0.38,
+                            "paymentInPercentageWithinState": 1.56
+                        },
+                        {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 68661.52,
+                            "paymentInPercentageNationwide": 0.26,
+                            "paymentInPercentageWithinState": 1.35
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                },
+                {
+                    "statuteName": "Other",
+                    "statutePaymentInDollars": 0.0,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Bundles",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                }
+            ],
+            "totalPaymentInPercentageNationwide": 0.59,
+            "totalPaymentInDollars": 5080126.93
+        }
+    ],
+    "Idaho": [
+        {
+            "years": "2018-2022",
+            "statutes": [
+                {
+                    "statuteName": "(6)(A) Practices",
+                    "statutePaymentInDollars": 2274177.1999999997,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Land management",
+                            "paymentInDollars": 1334330.7,
+                            "paymentInPercentageNationwide": 0.46,
+                            "paymentInPercentageWithinState": 29.11
+                        },
+                        {
+                            "practiceCategoryName": "Structural",
+                            "paymentInDollars": 337600.89,
+                            "paymentInPercentageNationwide": 1.62,
+                            "paymentInPercentageWithinState": 7.36
+                        },
+                        {
+                            "practiceCategoryName": "Vegetative",
+                            "paymentInDollars": 280006.06,
+                            "paymentInPercentageNationwide": 0.24,
+                            "paymentInPercentageWithinState": 6.11
+                        },
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 200354.69,
+                            "paymentInPercentageNationwide": 0.11,
+                            "paymentInPercentageWithinState": 4.37
+                        },
+                        {
+                            "practiceCategoryName": "Forest management",
+                            "paymentInDollars": 94119.65,
+                            "paymentInPercentageNationwide": 0.11,
+                            "paymentInPercentageWithinState": 2.05
+                        },
+                        {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 27765.21,
+                            "paymentInPercentageNationwide": 0.1,
+                            "paymentInPercentageWithinState": 0.61
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                },
+                {
+                    "statuteName": "Other",
+                    "statutePaymentInDollars": 196620.3,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Bundles",
+                            "paymentInDollars": 196620.3,
+                            "paymentInPercentageNationwide": 1.77,
+                            "paymentInPercentageWithinState": 4.29
+                        }
+                    ]
+                }
+            ],
+            "totalPaymentInPercentageNationwide": 0.53,
+            "totalPaymentInDollars": 4584350.5
+        }
+    ],
+    "Florida": [
+        {
+            "years": "2018-2022",
+            "statutes": [
+                {
+                    "statuteName": "(6)(A) Practices",
+                    "statutePaymentInDollars": 2987497.68,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Land management",
+                            "paymentInDollars": 1671214.73,
+                            "paymentInPercentageNationwide": 0.58,
+                            "paymentInPercentageWithinState": 40.24
+                        },
+                        {
+                            "practiceCategoryName": "Forest management",
+                            "paymentInDollars": 853233.02,
+                            "paymentInPercentageNationwide": 1.03,
+                            "paymentInPercentageWithinState": 20.54
+                        },
+                        {
+                            "practiceCategoryName": "Structural",
+                            "paymentInDollars": 222573.21,
+                            "paymentInPercentageNationwide": 1.07,
+                            "paymentInPercentageWithinState": 5.36
+                        },
+                        {
+                            "practiceCategoryName": "Vegetative",
+                            "paymentInDollars": 157157.05,
+                            "paymentInPercentageNationwide": 0.14,
+                            "paymentInPercentageWithinState": 3.78
+                        },
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 66443.24,
+                            "paymentInPercentageNationwide": 0.04,
+                            "paymentInPercentageWithinState": 1.6
+                        },
+                        {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 16876.43,
+                            "paymentInPercentageNationwide": 0.06,
+                            "paymentInPercentageWithinState": 0.41
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                },
+                {
+                    "statuteName": "Other",
+                    "statutePaymentInDollars": 0.0,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Bundles",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                }
+            ],
+            "totalPaymentInPercentageNationwide": 0.48,
+            "totalPaymentInDollars": 4153448.8
+        }
+    ],
+    "California": [
+        {
+            "years": "2018-2022",
+            "statutes": [
+                {
+                    "statuteName": "(6)(A) Practices",
+                    "statutePaymentInDollars": 1923153.6600000001,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Land management",
+                            "paymentInDollars": 903452.86,
+                            "paymentInPercentageNationwide": 0.31,
+                            "paymentInPercentageWithinState": 22.17
+                        },
+                        {
+                            "practiceCategoryName": "Forest management",
+                            "paymentInDollars": 349895.83,
+                            "paymentInPercentageNationwide": 0.42,
+                            "paymentInPercentageWithinState": 8.59
+                        },
+                        {
+                            "practiceCategoryName": "Structural",
+                            "paymentInDollars": 317362.38,
+                            "paymentInPercentageNationwide": 1.52,
+                            "paymentInPercentageWithinState": 7.79
+                        },
+                        {
+                            "practiceCategoryName": "Vegetative",
+                            "paymentInDollars": 228066.64,
+                            "paymentInPercentageNationwide": 0.2,
+                            "paymentInPercentageWithinState": 5.6
+                        },
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 107688.47,
+                            "paymentInPercentageNationwide": 0.06,
+                            "paymentInPercentageWithinState": 2.64
+                        },
+                        {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 16687.48,
+                            "paymentInPercentageNationwide": 0.06,
+                            "paymentInPercentageWithinState": 0.41
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                },
+                {
+                    "statuteName": "Other",
+                    "statutePaymentInDollars": 431085.74,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Bundles",
+                            "paymentInDollars": 431085.74,
+                            "paymentInPercentageNationwide": 3.87,
+                            "paymentInPercentageWithinState": 10.58
+                        }
+                    ]
+                }
+            ],
+            "totalPaymentInPercentageNationwide": 0.47,
+            "totalPaymentInDollars": 4075551.64
+        }
+    ],
+    "New York": [
+        {
+            "years": "2018-2022",
+            "statutes": [
+                {
+                    "statuteName": "(6)(A) Practices",
+                    "statutePaymentInDollars": 2126477.45,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Land management",
+                            "paymentInDollars": 713829.27,
+                            "paymentInPercentageNationwide": 0.25,
+                            "paymentInPercentageWithinState": 20.16
+                        },
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 546167.18,
+                            "paymentInPercentageNationwide": 0.29,
+                            "paymentInPercentageWithinState": 15.42
+                        },
+                        {
+                            "practiceCategoryName": "Vegetative",
+                            "paymentInDollars": 414802.06,
+                            "paymentInPercentageNationwide": 0.36,
+                            "paymentInPercentageWithinState": 11.71
+                        },
+                        {
+                            "practiceCategoryName": "Forest management",
+                            "paymentInDollars": 413648.05,
+                            "paymentInPercentageNationwide": 0.5,
+                            "paymentInPercentageWithinState": 11.68
+                        },
+                        {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 19750.34,
+                            "paymentInPercentageNationwide": 0.07,
+                            "paymentInPercentageWithinState": 0.56
+                        },
+                        {
+                            "practiceCategoryName": "Structural",
+                            "paymentInDollars": 18280.55,
+                            "paymentInPercentageNationwide": 0.09,
+                            "paymentInPercentageWithinState": 0.52
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                },
+                {
+                    "statuteName": "Other",
+                    "statutePaymentInDollars": 0.0,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Bundles",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                }
+            ],
+            "totalPaymentInPercentageNationwide": 0.41,
+            "totalPaymentInDollars": 3541662.25
+        }
+    ],
+    "West Virginia": [
+        {
+            "years": "2018-2022",
+            "statutes": [
+                {
+                    "statuteName": "(6)(A) Practices",
+                    "statutePaymentInDollars": 686028.17,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Vegetative",
+                            "paymentInDollars": 264778.77,
+                            "paymentInPercentageNationwide": 0.23,
+                            "paymentInPercentageWithinState": 13.46
+                        },
+                        {
+                            "practiceCategoryName": "Forest management",
+                            "paymentInDollars": 193611.94,
+                            "paymentInPercentageNationwide": 0.23,
+                            "paymentInPercentageWithinState": 9.84
+                        },
+                        {
+                            "practiceCategoryName": "Land management",
+                            "paymentInDollars": 185058.71,
+                            "paymentInPercentageNationwide": 0.06,
+                            "paymentInPercentageWithinState": 9.41
+                        },
+                        {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 38443.57,
+                            "paymentInPercentageNationwide": 0.14,
+                            "paymentInPercentageWithinState": 1.95
+                        },
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 2448.96,
+                            "paymentInPercentageNationwide": 0.0,
+                            "paymentInPercentageWithinState": 0.12
+                        },
+                        {
+                            "practiceCategoryName": "Structural",
+                            "paymentInDollars": 1686.22,
+                            "paymentInPercentageNationwide": 0.01,
+                            "paymentInPercentageWithinState": 0.09
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                },
+                {
+                    "statuteName": "Other",
+                    "statutePaymentInDollars": 0.0,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Bundles",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                }
+            ],
+            "totalPaymentInPercentageNationwide": 0.23,
+            "totalPaymentInDollars": 1966631.37
+        }
+    ],
+    "Wyoming": [
+        {
+            "years": "2018-2022",
+            "statutes": [
+                {
+                    "statuteName": "(6)(A) Practices",
+                    "statutePaymentInDollars": 1402304.8199999998,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Land management",
+                            "paymentInDollars": 1059168.09,
+                            "paymentInPercentageNationwide": 0.37,
+                            "paymentInPercentageWithinState": 56.18
+                        },
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 105737.62,
+                            "paymentInPercentageNationwide": 0.06,
+                            "paymentInPercentageWithinState": 5.61
+                        },
+                        {
+                            "practiceCategoryName": "Vegetative",
+                            "paymentInDollars": 91466.87,
+                            "paymentInPercentageNationwide": 0.08,
+                            "paymentInPercentageWithinState": 4.85
+                        },
+                        {
+                            "practiceCategoryName": "Structural",
+                            "paymentInDollars": 87485.35,
+                            "paymentInPercentageNationwide": 0.42,
+                            "paymentInPercentageWithinState": 4.64
+                        },
+                        {
+                            "practiceCategoryName": "Forest management",
+                            "paymentInDollars": 51554.15,
+                            "paymentInPercentageNationwide": 0.06,
+                            "paymentInPercentageWithinState": 2.73
+                        },
+                        {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 6892.74,
+                            "paymentInPercentageNationwide": 0.03,
+                            "paymentInPercentageWithinState": 0.37
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                },
+                {
+                    "statuteName": "Other",
+                    "statutePaymentInDollars": 0.0,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Bundles",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                }
+            ],
+            "totalPaymentInPercentageNationwide": 0.22,
+            "totalPaymentInDollars": 1885456.06
+        }
+    ],
+    "Arizona": [
+        {
+            "years": "2018-2022",
+            "statutes": [
+                {
+                    "statuteName": "(6)(A) Practices",
+                    "statutePaymentInDollars": 736075.46,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Land management",
+                            "paymentInDollars": 495893.42,
+                            "paymentInPercentageNationwide": 0.17,
+                            "paymentInPercentageWithinState": 40.36
+                        },
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 132713.01,
+                            "paymentInPercentageNationwide": 0.07,
+                            "paymentInPercentageWithinState": 10.8
+                        },
+                        {
+                            "practiceCategoryName": "Vegetative",
+                            "paymentInDollars": 63011.91,
+                            "paymentInPercentageNationwide": 0.06,
+                            "paymentInPercentageWithinState": 5.13
+                        },
+                        {
+                            "practiceCategoryName": "Structural",
+                            "paymentInDollars": 42863.76,
+                            "paymentInPercentageNationwide": 0.21,
+                            "paymentInPercentageWithinState": 3.49
+                        },
+                        {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 1546.08,
+                            "paymentInPercentageNationwide": 0.01,
+                            "paymentInPercentageWithinState": 0.13
+                        },
+                        {
+                            "practiceCategoryName": "Forest management",
+                            "paymentInDollars": 47.28,
+                            "paymentInPercentageNationwide": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                },
+                {
+                    "statuteName": "Other",
+                    "statutePaymentInDollars": 13238.33,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Bundles",
+                            "paymentInDollars": 13238.33,
+                            "paymentInPercentageNationwide": 0.12,
+                            "paymentInPercentageWithinState": 1.08
+                        }
+                    ]
+                }
+            ],
+            "totalPaymentInPercentageNationwide": 0.14,
+            "totalPaymentInDollars": 1228788.24
+        }
+    ],
+    "Maryland": [
+        {
+            "years": "2018-2022",
+            "statutes": [
+                {
+                    "statuteName": "(6)(A) Practices",
+                    "statutePaymentInDollars": 648544.7,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Land management",
+                            "paymentInDollars": 329732.22,
+                            "paymentInPercentageNationwide": 0.11,
+                            "paymentInPercentageWithinState": 30.21
+                        },
+                        {
+                            "practiceCategoryName": "Vegetative",
+                            "paymentInDollars": 186546.06,
+                            "paymentInPercentageNationwide": 0.16,
+                            "paymentInPercentageWithinState": 17.09
+                        },
+                        {
+                            "practiceCategoryName": "Structural",
+                            "paymentInDollars": 54532.6,
+                            "paymentInPercentageNationwide": 0.26,
+                            "paymentInPercentageWithinState": 5.0
+                        },
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 34729.16,
+                            "paymentInPercentageNationwide": 0.02,
+                            "paymentInPercentageWithinState": 3.18
+                        },
+                        {
+                            "practiceCategoryName": "Forest management",
+                            "paymentInDollars": 32634.49,
+                            "paymentInPercentageNationwide": 0.04,
+                            "paymentInPercentageWithinState": 2.99
+                        },
+                        {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 10370.17,
+                            "paymentInPercentageNationwide": 0.04,
+                            "paymentInPercentageWithinState": 0.95
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                },
+                {
+                    "statuteName": "Other",
+                    "statutePaymentInDollars": 2912.98,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Bundles",
+                            "paymentInDollars": 2912.98,
+                            "paymentInPercentageNationwide": 0.03,
+                            "paymentInPercentageWithinState": 0.27
+                        }
+                    ]
+                }
+            ],
+            "totalPaymentInPercentageNationwide": 0.13,
+            "totalPaymentInDollars": 1091520.93
+        }
+    ],
+    "Delaware": [
+        {
+            "years": "2018-2022",
+            "statutes": [
+                {
+                    "statuteName": "(6)(A) Practices",
+                    "statutePaymentInDollars": 871534.1900000001,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Land management",
+                            "paymentInDollars": 429595.25,
+                            "paymentInPercentageNationwide": 0.15,
+                            "paymentInPercentageWithinState": 40.62
+                        },
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 225422.66,
+                            "paymentInPercentageNationwide": 0.12,
+                            "paymentInPercentageWithinState": 21.31
+                        },
+                        {
+                            "practiceCategoryName": "Vegetative",
+                            "paymentInDollars": 125704.89,
+                            "paymentInPercentageNationwide": 0.11,
+                            "paymentInPercentageWithinState": 11.88
+                        },
+                        {
+                            "practiceCategoryName": "Structural",
+                            "paymentInDollars": 89094.94,
+                            "paymentInPercentageNationwide": 0.43,
+                            "paymentInPercentageWithinState": 8.42
+                        },
+                        {
+                            "practiceCategoryName": "Forest management",
+                            "paymentInDollars": 1120.06,
+                            "paymentInPercentageNationwide": 0.0,
+                            "paymentInPercentageWithinState": 0.11
+                        },
+                        {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 596.39,
+                            "paymentInPercentageNationwide": 0.0,
+                            "paymentInPercentageWithinState": 0.06
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                },
+                {
+                    "statuteName": "Other",
+                    "statutePaymentInDollars": 0.0,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Bundles",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                }
+            ],
+            "totalPaymentInPercentageNationwide": 0.12,
+            "totalPaymentInDollars": 1057702.94
+        }
+    ],
+    "New Hampshire": [
+        {
+            "years": "2018-2022",
+            "statutes": [
+                {
+                    "statuteName": "(6)(A) Practices",
+                    "statutePaymentInDollars": 500448.76999999996,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Forest management",
+                            "paymentInDollars": 450477.11,
+                            "paymentInPercentageNationwide": 0.54,
+                            "paymentInPercentageWithinState": 72.32
+                        },
+                        {
+                            "practiceCategoryName": "Structural",
+                            "paymentInDollars": 26437.88,
+                            "paymentInPercentageNationwide": 0.13,
+                            "paymentInPercentageWithinState": 4.24
+                        },
+                        {
+                            "practiceCategoryName": "Vegetative",
+                            "paymentInDollars": 16946.16,
+                            "paymentInPercentageNationwide": 0.01,
+                            "paymentInPercentageWithinState": 2.72
+                        },
+                        {
+                            "practiceCategoryName": "Land management",
+                            "paymentInDollars": 4331.14,
+                            "paymentInPercentageNationwide": 0.0,
+                            "paymentInPercentageWithinState": 0.7
+                        },
+                        {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 2256.48,
+                            "paymentInPercentageNationwide": 0.01,
+                            "paymentInPercentageWithinState": 0.36
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        },
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                },
+                {
+                    "statuteName": "Other",
+                    "statutePaymentInDollars": 0.0,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Bundles",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                }
+            ],
+            "totalPaymentInPercentageNationwide": 0.07,
+            "totalPaymentInDollars": 622931.17
+        }
+    ],
+    "Hawaii": [
+        {
+            "years": "2018-2022",
+            "statutes": [
+                {
+                    "statuteName": "(6)(A) Practices",
+                    "statutePaymentInDollars": 145430.74000000002,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Land management",
+                            "paymentInDollars": 110151.58,
+                            "paymentInPercentageNationwide": 0.04,
+                            "paymentInPercentageWithinState": 28.43
+                        },
+                        {
+                            "practiceCategoryName": "Forest management",
+                            "paymentInDollars": 33818.44,
+                            "paymentInPercentageNationwide": 0.04,
+                            "paymentInPercentageWithinState": 8.73
+                        },
+                        {
+                            "practiceCategoryName": "Vegetative",
+                            "paymentInDollars": 1339.43,
+                            "paymentInPercentageNationwide": 0.0,
+                            "paymentInPercentageWithinState": 0.35
+                        },
+                        {
+                            "practiceCategoryName": "Structural",
+                            "paymentInDollars": 121.29,
+                            "paymentInPercentageNationwide": 0.0,
+                            "paymentInPercentageWithinState": 0.03
+                        },
+                        {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        },
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                },
+                {
+                    "statuteName": "Other",
+                    "statutePaymentInDollars": 0.0,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Bundles",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                }
+            ],
+            "totalPaymentInPercentageNationwide": 0.05,
+            "totalPaymentInDollars": 387390.79
+        }
+    ],
+    "Massachusetts": [
+        {
+            "years": "2018-2022",
+            "statutes": [
+                {
+                    "statuteName": "(6)(A) Practices",
+                    "statutePaymentInDollars": 126328.54999999999,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Forest management",
+                            "paymentInDollars": 43012.88,
+                            "paymentInPercentageNationwide": 0.05,
+                            "paymentInPercentageWithinState": 10.45
+                        },
+                        {
+                            "practiceCategoryName": "Structural",
+                            "paymentInDollars": 34892.77,
+                            "paymentInPercentageNationwide": 0.17,
+                            "paymentInPercentageWithinState": 8.47
+                        },
+                        {
+                            "practiceCategoryName": "Land management",
+                            "paymentInDollars": 23910.62,
+                            "paymentInPercentageNationwide": 0.01,
+                            "paymentInPercentageWithinState": 5.81
+                        },
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 12053.41,
+                            "paymentInPercentageNationwide": 0.01,
+                            "paymentInPercentageWithinState": 2.93
+                        },
+                        {
+                            "practiceCategoryName": "Vegetative",
+                            "paymentInDollars": 10960.43,
+                            "paymentInPercentageNationwide": 0.01,
+                            "paymentInPercentageWithinState": 2.66
+                        },
+                        {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 1498.44,
+                            "paymentInPercentageNationwide": 0.01,
+                            "paymentInPercentageWithinState": 0.36
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                },
+                {
+                    "statuteName": "Other",
+                    "statutePaymentInDollars": 0.0,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Bundles",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                }
+            ],
+            "totalPaymentInPercentageNationwide": 0.05,
+            "totalPaymentInDollars": 411747.35
+        }
+    ],
+    "Vermont": [
+        {
+            "years": "2018-2022",
+            "statutes": [
+                {
+                    "statuteName": "(6)(A) Practices",
+                    "statutePaymentInDollars": 34612.75,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Forest management",
+                            "paymentInDollars": 13231.8,
+                            "paymentInPercentageNationwide": 0.02,
+                            "paymentInPercentageWithinState": 3.07
+                        },
+                        {
+                            "practiceCategoryName": "Vegetative",
+                            "paymentInDollars": 12397.32,
+                            "paymentInPercentageNationwide": 0.01,
+                            "paymentInPercentageWithinState": 2.87
+                        },
+                        {
+                            "practiceCategoryName": "Land management",
+                            "paymentInDollars": 8513.28,
+                            "paymentInPercentageNationwide": 0.0,
+                            "paymentInPercentageWithinState": 1.97
+                        },
+                        {
+                            "practiceCategoryName": "Structural",
+                            "paymentInDollars": 470.35,
+                            "paymentInPercentageNationwide": 0.0,
+                            "paymentInPercentageWithinState": 0.11
+                        },
+                        {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        },
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                },
+                {
+                    "statuteName": "Other",
+                    "statutePaymentInDollars": 0.0,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Bundles",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                }
+            ],
+            "totalPaymentInPercentageNationwide": 0.05,
+            "totalPaymentInDollars": 431254.08
+        }
+    ],
+    "Maine": [
+        {
+            "years": "2018-2022",
+            "statutes": [
+                {
+                    "statuteName": "(6)(A) Practices",
+                    "statutePaymentInDollars": 220045.1,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Forest management",
+                            "paymentInDollars": 116936.19,
+                            "paymentInPercentageNationwide": 0.14,
+                            "paymentInPercentageWithinState": 31.78
+                        },
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 67367.14,
+                            "paymentInPercentageNationwide": 0.04,
+                            "paymentInPercentageWithinState": 18.31
+                        },
+                        {
+                            "practiceCategoryName": "Vegetative",
+                            "paymentInDollars": 17019.41,
+                            "paymentInPercentageNationwide": 0.01,
+                            "paymentInPercentageWithinState": 4.63
+                        },
+                        {
+                            "practiceCategoryName": "Land management",
+                            "paymentInDollars": 12399.01,
+                            "paymentInPercentageNationwide": 0.0,
+                            "paymentInPercentageWithinState": 3.37
+                        },
+                        {
+                            "practiceCategoryName": "Structural",
+                            "paymentInDollars": 3236.82,
+                            "paymentInPercentageNationwide": 0.02,
+                            "paymentInPercentageWithinState": 0.88
+                        },
+                        {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 3086.53,
+                            "paymentInPercentageNationwide": 0.01,
+                            "paymentInPercentageWithinState": 0.84
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                },
+                {
+                    "statuteName": "Other",
+                    "statutePaymentInDollars": 0.0,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Bundles",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                }
+            ],
+            "totalPaymentInPercentageNationwide": 0.04,
+            "totalPaymentInDollars": 367914.15
+        }
+    ],
+    "Nevada": [
+        {
+            "years": "2018-2022",
+            "statutes": [
+                {
+                    "statuteName": "(6)(A) Practices",
+                    "statutePaymentInDollars": 62144.619999999995,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Structural",
+                            "paymentInDollars": 46480.96,
+                            "paymentInPercentageNationwide": 0.22,
+                            "paymentInPercentageWithinState": 16.2
+                        },
+                        {
+                            "practiceCategoryName": "Land management",
+                            "paymentInDollars": 15559.55,
+                            "paymentInPercentageNationwide": 0.01,
+                            "paymentInPercentageWithinState": 5.42
+                        },
+                        {
+                            "practiceCategoryName": "Vegetative",
+                            "paymentInDollars": 104.11,
+                            "paymentInPercentageNationwide": 0.0,
+                            "paymentInPercentageWithinState": 0.04
+                        },
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        },
+                        {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        },
+                        {
+                            "practiceCategoryName": "Forest management",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                },
+                {
+                    "statuteName": "Other",
+                    "statutePaymentInDollars": 0.0,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Bundles",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                }
+            ],
+            "totalPaymentInPercentageNationwide": 0.03,
+            "totalPaymentInDollars": 286918.12
+        }
+    ],
+    "Rhode Island": [
+        {
+            "years": "2018-2022",
+            "statutes": [
+                {
+                    "statuteName": "(6)(A) Practices",
+                    "statutePaymentInDollars": 50063.57,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Forest management",
+                            "paymentInDollars": 42022.35,
+                            "paymentInPercentageNationwide": 0.05,
+                            "paymentInPercentageWithinState": 16.37
+                        },
+                        {
+                            "practiceCategoryName": "Vegetative",
+                            "paymentInDollars": 4592.75,
+                            "paymentInPercentageNationwide": 0.0,
+                            "paymentInPercentageWithinState": 1.79
+                        },
+                        {
+                            "practiceCategoryName": "Land management",
+                            "paymentInDollars": 2630.35,
+                            "paymentInPercentageNationwide": 0.0,
+                            "paymentInPercentageWithinState": 1.02
+                        },
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 814.96,
+                            "paymentInPercentageNationwide": 0.0,
+                            "paymentInPercentageWithinState": 0.32
+                        },
+                        {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 3.16,
+                            "paymentInPercentageNationwide": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        },
+                        {
+                            "practiceCategoryName": "Structural",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                },
+                {
+                    "statuteName": "Other",
+                    "statutePaymentInDollars": 0.0,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Bundles",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                }
+            ],
+            "totalPaymentInPercentageNationwide": 0.03,
+            "totalPaymentInDollars": 256662.17
+        }
+    ],
+    "Connecticut": [
+        {
+            "years": "2018-2022",
+            "statutes": [
+                {
+                    "statuteName": "(6)(A) Practices",
+                    "statutePaymentInDollars": 26977.75,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Forest management",
+                            "paymentInDollars": 17890.64,
+                            "paymentInPercentageNationwide": 0.02,
+                            "paymentInPercentageWithinState": 11.3
+                        },
+                        {
+                            "practiceCategoryName": "Vegetative",
+                            "paymentInDollars": 4501.04,
+                            "paymentInPercentageNationwide": 0.0,
+                            "paymentInPercentageWithinState": 2.84
+                        },
+                        {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 2774.86,
+                            "paymentInPercentageNationwide": 0.01,
+                            "paymentInPercentageWithinState": 1.75
+                        },
+                        {
+                            "practiceCategoryName": "Land management",
+                            "paymentInDollars": 1781.55,
+                            "paymentInPercentageNationwide": 0.0,
+                            "paymentInPercentageWithinState": 1.12
+                        },
+                        {
+                            "practiceCategoryName": "Structural",
+                            "paymentInDollars": 29.66,
+                            "paymentInPercentageNationwide": 0.0,
+                            "paymentInPercentageWithinState": 0.02
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        },
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                },
+                {
+                    "statuteName": "Other",
+                    "statutePaymentInDollars": 0.0,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Bundles",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                }
+            ],
+            "totalPaymentInPercentageNationwide": 0.02,
+            "totalPaymentInDollars": 158367.75
+        }
+    ],
+    "Pacific Basin": [
+        {
+            "years": "2018-2022",
+            "statutes": [
+                {
+                    "statuteName": "(6)(A) Practices",
+                    "statutePaymentInDollars": 68461.49,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Forest management",
+                            "paymentInDollars": 68377.0,
+                            "paymentInPercentageNationwide": 0.08,
+                            "paymentInPercentageWithinState": 36.36
+                        },
+                        {
+                            "practiceCategoryName": "Vegetative",
+                            "paymentInDollars": 84.49,
+                            "paymentInPercentageNationwide": 0.0,
+                            "paymentInPercentageWithinState": 0.04
+                        },
+                        {
+                            "practiceCategoryName": "Land management",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        },
+                        {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        },
+                        {
+                            "practiceCategoryName": "Structural",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        },
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                },
+                {
+                    "statuteName": "Other",
+                    "statutePaymentInDollars": 0.0,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Bundles",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                }
+            ],
+            "totalPaymentInPercentageNationwide": 0.02,
+            "totalPaymentInDollars": 188071.39
+        }
+    ],
+    "Puerto Rico": [
+        {
+            "years": "2018-2022",
+            "statutes": [
+                {
+                    "statuteName": "(6)(A) Practices",
+                    "statutePaymentInDollars": 57987.380000000005,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Land management",
+                            "paymentInDollars": 38843.85,
+                            "paymentInPercentageNationwide": 0.01,
+                            "paymentInPercentageWithinState": 25.13
+                        },
+                        {
+                            "practiceCategoryName": "Forest management",
+                            "paymentInDollars": 10889.8,
+                            "paymentInPercentageNationwide": 0.01,
+                            "paymentInPercentageWithinState": 7.05
+                        },
+                        {
+                            "practiceCategoryName": "Vegetative",
+                            "paymentInDollars": 4151.59,
+                            "paymentInPercentageNationwide": 0.0,
+                            "paymentInPercentageWithinState": 2.69
+                        },
+                        {
+                            "practiceCategoryName": "Structural",
+                            "paymentInDollars": 2623.37,
+                            "paymentInPercentageNationwide": 0.01,
+                            "paymentInPercentageWithinState": 1.7
+                        },
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 1138.19,
+                            "paymentInPercentageNationwide": 0.0,
+                            "paymentInPercentageWithinState": 0.74
+                        },
+                        {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 340.58,
+                            "paymentInPercentageNationwide": 0.0,
+                            "paymentInPercentageWithinState": 0.22
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                },
+                {
+                    "statuteName": "Other",
+                    "statutePaymentInDollars": 0.0,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Bundles",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                }
+            ],
+            "totalPaymentInPercentageNationwide": 0.02,
+            "totalPaymentInDollars": 154551.43
+        }
+    ],
+    "Alaska": [
+        {
+            "years": "2018-2022",
+            "statutes": [
+                {
+                    "statuteName": "(6)(A) Practices",
+                    "statutePaymentInDollars": 47304.59999999999,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Forest management",
+                            "paymentInDollars": 28423.66,
+                            "paymentInPercentageNationwide": 0.03,
+                            "paymentInPercentageWithinState": 22.84
+                        },
+                        {
+                            "practiceCategoryName": "Land management",
+                            "paymentInDollars": 13720.3,
+                            "paymentInPercentageNationwide": 0.0,
+                            "paymentInPercentageWithinState": 11.02
+                        },
+                        {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 3551.06,
+                            "paymentInPercentageNationwide": 0.01,
+                            "paymentInPercentageWithinState": 2.85
+                        },
+                        {
+                            "practiceCategoryName": "Vegetative",
+                            "paymentInDollars": 1423.81,
+                            "paymentInPercentageNationwide": 0.0,
+                            "paymentInPercentageWithinState": 1.14
+                        },
+                        {
+                            "practiceCategoryName": "Structural",
+                            "paymentInDollars": 185.77,
+                            "paymentInPercentageNationwide": 0.0,
+                            "paymentInPercentageWithinState": 0.15
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        },
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                },
+                {
+                    "statuteName": "Other",
+                    "statutePaymentInDollars": 0.0,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Bundles",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                }
+            ],
+            "totalPaymentInPercentageNationwide": 0.01,
+            "totalPaymentInDollars": 124455.8
+        }
+    ],
+    "New Jersey": [
+        {
+            "years": "2018-2022",
+            "statutes": [
+                {
+                    "statuteName": "(6)(A) Practices",
+                    "statutePaymentInDollars": 31834.12,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Land management",
+                            "paymentInDollars": 13125.51,
+                            "paymentInPercentageNationwide": 0.0,
+                            "paymentInPercentageWithinState": 11.01
+                        },
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 9349.45,
+                            "paymentInPercentageNationwide": 0.0,
+                            "paymentInPercentageWithinState": 7.84
+                        },
+                        {
+                            "practiceCategoryName": "Vegetative",
+                            "paymentInDollars": 7443.68,
+                            "paymentInPercentageNationwide": 0.01,
+                            "paymentInPercentageWithinState": 6.25
+                        },
+                        {
+                            "practiceCategoryName": "Forest management",
+                            "paymentInDollars": 1526.88,
+                            "paymentInPercentageNationwide": 0.0,
+                            "paymentInPercentageWithinState": 1.28
+                        },
+                        {
+                            "practiceCategoryName": "Structural",
+                            "paymentInDollars": 388.6,
+                            "paymentInPercentageNationwide": 0.0,
+                            "paymentInPercentageWithinState": 0.33
+                        },
+                        {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                },
+                {
+                    "statuteName": "Other",
+                    "statutePaymentInDollars": 0.0,
+                    "practiceCategories": [
+                        {
+                            "practiceCategoryName": "Bundles",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        }
+                    ]
+                }
+            ],
+            "totalPaymentInPercentageNationwide": 0.01,
+            "totalPaymentInDollars": 119194.12
+        }
+    ]
+}
