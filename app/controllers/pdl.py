@@ -11,11 +11,11 @@ from app.models.statecode import StateCode
 from app.models.allprograms import AllProgram
 
 
-CSP_JSON_DATA_PATH = os.path.join("controllers", "data", "csp")
+CSP_JSON_DATA_PATH = os.path.join("controllers", "data", "conservation", "csp")
 CSP_MAP_DATA_JSON = "csp_map_data.json"
 CSP_STATE_DISTRIBUTION_DATA_JSON = "csp_state_distribution_data.json"
 CSP_PRACTICE_CATEGORIES_DATA_JSON = "csp_practice_categories_data.json"
-EQIP_JSON_DATA_PATH = os.path.join("controllers", "data", "eqip")
+EQIP_JSON_DATA_PATH = os.path.join("controllers", "data", "conservation", "eqip")
 EQIP_MAP_DATA_JSON = "eqip_map_data.json"
 EQIP_STATE_DISTRIBUTION_DATA_JSON = "eqip_state_distribution_data.json"
 EQIP_PRACTICE_CATEGORIES_DATA_JSON = "eqip_practice_categories_data.json"
