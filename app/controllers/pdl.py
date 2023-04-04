@@ -10,7 +10,8 @@ from app.models.state import State
 from app.models.statecode import StateCode
 from app.models.allprograms import AllProgram
 
-
+SNAP_JSON_DATA_PATH = os.path.join("controllers", "data", "snap")
+SNAP_DATA_JSON = "snap_state_distribution_data.json"
 EQIP_JSON_DATA_PATH = os.path.join("controllers", "data", "eqip")
 EQIP_MAP_DATA_JSON = "eqip_map_data.json"
 EQIP_STATE_DISTRIBUTION_DATA_JSON = "eqip_state_distribution_data.json"
@@ -180,6 +181,21 @@ def allprograms_search(state=None):
         }
         logging.error("All programs " + json.dumps(msg))
         return rs_handlers.bad_request(msg)
+
+
+def programs_snap_state_distribution_search():
+    # set the file path
+    eqip_data = os.path.join(SNAP_JSON_DATA_PATH, SNAP_DATA_JSON)
+
+    # open file
+    with open(eqip_data, 'r') as map_data:
+        file_data = map_data.read()
+
+    # parse file
+    data_json = json.loads(file_data)
+
+    return data_json
+
 
 # EQIP Map Data
 def programs_conservation_eqip_map_search():
