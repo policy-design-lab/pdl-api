@@ -237,6 +237,13 @@ paths:
       summary: Gets the CSP conservation data for all practice categories.
       description: |
         Returns  the CSP conservation data for all practice categories in JSON format.
+  /pdl/programs/snap/state-distribution:
+    get:
+      tags:
+        - "SNAP State Distribution Data"
+      summary: Gets the SNAP state distribution data.
+      description: |
+        Returns the SNAP State Distribution Data in JSON format.
       responses:
         200:
           description: Ok
