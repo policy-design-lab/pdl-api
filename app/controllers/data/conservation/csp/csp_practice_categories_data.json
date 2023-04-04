@@ -35,19 +35,56 @@
                 }
             ],
             "totalPaymentInDollars": 723073250.08,
-            "totalPaymentInPercentage": 84.25
+            "totalPaymentInPercentage": 18.93
+        },
+        {
+            "statuteName": "2014 CSP",
+            "practiceCategories": [
+                {
+                    "practiceCategoryName": "Cropland",
+                    "totalPaymentInDollars": 2286711791.24,
+                    "totalPaymentInPercentage": 77.23
+                },
+                {
+                    "practiceCategoryName": "Rangeland",
+                    "totalPaymentInDollars": 349383709.47,
+                    "totalPaymentInPercentage": 11.8
+                },
+                {
+                    "practiceCategoryName": "Pastureland",
+                    "totalPaymentInDollars": 195464258.55,
+                    "totalPaymentInPercentage": 6.6
+                },
+                {
+                    "practiceCategoryName": "NIPF",
+                    "totalPaymentInDollars": 94022179.5,
+                    "totalPaymentInPercentage": 3.18
+                },
+                {
+                    "practiceCategoryName": "Pastured Cropland",
+                    "totalPaymentInDollars": 35232081.84,
+                    "totalPaymentInPercentage": 1.19
+                }
+            ],
+            "totalPaymentInDollars": 2960814020.6,
+            "totalPaymentInPercentage": 77.53
         },
         {
             "statuteName": "Other",
             "practiceCategories": [
                 {
+                    "practiceCategoryName": "Other Payments",
+                    "totalPaymentInDollars": 124060047.46,
+                    "totalPaymentInPercentage": 91.77
+                },
+                {
                     "practiceCategoryName": "Bundles",
                     "totalPaymentInDollars": 11125692.47,
-                    "totalPaymentInPercentage": 100.0
+                    "totalPaymentInPercentage": 8.23
                 }
             ],
-            "totalPaymentInDollars": 11125692.47,
-            "totalPaymentInPercentage": 1.3
+            "totalPaymentInDollars": 135185739.93,
+            "totalPaymentInPercentage": 3.54
         }
     ]
 }
