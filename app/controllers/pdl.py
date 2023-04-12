@@ -189,14 +189,7 @@ def allprograms_search(state=None):
         return rs_handlers.bad_request(msg)
 
 
-def  programs_conservation_csp_map_search():
-    # set the file path
-    csp_data = os.path.join(CSP_JSON_DATA_PATH, CSP_MAP_DATA_JSON)
-
-    # open file
-    with open(csp_data, 'r') as map_data:
-
-
+# SNAP state distribution data
 def programs_snap_state_distribution_search():
     # set the file path
     eqip_data = os.path.join(SNAP_JSON_DATA_PATH, SNAP_DATA_JSON)
@@ -211,6 +204,67 @@ def programs_snap_state_distribution_search():
     return data_json
 
 
+# commodities map data
+def programs_commodities_map_search():
+    # set the file path
+    csp_data = os.path.join(CSP_JSON_DATA_PATH, CSP_MAP_DATA_JSON)
+
+    # open file
+    with open(csp_data, 'r') as map_data:
+        file_data = map_data.read()
+
+        # parse file
+        data_json = json.loads(file_data)
+
+        return data_json
+
+
+# Commodities state distribution data
+def programs_commodities_state_distribution_search():
+    # set the file path
+    csp_data = os.path.join(CSP_JSON_DATA_PATH, CSP_STATE_DISTRIBUTION_DATA_JSON)
+
+    # open file
+    with open(csp_data, 'r') as state_data:
+        file_data = state_data.read()
+
+    # parse file
+    data_json = json.loads(file_data)
+
+    return data_json
+
+
+# Commodities subprogram data
+def programs_commodities_subprograms_search():
+    # set the file path
+    csp_data = os.path.join(CSP_JSON_DATA_PATH, CSP_PRACTICE_CATEGORIES_DATA_JSON)
+
+    # open file
+    with open(csp_data, 'r') as subprograms_data:
+        file_data = subprograms_data.read()
+
+    # parse file
+    data_json = json.loads(file_data)
+
+    return data_json
+
+
+# CSP map data
+def programs_conservation_csp_map_search():
+    # set the file path
+    csp_data = os.path.join(CSP_JSON_DATA_PATH, CSP_MAP_DATA_JSON)
+
+    # open file
+    with open(csp_data, 'r') as map_data:
+        file_data = map_data.read()
+
+        # parse file
+        data_json = json.loads(file_data)
+
+        return data_json
+
+
+# CSP state distribution data
 def programs_conservation_csp_state_distribution_search():
     # set the file path
     csp_data = os.path.join(CSP_JSON_DATA_PATH, CSP_STATE_DISTRIBUTION_DATA_JSON)
@@ -225,6 +279,7 @@ def programs_conservation_csp_state_distribution_search():
     return data_json
 
 
+# CSP practice category data
 def programs_conservation_csp_practice_categories_search():
     # set the file path
     csp_data = os.path.join(CSP_JSON_DATA_PATH, CSP_PRACTICE_CATEGORIES_DATA_JSON)
