@@ -23,3 +23,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Update SNAP JSON file structure and add participation percentages. [#48](https://github.com/policy-design-lab/pdl-api/issues/48)
+- Update EQIP JSON data files. [#53](https://github.com/policy-design-lab/pdl-api/issues/53)
