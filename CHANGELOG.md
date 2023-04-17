@@ -18,8 +18,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CORS for developing with frontend. [#20](https://github.com/policy-design-lab/pdl-api/issues/20)
 - Format test function for the PEP8 formatting. [#24](https://github.com/policy-design-lab/pdl-api/issues/24)
 - EQIP json GET endpoints. [#35](https://github.com/policy-design-lab/pdl-api/issues/35)
-- Title II CSP json GET endpoints. [#45](https://github.com/policy-design-lab/pdl-api/issues/45)
+- Title I Commodities json GET endpoints. [#40](https://github.com/policy-design-lab/pdl-api/issues/40)
 - SNAP json GET endpoints. [#42](https://github.com/policy-design-lab/pdl-api/issues/42)
+- Title II CSP json GET endpoints. [#45](https://github.com/policy-design-lab/pdl-api/issues/45)
 
 ### Changed
 - Update SNAP JSON file structure and add participation percentages. [#48](https://github.com/policy-design-lab/pdl-api/issues/48)
