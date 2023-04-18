@@ -24,5 +24,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Update SNAP JSON file structure and add participation percentages. [#48](https://github.com/policy-design-lab/pdl-api/issues/48)
 
+### Fixed
+- Open API sepecification file. [#50](https://github.com/policy-design-lab/pdl-api/issues/50)
+
 [unreleased]: https://github.com/policy-design-lab/pdl-api/compare/0.1.0...HEAD
 [0.1.0]: https://github.com/policy-design-lab/pdl-api/releases/tag/0.1.0
