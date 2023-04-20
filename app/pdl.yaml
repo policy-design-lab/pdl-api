@@ -1,0 +1,470 @@
+openapi: 3.0.0
+info:
+  title: Policy Design Lab API
+  description: Policy Design Lab API Documentation
+  version: 0.1.0
+servers:
+- url: https://localhost
+  description: Production server
+- url: https://localhost
+  description: Test server
+- url: https://localhost
+  description: Development server
+tags:
+- name: "Summary"
+  description: "Farm Bill summary data."
+- name: "All Programs"
+  description: "All programs data."
+- name: "Title II: Conservation - EQIP"
+  description: "Farm Bill Title II: Conservation - Environmental Quality Incentives Program (EQIP) data."
+- name: "States"
+  description: "Information related to States."
+paths:
+  /pdl/summary:
+    get:
+      tags:
+        - Summary
+      summary: Get the list of summary records
+      description: |
+        By passing in the appropriate options, you can search for summary records matching your criteria in the system
+      parameters:
+        - name: state
+          in: query
+          description: The parameter for searching summary data by the state code
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: year
+          in: query
+          description: The parameter for searching summary data by year
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Summary'
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
+  /pdl/states:
+    get:
+      tags:
+        - States
+      summary: Get the list of state fips and code records
+      description: |
+        By passing in the appropriate options, you can search for state records matching your criteria in the system
+      parameters:
+        - name: code
+          in: query
+          description: The parameter for searching state data by the state code
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: fips
+          in: query
+          description: The parameter for searching state data by the state fips code
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/State'
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
+  /pdl/states/{statecode}:
+    get:
+      tags:
+        - States
+      summary: Get the name and fips code of a state
+      description: |
+        By passing in the state name, you can get the state information.
+      parameters:
+        - name: statecode
+          in: path
+          description: state code
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: string
+                items:
+                  $ref: '#/components/schemas/State'
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
+  /pdl/statecodes:
+    get:
+      tags:
+        - States
+      summary: Get the list of state code and name records
+      description: |
+        By passing in the appropriate options, you can search for state name records matching your criteria in the system
+      parameters:
+        - name: code
+          in: query
+          description: The parameter for searching state data by the state code
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: name
+          in: query
+          description: The parameter for searching state data by the state name
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Statecode'
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
+  /pdl/allprograms:
+    get:
+      tags:
+        - All Programs
+      summary: Get the list of all program records
+      description: |
+        By passing in the appropriate options, you can search for all program records matching your criteria in the system
+      parameters:
+        - name: state
+          in: query
+          description: The parameter for searching all programs data by state abbreviation
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AllPrograms'
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
+  /pdl/programs/conservation/csp/map:
+    get:
+      tags:
+        - "Title II: Conservation - CSP"
+      summary: Gets the CSP conservation data for map visualization.
+      description: |
+        Returns  the CSP conservation data for map visualization in JSON format.
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: string
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
+  /pdl/programs/conservation/csp/state-distribution:
+    get:
+      tags:
+        - "Title II: Conservation - CSP"
+      summary: Gets the CSP conservation data for all states.
+      description: |
+        Returns  the CSP conservation data for all states in JSON format.
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: string
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
+  /pdl/programs/conservation/csp/practice-categories:
+    get:
+      tags:
+        - "Title II: Conservation - CSP"
+      summary: Gets the CSP conservation data for all practice categories.
+      description: |
+        Returns  the CSP conservation data for all practice categories in JSON format.
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: string
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
+  /pdl/programs/snap/state-distribution:
+    get:
+      tags:
+        - "SNAP State Distribution Data"
+      summary: Gets the SNAP state distribution data.
+      description: |
+        Returns the SNAP State Distribution Data in JSON format.
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: string
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
+  /pdl/programs/conservation/eqip/map:
+    get:
+      tags:
+        - "Title II: Conservation - EQIP"
+      summary: Gets the EQIP payment distribution data for map visualization.
+      description: |
+        Returns  the EQIP payment distribution data for map visualization in JSON format.
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: string
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
+  /pdl/programs/conservation/eqip/state-distribution:
+    get:
+      tags:
+        - "Title II: Conservation - EQIP"
+      summary: Gets the EQIP payment distribution data for all states.
+      description: |
+        Returns the EQIP payment distribution data for all states in JSON format.
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: string
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
+  /pdl/programs/conservation/eqip/practice-categories:
+    get:
+      tags:
+        - "Title II: Conservation - EQIP"
+      summary: Gets the EQIP payment distribution data for all practice categories.
+      description: |
+        Returns the EQIP payment distribution data for all practice categories in JSON format.
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: string
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
+components:
+  schemas:
+    Summary:
+      type: object
+      nullable: true
+      properties:
+        title:
+          type: string
+        state:
+          nullable: true
+          type: string
+        fiscal_year:
+          nullable: true
+          type: integer
+        amount:
+          nullable: true
+          type: string
+    State:
+      type: object
+      nullable: true
+      properties:
+        id:
+          type: string
+        val:
+          nullable: true
+          type: string
+    Statecode:
+      type: object
+      nullable: true
+      properties:
+        code:
+          type: string
+        name:
+          nullable: true
+          type: string
+    AllPrograms:
+      type: object
+      nullable: true
+      properties:
+        state:
+          type: string
+        crop_ins_2018:
+          nullable: true
+          type: number
+        crop_ins_2019:
+          nullable: true
+          type: number
+        crop_ins_2020:
+          nullable: true
+          type: number
+        crop_ins_2021:
+          nullable: true
+          type: number
+        crop_ins_2022:
+          nullable: true
+          type: number
+        crop_ins_total:
+          nullable: true
+          type: number
+        snap_2018:
+          nullable: true
+          type: number
+        snap_2019:
+          nullable: true
+          type: number
+        snap_2020:
+          nullable: true
+          type: number
+        snap_2021:
+          nullable: true
+          type: number
+        snap_2022:
+          nullable: true
+          type: number
+        snap_total:
+          nullable: true
+          type: number
+        title_1_2018:
+          nullable: true
+          type: number
+        title_1_2019:
+          nullable: true
+          type: number
+        title_1_2020:
+          nullable: true
+          type: number
+        title_1_2021:
+          nullable: true
+          type: number
+        title_1_202:
+          nullable: true
+          type: number
+        title_1_total:
+          nullable: true
+          type: number
+        title_2_2018:
+          nullable: true
+          type: number
+        title_2_2019:
+          nullable: true
+          type: number
+        title_2_2020:
+          nullable: true
+          type: number
+        title_2_2021:
+          nullable: true
+          type: number
+        title_2_202:
+          nullable: true
+          type: number
+        title_2_total:
+          nullable: true
+          type: number
+        prog.all_programs_total_2018:
+          nullable: true
+          type: number
+        prog.all_programs_total_2019:
+          nullable: true
+          type: number
+        prog.all_programs_total_2020:
+          nullable: true
+          type: number
+        prog.all_programs_total_2021:
+          nullable: true
+          type: number
+        prog.all_programs_total_2022:
+          nullable: true
+          type: number
+        all_programs_total_18_22:
+          nullable: true
+          type: number
