@@ -195,7 +195,13 @@ def  programs_conservation_csp_map_search():
 
     # open file
     with open(csp_data, 'r') as map_data:
+        file_data = map_data.read()
 
+        # parse file
+        data_json = json.loads(file_data)
+
+        return data_json
+    
 
 def programs_snap_state_distribution_search():
     # set the file path
