@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Update CSP JSON data files. [#61](https://github.com/policy-design-lab/pdl-api/issues/61)
+- Update EQIP JSON data files. [#53](https://github.com/policy-design-lab/pdl-api/issues/53)
 
 ## [0.1.0] - 2023-04-18
 
