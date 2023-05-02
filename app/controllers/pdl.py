@@ -313,10 +313,10 @@ def construct_statecode_result(state):
 # construct summary
 def construct_summary_result(summary):
     result = {
-        "title": summary.title,
-        "state": summary.state,
-        "fiscal year": summary.fiscal_year,
-        "amount": summary.amount
+        "Title": summary.title,
+        "State": summary.state,
+        "Fiscal Year": summary.fiscal_year,
+        "Amount": summary.amount
     }
 
     return result
