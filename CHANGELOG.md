@@ -23,6 +23,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Created statecode table in database. [#16](https://github.com/policy-design-lab/pdl-api/issues/16)
 - CORS for developing with frontend. [#20](https://github.com/policy-design-lab/pdl-api/issues/20)
 - Format test function for the PEP8 formatting. [#24](https://github.com/policy-design-lab/pdl-api/issues/24)
+
+### Changed
+- Database update script upgraded to sqlalchemy 2 or higher. [#28](https://github.com/policy-design-lab/pdl-api/issues/28)
 - EQIP json GET endpoints. [#35](https://github.com/policy-design-lab/pdl-api/issues/35)
 - Title II CSP json GET endpoints. [#45](https://github.com/policy-design-lab/pdl-api/issues/45)
 - SNAP json GET endpoints. [#42](https://github.com/policy-design-lab/pdl-api/issues/42)
