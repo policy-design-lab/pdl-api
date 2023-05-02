@@ -206,7 +206,7 @@ def create_summary_table():
         Column('title', VARCHAR),
         Column('state', VARCHAR),
         Column('fiscal_year', Integer),
-        Column('amount', VARCHAR)
+        Column('amount', Numeric)
     )
 
     meta.create_all(engine)
@@ -334,8 +334,8 @@ if __name__ == '__main__':
     # create_practice_table()
     # create_category1_table()
     # separte_values_in_column()
-    create_allprograms_table()
-    # create_summary_table()
+    # create_allprograms_table()
+    create_summary_table()
     # tablename = 'test'
     # incsv = 'data\\allprograms.csv'
     # create_table_from_csv(tablename, incsv)
