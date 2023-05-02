@@ -11,6 +11,9 @@ from app.models.statecode import StateCode
 from app.models.allprograms import AllProgram
 
 
+LANDING_PAGE_DATA_PATH = os.path.join("controllers", "data", "landingpage")
+ALLPROGRAM_DATA_JSON = "allPrograms.json"
+SUMMARY_DATA_JSON = "summary.json"
 CSP_JSON_DATA_PATH = os.path.join("controllers", "data", "conservation", "csp")
 CSP_MAP_DATA_JSON = "csp_map_data.json"
 CSP_STATE_DISTRIBUTION_DATA_JSON = "csp_state_distribution_data.json"
@@ -31,43 +34,17 @@ def search():
 
 
 # GET all the entries from summary table
-def summary_search(state=None, year=None):
-    if not state and not year:
-        summaries = Summary.query.all()
-        results = [construct_summary_result(summary) for summary in summaries]
+def summary_search():
+    summary_data = os.path.join(LANDING_PAGE_DATA_PATH, SUMMARY_DATA_JSON)
 
-        # return {"count": len(results), "summary": results}
-        return results
+    # open file
+    with open(summary_data, 'r') as json_data:
+        file_data = json_data.read()
 
-    # only name provide
-    elif state is not None and not year:
-        summaries = Summary.query.filter_by(state=state.upper()).all()
-        results = [construct_summary_result(summary) for summary in summaries]
+        # parse file
+        data_json = json.loads(file_data)
 
-        return results
-
-    # only year provide
-    elif not state and year is not None:
-        summaries = Summary.query.filter_by(fiscal_year=year).all()
-        results = [construct_summary_result(summary) for summary in summaries]
-
-        return results
-
-    # both year and name provided
-    elif state and year:
-        summaries = Summary.query.filter((Summary.fiscal_year == year) & (Summary.state == state.upper())).all()
-        results = [construct_summary_result(summary) for summary in summaries]
-
-        return results
-
-    # none of them
-    else:
-        msg = {
-            "reason": "The query is not correct.",
-            "error": "Bad Request: " + request.url,
-        }
-        logging.error("Summary " + json.dumps(msg))
-        return rs_handlers.bad_request(msg)
+        return data_json
 
 
 # GET all the entries from states table
@@ -166,27 +143,17 @@ def statecodes_search(code=None, name=None):
 
 
 # GET all the entries from states table
-def allprograms_search(state=None):
-    # no state parameters
-    if not state:
-        allprograms = AllProgram.query.all()
-        results = [construct_allprogram_result(prog) for prog in allprograms]
-        return results
+def allprograms_search():
+    allprograms_data = os.path.join(LANDING_PAGE_DATA_PATH, ALLPROGRAM_DATA_JSON)
 
-    # yes state
-    elif state is not None:
-        allprograms = AllProgram.query.filter_by(state=state.upper()).all()
-        results = [construct_allprogram_result(prog) for prog in allprograms]
-        return results
+    # open file
+    with open(allprograms_data, 'r') as json_data:
+        file_data = json_data.read()
 
-    # none of them
-    else:
-        msg = {
-            "reason": "The query is not correct.",
-            "error": "Bad Request: " + request.url,
-        }
-        logging.error("All programs " + json.dumps(msg))
-        return rs_handlers.bad_request(msg)
+        # parse file
+        data_json = json.loads(file_data)
+
+        return data_json
 
 
 def  programs_conservation_csp_map_search():

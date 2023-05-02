@@ -27,23 +27,6 @@ paths:
       summary: Get the list of summary records
       description: |
         By passing in the appropriate options, you can search for summary records matching your criteria in the system
-      parameters:
-        - name: state
-          in: query
-          description: The parameter for searching summary data by the state code
-          required: false
-          style: form
-          explode: true
-          schema:
-            type: string
-        - name: year
-          in: query
-          description: The parameter for searching summary data by year
-          required: false
-          style: form
-          explode: true
-          schema:
-            type: integer
       responses:
         200:
           description: Ok
@@ -173,15 +156,6 @@ paths:
       summary: Get the list of all program records
       description: |
         By passing in the appropriate options, you can search for all program records matching your criteria in the system
-      parameters:
-        - name: state
-          in: query
-          description: The parameter for searching all programs data by state abbreviation
-          required: false
-          style: form
-          explode: true
-          schema:
-            type: string
       responses:
         200:
           description: Ok
