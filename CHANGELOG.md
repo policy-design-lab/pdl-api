@@ -6,11 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Statute-level percentages to CSP JSON data. [#71](https://github.com/policy-design-lab/pdl-api/issues/71)
+
 ### Changed
 - Update CSP JSON data files. [#61](https://github.com/policy-design-lab/pdl-api/issues/61)
 - Update EQIP JSON data files. [#53](https://github.com/policy-design-lab/pdl-api/issues/53)
+- Pastured cropland with Grassland in CSP JSON files. [#73]https://github.com/policy-design-lab/pdl-api/issues/73
 
-## Fixed
+### Fixed
 - CSP JSON file by adding zero entries for soil testing. [#69](https://github.com/policy-design-lab/pdl-api/issues/69)
 
 ## [0.1.0] - 2023-04-18
