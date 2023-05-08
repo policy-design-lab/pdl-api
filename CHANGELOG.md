@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Update CSP JSON data files. [#61](https://github.com/policy-design-lab/pdl-api/issues/61)
 - Update EQIP JSON data files. [#53](https://github.com/policy-design-lab/pdl-api/issues/53)
+- Pastured cropland with Grassland in CSP JSON files. [#73]https://github.com/policy-design-lab/pdl-api/issues/73
 
 ### Fixed
 - CSP JSON file by adding zero entries for soil testing. [#69](https://github.com/policy-design-lab/pdl-api/issues/69)
