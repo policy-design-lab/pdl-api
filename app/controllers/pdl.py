@@ -12,7 +12,7 @@ from app.models.allprograms import AllProgram
 
 
 LANDING_PAGE_DATA_PATH = os.path.join("controllers", "data", "landingpage")
-ALLPROGRAM_DATA_JSON = "allPrograms.json"
+ALLPROGRAM_DATA_JSON = "allprograms.json"
 SUMMARY_DATA_JSON = "summary.json"
 CSP_JSON_DATA_PATH = os.path.join("controllers", "data", "conservation", "csp")
 CSP_MAP_DATA_JSON = "csp_map_data.json"
