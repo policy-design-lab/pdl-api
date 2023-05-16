@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Update CSP JSON data files. [#61](https://github.com/policy-design-lab/pdl-api/issues/61)
 - Update EQIP JSON data files. [#53](https://github.com/policy-design-lab/pdl-api/issues/53)
+- Make summary and all programs directly served from json file. [#65](https://github.com/policy-design-lab/pdl-api/issues/65)
 
 ## [0.1.0] - 2023-04-18
 
@@ -29,7 +30,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Update SNAP JSON file structure and add participation percentages. [#48](https://github.com/policy-design-lab/pdl-api/issues/48)
-- Make summary and all programs directly served from json file. [#65](https://github.com/policy-design-lab/pdl-api/issues/65)
 
 ### Fixed
 - Open API sepecification file. [#50](https://github.com/policy-design-lab/pdl-api/issues/50)
