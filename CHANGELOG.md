@@ -7,9 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Changed
+- Make summary and all programs directly served from json file. [#65](https://github.com/policy-design-lab/pdl-api/issues/65)
+
+## [0.2.0] - 2023-05-10
+
+### Added
+- Statute-level percentages to CSP JSON data. [#71](https://github.com/policy-design-lab/pdl-api/issues/71)
+
+### Changed
 - Update CSP JSON data files. [#61](https://github.com/policy-design-lab/pdl-api/issues/61)
 - Update EQIP JSON data files. [#53](https://github.com/policy-design-lab/pdl-api/issues/53)
-- Make summary and all programs directly served from json file. [#65](https://github.com/policy-design-lab/pdl-api/issues/65)
+- Pastured cropland with Grassland in CSP JSON files. [#73]https://github.com/policy-design-lab/pdl-api/issues/73
+- Database update script upgraded to sqlalchemy 2 or higher. [#28](https://github.com/policy-design-lab/pdl-api/issues/28)
+- Updated syntax for summary end point. [#67](https://github.com/policy-design-lab/pdl-api/issues/67)
+
+### Fixed
+- CSP JSON file by adding zero entries for soil testing. [#69](https://github.com/policy-design-lab/pdl-api/issues/69)
 
 ## [0.1.0] - 2023-04-18
 
@@ -24,15 +37,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Created statecode table in database. [#16](https://github.com/policy-design-lab/pdl-api/issues/16)
 - CORS for developing with frontend. [#20](https://github.com/policy-design-lab/pdl-api/issues/20)
 - Format test function for the PEP8 formatting. [#24](https://github.com/policy-design-lab/pdl-api/issues/24)
+
+### Changed
 - EQIP json GET endpoints. [#35](https://github.com/policy-design-lab/pdl-api/issues/35)
 - Title II CSP json GET endpoints. [#45](https://github.com/policy-design-lab/pdl-api/issues/45)
 - SNAP json GET endpoints. [#42](https://github.com/policy-design-lab/pdl-api/issues/42)
-
-### Changed
 - Update SNAP JSON file structure and add participation percentages. [#48](https://github.com/policy-design-lab/pdl-api/issues/48)
 
 ### Fixed
 - Open API sepecification file. [#50](https://github.com/policy-design-lab/pdl-api/issues/50)
 
-[unreleased]: https://github.com/policy-design-lab/pdl-api/compare/0.1.0...HEAD
+[unreleased]: https://github.com/policy-design-lab/pdl-api/compare/0.2.0...HEAD
+[0.2.0]: https://github.com/policy-design-lab/pdl-api/compare/0.1.0...0.2.0
 [0.1.0]: https://github.com/policy-design-lab/pdl-api/releases/tag/0.1.0

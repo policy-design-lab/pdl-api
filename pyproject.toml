@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pdl-api"
-version = "0.1.0"
+version = "0.2.0"
 description = ""
 authors = ["Yong Wook Kim <ywkim@illinois.edu>"]
 readme = "README.md"
@@ -15,7 +15,7 @@ Flask-Cors = ">=3.0.10"
 itsdangerous = ">=2.0.1"
 gunicorn = ">=20.0.4"
 diskcache = ">=4.0.0"
-SQLAlchemy = {extras = ["mypy"], version = ">=1.4"}
+SQLAlchemy = {extras = ["mypy"], version = ">=2.0.0"}
 connexion = {version = "^2.9.0", extras = ["swagger-ui"]}
 python-dotenv = ">=0.10.3"
 psycopg2-binary = ">=2.9"
