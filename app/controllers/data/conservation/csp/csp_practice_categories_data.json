@@ -1,90 +1,93 @@
 {
     "statutes": [
         {
-            "statuteName": "(6)(A) Practices",
+            "statuteName": "2018 Practices",
             "practiceCategories": [
                 {
                     "practiceCategoryName": "Land management",
-                    "totalPaymentInDollars": 288840374.22,
-                    "totalPaymentInPercentage": 39.95
+                    "totalPaymentInDollars": 288840407.0,
+                    "totalPaymentInPercentage": 33.64
                 },
                 {
                     "practiceCategoryName": "Other improvement",
-                    "totalPaymentInDollars": 189503325.03,
-                    "totalPaymentInPercentage": 26.21
+                    "totalPaymentInDollars": 189894403.0,
+                    "totalPaymentInPercentage": 22.12
+                },
+                {
+                    "practiceCategoryName": "Existing activity payments",
+                    "totalPaymentInDollars": 124060057.0,
+                    "totalPaymentInPercentage": 14.45
                 },
                 {
                     "practiceCategoryName": "Vegetative",
-                    "totalPaymentInDollars": 114325783.56,
-                    "totalPaymentInPercentage": 15.81
+                    "totalPaymentInDollars": 114325867.0,
+                    "totalPaymentInPercentage": 13.31
                 },
                 {
                     "practiceCategoryName": "Forest management",
-                    "totalPaymentInDollars": 82980559.71,
-                    "totalPaymentInPercentage": 11.48
+                    "totalPaymentInDollars": 82980588.0,
+                    "totalPaymentInPercentage": 9.66
                 },
                 {
                     "practiceCategoryName": "Soil remediation",
-                    "totalPaymentInDollars": 26570782.65,
-                    "totalPaymentInPercentage": 3.67
+                    "totalPaymentInDollars": 26570809.0,
+                    "totalPaymentInPercentage": 3.09
                 },
                 {
                     "practiceCategoryName": "Structural",
-                    "totalPaymentInDollars": 20852424.91,
-                    "totalPaymentInPercentage": 2.88
-                }
-            ],
-            "totalPaymentInDollars": 723073250.08,
-            "totalPaymentInPercentage": 18.93
-        },
-        {
-            "statuteName": "2014 CSP",
-            "practiceCategories": [
-                {
-                    "practiceCategoryName": "Cropland",
-                    "totalPaymentInDollars": 2286711791.24,
-                    "totalPaymentInPercentage": 77.23
-                },
-                {
-                    "practiceCategoryName": "Rangeland",
-                    "totalPaymentInDollars": 349383709.47,
-                    "totalPaymentInPercentage": 11.8
-                },
-                {
-                    "practiceCategoryName": "Pastureland",
-                    "totalPaymentInDollars": 195464258.55,
-                    "totalPaymentInPercentage": 6.6
-                },
-                {
-                    "practiceCategoryName": "NIPF",
-                    "totalPaymentInDollars": 94022179.5,
-                    "totalPaymentInPercentage": 3.18
-                },
-                {
-                    "practiceCategoryName": "Pastured Cropland",
-                    "totalPaymentInDollars": 35232081.84,
-                    "totalPaymentInPercentage": 1.19
-                }
-            ],
-            "totalPaymentInDollars": 2960814020.6,
-            "totalPaymentInPercentage": 77.53
-        },
-        {
-            "statuteName": "Other",
-            "practiceCategories": [
-                {
-                    "practiceCategoryName": "Other Payments",
-                    "totalPaymentInDollars": 124060047.46,
-                    "totalPaymentInPercentage": 91.77
+                    "totalPaymentInDollars": 20852431.0,
+                    "totalPaymentInPercentage": 2.43
                 },
                 {
                     "practiceCategoryName": "Bundles",
-                    "totalPaymentInDollars": 11125692.47,
-                    "totalPaymentInPercentage": 8.23
+                    "totalPaymentInDollars": 11125700.0,
+                    "totalPaymentInPercentage": 1.3
+                },
+                {
+                    "practiceCategoryName": "Soil testing",
+                    "totalPaymentInDollars": 0.0,
+                    "totalPaymentInPercentage": 0.0
                 }
             ],
-            "totalPaymentInDollars": 135185739.93,
-            "totalPaymentInPercentage": 3.54
+            "totalPaymentInDollars": 858650262.0,
+            "totalPaymentInPercentage": 21.84
+        },
+        {
+            "statuteName": "2014 Eligible Land",
+            "practiceCategories": [
+                {
+                    "practiceCategoryName": "Cropland",
+                    "totalPaymentInDollars": 2286711795.0,
+                    "totalPaymentInPercentage": 74.4
+                },
+                {
+                    "practiceCategoryName": "Rangeland",
+                    "totalPaymentInDollars": 349383707.0,
+                    "totalPaymentInPercentage": 11.37
+                },
+                {
+                    "practiceCategoryName": "Pastureland",
+                    "totalPaymentInDollars": 201823173.0,
+                    "totalPaymentInPercentage": 6.57
+                },
+                {
+                    "practiceCategoryName": "Other: supplemental, adjustment & other",
+                    "totalPaymentInDollars": 106205341.0,
+                    "totalPaymentInPercentage": 3.46
+                },
+                {
+                    "practiceCategoryName": "Non-industrial private forestland",
+                    "totalPaymentInDollars": 94022176.0,
+                    "totalPaymentInPercentage": 3.06
+                },
+                {
+                    "practiceCategoryName": "Grassland",
+                    "totalPaymentInDollars": 35232083.0,
+                    "totalPaymentInPercentage": 1.15
+                }
+            ],
+            "totalPaymentInDollars": 3073378275.0,
+            "totalPaymentInPercentage": 78.16
         }
     ]
 }
