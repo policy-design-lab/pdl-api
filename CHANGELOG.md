@@ -6,8 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Title I Commodities json GET endpoints. [#40](https://github.com/policy-design-lab/pdl-api/issues/40)
+
 ### Changed
 - Make summary and all programs directly served from json file. [#65](https://github.com/policy-design-lab/pdl-api/issues/65)
+
 
 ## [0.2.0] - 2023-05-10
 
@@ -40,7 +44,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - EQIP json GET endpoints. [#35](https://github.com/policy-design-lab/pdl-api/issues/35)
-- Title I Commodities json GET endpoints. [#40](https://github.com/policy-design-lab/pdl-api/issues/40)
 - SNAP json GET endpoints. [#42](https://github.com/policy-design-lab/pdl-api/issues/42)
 - Title II CSP json GET endpoints. [#45](https://github.com/policy-design-lab/pdl-api/issues/45)
 - Update SNAP JSON file structure and add participation percentages. [#48](https://github.com/policy-design-lab/pdl-api/issues/48)
