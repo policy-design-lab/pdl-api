@@ -10,14 +10,19 @@ from app.models.state import State
 from app.models.statecode import StateCode
 from app.models.allprograms import AllProgram
 
-
 LANDING_PAGE_DATA_PATH = os.path.join("controllers", "data", "landingpage")
 ALLPROGRAM_DATA_JSON = "allprograms.json"
 SUMMARY_DATA_JSON = "summary.json"
+COMMOD_JSON_DATA_PATH = os.path.join("controllers", "data", "commodities")
+COMMOD_MAP_DATA_JSON = "commodities_map_data.json"
+COMMOD_STATE_DISTRIBUTION_DATA_JSON = "commodities_state_distribution_data.json"
+COMMOD_SUBPROGRAMS_DATA_JSON = "commodities_subprograms_data.json"
 CSP_JSON_DATA_PATH = os.path.join("controllers", "data", "conservation", "csp")
 CSP_MAP_DATA_JSON = "csp_map_data.json"
 CSP_STATE_DISTRIBUTION_DATA_JSON = "csp_state_distribution_data.json"
 CSP_PRACTICE_CATEGORIES_DATA_JSON = "csp_practice_categories_data.json"
+SNAP_JSON_DATA_PATH = os.path.join("controllers", "data", "snap")
+SNAP_DATA_JSON = "snap_state_distribution_data.json"
 EQIP_JSON_DATA_PATH = os.path.join("controllers", "data", "conservation", "eqip")
 EQIP_MAP_DATA_JSON = "eqip_map_data.json"
 EQIP_STATE_DISTRIBUTION_DATA_JSON = "eqip_state_distribution_data.json"
@@ -155,7 +160,68 @@ def allprograms_search():
         return data_json
 
 
-def  programs_conservation_csp_map_search():
+# SNAP state distribution data
+def programs_snap_state_distribution_search():
+    # set the file path
+    eqip_data = os.path.join(SNAP_JSON_DATA_PATH, SNAP_DATA_JSON)
+
+    # open file
+    with open(eqip_data, 'r') as map_data:
+        file_data = map_data.read()
+
+        # parse file
+        data_json = json.loads(file_data)
+
+        return data_json
+
+
+# commodities map data
+def programs_commodities_map_search():
+    # set the file path
+    csp_data = os.path.join(COMMOD_JSON_DATA_PATH, COMMOD_MAP_DATA_JSON)
+
+    # open file
+    with open(csp_data, 'r') as map_data:
+        file_data = map_data.read()
+
+        # parse file
+        data_json = json.loads(file_data)
+
+        return data_json
+
+
+# Commodities state distribution data
+def programs_commodities_state_distribution_search():
+    # set the file path
+    csp_data = os.path.join(COMMOD_JSON_DATA_PATH, COMMOD_STATE_DISTRIBUTION_DATA_JSON)
+
+    # open file
+    with open(csp_data, 'r') as state_data:
+        file_data = state_data.read()
+
+    # parse file
+    data_json = json.loads(file_data)
+
+    return data_json
+
+
+# Commodities subprogram data
+def programs_commodities_subprograms_search():
+    # set the file path
+    csp_data = os.path.join(COMMOD_JSON_DATA_PATH, COMMOD_SUBPROGRAMS_DATA_JSON)
+
+    # open file
+    with open(csp_data, 'r') as subprograms_data:
+        file_data = subprograms_data.read()
+
+    # parse file
+    data_json = json.loads(file_data)
+
+    return data_json
+
+
+# CSP map data
+def programs_conservation_csp_map_search():
     # set the file path
     csp_data = os.path.join(CSP_JSON_DATA_PATH, CSP_MAP_DATA_JSON)
 
@@ -167,22 +233,9 @@ def  programs_conservation_csp_map_search():
         data_json = json.loads(file_data)
 
         return data_json
-    
-
-def programs_snap_state_distribution_search():
-    # set the file path
-    eqip_data = os.path.join(SNAP_JSON_DATA_PATH, SNAP_DATA_JSON)
-
-    # open file
-    with open(eqip_data, 'r') as map_data:
-        file_data = map_data.read()
-
-    # parse file
-    data_json = json.loads(file_data)
-
-    return data_json
 
 
+# CSP state distribution data
 def programs_conservation_csp_state_distribution_search():
     # set the file path
     csp_data = os.path.join(CSP_JSON_DATA_PATH, CSP_STATE_DISTRIBUTION_DATA_JSON)
@@ -197,6 +250,7 @@ def programs_conservation_csp_state_distribution_search():
     return data_json
 
 
+# CSP practice category data
 def programs_conservation_csp_practice_categories_search():
     # set the file path
     csp_data = os.path.join(CSP_JSON_DATA_PATH, CSP_PRACTICE_CATEGORIES_DATA_JSON)
