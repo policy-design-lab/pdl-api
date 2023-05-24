@@ -12,6 +12,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Make summary and all programs directly served from json file. [#65](https://github.com/policy-design-lab/pdl-api/issues/65)
 
+### Fixed
+- Topline numbers for crop insurance and re-calculated total payments. [#81](https://github.com/policy-design-lab/pdl-api/issues/81)
+
 ## [0.2.0] - 2023-05-10
 
 ### Added
