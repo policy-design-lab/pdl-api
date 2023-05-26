@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: Policy Design Lab API
   description: Policy Design Lab API Documentation
-  version: 0.2.0
+  version: 0.3.0
 servers:
 - url: https://localhost
   description: Production server
@@ -15,8 +15,14 @@ tags:
   description: "Farm Bill summary data."
 - name: "All Programs"
   description: "All programs data."
+- name: "Title I: Commodities"
+  description: "Farm Bill Title I: Commodities data."
+- name: "Title II: Conservation - CSP"
+  description: "Farm Bill Title II: Conservation - Conservation Stewardship Program (CSP) data."
 - name: "Title II: Conservation - EQIP"
   description: "Farm Bill Title II: Conservation - Environmental Quality Incentives Program (EQIP) data."
+- name: "SNAP State Distribution Data"
+  description: "Supplemental Nutrition Assistant Program (SNAP) state distribution data"
 - name: "States"
   description: "Information related to States."
 paths:
@@ -27,23 +33,6 @@ paths:
       summary: Get the list of summary records
       description: |
         By passing in the appropriate options, you can search for summary records matching your criteria in the system
-      parameters:
-        - name: state
-          in: query
-          description: The parameter for searching summary data by the state code
-          required: false
-          style: form
-          explode: true
-          schema:
-            type: string
-        - name: year
-          in: query
-          description: The parameter for searching summary data by year
-          required: false
-          style: form
-          explode: true
-          schema:
-            type: integer
       responses:
         200:
           description: Ok
@@ -173,15 +162,6 @@ paths:
       summary: Get the list of all program records
       description: |
         By passing in the appropriate options, you can search for all program records matching your criteria in the system
-      parameters:
-        - name: state
-          in: query
-          description: The parameter for searching all programs data by state abbreviation
-          required: false
-          style: form
-          explode: true
-          schema:
-            type: string
       responses:
         200:
           description: Ok
@@ -191,6 +171,66 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/AllPrograms'
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
+  /pdl/programs/commodities/map:
+    get:
+      tags:
+        - "Title I: Commodities"
+      summary: Gets the Commodities payment distribution data for map visualization.
+      description: |
+        Returns  the Commodities payment distribution data for map visualization in JSON format.
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: string
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
+  /pdl/programs/commodities/state-distribution:
+    get:
+      tags:
+        - "Title I: Commodities"
+      summary: Gets the Commodities payment distribution data for all states.
+      description: |
+        Returns the Commodities payment distribution data for all states in JSON format.
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: string
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
+  /pdl/programs/commodities/subprograms:
+    get:
+      tags:
+        - "Title I: Commodities"
+      summary: Gets the Commodities payment distribution data for all subprograms.
+      description: |
+        Returns the Commodities payment distribution data for all subprograms in JSON format.
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: string
         400:
           description: Bad request
         401:
@@ -324,6 +364,26 @@ paths:
       summary: Gets the EQIP payment distribution data for all practice categories.
       description: |
         Returns the EQIP payment distribution data for all practice categories in JSON format.
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: string
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
+  /pdl/programs/snap/state-distribution:
+    get:
+      tags:
+        - "SNAP State Distribution Data"
+      summary: Gets the SNAP state distribution data.
+      description: |
+        Returns the SNAP State Distribution Data in JSON format.
       responses:
         200:
           description: Ok

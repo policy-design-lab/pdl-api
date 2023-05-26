@@ -10,18 +10,25 @@ from app.models.state import State
 from app.models.statecode import StateCode
 from app.models.allprograms import AllProgram
 
-
+LANDING_PAGE_DATA_PATH = os.path.join("controllers", "data", "landingpage")
+ALLPROGRAM_DATA_JSON = "allprograms.json"
+SUMMARY_DATA_JSON = "summary.json"
+COMMOD_JSON_DATA_PATH = os.path.join("controllers", "data", "commodities")
+COMMOD_MAP_DATA_JSON = "commodities_map_data.json"
+COMMOD_STATE_DISTRIBUTION_DATA_JSON = "commodities_state_distribution_data.json"
+COMMOD_SUBPROGRAMS_DATA_JSON = "commodities_subprograms_data.json"
 CSP_JSON_DATA_PATH = os.path.join("controllers", "data", "conservation", "csp")
 CSP_MAP_DATA_JSON = "csp_map_data.json"
 CSP_STATE_DISTRIBUTION_DATA_JSON = "csp_state_distribution_data.json"
 CSP_PRACTICE_CATEGORIES_DATA_JSON = "csp_practice_categories_data.json"
-EQIP_JSON_DATA_PATH = os.path.join("controllers", "data", "conservation", "eqip")
 SNAP_JSON_DATA_PATH = os.path.join("controllers", "data", "snap")
 SNAP_DATA_JSON = "snap_state_distribution_data.json"
-EQIP_JSON_DATA_PATH = os.path.join("controllers", "data", "eqip")
+EQIP_JSON_DATA_PATH = os.path.join("controllers", "data", "conservation", "eqip")
 EQIP_MAP_DATA_JSON = "eqip_map_data.json"
 EQIP_STATE_DISTRIBUTION_DATA_JSON = "eqip_state_distribution_data.json"
 EQIP_PRACTICE_CATEGORIES_DATA_JSON = "eqip_practice_categories_data.json"
+SNAP_JSON_DATA_PATH = os.path.join("controllers", "data", "snap")
+SNAP_DATA_JSON = "snap_state_distribution_data.json"
 
 
 def search():
@@ -31,43 +38,17 @@ def search():
 
 
 # GET all the entries from summary table
-def summary_search(state=None, year=None):
-    if not state and not year:
-        summaries = Summary.query.all()
-        results = [construct_summary_result(summary) for summary in summaries]
+def summary_search():
+    summary_data = os.path.join(LANDING_PAGE_DATA_PATH, SUMMARY_DATA_JSON)
 
-        # return {"count": len(results), "summary": results}
-        return results
+    # open file
+    with open(summary_data, 'r') as json_data:
+        file_data = json_data.read()
 
-    # only name provide
-    elif state is not None and not year:
-        summaries = Summary.query.filter_by(state=state.upper()).all()
-        results = [construct_summary_result(summary) for summary in summaries]
+        # parse file
+        data_json = json.loads(file_data)
 
-        return results
-
-    # only year provide
-    elif not state and year is not None:
-        summaries = Summary.query.filter_by(fiscal_year=year).all()
-        results = [construct_summary_result(summary) for summary in summaries]
-
-        return results
-
-    # both year and name provided
-    elif state and year:
-        summaries = Summary.query.filter((Summary.fiscal_year == year) & (Summary.state == state.upper())).all()
-        results = [construct_summary_result(summary) for summary in summaries]
-
-        return results
-
-    # none of them
-    else:
-        msg = {
-            "reason": "The query is not correct.",
-            "error": "Bad Request: " + request.url,
-        }
-        logging.error("Summary " + json.dumps(msg))
-        return rs_handlers.bad_request(msg)
+        return data_json
 
 
 # GET all the entries from states table
@@ -166,30 +147,81 @@ def statecodes_search(code=None, name=None):
 
 
 # GET all the entries from states table
-def allprograms_search(state=None):
-    # no state parameters
-    if not state:
-        allprograms = AllProgram.query.all()
-        results = [construct_allprogram_result(prog) for prog in allprograms]
-        return results
+def allprograms_search():
+    allprograms_data = os.path.join(LANDING_PAGE_DATA_PATH, ALLPROGRAM_DATA_JSON)
 
-    # yes state
-    elif state is not None:
-        allprograms = AllProgram.query.filter_by(state=state.upper()).all()
-        results = [construct_allprogram_result(prog) for prog in allprograms]
-        return results
+    # open file
+    with open(allprograms_data, 'r') as json_data:
+        file_data = json_data.read()
 
-    # none of them
-    else:
-        msg = {
-            "reason": "The query is not correct.",
-            "error": "Bad Request: " + request.url,
-        }
-        logging.error("All programs " + json.dumps(msg))
-        return rs_handlers.bad_request(msg)
+        # parse file
+        data_json = json.loads(file_data)
+
+        return data_json
 
 
-def  programs_conservation_csp_map_search():
+# SNAP state distribution data
+def programs_snap_state_distribution_search():
+    # set the file path
+    eqip_data = os.path.join(SNAP_JSON_DATA_PATH, SNAP_DATA_JSON)
+
+    # open file
+    with open(eqip_data, 'r') as map_data:
+        file_data = map_data.read()
+
+        # parse file
+        data_json = json.loads(file_data)
+
+        return data_json
+
+
+# commodities map data
+def programs_commodities_map_search():
+    # set the file path
+    csp_data = os.path.join(COMMOD_JSON_DATA_PATH, COMMOD_MAP_DATA_JSON)
+
+    # open file
+    with open(csp_data, 'r') as map_data:
+        file_data = map_data.read()
+
+        # parse file
+        data_json = json.loads(file_data)
+
+        return data_json
+
+
+# Commodities state distribution data
+def programs_commodities_state_distribution_search():
+    # set the file path
+    csp_data = os.path.join(COMMOD_JSON_DATA_PATH, COMMOD_STATE_DISTRIBUTION_DATA_JSON)
+
+    # open file
+    with open(csp_data, 'r') as state_data:
+        file_data = state_data.read()
+
+    # parse file
+    data_json = json.loads(file_data)
+
+    return data_json
+
+
+# Commodities subprogram data
+def programs_commodities_subprograms_search():
+    # set the file path
+    csp_data = os.path.join(COMMOD_JSON_DATA_PATH, COMMOD_SUBPROGRAMS_DATA_JSON)
+
+    # open file
+    with open(csp_data, 'r') as subprograms_data:
+        file_data = subprograms_data.read()
+
+    # parse file
+    data_json = json.loads(file_data)
+
+    return data_json
+
+
+# CSP map data
+def programs_conservation_csp_map_search():
     # set the file path
     csp_data = os.path.join(CSP_JSON_DATA_PATH, CSP_MAP_DATA_JSON)
 
@@ -201,22 +233,9 @@ def  programs_conservation_csp_map_search():
         data_json = json.loads(file_data)
 
         return data_json
-    
-
-def programs_snap_state_distribution_search():
-    # set the file path
-    eqip_data = os.path.join(SNAP_JSON_DATA_PATH, SNAP_DATA_JSON)
-
-    # open file
-    with open(eqip_data, 'r') as map_data:
-        file_data = map_data.read()
-
-    # parse file
-    data_json = json.loads(file_data)
-
-    return data_json
 
 
+# CSP state distribution data
 def programs_conservation_csp_state_distribution_search():
     # set the file path
     csp_data = os.path.join(CSP_JSON_DATA_PATH, CSP_STATE_DISTRIBUTION_DATA_JSON)
@@ -231,6 +250,7 @@ def programs_conservation_csp_state_distribution_search():
     return data_json
 
 
+# CSP practice category data
 def programs_conservation_csp_practice_categories_search():
     # set the file path
     csp_data = os.path.join(CSP_JSON_DATA_PATH, CSP_PRACTICE_CATEGORIES_DATA_JSON)
