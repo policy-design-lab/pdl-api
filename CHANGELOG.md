@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - SNAP data based on latest information. [#91](https://github.com/policy-design-lab/pdl-api/issues/91)
+- EQIP data based on latest information. [#97](https://github.com/policy-design-lab/pdl-api/issues/97)
 
 ## [0.3.0] - 2023-05-26
 
