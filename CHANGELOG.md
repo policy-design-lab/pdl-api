@@ -7,8 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Changed
-- SNAP data based on latest information. [#91](https://github.com/policy-design-lab/pdl-api/issues/91)
+- EQIP data based on latest information. [#97](https://github.com/policy-design-lab/pdl-api/issues/97)
 - Title 1 Commodities JSON files. [#99](https://github.com/policy-design-lab/pdl-api/issues/99)
+
+## [0.4.0] - 2023-06-08
+
+### Changed
+- SNAP data based on latest information. [#91](https://github.com/policy-design-lab/pdl-api/issues/91)
 
 ## [0.3.0] - 2023-05-26
 
@@ -59,6 +64,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Open API sepecification file. [#50](https://github.com/policy-design-lab/pdl-api/issues/50)
 
+[0.4.0]: https://github.com/policy-design-lab/pdl-api/compare/0.3.0...0.4.0
 [0.3.0]: https://github.com/policy-design-lab/pdl-api/compare/0.2.0...0.3.0
 [0.2.0]: https://github.com/policy-design-lab/pdl-api/compare/0.1.0...0.2.0
 [0.1.0]: https://github.com/policy-design-lab/pdl-api/releases/tag/0.1.0
