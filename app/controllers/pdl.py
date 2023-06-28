@@ -5,10 +5,9 @@ import app.utils.jsonutils as jsonutils
 import app.utils.rest_handlers as rs_handlers
 
 from flask import request
-from app.models.summary import Summary
 from app.models.state import State
 from app.models.statecode import StateCode
-from app.models.allprograms import AllProgram
+from collections import OrderedDict
 
 LANDING_PAGE_DATA_PATH = os.path.join("controllers", "data", "landingpage")
 ALLPROGRAM_DATA_JSON = "allprograms.json"
@@ -46,7 +45,7 @@ def summary_search():
         file_data = json_data.read()
 
         # parse file
-        data_json = json.loads(file_data)
+        data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
 
         return data_json
 
@@ -155,7 +154,7 @@ def allprograms_search():
         file_data = json_data.read()
 
         # parse file
-        data_json = json.loads(file_data)
+        data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
 
         return data_json
 
@@ -170,7 +169,7 @@ def programs_snap_state_distribution_search():
         file_data = map_data.read()
 
         # parse file
-        data_json = json.loads(file_data)
+        data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
 
         return data_json
 
@@ -185,7 +184,7 @@ def programs_commodities_map_search():
         file_data = map_data.read()
 
         # parse file
-        data_json = json.loads(file_data)
+        data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
 
         return data_json
 
@@ -200,7 +199,7 @@ def programs_commodities_state_distribution_search():
         file_data = state_data.read()
 
     # parse file
-    data_json = json.loads(file_data)
+    data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
 
     return data_json
 
@@ -215,7 +214,7 @@ def programs_commodities_subprograms_search():
         file_data = subprograms_data.read()
 
     # parse file
-    data_json = json.loads(file_data)
+    data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
 
     return data_json
 
@@ -230,7 +229,7 @@ def programs_conservation_csp_map_search():
         file_data = map_data.read()
 
         # parse file
-        data_json = json.loads(file_data)
+        data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
 
         return data_json
 
@@ -245,7 +244,7 @@ def programs_conservation_csp_state_distribution_search():
         file_data = state_data.read()
 
     # parse file
-    data_json = json.loads(file_data)
+    data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
 
     return data_json
 
@@ -260,7 +259,7 @@ def programs_conservation_csp_practice_categories_search():
         file_data = practice_data.read()
 
     # parse file
-    data_json = json.loads(file_data)
+    data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
 
     return data_json
 
@@ -275,7 +274,7 @@ def programs_conservation_eqip_map_search():
         file_data = map_data.read()
 
     # parse file
-    data_json = json.loads(file_data)
+    data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
 
     return data_json
 
@@ -290,7 +289,7 @@ def programs_conservation_eqip_state_distribution_search():
         file_data = map_data.read()
 
     # parse file
-    data_json = json.loads(file_data)
+    data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
 
     return data_json
 
@@ -305,7 +304,7 @@ def programs_conservation_eqip_practice_categories_search():
         file_data = map_data.read()
 
     # parse file
-    data_json = json.loads(file_data)
+    data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
 
     return data_json
 
