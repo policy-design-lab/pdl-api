@@ -32,6 +32,7 @@ app = connexion_app.app
 app.config['SQLALCHEMY_DATABASE_URI'] = db_connenction_url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['PROPAGATE_EXCEPTIONS'] = True
+app.config['JSON_SORT_KEYS'] = False
 
 db.init_app(app)
 
