@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Crop Insurance endpoints. [#78](https://github.com/policy-design-lab/pdl-api/issues/78)
+
 ### Changed
 - EQIP data based on latest information. [#97](https://github.com/policy-design-lab/pdl-api/issues/97)
 - Title 1 Commodities JSON files. [#99](https://github.com/policy-design-lab/pdl-api/issues/99)
