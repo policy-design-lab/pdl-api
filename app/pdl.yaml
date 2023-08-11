@@ -297,6 +297,46 @@ paths:
           description: Unauthorized
         500:
           description: Internal error
+  /pdl/programs/conservation/crp/state-distribution:
+    get:
+      tags:
+        - "Title II: Conservation - CRP"
+      summary: Gets the CRP conservation data for all states.
+      description: |
+        Returns  the CRP conservation data for all states in JSON format.
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: string
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
+  /pdl/programs/conservation/crp/practice-categories:
+    get:
+      tags:
+        - "Title II: Conservation - CRP"
+      summary: Gets the CRP conservation data for all practice categories.
+      description: |
+        Returns  the CRP conservation data for all practice categories in JSON format.
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: string
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
   /pdl/programs/conservation/eqip/map:
     get:
       tags:

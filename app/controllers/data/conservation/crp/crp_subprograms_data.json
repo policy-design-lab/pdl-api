@@ -1,0 +1,56 @@
+{
+  "programs": [
+    {
+      "programName": "Total General Sign-Up",
+      "totalContracts": 781552,
+      "totalFarms": 568030,
+      "totalAcre": 60870302,
+      "totalRent1K": 3242519,
+      "totalRentAcre": 13565.92,
+      "subPrograms": []
+    },
+    {
+      "programName": "Total Continuous",
+      "totalContracts": 781552,
+      "totalFarms": 568030,
+      "totalAcre": 60870302,
+      "totalRent1K": 3242519,
+      "totalRentAcre": 13565.92,
+      "subPrograms": [
+        {
+          "programName": "CREP Only",
+          "totalContracts": 269155,
+          "totalFarms": 183070,
+          "totalAcre": 4425600,
+          "totalRent1K": 773731,
+          "totalRentAcre": 28623.07
+        },
+        {
+          "programName": "Continuous Non-CREP",
+          "totalContracts": 1782815,
+          "totalFarms": 1180174,
+          "totalAcre": 33456676,
+          "totalRent1K": 4539271,
+          "totalRentAcre": 21132.77
+        },
+        {
+          "programName": "Farmable Wetland",
+          "totalContracts": 72903,
+          "totalFarms": 56346,
+          "totalAcre": 1914225,
+          "totalRent1K": 304597,
+          "totalRentAcre": 13422.48
+        }
+      ]
+    },
+    {
+      "programName": "Grassland",
+      "totalContracts": 28838,
+      "totalFarms": 16654,
+      "totalAcre": 9265067,
+      "totalRent1K": 140631,
+      "totalRentAcre": 3049.22,
+      "subPrograms": []
+    }
+  ]
+}
