@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - API endpoints returns json without soring orders. [#101](https://github.com/policy-design-lab/pdl-api/issues/101)
 - Title 1 Commodities state distribution JSON file. [#104](https://github.com/policy-design-lab/pdl-api/issues/104)
+- Title 1 Commodities state distribution JSON to use correct average payee counts. [#112](https://github.com/policy-design-lab/pdl-api/issues/112)
 
 ## [0.4.0] - 2023-06-08
 
