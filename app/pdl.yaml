@@ -317,13 +317,13 @@ paths:
           description: Unauthorized
         500:
           description: Internal error
-  /pdl/programs/conservation/crp/practice-categories:
+  /pdl/programs/conservation/crp/subprograms:
     get:
       tags:
         - "Title II: Conservation - CRP"
-      summary: Gets the CRP conservation data for all practice categories.
+      summary: Gets the CRP conservation distribution data for all subprograms.
       description: |
-        Returns  the CRP conservation data for all practice categories in JSON format.
+        Returns the CRP conservation distribution data for all subprograms in JSON format.
       responses:
         200:
           description: Ok

@@ -22,7 +22,7 @@ CSP_STATE_DISTRIBUTION_DATA_JSON = "csp_state_distribution_data.json"
 CSP_PRACTICE_CATEGORIES_DATA_JSON = "csp_practice_categories_data.json"
 CRP_JSON_DATA_PATH = os.path.join("controllers", "data", "conservation", "crp")
 CRP_STATE_DISTRIBUTION_DATA_JSON = "crp_state_distribution_data.json"
-CRP_PRACTICE_CATEGORIES_DATA_JSON = "crp_practice_categories_data.json"
+CRP_SUBPROGRAMS_DATA_JSON = "crp_subprograms_data.json"
 SNAP_JSON_DATA_PATH = os.path.join("controllers", "data", "snap")
 SNAP_DATA_JSON = "snap_state_distribution_data.json"
 EQIP_JSON_DATA_PATH = os.path.join("controllers", "data", "conservation", "eqip")
@@ -286,9 +286,9 @@ def programs_conservation_crp_state_distribution_search():
 
 
 # CRP practice category data
-def programs_conservation_crp_practice_categories_search():
+def programs_conservation_crp_subprograms_search():
     # set the file path
-    crp_data = os.path.join(CRP_JSON_DATA_PATH, CRP_PRACTICE_CATEGORIES_DATA_JSON)
+    crp_data = os.path.join(CRP_JSON_DATA_PATH, CRP_SUBPROGRAMS_DATA_JSON)
 
     # open file
     with open(crp_data, 'r') as practice_data:
