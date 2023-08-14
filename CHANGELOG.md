@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - EQIP data based on latest information. [#97](https://github.com/policy-design-lab/pdl-api/issues/97)
 - Title 1 Commodities JSON files. [#99](https://github.com/policy-design-lab/pdl-api/issues/99)
 - Title 1 Commodities JSON files after raw data update. [#110](https://github.com/policy-design-lab/pdl-api/issues/110)
+- All Programs and Summary JSON after updates to Title-1 data. [#115](https://github.com/policy-design-lab/pdl-api/issues/115)
 
 ### Fixed
 - API endpoints returns json without soring orders. [#101](https://github.com/policy-design-lab/pdl-api/issues/101)
