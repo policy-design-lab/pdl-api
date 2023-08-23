@@ -4,6 +4,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.0] - 2023-08-22
+
+### Added
+- Crop Insurance endpoints. [#78](https://github.com/policy-design-lab/pdl-api/issues/78)
+
+### Changed
+- EQIP data based on latest information. [#97](https://github.com/policy-design-lab/pdl-api/issues/97)
+- Title 1 Commodities JSON files. [#99](https://github.com/policy-design-lab/pdl-api/issues/99)
+- Title 1 Commodities JSON files after raw data update. [#110](https://github.com/policy-design-lab/pdl-api/issues/110)
+- Crop Insurance JSON files to use average liabilities. [#117](https://github.com/policy-design-lab/pdl-api/issues/117)
+- All Programs and Summary JSON after updates to Title-1 data. [#115](https://github.com/policy-design-lab/pdl-api/issues/115)
+
+### Fixed
+- API endpoints returns json without soring orders. [#101](https://github.com/policy-design-lab/pdl-api/issues/101)
+- Title 1 Commodities state distribution JSON file. [#104](https://github.com/policy-design-lab/pdl-api/issues/104)
+- Title 1 Commodities state distribution JSON to use correct average payee counts. [#112](https://github.com/policy-design-lab/pdl-api/issues/112)
+
 ## [0.4.0] - 2023-06-08
 
 ### Changed
@@ -56,8 +73,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update SNAP JSON file structure and add participation percentages. [#48](https://github.com/policy-design-lab/pdl-api/issues/48)
 
 ### Fixed
-- Open API sepecification file. [#50](https://github.com/policy-design-lab/pdl-api/issues/50)
+- Open API specification file. [#50](https://github.com/policy-design-lab/pdl-api/issues/50)
 
+[0.5.0]: https://github.com/policy-design-lab/pdl-api/compare/0.4.0...0.5.0
 [0.4.0]: https://github.com/policy-design-lab/pdl-api/compare/0.3.0...0.4.0
 [0.3.0]: https://github.com/policy-design-lab/pdl-api/compare/0.2.0...0.3.0
 [0.2.0]: https://github.com/policy-design-lab/pdl-api/compare/0.1.0...0.2.0
