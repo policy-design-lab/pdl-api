@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased] 
 
 ### Added
-- Title 2 Convervation CRP endpoints. [#79](https://github.com/policy-design-lab/pdl-api/issues/79)
+- Title 2 Conservation CRP endpoints. [#79](https://github.com/policy-design-lab/pdl-api/issues/79)
 
 ## [0.5.0] - 2023-08-22
 
