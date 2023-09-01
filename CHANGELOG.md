@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Title 2 Conservation CRP endpoints. [#79](https://github.com/policy-design-lab/pdl-api/issues/79)
 
+### Changed
+- Crop Insurance JSON files to include average area insured and use latest data. [#120](https://github.com/policy-design-lab/pdl-api/issues/120)
+
 ## [0.5.0] - 2023-08-22
 
 ### Added
