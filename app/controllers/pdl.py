@@ -343,6 +343,7 @@ def programs_conservation_rcpp_state_distribution_search():
 
     # open file
     with open(rcpp_data, 'r') as state_data:
+        file_data = state_data.read()
       
     # parse file
     data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
@@ -357,6 +358,7 @@ def programs_conservation_rcpp_subprograms_search():
 
     # open file
     with open(rcpp_data, 'r') as practice_data:
+        file_data = practice_data.read()
       
     # parse file
     data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
