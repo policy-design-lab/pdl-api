@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Title 2 Conservation ACEP endpoints. [#131](https://github.com/policy-design-lab/pdl-api/issues/131)
+- Title 2 Conservation RCPP endpoints. [#133](https://github.com/policy-design-lab/pdl-api/issues/133)
 
 ## [0.6.1] - 2023-09-18
 
