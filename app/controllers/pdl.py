@@ -23,6 +23,12 @@ CSP_PRACTICE_CATEGORIES_DATA_JSON = "csp_practice_categories_data.json"
 CRP_JSON_DATA_PATH = os.path.join("controllers", "data", "conservation", "crp")
 CRP_STATE_DISTRIBUTION_DATA_JSON = "crp_state_distribution_data.json"
 CRP_SUBPROGRAMS_DATA_JSON = "crp_subprograms_data.json"
+ACEP_JSON_DATA_PATH = os.path.join("controllers", "data", "conservation", "acep")
+ACEP_STATE_DISTRIBUTION_DATA_JSON = "acep_state_distribution_data.json"
+ACEP_SUBPROGRAMS_DATA_JSON = "acep_subprograms_data.json"
+RCPP_JSON_DATA_PATH = os.path.join("controllers", "data", "conservation", "rcpp")
+RCPP_STATE_DISTRIBUTION_DATA_JSON = "rcpp_state_distribution_data.json"
+RCPP_SUBPROGRAMS_DATA_JSON = "rcpp_subprograms_data.json"
 SNAP_JSON_DATA_PATH = os.path.join("controllers", "data", "snap")
 SNAP_DATA_JSON = "snap_state_distribution_data.json"
 EQIP_JSON_DATA_PATH = os.path.join("controllers", "data", "conservation", "eqip")
@@ -294,6 +300,66 @@ def programs_conservation_crp_subprograms_search():
     with open(crp_data, 'r') as practice_data:
         file_data = practice_data.read()
 
+    # parse file
+    data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
+
+    return data_json
+
+
+# ACEP state distribution data
+def programs_conservation_acep_state_distribution_search():
+    # set the file path
+    acep_data = os.path.join(ACEP_JSON_DATA_PATH, ACEP_STATE_DISTRIBUTION_DATA_JSON)
+
+    # open file
+    with open(acep_data, 'r') as state_data:
+        file_data = state_data.read()
+
+    # parse file
+    data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
+
+    return data_json
+
+
+# ACEP practice subprograms data
+def programs_conservation_acep_subprograms_search():
+    # set the file path
+    acep_data = os.path.join(ACEP_JSON_DATA_PATH, ACEP_SUBPROGRAMS_DATA_JSON)
+
+    # open file
+    with open(acep_data, 'r') as practice_data:
+        file_data = practice_data.read()
+
+    # parse file
+    data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
+
+    return data_json
+  
+
+# RCPP state distribution data
+def programs_conservation_rcpp_state_distribution_search():
+    # set the file path
+    rcpp_data = os.path.join(RCPP_JSON_DATA_PATH, RCPP_STATE_DISTRIBUTION_DATA_JSON)
+
+    # open file
+    with open(rcpp_data, 'r') as state_data:
+        file_data = state_data.read()
+      
+    # parse file
+    data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
+
+    return data_json
+
+
+# RCPP practice subprograms data
+def programs_conservation_rcpp_subprograms_search():
+    # set the file path
+    rcpp_data = os.path.join(RCPP_JSON_DATA_PATH, RCPP_SUBPROGRAMS_DATA_JSON)
+
+    # open file
+    with open(rcpp_data, 'r') as practice_data:
+        file_data = practice_data.read()
+      
     # parse file
     data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
 

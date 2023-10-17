@@ -337,6 +337,86 @@ paths:
           description: Unauthorized
         500:
           description: Internal error
+  /pdl/programs/conservation/acep/state-distribution:
+    get:
+      tags:
+        - "Title II: Conservation - ACEP"
+      summary: Gets the ACEP conservation data for all states.
+      description: |
+        Returns  the ACEP conservation data for all states in JSON format.
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: string
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
+  /pdl/programs/conservation/acep/subprograms:
+    get:
+      tags:
+        - "Title II: Conservation - ACEP"
+      summary: Gets the ACEP conservation distribution data for all subprograms.
+      description: |
+        Returns the ACEP conservation distribution data for all subprograms in JSON format.
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: string
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
+  /pdl/programs/conservation/rcpp/state-distribution:
+    get:
+      tags:
+        - "Title II: Conservation - RCPP"
+      summary: Gets the RCPP conservation data for all states.
+      description: |
+        Returns  the RCPP conservation data for all states in JSON format.
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: string
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
+  /pdl/programs/conservation/rcpp/subprograms:
+    get:
+      tags:
+        - "Title II: Conservation - RCPP"
+      summary: Gets the RCPP conservation distribution data for all subprograms.
+      description: |
+        Returns the RCPP conservation distribution data for all subprograms in JSON format.
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: string
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
   /pdl/programs/conservation/eqip/map:
     get:
       tags:
