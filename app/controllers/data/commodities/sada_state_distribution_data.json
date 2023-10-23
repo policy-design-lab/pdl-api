@@ -1,7 +1,7 @@
 {
   "2014-2021": [
     {
-      "state": "Texas",
+      "state": "TX",
       "programs": [
         {
           "programName": "SADA",
@@ -56,7 +56,7 @@
       ]
     },
     {
-      "state": "Oklahoma",
+      "state": "OK",
       "programs": [
         {
           "programName": "SADA",
@@ -111,7 +111,7 @@
       ]
     },
     {
-      "state": "California",
+      "state": "CA",
       "programs": [
         {
           "programName": "SADA",
@@ -166,7 +166,7 @@
       ]
     },
     {
-      "state": "South Dakota",
+      "state": "SD",
       "programs": [
         {
           "programName": "SADA",
@@ -221,7 +221,7 @@
       ]
     },
     {
-      "state": "Kansas",
+      "state": "KS",
       "programs": [
         {
           "programName": "SADA",
@@ -276,7 +276,7 @@
       ]
     },
     {
-      "state": "Montana",
+      "state": "MT",
       "programs": [
         {
           "programName": "SADA",
@@ -331,7 +331,7 @@
       ]
     },
     {
-      "state": "Oregon",
+      "state": "OR",
       "programs": [
         {
           "programName": "SADA",
@@ -386,7 +386,7 @@
       ]
     },
     {
-      "state": "North Dakota",
+      "state": "ND",
       "programs": [
         {
           "programName": "SADA",
@@ -441,7 +441,7 @@
       ]
     },
     {
-      "state": "New Mexico",
+      "state": "NM",
       "programs": [
         {
           "programName": "SADA",
@@ -496,7 +496,7 @@
       ]
     },
     {
-      "state": "Colorado",
+      "state": "CO",
       "programs": [
         {
           "programName": "SADA",
@@ -551,7 +551,7 @@
       ]
     },
     {
-      "state": "Nebraska",
+      "state": "NE",
       "programs": [
         {
           "programName": "SADA",
@@ -606,7 +606,7 @@
       ]
     },
     {
-      "state": "Utah",
+      "state": "UT",
       "programs": [
         {
           "programName": "SADA",
@@ -661,7 +661,7 @@
       ]
     },
     {
-      "state": "Alabama",
+      "state": "AL",
       "programs": [
         {
           "programName": "SADA",
@@ -716,7 +716,7 @@
       ]
     },
     {
-      "state": "Wyoming",
+      "state": "WY",
       "programs": [
         {
           "programName": "SADA",
@@ -771,7 +771,7 @@
       ]
     },
     {
-      "state": "Florida",
+      "state": "FL",
       "programs": [
         {
           "programName": "SADA",
@@ -826,7 +826,7 @@
       ]
     },
     {
-      "state": "Missouri",
+      "state": "MO",
       "programs": [
         {
           "programName": "SADA",
@@ -881,7 +881,7 @@
       ]
     },
     {
-      "state": "Georgia",
+      "state": "GA",
       "programs": [
         {
           "programName": "SADA",
@@ -936,7 +936,7 @@
       ]
     },
     {
-      "state": "Idaho",
+      "state": "ID",
       "programs": [
         {
           "programName": "SADA",
@@ -991,7 +991,7 @@
       ]
     },
     {
-      "state": "Arizona",
+      "state": "AZ",
       "programs": [
         {
           "programName": "SADA",
@@ -1046,7 +1046,7 @@
       ]
     },
     {
-      "state": "Nevada",
+      "state": "NV",
       "programs": [
         {
           "programName": "SADA",
@@ -1101,7 +1101,7 @@
       ]
     },
     {
-      "state": "Mississippi",
+      "state": "MS",
       "programs": [
         {
           "programName": "SADA",
@@ -1156,7 +1156,7 @@
       ]
     },
     {
-      "state": "Louisiana",
+      "state": "LA",
       "programs": [
         {
           "programName": "SADA",
@@ -1211,7 +1211,7 @@
       ]
     },
     {
-      "state": "Tennessee",
+      "state": "TN",
       "programs": [
         {
           "programName": "SADA",
@@ -1266,7 +1266,7 @@
       ]
     },
     {
-      "state": "Washington",
+      "state": "WA",
       "programs": [
         {
           "programName": "SADA",
@@ -1321,7 +1321,7 @@
       ]
     },
     {
-      "state": "Iowa",
+      "state": "IA",
       "programs": [
         {
           "programName": "SADA",
@@ -1376,7 +1376,7 @@
       ]
     },
     {
-      "state": "Arkansas",
+      "state": "AR",
       "programs": [
         {
           "programName": "SADA",
@@ -1431,7 +1431,7 @@
       ]
     },
     {
-      "state": "Minnesota",
+      "state": "MN",
       "programs": [
         {
           "programName": "SADA",
@@ -1486,7 +1486,7 @@
       ]
     },
     {
-      "state": "Kentucky",
+      "state": "KY",
       "programs": [
         {
           "programName": "SADA",
@@ -1541,7 +1541,7 @@
       ]
     },
     {
-      "state": "Hawaii",
+      "state": "HI",
       "programs": [
         {
           "programName": "SADA",
@@ -1596,7 +1596,7 @@
       ]
     },
     {
-      "state": "Wisconsin",
+      "state": "WI",
       "programs": [
         {
           "programName": "SADA",
@@ -1651,7 +1651,7 @@
       ]
     },
     {
-      "state": "North Carolina",
+      "state": "NC",
       "programs": [
         {
           "programName": "SADA",
@@ -1706,7 +1706,7 @@
       ]
     },
     {
-      "state": "South Carolina",
+      "state": "SC",
       "programs": [
         {
           "programName": "SADA",
@@ -1761,7 +1761,7 @@
       ]
     },
     {
-      "state": "Michigan",
+      "state": "MI",
       "programs": [
         {
           "programName": "SADA",
@@ -1816,7 +1816,7 @@
       ]
     },
     {
-      "state": "New York",
+      "state": "NY",
       "programs": [
         {
           "programName": "SADA",
@@ -1871,7 +1871,7 @@
       ]
     },
     {
-      "state": "Pennsylvania",
+      "state": "PA",
       "programs": [
         {
           "programName": "SADA",
@@ -1926,7 +1926,7 @@
       ]
     },
     {
-      "state": "Ohio",
+      "state": "OH",
       "programs": [
         {
           "programName": "SADA",
@@ -1981,7 +1981,7 @@
       ]
     },
     {
-      "state": "Massachusetts",
+      "state": "MA",
       "programs": [
         {
           "programName": "SADA",
@@ -2036,7 +2036,7 @@
       ]
     },
     {
-      "state": "Virginia",
+      "state": "VA",
       "programs": [
         {
           "programName": "SADA",
@@ -2091,7 +2091,7 @@
       ]
     },
     {
-      "state": "West Virginia",
+      "state": "WV",
       "programs": [
         {
           "programName": "SADA",
@@ -2146,7 +2146,7 @@
       ]
     },
     {
-      "state": "Indiana",
+      "state": "IN",
       "programs": [
         {
           "programName": "SADA",
@@ -2201,7 +2201,7 @@
       ]
     },
     {
-      "state": "Illinois",
+      "state": "IL",
       "programs": [
         {
           "programName": "SADA",
@@ -2256,7 +2256,7 @@
       ]
     },
     {
-      "state": "New Jersey",
+      "state": "NJ",
       "programs": [
         {
           "programName": "SADA",
@@ -2311,7 +2311,7 @@
       ]
     },
     {
-      "state": "Vermont",
+      "state": "VT",
       "programs": [
         {
           "programName": "SADA",
@@ -2366,7 +2366,7 @@
       ]
     },
     {
-      "state": "Maine",
+      "state": "ME",
       "programs": [
         {
           "programName": "SADA",
@@ -2421,7 +2421,7 @@
       ]
     },
     {
-      "state": "Connecticut",
+      "state": "CT",
       "programs": [
         {
           "programName": "SADA",
@@ -2476,7 +2476,7 @@
       ]
     },
     {
-      "state": "New Hampshire",
+      "state": "NH",
       "programs": [
         {
           "programName": "SADA",
@@ -2531,7 +2531,7 @@
       ]
     },
     {
-      "state": "Maryland",
+      "state": "MD",
       "programs": [
         {
           "programName": "SADA",
@@ -2586,7 +2586,7 @@
       ]
     },
     {
-      "state": "Rhode Island",
+      "state": "RI",
       "programs": [
         {
           "programName": "SADA",
@@ -2641,7 +2641,7 @@
       ]
     },
     {
-      "state": "Delaware",
+      "state": "DE",
       "programs": [
         {
           "programName": "SADA",
@@ -2696,7 +2696,7 @@
       ]
     },
     {
-      "state": "Alaska",
+      "state": "AK",
       "programs": [
         {
           "programName": "SADA",
