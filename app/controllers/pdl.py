@@ -16,6 +16,10 @@ COMMOD_JSON_DATA_PATH = os.path.join("controllers", "data", "commodities")
 COMMOD_MAP_DATA_JSON = "commodities_map_data.json"
 COMMOD_STATE_DISTRIBUTION_DATA_JSON = "commodities_state_distribution_data.json"
 COMMOD_SUBPROGRAMS_DATA_JSON = "commodities_subprograms_data.json"
+DMC_STATE_DISTRIBUTION_DATA_JSON = "dmc_state_distribution_data.json"
+DMC_SUBPROGRAMS_DATA_JSON = "dmc_subprograms_data.json"
+SADA_STATE_DISTRIBUTION_DATA_JSON = "sada_state_distribution_data.json"
+SADA_SUBPROGRAMS_DATA_JSON = "sada_subprograms_data.json"
 CSP_JSON_DATA_PATH = os.path.join("controllers", "data", "conservation", "csp")
 CSP_MAP_DATA_JSON = "csp_map_data.json"
 CSP_STATE_DISTRIBUTION_DATA_JSON = "csp_state_distribution_data.json"
@@ -224,6 +228,66 @@ def programs_commodities_subprograms_search():
     # open file
     with open(csp_data, 'r') as subprograms_data:
         file_data = subprograms_data.read()
+
+    # parse file
+    data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
+
+    return data_json
+
+
+# DMC state distribution data
+def programs_commodities_dmc_state_distribution_search():
+    # set the file path
+    dmc_data = os.path.join(COMMOD_JSON_DATA_PATH, DMC_STATE_DISTRIBUTION_DATA_JSON)
+
+    # open file
+    with open(dmc_data, 'r') as state_data:
+        file_data = state_data.read()
+
+    # parse file
+    data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
+
+    return data_json
+
+
+# DMC practice subprograms data
+def programs_commodities_dmc_subprograms_search():
+    # set the file path
+    dmc_data = os.path.join(COMMOD_JSON_DATA_PATH, DMC_SUBPROGRAMS_DATA_JSON)
+
+    # open file
+    with open(dmc_data, 'r') as practice_data:
+        file_data = practice_data.read()
+
+    # parse file
+    data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
+
+    return data_json
+
+
+# SADA state distribution data
+def programs_commodities_sada_state_distribution_search():
+    # set the file path
+    dmc_data = os.path.join(COMMOD_JSON_DATA_PATH, SADA_STATE_DISTRIBUTION_DATA_JSON)
+
+    # open file
+    with open(dmc_data, 'r') as state_data:
+        file_data = state_data.read()
+
+    # parse file
+    data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
+
+    return data_json
+
+
+# SADA practice subprograms data
+def programs_commodities_sada_subprograms_search():
+    # set the file path
+    dmc_data = os.path.join(COMMOD_JSON_DATA_PATH, SADA_SUBPROGRAMS_DATA_JSON)
+
+    # open file
+    with open(dmc_data, 'r') as practice_data:
+        file_data = practice_data.read()
 
     # parse file
     data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
