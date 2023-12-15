@@ -857,7 +857,7 @@ paths:
           description: Unauthorized
         500:
           description: Internal error
-  /pdl/titles/title-ii/programs/csp/prog-categories:
+  /pdl/titles/title-ii/programs/csp/practice-categories:
     get:
       tags:
         - "Title II: Conservation - CSP"
