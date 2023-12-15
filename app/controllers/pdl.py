@@ -504,6 +504,33 @@ def programs_crop_insurance_summary_search():
 
     return data_json
 
+# /pdl/titles/title-i/subtitles/subtitle-a/map:
+# /pdl/titles/title-i/subtitles/subtitle-a/state-distribution:
+# /pdl/titles/title-i/subtitles/subtitle-a/subprograms:
+#
+# /pdl/titles/title-i/subtitles/subtitle-d/state-distribution:
+# /pdl/titles/title-i/subtitles/subtitle-d/subprograms:
+#
+# /pdl/titles/title-i/subtitles/subtitle-e/state-distribution:
+# /pdl/titles/title-i/subtitles/subtitle-e/subprograms:
+#
+# /pdl/titles/title-ii/programs/eqip/map
+# /pdl/titles/title-ii/programs/eqip/state-distribution
+# /pdl/titles/title-ii/programs/eqip/practice-categories
+#
+# /pdl/titles/title-ii/programs/csp/map
+# /pdl/titles/title-ii/programs/csp/state-distribution
+# /pdl/titles/title-ii/programs/csp/practice-categories
+#
+# /pdl/titles/title-ii/programs/crp/state-distribution
+# /pdl/titles/title-ii/programs/crp/subprograms
+#
+# /pdl/titles/title-ii/programs/acep/state-distribution
+# /pdl/titles/title-ii/programs/acep/subprograms
+#
+# /pdl/titles/title-ii/programs/rcpp/state-distribution
+# /pdl/titles/title-ii/programs/rcpp/subprograms
+
 
 # construct state
 def construct_state_result(state):
