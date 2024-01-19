@@ -1,7 +1,7 @@
 {
-    "South Dakota": [
+    "2018-2022": [
         {
-            "years": "2018-2022",
+            "state": "SD",
             "statutes": [
                 {
                     "statuteName": "2018 Practices",
@@ -93,7 +93,7 @@
                             "paymentInPercentageWithinState": 2.74
                         },
                         {
-                            "practiceCategoryName": "Grassland",
+                            "practiceCategoryName": "Pastured cropland",
                             "paymentInDollars": 482575,
                             "paymentInPercentageNationwide": 1.37,
                             "paymentInPercentageWithinState": 0.14
@@ -108,14 +108,10 @@
                     "statutePaymentInPercentageWithinState": 81.14,
                     "statutePaymentInPercentageNationwide": 8.89
                 }
-            ],
-            "totalPaymentInPercentageNationwide": 8.56,
-            "totalPaymentInDollars": 336714317
-        }
-    ],
-    "Minnesota": [
+            ]
+        },
         {
-            "years": "2018-2022",
+            "state": "MN",
             "statutes": [
                 {
                     "statuteName": "2018 Practices",
@@ -207,7 +203,7 @@
                             "paymentInPercentageWithinState": 1.16
                         },
                         {
-                            "practiceCategoryName": "Grassland",
+                            "practiceCategoryName": "Pastured cropland",
                             "paymentInDollars": 1164623,
                             "paymentInPercentageNationwide": 3.31,
                             "paymentInPercentageWithinState": 0.39
@@ -221,14 +217,10 @@
                     "statutePaymentInPercentageWithinState": 81.69,
                     "statutePaymentInPercentageNationwide": 7.9
                 }
-            ],
-            "totalPaymentInPercentageNationwide": 7.56,
-            "totalPaymentInDollars": 297149211
-        }
-    ],
-    "Arkansas": [
+            ]
+        },
         {
-            "years": "2018-2022",
+            "state": "AR",
             "statutes": [
                 {
                     "statuteName": "2018 Practices",
@@ -320,7 +312,7 @@
                             "paymentInPercentageWithinState": 0.46
                         },
                         {
-                            "practiceCategoryName": "Grassland",
+                            "practiceCategoryName": "Pastured cropland",
                             "paymentInDollars": 855639,
                             "paymentInPercentageNationwide": 2.43,
                             "paymentInPercentageWithinState": 0.29
@@ -334,14 +326,10 @@
                     "statutePaymentInPercentageWithinState": 70.93,
                     "statutePaymentInPercentageNationwide": 6.77
                 }
-            ],
-            "totalPaymentInPercentageNationwide": 7.46,
-            "totalPaymentInDollars": 293398765
-        }
-    ],
-    "Mississippi": [
+            ]
+        },
         {
-            "years": "2018-2022",
+            "state": "MS",
             "statutes": [
                 {
                     "statuteName": "2018 Practices",
@@ -433,7 +421,7 @@
                             "paymentInPercentageWithinState": 2.56
                         },
                         {
-                            "practiceCategoryName": "Grassland",
+                            "practiceCategoryName": "Pastured cropland",
                             "paymentInDollars": 558006,
                             "paymentInPercentageNationwide": 1.58,
                             "paymentInPercentageWithinState": 0.2
@@ -447,14 +435,10 @@
                     "statutePaymentInPercentageWithinState": 54.26,
                     "statutePaymentInPercentageNationwide": 5.0
                 }
-            ],
-            "totalPaymentInPercentageNationwide": 7.2,
-            "totalPaymentInDollars": 283283885
-        }
-    ],
-    "North Dakota": [
+            ]
+        },
         {
-            "years": "2018-2022",
+            "state": "ND",
             "statutes": [
                 {
                     "statuteName": "2018 Practices",
@@ -545,7 +529,7 @@
                             "paymentInPercentageWithinState": 0.6
                         },
                         {
-                            "practiceCategoryName": "Grassland",
+                            "practiceCategoryName": "Pastured cropland",
                             "paymentInDollars": 126242,
                             "paymentInPercentageNationwide": 0.36,
                             "paymentInPercentageWithinState": 0.05
@@ -560,14 +544,10 @@
                     "statutePaymentInPercentageWithinState": 82.34,
                     "statutePaymentInPercentageNationwide": 7.34
                 }
-            ],
-            "totalPaymentInPercentageNationwide": 6.97,
-            "totalPaymentInDollars": 273940606
-        }
-    ],
-    "Nebraska": [
+            ]
+        },
         {
-            "years": "2018-2022",
+            "state": "NE",
             "statutes": [
                 {
                     "statuteName": "2018 Practices",
@@ -659,7 +639,7 @@
                             "paymentInPercentageWithinState": 1.38
                         },
                         {
-                            "practiceCategoryName": "Grassland",
+                            "practiceCategoryName": "Pastured cropland",
                             "paymentInDollars": 123597,
                             "paymentInPercentageNationwide": 0.35,
                             "paymentInPercentageWithinState": 0.05
@@ -674,14 +654,10 @@
                     "statutePaymentInPercentageWithinState": 81.94,
                     "statutePaymentInPercentageNationwide": 6.01
                 }
-            ],
-            "totalPaymentInPercentageNationwide": 5.73,
-            "totalPaymentInDollars": 225430774
-        }
-    ],
-    "Georgia": [
+            ]
+        },
         {
-            "years": "2018-2022",
+            "state": "GA",
             "statutes": [
                 {
                     "statuteName": "2018 Practices",
@@ -773,7 +749,7 @@
                             "paymentInPercentageWithinState": 0.63
                         },
                         {
-                            "practiceCategoryName": "Grassland",
+                            "practiceCategoryName": "Pastured cropland",
                             "paymentInDollars": 704180,
                             "paymentInPercentageNationwide": 2.0,
                             "paymentInPercentageWithinState": 0.36
@@ -787,14 +763,10 @@
                     "statutePaymentInPercentageWithinState": 72.84,
                     "statutePaymentInPercentageNationwide": 4.66
                 }
-            ],
-            "totalPaymentInPercentageNationwide": 5.0,
-            "totalPaymentInDollars": 196619858
-        }
-    ],
-    "Oklahoma": [
+            ]
+        },
         {
-            "years": "2018-2022",
+            "state": "OK",
             "statutes": [
                 {
                     "statuteName": "2018 Practices",
@@ -880,7 +852,7 @@
                             "paymentInPercentageWithinState": 14.0
                         },
                         {
-                            "practiceCategoryName": "Grassland",
+                            "practiceCategoryName": "Pastured cropland",
                             "paymentInDollars": 18743317,
                             "paymentInPercentageNationwide": 53.2,
                             "paymentInPercentageWithinState": 10.23
@@ -901,14 +873,10 @@
                     "statutePaymentInPercentageWithinState": 92.56,
                     "statutePaymentInPercentageNationwide": 5.52
                 }
-            ],
-            "totalPaymentInPercentageNationwide": 4.66,
-            "totalPaymentInDollars": 183291848
-        }
-    ],
-    "Kansas": [
+            ]
+        },
         {
-            "years": "2018-2022",
+            "state": "KS",
             "statutes": [
                 {
                     "statuteName": "2018 Practices",
@@ -1000,7 +968,7 @@
                             "paymentInPercentageWithinState": 0.76
                         },
                         {
-                            "practiceCategoryName": "Grassland",
+                            "practiceCategoryName": "Pastured cropland",
                             "paymentInDollars": 299583,
                             "paymentInPercentageNationwide": 0.85,
                             "paymentInPercentageWithinState": 0.18
@@ -1014,14 +982,10 @@
                     "statutePaymentInPercentageWithinState": 86.47,
                     "statutePaymentInPercentageNationwide": 4.68
                 }
-            ],
-            "totalPaymentInPercentageNationwide": 4.23,
-            "totalPaymentInDollars": 166500158
-        }
-    ],
-    "Illinois": [
+            ]
+        },
         {
-            "years": "2018-2022",
+            "state": "IL",
             "statutes": [
                 {
                     "statuteName": "2018 Practices",
@@ -1112,7 +1076,7 @@
                             "paymentInPercentageWithinState": 0.65
                         },
                         {
-                            "practiceCategoryName": "Grassland",
+                            "practiceCategoryName": "Pastured cropland",
                             "paymentInDollars": 103247,
                             "paymentInPercentageNationwide": 0.29,
                             "paymentInPercentageWithinState": 0.07
@@ -1126,14 +1090,10 @@
                     "statutePaymentInPercentageWithinState": 83.85,
                     "statutePaymentInPercentageNationwide": 4.17
                 }
-            ],
-            "totalPaymentInPercentageNationwide": 3.89,
-            "totalPaymentInDollars": 152828212
-        }
-    ],
-    "Montana": [
+            ]
+        },
         {
-            "years": "2018-2022",
+            "state": "MT",
             "statutes": [
                 {
                     "statuteName": "2018 Practices",
@@ -1231,7 +1191,7 @@
                             "paymentInPercentageWithinState": 0.63
                         },
                         {
-                            "practiceCategoryName": "Grassland",
+                            "practiceCategoryName": "Pastured cropland",
                             "paymentInDollars": 30808,
                             "paymentInPercentageNationwide": 0.09,
                             "paymentInPercentageWithinState": 0.02
@@ -1240,14 +1200,10 @@
                     "statutePaymentInPercentageWithinState": 82.9,
                     "statutePaymentInPercentageNationwide": 3.87
                 }
-            ],
-            "totalPaymentInPercentageNationwide": 3.65,
-            "totalPaymentInDollars": 143460367
-        }
-    ],
-    "Iowa": [
+            ]
+        },
         {
-            "years": "2018-2022",
+            "state": "IA",
             "statutes": [
                 {
                     "statuteName": "2018 Practices",
@@ -1339,7 +1295,7 @@
                             "paymentInPercentageWithinState": 0.72
                         },
                         {
-                            "practiceCategoryName": "Grassland",
+                            "practiceCategoryName": "Pastured cropland",
                             "paymentInDollars": 185400,
                             "paymentInPercentageNationwide": 0.53,
                             "paymentInPercentageWithinState": 0.14
@@ -1353,14 +1309,10 @@
                     "statutePaymentInPercentageWithinState": 83.88,
                     "statutePaymentInPercentageNationwide": 3.74
                 }
-            ],
-            "totalPaymentInPercentageNationwide": 3.48,
-            "totalPaymentInDollars": 136891392
-        }
-    ],
-    "Louisiana": [
+            ]
+        },
         {
-            "years": "2018-2022",
+            "state": "LA",
             "statutes": [
                 {
                     "statuteName": "2018 Practices",
@@ -1440,7 +1392,7 @@
                             "paymentInPercentageWithinState": 5.14
                         },
                         {
-                            "practiceCategoryName": "Grassland",
+                            "practiceCategoryName": "Pastured cropland",
                             "paymentInDollars": 3713108,
                             "paymentInPercentageNationwide": 10.54,
                             "paymentInPercentageWithinState": 2.93
@@ -1467,14 +1419,10 @@
                     "statutePaymentInPercentageWithinState": 77.13,
                     "statutePaymentInPercentageNationwide": 3.18
                 }
-            ],
-            "totalPaymentInPercentageNationwide": 3.22,
-            "totalPaymentInDollars": 126589042
-        }
-    ],
-    "Missouri": [
+            ]
+        },
         {
-            "years": "2018-2022",
+            "state": "MO",
             "statutes": [
                 {
                     "statuteName": "2018 Practices",
@@ -1565,7 +1513,7 @@
                             "paymentInPercentageWithinState": 3.19
                         },
                         {
-                            "practiceCategoryName": "Grassland",
+                            "practiceCategoryName": "Pastured cropland",
                             "paymentInDollars": 2871246,
                             "paymentInPercentageNationwide": 8.15,
                             "paymentInPercentageWithinState": 2.3
@@ -1579,14 +1527,10 @@
                     "statutePaymentInPercentageWithinState": 78.68,
                     "statutePaymentInPercentageNationwide": 3.19
                 }
-            ],
-            "totalPaymentInPercentageNationwide": 3.17,
-            "totalPaymentInDollars": 124737395
-        }
-    ],
-    "Texas": [
+            ]
+        },
         {
-            "years": "2018-2022",
+            "state": "TX",
             "statutes": [
                 {
                     "statuteName": "2018 Practices",
@@ -1671,7 +1615,7 @@
                             "paymentInPercentageWithinState": 14.82
                         },
                         {
-                            "practiceCategoryName": "Grassland",
+                            "practiceCategoryName": "Pastured cropland",
                             "paymentInDollars": 2706286,
                             "paymentInPercentageNationwide": 7.68,
                             "paymentInPercentageWithinState": 2.42
@@ -1692,14 +1636,10 @@
                     "statutePaymentInPercentageWithinState": 80.8,
                     "statutePaymentInPercentageNationwide": 2.94
                 }
-            ],
-            "totalPaymentInPercentageNationwide": 2.84,
-            "totalPaymentInDollars": 111808990
-        }
-    ],
-    "Wisconsin": [
+            ]
+        },
         {
-            "years": "2018-2022",
+            "state": "WI",
             "statutes": [
                 {
                     "statuteName": "2018 Practices",
@@ -1791,7 +1731,7 @@
                             "paymentInPercentageWithinState": 4.04
                         },
                         {
-                            "practiceCategoryName": "Grassland",
+                            "practiceCategoryName": "Pastured cropland",
                             "paymentInDollars": 329479,
                             "paymentInPercentageNationwide": 0.94,
                             "paymentInPercentageWithinState": 0.36
@@ -1805,14 +1745,10 @@
                     "statutePaymentInPercentageWithinState": 81.64,
                     "statutePaymentInPercentageNationwide": 2.46
                 }
-            ],
-            "totalPaymentInPercentageNationwide": 2.36,
-            "totalPaymentInDollars": 92607190
-        }
-    ],
-    "Oregon": [
+            ]
+        },
         {
-            "years": "2018-2022",
+            "state": "OR",
             "statutes": [
                 {
                     "statuteName": "2018 Practices",
@@ -1910,7 +1846,7 @@
                             "paymentInPercentageWithinState": 0.85
                         },
                         {
-                            "practiceCategoryName": "Grassland",
+                            "practiceCategoryName": "Pastured cropland",
                             "paymentInDollars": 150067,
                             "paymentInPercentageNationwide": 0.43,
                             "paymentInPercentageWithinState": 0.16
@@ -1919,14 +1855,10 @@
                     "statutePaymentInPercentageWithinState": 70.09,
                     "statutePaymentInPercentageNationwide": 2.08
                 }
-            ],
-            "totalPaymentInPercentageNationwide": 2.32,
-            "totalPaymentInDollars": 91211169
-        }
-    ],
-    "Colorado": [
+            ]
+        },
         {
-            "years": "2018-2022",
+            "state": "CO",
             "statutes": [
                 {
                     "statuteName": "2018 Practices",
@@ -2024,7 +1956,7 @@
                             "paymentInPercentageWithinState": 0.12
                         },
                         {
-                            "practiceCategoryName": "Grassland",
+                            "practiceCategoryName": "Pastured cropland",
                             "paymentInDollars": 30778,
                             "paymentInPercentageNationwide": 0.09,
                             "paymentInPercentageWithinState": 0.04
@@ -2033,14 +1965,10 @@
                     "statutePaymentInPercentageWithinState": 82.84,
                     "statutePaymentInPercentageNationwide": 2.28
                 }
-            ],
-            "totalPaymentInPercentageNationwide": 2.15,
-            "totalPaymentInDollars": 84649516
-        }
-    ],
-    "Washington": [
+            ]
+        },
         {
-            "years": "2018-2022",
+            "state": "WA",
             "statutes": [
                 {
                     "statuteName": "2018 Practices",
@@ -2138,7 +2066,7 @@
                             "paymentInPercentageWithinState": 0.7
                         },
                         {
-                            "practiceCategoryName": "Grassland",
+                            "practiceCategoryName": "Pastured cropland",
                             "paymentInDollars": 6932,
                             "paymentInPercentageNationwide": 0.02,
                             "paymentInPercentageWithinState": 0.01
@@ -2147,14 +2075,10 @@
                     "statutePaymentInPercentageWithinState": 79.83,
                     "statutePaymentInPercentageNationwide": 2.11
                 }
-            ],
-            "totalPaymentInPercentageNationwide": 2.07,
-            "totalPaymentInDollars": 81201037
-        }
-    ],
-    "New Mexico": [
+            ]
+        },
         {
-            "years": "2018-2022",
+            "state": "NM",
             "statutes": [
                 {
                     "statuteName": "2018 Practices",
@@ -2251,7 +2175,7 @@
                             "paymentInPercentageWithinState": 0.11
                         },
                         {
-                            "practiceCategoryName": "Grassland",
+                            "practiceCategoryName": "Pastured cropland",
                             "paymentInDollars": 8760,
                             "paymentInPercentageNationwide": 0.02,
                             "paymentInPercentageWithinState": 0.02
@@ -2260,14 +2184,10 @@
                     "statutePaymentInPercentageWithinState": 81.03,
                     "statutePaymentInPercentageNationwide": 1.52
                 }
-            ],
-            "totalPaymentInPercentageNationwide": 1.47,
-            "totalPaymentInDollars": 57688117
-        }
-    ],
-    "Indiana": [
+            ]
+        },
         {
-            "years": "2018-2022",
+            "state": "IN",
             "statutes": [
                 {
                     "statuteName": "2018 Practices",
@@ -2358,7 +2278,7 @@
                             "paymentInPercentageWithinState": 1.09
                         },
                         {
-                            "practiceCategoryName": "Grassland",
+                            "practiceCategoryName": "Pastured cropland",
                             "paymentInDollars": 2989,
                             "paymentInPercentageNationwide": 0.01,
                             "paymentInPercentageWithinState": 0.01
@@ -2372,14 +2292,10 @@
                     "statutePaymentInPercentageWithinState": 73.54,
                     "statutePaymentInPercentageNationwide": 1.11
                 }
-            ],
-            "totalPaymentInPercentageNationwide": 1.18,
-            "totalPaymentInDollars": 46224196
-        }
-    ],
-    "Tennessee": [
+            ]
+        },
         {
-            "years": "2018-2022",
+            "state": "TN",
             "statutes": [
                 {
                     "statuteName": "2018 Practices",
@@ -2471,7 +2387,7 @@
                             "paymentInPercentageWithinState": 5.03
                         },
                         {
-                            "practiceCategoryName": "Grassland",
+                            "practiceCategoryName": "Pastured cropland",
                             "paymentInDollars": 312409,
                             "paymentInPercentageNationwide": 0.89,
                             "paymentInPercentageWithinState": 0.94
@@ -2485,14 +2401,10 @@
                     "statutePaymentInPercentageWithinState": 75.33,
                     "statutePaymentInPercentageNationwide": 0.81
                 }
-            ],
-            "totalPaymentInPercentageNationwide": 0.84,
-            "totalPaymentInDollars": 33140189
-        }
-    ],
-    "Alabama": [
+            ]
+        },
         {
-            "years": "2018-2022",
+            "state": "AL",
             "statutes": [
                 {
                     "statuteName": "2018 Practices",
@@ -2578,7 +2490,7 @@
                             "paymentInPercentageWithinState": 9.58
                         },
                         {
-                            "practiceCategoryName": "Grassland",
+                            "practiceCategoryName": "Pastured cropland",
                             "paymentInDollars": 647082,
                             "paymentInPercentageNationwide": 1.84,
                             "paymentInPercentageWithinState": 2.07
@@ -2598,14 +2510,10 @@
                     "statutePaymentInPercentageWithinState": 69.41,
                     "statutePaymentInPercentageNationwide": 0.7
                 }
-            ],
-            "totalPaymentInPercentageNationwide": 0.79,
-            "totalPaymentInDollars": 31191204
-        }
-    ],
-    "Virginia": [
+            ]
+        },
         {
-            "years": "2018-2022",
+            "state": "VA",
             "statutes": [
                 {
                     "statuteName": "2018 Practices",
@@ -2696,7 +2604,7 @@
                             "paymentInPercentageWithinState": 3.73
                         },
                         {
-                            "practiceCategoryName": "Grassland",
+                            "practiceCategoryName": "Pastured cropland",
                             "paymentInDollars": 39134,
                             "paymentInPercentageNationwide": 0.11,
                             "paymentInPercentageWithinState": 0.13
@@ -2710,14 +2618,10 @@
                     "statutePaymentInPercentageWithinState": 75.24,
                     "statutePaymentInPercentageNationwide": 0.75
                 }
-            ],
-            "totalPaymentInPercentageNationwide": 0.78,
-            "totalPaymentInDollars": 30678163
-        }
-    ],
-    "South Carolina": [
+            ]
+        },
         {
-            "years": "2018-2022",
+            "state": "SC",
             "statutes": [
                 {
                     "statuteName": "2018 Practices",
@@ -2808,7 +2712,7 @@
                             "paymentInPercentageWithinState": 1.64
                         },
                         {
-                            "practiceCategoryName": "Grassland",
+                            "practiceCategoryName": "Pastured cropland",
                             "paymentInDollars": 37182,
                             "paymentInPercentageNationwide": 0.11,
                             "paymentInPercentageWithinState": 0.12
@@ -2822,14 +2726,10 @@
                     "statutePaymentInPercentageWithinState": 67.15,
                     "statutePaymentInPercentageNationwide": 0.66
                 }
-            ],
-            "totalPaymentInPercentageNationwide": 0.77,
-            "totalPaymentInDollars": 30140650
-        }
-    ],
-    "Kentucky": [
+            ]
+        },
         {
-            "years": "2018-2022",
+            "state": "KY",
             "statutes": [
                 {
                     "statuteName": "2018 Practices",
@@ -2921,7 +2821,7 @@
                             "paymentInPercentageWithinState": 7.24
                         },
                         {
-                            "practiceCategoryName": "Grassland",
+                            "practiceCategoryName": "Pastured cropland",
                             "paymentInDollars": 514808,
                             "paymentInPercentageNationwide": 1.46,
                             "paymentInPercentageWithinState": 1.75
@@ -2935,14 +2835,10 @@
                     "statutePaymentInPercentageWithinState": 79.3,
                     "statutePaymentInPercentageNationwide": 0.76
                 }
-            ],
-            "totalPaymentInPercentageNationwide": 0.75,
-            "totalPaymentInDollars": 29378981
-        }
-    ],
-    "Pennsylvania": [
+            ]
+        },
         {
-            "years": "2018-2022",
+            "state": "PA",
             "statutes": [
                 {
                     "statuteName": "2018 Practices",
@@ -3034,7 +2930,7 @@
                             "paymentInPercentageWithinState": 5.01
                         },
                         {
-                            "practiceCategoryName": "Grassland",
+                            "practiceCategoryName": "Pastured cropland",
                             "paymentInDollars": 28696,
                             "paymentInPercentageNationwide": 0.08,
                             "paymentInPercentageWithinState": 0.1
@@ -3048,14 +2944,10 @@
                     "statutePaymentInPercentageWithinState": 78.75,
                     "statutePaymentInPercentageNationwide": 0.75
                 }
-            ],
-            "totalPaymentInPercentageNationwide": 0.75,
-            "totalPaymentInDollars": 29312551
-        }
-    ],
-    "Michigan": [
+            ]
+        },
         {
-            "years": "2018-2022",
+            "state": "MI",
             "statutes": [
                 {
                     "statuteName": "2018 Practices",
@@ -3146,7 +3038,7 @@
                             "paymentInPercentageWithinState": 1.18
                         },
                         {
-                            "practiceCategoryName": "Grassland",
+                            "practiceCategoryName": "Pastured cropland",
                             "paymentInDollars": 43455,
                             "paymentInPercentageNationwide": 0.12,
                             "paymentInPercentageWithinState": 0.15
@@ -3160,14 +3052,10 @@
                     "statutePaymentInPercentageWithinState": 71.23,
                     "statutePaymentInPercentageNationwide": 0.67
                 }
-            ],
-            "totalPaymentInPercentageNationwide": 0.74,
-            "totalPaymentInDollars": 29020607
-        }
-    ],
-    "Ohio": [
+            ]
+        },
         {
-            "years": "2018-2022",
+            "state": "OH",
             "statutes": [
                 {
                     "statuteName": "2018 Practices",
@@ -3258,7 +3146,7 @@
                             "paymentInPercentageWithinState": 3.35
                         },
                         {
-                            "practiceCategoryName": "Grassland",
+                            "practiceCategoryName": "Pastured cropland",
                             "paymentInDollars": 40103,
                             "paymentInPercentageNationwide": 0.11,
                             "paymentInPercentageWithinState": 0.14
@@ -3272,14 +3160,10 @@
                     "statutePaymentInPercentageWithinState": 82.18,
                     "statutePaymentInPercentageNationwide": 0.76
                 }
-            ],
-            "totalPaymentInPercentageNationwide": 0.73,
-            "totalPaymentInDollars": 28512759
-        }
-    ],
-    "Idaho": [
+            ]
+        },
         {
-            "years": "2018-2022",
+            "state": "ID",
             "statutes": [
                 {
                     "statuteName": "2018 Practices",
@@ -3377,7 +3261,7 @@
                             "paymentInPercentageWithinState": 2.95
                         },
                         {
-                            "practiceCategoryName": "Grassland",
+                            "practiceCategoryName": "Pastured cropland",
                             "paymentInDollars": 94943,
                             "paymentInPercentageNationwide": 0.27,
                             "paymentInPercentageWithinState": 0.35
@@ -3386,14 +3270,10 @@
                     "statutePaymentInPercentageWithinState": 83.11,
                     "statutePaymentInPercentageNationwide": 0.73
                 }
-            ],
-            "totalPaymentInPercentageNationwide": 0.69,
-            "totalPaymentInDollars": 27144959
-        }
-    ],
-    "Utah": [
+            ]
+        },
         {
-            "years": "2018-2022",
+            "state": "UT",
             "statutes": [
                 {
                     "statuteName": "2018 Practices",
@@ -3490,7 +3370,7 @@
                             "paymentInPercentageWithinState": 3.84
                         },
                         {
-                            "practiceCategoryName": "Grassland",
+                            "practiceCategoryName": "Pastured cropland",
                             "paymentInDollars": 77979,
                             "paymentInPercentageNationwide": 0.22,
                             "paymentInPercentageWithinState": 0.3
@@ -3499,14 +3379,10 @@
                     "statutePaymentInPercentageWithinState": 78.2,
                     "statutePaymentInPercentageNationwide": 0.66
                 }
-            ],
-            "totalPaymentInPercentageNationwide": 0.66,
-            "totalPaymentInDollars": 25835338
-        }
-    ],
-    "New York": [
+            ]
+        },
         {
-            "years": "2018-2022",
+            "state": "NY",
             "statutes": [
                 {
                     "statuteName": "2018 Practices",
@@ -3597,7 +3473,7 @@
                             "paymentInPercentageWithinState": 3.22
                         },
                         {
-                            "practiceCategoryName": "Grassland",
+                            "practiceCategoryName": "Pastured cropland",
                             "paymentInDollars": 53449,
                             "paymentInPercentageNationwide": 0.15,
                             "paymentInPercentageWithinState": 0.24
@@ -3611,14 +3487,10 @@
                     "statutePaymentInPercentageWithinState": 84.06,
                     "statutePaymentInPercentageNationwide": 0.61
                 }
-            ],
-            "totalPaymentInPercentageNationwide": 0.57,
-            "totalPaymentInDollars": 22217687
-        }
-    ],
-    "Wyoming": [
+            ]
+        },
         {
-            "years": "2018-2022",
+            "state": "WY",
             "statutes": [
                 {
                     "statuteName": "2018 Practices",
@@ -3709,7 +3581,7 @@
                             "paymentInPercentageWithinState": 0.28
                         },
                         {
-                            "practiceCategoryName": "Grassland",
+                            "practiceCategoryName": "Pastured cropland",
                             "paymentInDollars": 537,
                             "paymentInPercentageNationwide": 0.0,
                             "paymentInPercentageWithinState": 0.0
@@ -3723,14 +3595,10 @@
                     "statutePaymentInPercentageWithinState": 89.54,
                     "statutePaymentInPercentageNationwide": 0.53
                 }
-            ],
-            "totalPaymentInPercentageNationwide": 0.46,
-            "totalPaymentInDollars": 18031961
-        }
-    ],
-    "California": [
+            ]
+        },
         {
-            "years": "2018-2022",
+            "state": "CA",
             "statutes": [
                 {
                     "statuteName": "2018 Practices",
@@ -3828,7 +3696,7 @@
                             "paymentInPercentageWithinState": 1.14
                         },
                         {
-                            "practiceCategoryName": "Grassland",
+                            "practiceCategoryName": "Pastured cropland",
                             "paymentInDollars": 85490,
                             "paymentInPercentageNationwide": 0.24,
                             "paymentInPercentageWithinState": 0.49
@@ -3837,14 +3705,10 @@
                     "statutePaymentInPercentageWithinState": 76.43,
                     "statutePaymentInPercentageNationwide": 0.43
                 }
-            ],
-            "totalPaymentInPercentageNationwide": 0.44,
-            "totalPaymentInDollars": 17292904
-        }
-    ],
-    "North Carolina": [
+            ]
+        },
         {
-            "years": "2018-2022",
+            "state": "NC",
             "statutes": [
                 {
                     "statuteName": "2018 Practices",
@@ -3935,7 +3799,7 @@
                             "paymentInPercentageWithinState": 2.97
                         },
                         {
-                            "practiceCategoryName": "Grassland",
+                            "practiceCategoryName": "Pastured cropland",
                             "paymentInDollars": 405,
                             "paymentInPercentageNationwide": 0.0,
                             "paymentInPercentageWithinState": 0.0
@@ -3949,14 +3813,10 @@
                     "statutePaymentInPercentageWithinState": 56.46,
                     "statutePaymentInPercentageNationwide": 0.29
                 }
-            ],
-            "totalPaymentInPercentageNationwide": 0.4,
-            "totalPaymentInDollars": 15729631
-        }
-    ],
-    "Florida": [
+            ]
+        },
         {
-            "years": "2018-2022",
+            "state": "FL",
             "statutes": [
                 {
                     "statuteName": "2018 Practices",
@@ -4053,7 +3913,7 @@
                             "paymentInPercentageWithinState": 2.02
                         },
                         {
-                            "practiceCategoryName": "Grassland",
+                            "practiceCategoryName": "Pastured cropland",
                             "paymentInDollars": 850,
                             "paymentInPercentageNationwide": 0.0,
                             "paymentInPercentageWithinState": 0.01
@@ -4062,14 +3922,10 @@
                     "statutePaymentInPercentageWithinState": 67.96,
                     "statutePaymentInPercentageNationwide": 0.29
                 }
-            ],
-            "totalPaymentInPercentageNationwide": 0.33,
-            "totalPaymentInDollars": 12963872
-        }
-    ],
-    "West Virginia": [
+            ]
+        },
         {
-            "years": "2018-2022",
+            "state": "WV",
             "statutes": [
                 {
                     "statuteName": "2018 Practices",
@@ -4160,7 +4016,7 @@
                             "paymentInPercentageWithinState": 8.74
                         },
                         {
-                            "practiceCategoryName": "Grassland",
+                            "practiceCategoryName": "Pastured cropland",
                             "paymentInDollars": 31362,
                             "paymentInPercentageNationwide": 0.09,
                             "paymentInPercentageWithinState": 0.28
@@ -4174,14 +4030,10 @@
                     "statutePaymentInPercentageWithinState": 82.36,
                     "statutePaymentInPercentageNationwide": 0.3
                 }
-            ],
-            "totalPaymentInPercentageNationwide": 0.28,
-            "totalPaymentInDollars": 11148723
-        }
-    ],
-    "Arizona": [
+            ]
+        },
         {
-            "years": "2018-2022",
+            "state": "AZ",
             "statutes": [
                 {
                     "statuteName": "2018 Practices",
@@ -4273,7 +4125,7 @@
                             "paymentInPercentageWithinState": 0.39
                         },
                         {
-                            "practiceCategoryName": "Grassland",
+                            "practiceCategoryName": "Pastured cropland",
                             "paymentInDollars": 0.0,
                             "paymentInPercentageWithinState": 0.0
                         },
@@ -4286,14 +4138,10 @@
                     "statutePaymentInPercentageWithinState": 84.84,
                     "statutePaymentInPercentageNationwide": 0.22
                 }
-            ],
-            "totalPaymentInPercentageNationwide": 0.21,
-            "totalPaymentInDollars": 8104232
-        }
-    ],
-    "Delaware": [
+            ]
+        },
         {
-            "years": "2018-2022",
+            "state": "DE",
             "statutes": [
                 {
                     "statuteName": "2018 Practices",
@@ -4378,7 +4226,7 @@
                             "paymentInPercentageWithinState": 0.19
                         },
                         {
-                            "practiceCategoryName": "Grassland",
+                            "practiceCategoryName": "Pastured cropland",
                             "paymentInDollars": 7443,
                             "paymentInPercentageNationwide": 0.02,
                             "paymentInPercentageWithinState": 0.13
@@ -4398,14 +4246,10 @@
                     "statutePaymentInPercentageWithinState": 81.93,
                     "statutePaymentInPercentageNationwide": 0.16
                 }
-            ],
-            "totalPaymentInPercentageNationwide": 0.15,
-            "totalPaymentInDollars": 5854495
-        }
-    ],
-    "Maryland": [
+            ]
+        },
         {
-            "years": "2018-2022",
+            "state": "MD",
             "statutes": [
                 {
                     "statuteName": "2018 Practices",
@@ -4497,7 +4341,7 @@
                             "paymentInPercentageWithinState": 0.88
                         },
                         {
-                            "practiceCategoryName": "Grassland",
+                            "practiceCategoryName": "Pastured cropland",
                             "paymentInDollars": 880,
                             "paymentInPercentageNationwide": 0.0,
                             "paymentInPercentageWithinState": 0.02
@@ -4511,14 +4355,10 @@
                     "statutePaymentInPercentageWithinState": 75.85,
                     "statutePaymentInPercentageNationwide": 0.11
                 }
-            ],
-            "totalPaymentInPercentageNationwide": 0.11,
-            "totalPaymentInDollars": 4520665
-        }
-    ],
-    "Alaska": [
+            ]
+        },
         {
-            "years": "2018-2022",
+            "state": "AK",
             "statutes": [
                 {
                     "statuteName": "2018 Practices",
@@ -4608,12 +4448,12 @@
                             "paymentInPercentageWithinState": 1.03
                         },
                         {
-                            "practiceCategoryName": "Grassland",
+                            "practiceCategoryName": "Rangeland",
                             "paymentInDollars": 0.0,
                             "paymentInPercentageWithinState": 0.0
                         },
                         {
-                            "practiceCategoryName": "Rangeland",
+                            "practiceCategoryName": "Pastured cropland",
                             "paymentInDollars": 0.0,
                             "paymentInPercentageWithinState": 0.0
                         }
@@ -4621,14 +4461,10 @@
                     "statutePaymentInPercentageWithinState": 95.3,
                     "statutePaymentInPercentageNationwide": 0.08
                 }
-            ],
-            "totalPaymentInPercentageNationwide": 0.07,
-            "totalPaymentInDollars": 2649652
-        }
-    ],
-    "Maine": [
+            ]
+        },
         {
-            "years": "2018-2022",
+            "state": "ME",
             "statutes": [
                 {
                     "statuteName": "2018 Practices",
@@ -4719,7 +4555,7 @@
                             "paymentInPercentageWithinState": 3.99
                         },
                         {
-                            "practiceCategoryName": "Grassland",
+                            "practiceCategoryName": "Pastured cropland",
                             "paymentInDollars": 3633,
                             "paymentInPercentageNationwide": 0.01,
                             "paymentInPercentageWithinState": 0.19
@@ -4733,14 +4569,10 @@
                     "statutePaymentInPercentageWithinState": 80.41,
                     "statutePaymentInPercentageNationwide": 0.05
                 }
-            ],
-            "totalPaymentInPercentageNationwide": 0.05,
-            "totalPaymentInDollars": 1878085
-        }
-    ],
-    "New Hampshire": [
+            ]
+        },
         {
-            "years": "2018-2022",
+            "state": "NH",
             "statutes": [
                 {
                     "statuteName": "2018 Practices",
@@ -4830,7 +4662,7 @@
                             "paymentInPercentageWithinState": 3.83
                         },
                         {
-                            "practiceCategoryName": "Grassland",
+                            "practiceCategoryName": "Pastured cropland",
                             "paymentInDollars": 304,
                             "paymentInPercentageNationwide": 0.0,
                             "paymentInPercentageWithinState": 0.02
@@ -4844,14 +4676,10 @@
                     "statutePaymentInPercentageWithinState": 64.86,
                     "statutePaymentInPercentageNationwide": 0.04
                 }
-            ],
-            "totalPaymentInPercentageNationwide": 0.05,
-            "totalPaymentInDollars": 1772610
-        }
-    ],
-    "Nevada": [
+            ]
+        },
         {
-            "years": "2018-2022",
+            "state": "NV",
             "statutes": [
                 {
                     "statuteName": "2018 Practices",
@@ -4882,17 +4710,17 @@
                             "paymentInPercentageWithinState": 0.01
                         },
                         {
-                            "practiceCategoryName": "Soil testing",
-                            "paymentInDollars": 0.0,
-                            "paymentInPercentageWithinState": 0.0
-                        },
-                        {
-                            "practiceCategoryName": "Bundles",
-                            "paymentInDollars": 0.0,
-                            "paymentInPercentageWithinState": 0.0
-                        },
-                        {
                             "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        },
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
                             "paymentInDollars": 0.0,
                             "paymentInPercentageWithinState": 0.0
                         },
@@ -4902,7 +4730,7 @@
                             "paymentInPercentageWithinState": 0.0
                         },
                         {
-                            "practiceCategoryName": "Other improvement",
+                            "practiceCategoryName": "Bundles",
                             "paymentInDollars": 0.0,
                             "paymentInPercentageWithinState": 0.0
                         }
@@ -4939,7 +4767,7 @@
                             "paymentInPercentageWithinState": 2.36
                         },
                         {
-                            "practiceCategoryName": "Grassland",
+                            "practiceCategoryName": "Pastured cropland",
                             "paymentInDollars": 10388,
                             "paymentInPercentageNationwide": 0.03,
                             "paymentInPercentageWithinState": 0.61
@@ -4953,14 +4781,10 @@
                     "statutePaymentInPercentageWithinState": 83.12,
                     "statutePaymentInPercentageNationwide": 0.05
                 }
-            ],
-            "totalPaymentInPercentageNationwide": 0.04,
-            "totalPaymentInDollars": 1699431
-        }
-    ],
-    "Hawaii": [
+            ]
+        },
         {
-            "years": "2018-2022",
+            "state": "HI",
             "statutes": [
                 {
                     "statuteName": "2018 Practices",
@@ -5003,17 +4827,17 @@
                             "paymentInPercentageWithinState": 0.01
                         },
                         {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        },
+                        {
                             "practiceCategoryName": "Bundles",
                             "paymentInDollars": 0.0,
                             "paymentInPercentageWithinState": 0.0
                         },
                         {
                             "practiceCategoryName": "Soil testing",
-                            "paymentInDollars": 0.0,
-                            "paymentInPercentageWithinState": 0.0
-                        },
-                        {
-                            "practiceCategoryName": "Soil remediation",
                             "paymentInDollars": 0.0,
                             "paymentInPercentageWithinState": 0.0
                         }
@@ -5056,7 +4880,7 @@
                             "paymentInPercentageWithinState": 1.17
                         },
                         {
-                            "practiceCategoryName": "Grassland",
+                            "practiceCategoryName": "Pastured cropland",
                             "paymentInDollars": 0.0,
                             "paymentInPercentageWithinState": 0.0
                         }
@@ -5064,14 +4888,10 @@
                     "statutePaymentInPercentageWithinState": 66.35,
                     "statutePaymentInPercentageNationwide": 0.03
                 }
-            ],
-            "totalPaymentInPercentageNationwide": 0.03,
-            "totalPaymentInDollars": 1186264
-        }
-    ],
-    "New Jersey": [
+            ]
+        },
         {
-            "years": "2018-2022",
+            "state": "NJ",
             "statutes": [
                 {
                     "statuteName": "2018 Practices",
@@ -5114,17 +4934,17 @@
                             "paymentInPercentageWithinState": 0.03
                         },
                         {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        },
+                        {
                             "practiceCategoryName": "Bundles",
                             "paymentInDollars": 0.0,
                             "paymentInPercentageWithinState": 0.0
                         },
                         {
                             "practiceCategoryName": "Soil testing",
-                            "paymentInDollars": 0.0,
-                            "paymentInPercentageWithinState": 0.0
-                        },
-                        {
-                            "practiceCategoryName": "Soil remediation",
                             "paymentInDollars": 0.0,
                             "paymentInPercentageWithinState": 0.0
                         }
@@ -5161,7 +4981,7 @@
                             "paymentInPercentageWithinState": 2.93
                         },
                         {
-                            "practiceCategoryName": "Grassland",
+                            "practiceCategoryName": "Pastured cropland",
                             "paymentInDollars": 3292,
                             "paymentInPercentageNationwide": 0.01,
                             "paymentInPercentageWithinState": 0.29
@@ -5175,14 +4995,10 @@
                     "statutePaymentInPercentageWithinState": 89.4,
                     "statutePaymentInPercentageNationwide": 0.03
                 }
-            ],
-            "totalPaymentInPercentageNationwide": 0.03,
-            "totalPaymentInDollars": 1124210
-        }
-    ],
-    "Vermont": [
+            ]
+        },
         {
-            "years": "2018-2022",
+            "state": "VT",
             "statutes": [
                 {
                     "statuteName": "2018 Practices",
@@ -5219,6 +5035,11 @@
                             "paymentInPercentageWithinState": 0.04
                         },
                         {
+                            "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        },
+                        {
                             "practiceCategoryName": "Other improvement",
                             "paymentInDollars": 0.0,
                             "paymentInPercentageWithinState": 0.0
@@ -5230,11 +5051,6 @@
                         },
                         {
                             "practiceCategoryName": "Soil testing",
-                            "paymentInDollars": 0.0,
-                            "paymentInPercentageWithinState": 0.0
-                        },
-                        {
-                            "practiceCategoryName": "Soil remediation",
                             "paymentInDollars": 0.0,
                             "paymentInPercentageWithinState": 0.0
                         }
@@ -5271,7 +5087,7 @@
                             "paymentInPercentageWithinState": 9.05
                         },
                         {
-                            "practiceCategoryName": "Grassland",
+                            "practiceCategoryName": "Pastured cropland",
                             "paymentInDollars": 536,
                             "paymentInPercentageNationwide": 0.0,
                             "paymentInPercentageWithinState": 0.04
@@ -5285,14 +5101,10 @@
                     "statutePaymentInPercentageWithinState": 65.8,
                     "statutePaymentInPercentageNationwide": 0.03
                 }
-            ],
-            "totalPaymentInPercentageNationwide": 0.03,
-            "totalPaymentInDollars": 1261026
-        }
-    ],
-    "Connecticut": [
+            ]
+        },
         {
-            "years": "2018-2022",
+            "state": "CT",
             "statutes": [
                 {
                     "statuteName": "2018 Practices",
@@ -5382,7 +5194,7 @@
                             "paymentInPercentageWithinState": 4.2
                         },
                         {
-                            "practiceCategoryName": "Grassland",
+                            "practiceCategoryName": "Pastured cropland",
                             "paymentInDollars": 861,
                             "paymentInPercentageNationwide": 0.0,
                             "paymentInPercentageWithinState": 0.12
@@ -5396,14 +5208,10 @@
                     "statutePaymentInPercentageWithinState": 78.71,
                     "statutePaymentInPercentageNationwide": 0.02
                 }
-            ],
-            "totalPaymentInPercentageNationwide": 0.02,
-            "totalPaymentInDollars": 743827
-        }
-    ],
-    "Massachusetts": [
+            ]
+        },
         {
-            "years": "2018-2022",
+            "state": "MA",
             "statutes": [
                 {
                     "statuteName": "2018 Practices",
@@ -5494,12 +5302,12 @@
                             "paymentInPercentageWithinState": 2.17
                         },
                         {
-                            "practiceCategoryName": "Grassland",
+                            "practiceCategoryName": "Rangeland",
                             "paymentInDollars": 0.0,
                             "paymentInPercentageWithinState": 0.0
                         },
                         {
-                            "practiceCategoryName": "Rangeland",
+                            "practiceCategoryName": "Pastured cropland",
                             "paymentInDollars": 0.0,
                             "paymentInPercentageWithinState": 0.0
                         }
@@ -5507,14 +5315,10 @@
                     "statutePaymentInPercentageWithinState": 48.43,
                     "statutePaymentInPercentageNationwide": 0.01
                 }
-            ],
-            "totalPaymentInPercentageNationwide": 0.02,
-            "totalPaymentInDollars": 798490
-        }
-    ],
-    "Pacific Basin": [
+            ]
+        },
         {
-            "years": "2018-2022",
+            "state": "PB",
             "statutes": [
                 {
                     "statuteName": "2018 Practices",
@@ -5539,22 +5343,17 @@
                             "paymentInPercentageWithinState": 0.01
                         },
                         {
-                            "practiceCategoryName": "Soil testing",
-                            "paymentInDollars": 0.0,
-                            "paymentInPercentageWithinState": 0.0
-                        },
-                        {
-                            "practiceCategoryName": "Structural",
-                            "paymentInDollars": 0.0,
-                            "paymentInPercentageWithinState": 0.0
-                        },
-                        {
-                            "practiceCategoryName": "Bundles",
-                            "paymentInDollars": 0.0,
-                            "paymentInPercentageWithinState": 0.0
-                        },
-                        {
                             "practiceCategoryName": "Soil remediation",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        },
+                        {
+                            "practiceCategoryName": "Other improvement",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        },
+                        {
+                            "practiceCategoryName": "Soil testing",
                             "paymentInDollars": 0.0,
                             "paymentInPercentageWithinState": 0.0
                         },
@@ -5564,7 +5363,12 @@
                             "paymentInPercentageWithinState": 0.0
                         },
                         {
-                            "practiceCategoryName": "Other improvement",
+                            "practiceCategoryName": "Bundles",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        },
+                        {
+                            "practiceCategoryName": "Structural",
                             "paymentInDollars": 0.0,
                             "paymentInPercentageWithinState": 0.0
                         }
@@ -5595,7 +5399,12 @@
                             "paymentInPercentageWithinState": 8.79
                         },
                         {
-                            "practiceCategoryName": "Grassland",
+                            "practiceCategoryName": "Rangeland",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        },
+                        {
+                            "practiceCategoryName": "Pastured cropland",
                             "paymentInDollars": 0.0,
                             "paymentInPercentageWithinState": 0.0
                         },
@@ -5603,24 +5412,15 @@
                             "practiceCategoryName": "Pastureland",
                             "paymentInDollars": 0.0,
                             "paymentInPercentageWithinState": 0.0
-                        },
-                        {
-                            "practiceCategoryName": "Rangeland",
-                            "paymentInDollars": 0.0,
-                            "paymentInPercentageWithinState": 0.0
                         }
                     ],
                     "statutePaymentInPercentageWithinState": 71.48,
                     "statutePaymentInPercentageNationwide": 0.02
                 }
-            ],
-            "totalPaymentInPercentageNationwide": 0.02,
-            "totalPaymentInDollars": 659464
-        }
-    ],
-    "Puerto Rico": [
+            ]
+        },
         {
-            "years": "2018-2022",
+            "state": "PR",
             "statutes": [
                 {
                     "statuteName": "2018 Practices",
@@ -5705,7 +5505,12 @@
                             "paymentInPercentageWithinState": 7.55
                         },
                         {
-                            "practiceCategoryName": "Grassland",
+                            "practiceCategoryName": "Rangeland",
+                            "paymentInDollars": 0.0,
+                            "paymentInPercentageWithinState": 0.0
+                        },
+                        {
+                            "practiceCategoryName": "Pastured cropland",
                             "paymentInDollars": 0.0,
                             "paymentInPercentageWithinState": 0.0
                         },
@@ -5713,24 +5518,15 @@
                             "practiceCategoryName": "Non-industrial private forestland",
                             "paymentInDollars": 0.0,
                             "paymentInPercentageWithinState": 0.0
-                        },
-                        {
-                            "practiceCategoryName": "Rangeland",
-                            "paymentInDollars": 0.0,
-                            "paymentInPercentageWithinState": 0.0
                         }
                     ],
                     "statutePaymentInPercentageWithinState": 83.73,
                     "statutePaymentInPercentageNationwide": 0.03
                 }
-            ],
-            "totalPaymentInPercentageNationwide": 0.02,
-            "totalPaymentInDollars": 949971
-        }
-    ],
-    "Rhode Island": [
+            ]
+        },
         {
-            "years": "2018-2022",
+            "state": "RI",
             "statutes": [
                 {
                     "statuteName": "2018 Practices",
@@ -5820,12 +5616,12 @@
                             "paymentInPercentageWithinState": 4.1
                         },
                         {
-                            "practiceCategoryName": "Grassland",
+                            "practiceCategoryName": "Rangeland",
                             "paymentInDollars": 0.0,
                             "paymentInPercentageWithinState": 0.0
                         },
                         {
-                            "practiceCategoryName": "Rangeland",
+                            "practiceCategoryName": "Pastured cropland",
                             "paymentInDollars": 0.0,
                             "paymentInPercentageWithinState": 0.0
                         }
@@ -5833,9 +5629,7 @@
                     "statutePaymentInPercentageWithinState": 70.15,
                     "statutePaymentInPercentageNationwide": 0.02
                 }
-            ],
-            "totalPaymentInPercentageNationwide": 0.02,
-            "totalPaymentInDollars": 859891
+            ]
         }
     ]
 }

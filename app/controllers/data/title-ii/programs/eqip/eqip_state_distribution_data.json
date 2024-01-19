@@ -1,7 +1,7 @@
 {
-  "Texas": [
+  "2018-2022": [
     {
-      "years": "2018-2022",
+      "state": "TX",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -67,12 +67,12 @@
               "paymentInPercentageWithinState": 0.01
             },
             {
-              "practiceCategoryName": "Resource-conserving crop rotation",
+              "practiceCategoryName": "Comprehensive Nutrient Mgt.",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             },
             {
-              "practiceCategoryName": "Comprehensive Nutrient Mgt.",
+              "practiceCategoryName": "Resource-conserving crop rotation",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             },
@@ -83,14 +83,10 @@
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 9.2,
-      "totalPaymentInDollars": 433492969.22
-    }
-  ],
-  "California": [
+      ]
+    },
     {
-      "years": "2018-2022",
+      "state": "CA",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -174,14 +170,10 @@
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 8.23,
-      "totalPaymentInDollars": 387580710.1
-    }
-  ],
-  "Mississippi": [
+      ]
+    },
     {
-      "years": "2018-2022",
+      "state": "MS",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -265,14 +257,10 @@
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 4.23,
-      "totalPaymentInDollars": 199301830.92
-    }
-  ],
-  "Georgia": [
+      ]
+    },
     {
-      "years": "2018-2022",
+      "state": "GA",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -355,14 +343,10 @@
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 3.85,
-      "totalPaymentInDollars": 181382498.33
-    }
-  ],
-  "Arkansas": [
+      ]
+    },
     {
-      "years": "2018-2022",
+      "state": "AR",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -422,6 +406,11 @@
               "paymentInPercentageWithinState": 0.65
             },
             {
+              "practiceCategoryName": "Comprehensive Nutrient Mgt.",
+              "paymentInDollars": 0.0,
+              "paymentInPercentageWithinState": 0.0
+            },
+            {
               "practiceCategoryName": "Conservation planning assessment",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
@@ -432,25 +421,16 @@
               "paymentInPercentageWithinState": 0.0
             },
             {
-              "practiceCategoryName": "Comprehensive Nutrient Mgt.",
-              "paymentInDollars": 0.0,
-              "paymentInPercentageWithinState": 0.0
-            },
-            {
               "practiceCategoryName": "Soil health",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 3.55,
-      "totalPaymentInDollars": 167290452.7
-    }
-  ],
-  "Colorado": [
+      ]
+    },
     {
-      "years": "2018-2022",
+      "state": "CO",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -516,12 +496,12 @@
               "paymentInPercentageWithinState": 0.01
             },
             {
-              "practiceCategoryName": "Resource-conserving crop rotation",
+              "practiceCategoryName": "Comprehensive Nutrient Mgt.",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             },
             {
-              "practiceCategoryName": "Comprehensive Nutrient Mgt.",
+              "practiceCategoryName": "Resource-conserving crop rotation",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             },
@@ -532,14 +512,10 @@
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 3.03,
-      "totalPaymentInDollars": 142799016.37
-    }
-  ],
-  "Missouri": [
+      ]
+    },
     {
-      "years": "2018-2022",
+      "state": "MO",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -622,14 +598,10 @@
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 2.89,
-      "totalPaymentInDollars": 136275332.42
-    }
-  ],
-  "Wisconsin": [
+      ]
+    },
     {
-      "years": "2018-2022",
+      "state": "WI",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -713,14 +685,10 @@
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 2.76,
-      "totalPaymentInDollars": 129966293.39
-    }
-  ],
-  "Tennessee": [
+      ]
+    },
     {
-      "years": "2018-2022",
+      "state": "TN",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -803,14 +771,10 @@
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 2.66,
-      "totalPaymentInDollars": 125512301.81
-    }
-  ],
-  "Kansas": [
+      ]
+    },
     {
-      "years": "2018-2022",
+      "state": "KS",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -892,14 +856,10 @@
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 2.64,
-      "totalPaymentInDollars": 124576706.74
-    }
-  ],
-  "Iowa": [
+      ]
+    },
     {
-      "years": "2018-2022",
+      "state": "IA",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -982,14 +942,10 @@
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 2.5,
-      "totalPaymentInDollars": 117840464.45
-    }
-  ],
-  "Nebraska": [
+      ]
+    },
     {
-      "years": "2018-2022",
+      "state": "NE",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -1073,14 +1029,10 @@
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 2.38,
-      "totalPaymentInDollars": 111957436.65
-    }
-  ],
-  "South Carolina": [
+      ]
+    },
     {
-      "years": "2018-2022",
+      "state": "SC",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -1163,14 +1115,10 @@
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 2.25,
-      "totalPaymentInDollars": 105963715.41
-    }
-  ],
-  "Indiana": [
+      ]
+    },
     {
-      "years": "2018-2022",
+      "state": "IN",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -1253,14 +1201,10 @@
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 2.19,
-      "totalPaymentInDollars": 103384033.23
-    }
-  ],
-  "Minnesota": [
+      ]
+    },
     {
-      "years": "2018-2022",
+      "state": "MN",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -1344,14 +1288,10 @@
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 2.19,
-      "totalPaymentInDollars": 103323307.7
-    }
-  ],
-  "Ohio": [
+      ]
+    },
     {
-      "years": "2018-2022",
+      "state": "OH",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -1434,14 +1374,10 @@
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 2.16,
-      "totalPaymentInDollars": 101584202.85
-    }
-  ],
-  "Utah": [
+      ]
+    },
     {
-      "years": "2018-2022",
+      "state": "UT",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -1507,12 +1443,12 @@
               "paymentInPercentageWithinState": 0.02
             },
             {
-              "practiceCategoryName": "Resource-conserving crop rotation",
+              "practiceCategoryName": "Comprehensive Nutrient Mgt.",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             },
             {
-              "practiceCategoryName": "Comprehensive Nutrient Mgt.",
+              "practiceCategoryName": "Resource-conserving crop rotation",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             },
@@ -1523,14 +1459,10 @@
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 2.14,
-      "totalPaymentInDollars": 100939742.61
-    }
-  ],
-  "Alabama": [
+      ]
+    },
     {
-      "years": "2018-2022",
+      "state": "AL",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -1596,12 +1528,12 @@
               "paymentInPercentageWithinState": 0.14
             },
             {
-              "practiceCategoryName": "Resource-conserving crop rotation",
+              "practiceCategoryName": "Comprehensive Nutrient Mgt.",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             },
             {
-              "practiceCategoryName": "Comprehensive Nutrient Mgt.",
+              "practiceCategoryName": "Resource-conserving crop rotation",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             },
@@ -1612,14 +1544,10 @@
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 2.12,
-      "totalPaymentInDollars": 99662406.13
-    }
-  ],
-  "Montana": [
+      ]
+    },
     {
-      "years": "2018-2022",
+      "state": "MT",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -1679,6 +1607,11 @@
               "paymentInPercentageWithinState": 0.08
             },
             {
+              "practiceCategoryName": "Comprehensive Nutrient Mgt.",
+              "paymentInDollars": 0.0,
+              "paymentInPercentageWithinState": 0.0
+            },
+            {
               "practiceCategoryName": "Conservation planning assessment",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
@@ -1689,25 +1622,16 @@
               "paymentInPercentageWithinState": 0.0
             },
             {
-              "practiceCategoryName": "Comprehensive Nutrient Mgt.",
-              "paymentInDollars": 0.0,
-              "paymentInPercentageWithinState": 0.0
-            },
-            {
               "practiceCategoryName": "Soil health",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 2.05,
-      "totalPaymentInDollars": 96690781.54
-    }
-  ],
-  "Oregon": [
+      ]
+    },
     {
-      "years": "2018-2022",
+      "state": "OR",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -1790,14 +1714,10 @@
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 2.04,
-      "totalPaymentInDollars": 95997360.06
-    }
-  ],
-  "New Mexico": [
+      ]
+    },
     {
-      "years": "2018-2022",
+      "state": "NM",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -1863,12 +1783,12 @@
               "paymentInPercentageWithinState": 0.0
             },
             {
-              "practiceCategoryName": "Resource-conserving crop rotation",
+              "practiceCategoryName": "Comprehensive Nutrient Mgt.",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             },
             {
-              "practiceCategoryName": "Comprehensive Nutrient Mgt.",
+              "practiceCategoryName": "Resource-conserving crop rotation",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             },
@@ -1879,14 +1799,10 @@
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 2.03,
-      "totalPaymentInDollars": 95604233.6
-    }
-  ],
-  "Oklahoma": [
+      ]
+    },
     {
-      "years": "2018-2022",
+      "state": "OK",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -1946,6 +1862,11 @@
               "paymentInPercentageWithinState": 0.05
             },
             {
+              "practiceCategoryName": "Comprehensive Nutrient Mgt.",
+              "paymentInDollars": 0.0,
+              "paymentInPercentageWithinState": 0.0
+            },
+            {
               "practiceCategoryName": "Conservation planning assessment",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
@@ -1956,25 +1877,16 @@
               "paymentInPercentageWithinState": 0.0
             },
             {
-              "practiceCategoryName": "Comprehensive Nutrient Mgt.",
-              "paymentInDollars": 0.0,
-              "paymentInPercentageWithinState": 0.0
-            },
-            {
               "practiceCategoryName": "Soil health",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 2.01,
-      "totalPaymentInDollars": 94517070.18
-    }
-  ],
-  "North Carolina": [
+      ]
+    },
     {
-      "years": "2018-2022",
+      "state": "NC",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -2058,14 +1970,10 @@
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 1.97,
-      "totalPaymentInDollars": 92696160.98
-    }
-  ],
-  "Virginia": [
+      ]
+    },
     {
-      "years": "2018-2022",
+      "state": "VA",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -2148,14 +2056,10 @@
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 1.93,
-      "totalPaymentInDollars": 90836761.18
-    }
-  ],
-  "Louisiana": [
+      ]
+    },
     {
-      "years": "2018-2022",
+      "state": "LA",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -2215,6 +2119,11 @@
               "paymentInPercentageWithinState": 0.05
             },
             {
+              "practiceCategoryName": "Comprehensive Nutrient Mgt.",
+              "paymentInDollars": 0.0,
+              "paymentInPercentageWithinState": 0.0
+            },
+            {
               "practiceCategoryName": "Conservation planning assessment",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
@@ -2225,25 +2134,16 @@
               "paymentInPercentageWithinState": 0.0
             },
             {
-              "practiceCategoryName": "Comprehensive Nutrient Mgt.",
-              "paymentInDollars": 0.0,
-              "paymentInPercentageWithinState": 0.0
-            },
-            {
               "practiceCategoryName": "Soil health",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 1.88,
-      "totalPaymentInDollars": 88496408.09
-    }
-  ],
-  "Pennsylvania": [
+      ]
+    },
     {
-      "years": "2018-2022",
+      "state": "PA",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -2327,14 +2227,10 @@
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 1.78,
-      "totalPaymentInDollars": 83907299.05
-    }
-  ],
-  "Florida": [
+      ]
+    },
     {
-      "years": "2018-2022",
+      "state": "FL",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -2400,12 +2296,12 @@
               "paymentInPercentageWithinState": 0.07
             },
             {
-              "practiceCategoryName": "Resource-conserving crop rotation",
+              "practiceCategoryName": "Comprehensive Nutrient Mgt.",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             },
             {
-              "practiceCategoryName": "Comprehensive Nutrient Mgt.",
+              "practiceCategoryName": "Resource-conserving crop rotation",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             },
@@ -2416,14 +2312,10 @@
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 1.72,
-      "totalPaymentInDollars": 81068012.4
-    }
-  ],
-  "Idaho": [
+      ]
+    },
     {
-      "years": "2018-2022",
+      "state": "ID",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -2483,6 +2375,11 @@
               "paymentInPercentageWithinState": 0.31
             },
             {
+              "practiceCategoryName": "Comprehensive Nutrient Mgt.",
+              "paymentInDollars": 0.0,
+              "paymentInPercentageWithinState": 0.0
+            },
+            {
               "practiceCategoryName": "Conservation planning assessment",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
@@ -2493,25 +2390,16 @@
               "paymentInPercentageWithinState": 0.0
             },
             {
-              "practiceCategoryName": "Comprehensive Nutrient Mgt.",
-              "paymentInDollars": 0.0,
-              "paymentInPercentageWithinState": 0.0
-            },
-            {
               "practiceCategoryName": "Soil health",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 1.56,
-      "totalPaymentInDollars": 73356290.31
-    }
-  ],
-  "North Dakota": [
+      ]
+    },
     {
-      "years": "2018-2022",
+      "state": "ND",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -2577,12 +2465,12 @@
               "paymentInPercentageWithinState": 0.02
             },
             {
-              "practiceCategoryName": "Resource-conserving crop rotation",
+              "practiceCategoryName": "Comprehensive Nutrient Mgt.",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             },
             {
-              "practiceCategoryName": "Comprehensive Nutrient Mgt.",
+              "practiceCategoryName": "Resource-conserving crop rotation",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             },
@@ -2593,14 +2481,10 @@
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 1.56,
-      "totalPaymentInDollars": 73584837.81
-    }
-  ],
-  "Michigan": [
+      ]
+    },
     {
-      "years": "2018-2022",
+      "state": "MI",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -2684,14 +2568,10 @@
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 1.54,
-      "totalPaymentInDollars": 72476478.3
-    }
-  ],
-  "Washington": [
+      ]
+    },
     {
-      "years": "2018-2022",
+      "state": "WA",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -2774,14 +2654,10 @@
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 1.51,
-      "totalPaymentInDollars": 70995158.28
-    }
-  ],
-  "South Dakota": [
+      ]
+    },
     {
-      "years": "2018-2022",
+      "state": "SD",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -2863,14 +2739,10 @@
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 1.46,
-      "totalPaymentInDollars": 68595687.32
-    }
-  ],
-  "Kentucky": [
+      ]
+    },
     {
-      "years": "2018-2022",
+      "state": "KY",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -2954,14 +2826,10 @@
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 1.37,
-      "totalPaymentInDollars": 64660959.4
-    }
-  ],
-  "New York": [
+      ]
+    },
     {
-      "years": "2018-2022",
+      "state": "NY",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -3045,14 +2913,10 @@
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 1.19,
-      "totalPaymentInDollars": 56019935.58
-    }
-  ],
-  "Wyoming": [
+      ]
+    },
     {
-      "years": "2018-2022",
+      "state": "WY",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -3118,12 +2982,12 @@
               "paymentInPercentageWithinState": 0.01
             },
             {
-              "practiceCategoryName": "Resource-conserving crop rotation",
+              "practiceCategoryName": "Comprehensive Nutrient Mgt.",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             },
             {
-              "practiceCategoryName": "Comprehensive Nutrient Mgt.",
+              "practiceCategoryName": "Resource-conserving crop rotation",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             },
@@ -3134,14 +2998,10 @@
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 1.17,
-      "totalPaymentInDollars": 54967751.04
-    }
-  ],
-  "Arizona": [
+      ]
+    },
     {
-      "years": "2018-2022",
+      "state": "AZ",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -3201,6 +3061,11 @@
               "paymentInPercentageWithinState": 0.0
             },
             {
+              "practiceCategoryName": "Comprehensive Nutrient Mgt.",
+              "paymentInDollars": 0.0,
+              "paymentInPercentageWithinState": 0.0
+            },
+            {
               "practiceCategoryName": "Conservation planning assessment",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
@@ -3211,25 +3076,16 @@
               "paymentInPercentageWithinState": 0.0
             },
             {
-              "practiceCategoryName": "Comprehensive Nutrient Mgt.",
-              "paymentInDollars": 0.0,
-              "paymentInPercentageWithinState": 0.0
-            },
-            {
               "practiceCategoryName": "Soil health",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 1.15,
-      "totalPaymentInDollars": 54342132.65
-    }
-  ],
-  "Illinois": [
+      ]
+    },
     {
-      "years": "2018-2022",
+      "state": "IL",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -3313,14 +3169,10 @@
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 1.15,
-      "totalPaymentInDollars": 54035678.58
-    }
-  ],
-  "Maine": [
+      ]
+    },
     {
-      "years": "2018-2022",
+      "state": "ME",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -3403,14 +3255,10 @@
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 1.02,
-      "totalPaymentInDollars": 48237461.23
-    }
-  ],
-  "Maryland": [
+      ]
+    },
     {
-      "years": "2018-2022",
+      "state": "MD",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -3476,12 +3324,12 @@
               "paymentInPercentageWithinState": 0.23
             },
             {
-              "practiceCategoryName": "Resource-conserving crop rotation",
+              "practiceCategoryName": "Comprehensive Nutrient Mgt.",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             },
             {
-              "practiceCategoryName": "Comprehensive Nutrient Mgt.",
+              "practiceCategoryName": "Resource-conserving crop rotation",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             },
@@ -3492,14 +3340,10 @@
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 0.96,
-      "totalPaymentInDollars": 45181490.84
-    }
-  ],
-  "Vermont": [
+      ]
+    },
     {
-      "years": "2018-2022",
+      "state": "VT",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -3583,14 +3427,10 @@
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 0.85,
-      "totalPaymentInDollars": 39841804.13
-    }
-  ],
-  "Alaska": [
+      ]
+    },
     {
-      "years": "2018-2022",
+      "state": "AK",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -3650,6 +3490,11 @@
               "paymentInPercentageWithinState": 0.04
             },
             {
+              "practiceCategoryName": "Comprehensive Nutrient Mgt.",
+              "paymentInDollars": 0.0,
+              "paymentInPercentageWithinState": 0.0
+            },
+            {
               "practiceCategoryName": "Conservation planning assessment",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
@@ -3660,25 +3505,16 @@
               "paymentInPercentageWithinState": 0.0
             },
             {
-              "practiceCategoryName": "Comprehensive Nutrient Mgt.",
-              "paymentInDollars": 0.0,
-              "paymentInPercentageWithinState": 0.0
-            },
-            {
               "practiceCategoryName": "Soil health",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 0.8,
-      "totalPaymentInDollars": 37756649.08
-    }
-  ],
-  "Delaware": [
+      ]
+    },
     {
-      "years": "2018-2022",
+      "state": "DE",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -3744,12 +3580,12 @@
               "paymentInPercentageWithinState": 0.42
             },
             {
-              "practiceCategoryName": "Resource-conserving crop rotation",
+              "practiceCategoryName": "Comprehensive Nutrient Mgt.",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             },
             {
-              "practiceCategoryName": "Comprehensive Nutrient Mgt.",
+              "practiceCategoryName": "Resource-conserving crop rotation",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             },
@@ -3760,14 +3596,10 @@
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 0.69,
-      "totalPaymentInDollars": 32305110.27
-    }
-  ],
-  "West Virginia": [
+      ]
+    },
     {
-      "years": "2018-2022",
+      "state": "WV",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -3850,14 +3682,10 @@
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 0.69,
-      "totalPaymentInDollars": 32407128.52
-    }
-  ],
-  "Nevada": [
+      ]
+    },
     {
-      "years": "2018-2022",
+      "state": "NV",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -3894,12 +3722,12 @@
               "paymentInPercentageWithinState": 0.11
             },
             {
-              "practiceCategoryName": "Soil testing",
+              "practiceCategoryName": "Soil remediation",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             },
             {
-              "practiceCategoryName": "Soil remediation",
+              "practiceCategoryName": "Soil testing",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             }
@@ -3916,6 +3744,11 @@
               "paymentInPercentageWithinState": 0.03
             },
             {
+              "practiceCategoryName": "Comprehensive Nutrient Mgt.",
+              "paymentInDollars": 0.0,
+              "paymentInPercentageWithinState": 0.0
+            },
+            {
               "practiceCategoryName": "Conservation planning assessment",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
@@ -3926,25 +3759,16 @@
               "paymentInPercentageWithinState": 0.0
             },
             {
-              "practiceCategoryName": "Comprehensive Nutrient Mgt.",
-              "paymentInDollars": 0.0,
-              "paymentInPercentageWithinState": 0.0
-            },
-            {
               "practiceCategoryName": "Soil health",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 0.61,
-      "totalPaymentInDollars": 28656451.77
-    }
-  ],
-  "Hawaii": [
+      ]
+    },
     {
-      "years": "2018-2022",
+      "state": "HI",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -4004,6 +3828,11 @@
               "paymentInPercentageWithinState": 0.24
             },
             {
+              "practiceCategoryName": "Comprehensive Nutrient Mgt.",
+              "paymentInDollars": 0.0,
+              "paymentInPercentageWithinState": 0.0
+            },
+            {
               "practiceCategoryName": "Conservation planning assessment",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
@@ -4014,25 +3843,16 @@
               "paymentInPercentageWithinState": 0.0
             },
             {
-              "practiceCategoryName": "Comprehensive Nutrient Mgt.",
-              "paymentInDollars": 0.0,
-              "paymentInPercentageWithinState": 0.0
-            },
-            {
               "practiceCategoryName": "Soil health",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 0.55,
-      "totalPaymentInDollars": 26111272.99
-    }
-  ],
-  "New Hampshire": [
+      ]
+    },
     {
-      "years": "2018-2022",
+      "state": "NH",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -4115,14 +3935,10 @@
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 0.4,
-      "totalPaymentInDollars": 18646448.02
-    }
-  ],
-  "New Jersey": [
+      ]
+    },
     {
-      "years": "2018-2022",
+      "state": "NJ",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -4205,14 +4021,10 @@
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 0.38,
-      "totalPaymentInDollars": 17863913.31
-    }
-  ],
-  "Connecticut": [
+      ]
+    },
     {
-      "years": "2018-2022",
+      "state": "CT",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -4278,12 +4090,12 @@
               "paymentInPercentageWithinState": 0.71
             },
             {
-              "practiceCategoryName": "Resource-conserving crop rotation",
+              "practiceCategoryName": "Comprehensive Nutrient Mgt.",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             },
             {
-              "practiceCategoryName": "Comprehensive Nutrient Mgt.",
+              "practiceCategoryName": "Resource-conserving crop rotation",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             },
@@ -4294,14 +4106,10 @@
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 0.35,
-      "totalPaymentInDollars": 16429989.19
-    }
-  ],
-  "Massachusetts": [
+      ]
+    },
     {
-      "years": "2018-2022",
+      "state": "MA",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -4385,14 +4193,10 @@
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 0.34,
-      "totalPaymentInDollars": 15883998.9
-    }
-  ],
-  "Rhode Island": [
+      ]
+    },
     {
-      "years": "2018-2022",
+      "state": "RI",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -4429,12 +4233,12 @@
               "paymentInPercentageWithinState": 0.63
             },
             {
-              "practiceCategoryName": "Soil testing",
+              "practiceCategoryName": "Soil remediation",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             },
             {
-              "practiceCategoryName": "Soil remediation",
+              "practiceCategoryName": "Soil testing",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             }
@@ -4475,14 +4279,10 @@
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 0.2,
-      "totalPaymentInDollars": 9365606.82
-    }
-  ],
-  "Puerto Rico": [
+      ]
+    },
     {
-      "years": "2018-2022",
+      "state": "PR",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -4519,12 +4319,12 @@
               "paymentInPercentageWithinState": 0.19
             },
             {
-              "practiceCategoryName": "Soil testing",
+              "practiceCategoryName": "Forest management",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             },
             {
-              "practiceCategoryName": "Forest management",
+              "practiceCategoryName": "Soil testing",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             }
@@ -4535,22 +4335,22 @@
           "statutePaymentInDollars": 0.0,
           "practiceCategories": [
             {
-              "practiceCategoryName": "Resource-conserving crop rotation",
-              "paymentInDollars": 0.0,
-              "paymentInPercentageWithinState": 0.0
-            },
-            {
-              "practiceCategoryName": "Soil health",
-              "paymentInDollars": 0.0,
-              "paymentInPercentageWithinState": 0.0
-            },
-            {
               "practiceCategoryName": "Other planning",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             },
             {
+              "practiceCategoryName": "Resource-conserving crop rotation",
+              "paymentInDollars": 0.0,
+              "paymentInPercentageWithinState": 0.0
+            },
+            {
               "practiceCategoryName": "Comprehensive Nutrient Mgt.",
+              "paymentInDollars": 0.0,
+              "paymentInPercentageWithinState": 0.0
+            },
+            {
+              "practiceCategoryName": "Soil health",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             },
@@ -4561,14 +4361,10 @@
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 0.12,
-      "totalPaymentInDollars": 5423278.0
-    }
-  ],
-  "Northern Mariana Islands": [
+      ]
+    },
     {
-      "years": "2018-2022",
+      "state": "MP",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -4593,12 +4389,12 @@
               "paymentInPercentageWithinState": 1.85
             },
             {
-              "practiceCategoryName": "Soil testing",
+              "practiceCategoryName": "Other improvement",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             },
             {
-              "practiceCategoryName": "Other improvement",
+              "practiceCategoryName": "Soil remediation",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             },
@@ -4608,7 +4404,7 @@
               "paymentInPercentageWithinState": 0.0
             },
             {
-              "practiceCategoryName": "Soil remediation",
+              "practiceCategoryName": "Soil testing",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             }
@@ -4619,22 +4415,22 @@
           "statutePaymentInDollars": 0.0,
           "practiceCategories": [
             {
-              "practiceCategoryName": "Resource-conserving crop rotation",
-              "paymentInDollars": 0.0,
-              "paymentInPercentageWithinState": 0.0
-            },
-            {
-              "practiceCategoryName": "Soil health",
-              "paymentInDollars": 0.0,
-              "paymentInPercentageWithinState": 0.0
-            },
-            {
               "practiceCategoryName": "Other planning",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             },
             {
+              "practiceCategoryName": "Resource-conserving crop rotation",
+              "paymentInDollars": 0.0,
+              "paymentInPercentageWithinState": 0.0
+            },
+            {
               "practiceCategoryName": "Comprehensive Nutrient Mgt.",
+              "paymentInDollars": 0.0,
+              "paymentInPercentageWithinState": 0.0
+            },
+            {
+              "practiceCategoryName": "Soil health",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             },
@@ -4645,14 +4441,10 @@
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 0.01,
-      "totalPaymentInDollars": 332687.0
-    }
-  ],
-  "American Samoa": [
+      ]
+    },
     {
-      "years": "2018-2022",
+      "state": "AS",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -4665,17 +4457,12 @@
               "paymentInPercentageWithinState": 100.0
             },
             {
-              "practiceCategoryName": "Soil remediation",
+              "practiceCategoryName": "Soil testing",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             },
             {
-              "practiceCategoryName": "Vegetative",
-              "paymentInDollars": 0.0,
-              "paymentInPercentageWithinState": 0.0
-            },
-            {
-              "practiceCategoryName": "Forest management",
+              "practiceCategoryName": "Land management",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             },
@@ -4685,12 +4472,17 @@
               "paymentInPercentageWithinState": 0.0
             },
             {
-              "practiceCategoryName": "Soil testing",
+              "practiceCategoryName": "Forest management",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             },
             {
-              "practiceCategoryName": "Land management",
+              "practiceCategoryName": "Soil remediation",
+              "paymentInDollars": 0.0,
+              "paymentInPercentageWithinState": 0.0
+            },
+            {
+              "practiceCategoryName": "Vegetative",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             }
@@ -4701,22 +4493,22 @@
           "statutePaymentInDollars": 0.0,
           "practiceCategories": [
             {
-              "practiceCategoryName": "Resource-conserving crop rotation",
-              "paymentInDollars": 0.0,
-              "paymentInPercentageWithinState": 0.0
-            },
-            {
-              "practiceCategoryName": "Soil health",
-              "paymentInDollars": 0.0,
-              "paymentInPercentageWithinState": 0.0
-            },
-            {
               "practiceCategoryName": "Other planning",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             },
             {
+              "practiceCategoryName": "Resource-conserving crop rotation",
+              "paymentInDollars": 0.0,
+              "paymentInPercentageWithinState": 0.0
+            },
+            {
               "practiceCategoryName": "Comprehensive Nutrient Mgt.",
+              "paymentInDollars": 0.0,
+              "paymentInPercentageWithinState": 0.0
+            },
+            {
+              "practiceCategoryName": "Soil health",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             },
@@ -4727,14 +4519,10 @@
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 0.0,
-      "totalPaymentInDollars": 206636.0
-    }
-  ],
-  "Virgin Islands of the U.S.": [
+      ]
+    },
     {
-      "years": "2018-2022",
+      "state": "VI",
       "statutes": [
         {
           "statuteName": "(6)(A) Practices",
@@ -4753,17 +4541,7 @@
               "paymentInPercentageWithinState": 48.16
             },
             {
-              "practiceCategoryName": "Soil remediation",
-              "paymentInDollars": 0.0,
-              "paymentInPercentageWithinState": 0.0
-            },
-            {
-              "practiceCategoryName": "Vegetative",
-              "paymentInDollars": 0.0,
-              "paymentInPercentageWithinState": 0.0
-            },
-            {
-              "practiceCategoryName": "Forest management",
+              "practiceCategoryName": "Soil testing",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             },
@@ -4773,7 +4551,17 @@
               "paymentInPercentageWithinState": 0.0
             },
             {
-              "practiceCategoryName": "Soil testing",
+              "practiceCategoryName": "Forest management",
+              "paymentInDollars": 0.0,
+              "paymentInPercentageWithinState": 0.0
+            },
+            {
+              "practiceCategoryName": "Soil remediation",
+              "paymentInDollars": 0.0,
+              "paymentInPercentageWithinState": 0.0
+            },
+            {
+              "practiceCategoryName": "Vegetative",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             }
@@ -4784,22 +4572,22 @@
           "statutePaymentInDollars": 0.0,
           "practiceCategories": [
             {
-              "practiceCategoryName": "Resource-conserving crop rotation",
-              "paymentInDollars": 0.0,
-              "paymentInPercentageWithinState": 0.0
-            },
-            {
-              "practiceCategoryName": "Soil health",
-              "paymentInDollars": 0.0,
-              "paymentInPercentageWithinState": 0.0
-            },
-            {
               "practiceCategoryName": "Other planning",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             },
             {
+              "practiceCategoryName": "Resource-conserving crop rotation",
+              "paymentInDollars": 0.0,
+              "paymentInPercentageWithinState": 0.0
+            },
+            {
               "practiceCategoryName": "Comprehensive Nutrient Mgt.",
+              "paymentInDollars": 0.0,
+              "paymentInPercentageWithinState": 0.0
+            },
+            {
+              "practiceCategoryName": "Soil health",
               "paymentInDollars": 0.0,
               "paymentInPercentageWithinState": 0.0
             },
@@ -4810,9 +4598,7 @@
             }
           ]
         }
-      ],
-      "totalPaymentInPercentageNationwide": 0.0,
-      "totalPaymentInDollars": 97645.0
+      ]
     }
   ]
 }
