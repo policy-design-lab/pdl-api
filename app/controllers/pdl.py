@@ -45,6 +45,18 @@ CROP_INSURANCE_JSON_DATA_PATH = os.path.join("controllers", "data", "crop-insura
 CROP_INSURANCE_SUMMARY_DATA_JSON = "crop_insurance_subprograms_data.json"
 CROP_INSURANCE_STATE_DISTRIBUTION_DATA_JSON = "crop_insurance_state_distribution_data.json"
 
+TITLE_I_DATA_PATH = os.path.join("controllers", "data", "title-i")
+I_SUBTITLE_A_DATA_PATH = os.path.join(TITLE_I_DATA_PATH, "subtitle-a")
+I_SUBTITLE_D_DATA_PATH = os.path.join(TITLE_I_DATA_PATH, "subtitle-d")
+I_SUBTITLE_E_DATA_PATH = os.path.join(TITLE_I_DATA_PATH, "subtitle-e")
+
+TITLE_II_DATA_PATH = os.path.join("controllers", "data", "title-ii")
+II_EQIP_DATA_PATH = os.path.join(TITLE_II_DATA_PATH, "programs", "eqip")
+II_CSP_DATA_PATH = os.path.join(TITLE_II_DATA_PATH, "programs", "csp")
+II_CRP_DATA_PATH = os.path.join(TITLE_II_DATA_PATH, "programs", "crp")
+II_ACEP_DATA_PATH = os.path.join(TITLE_II_DATA_PATH, "programs", "acep")
+II_RCPP_DATA_PATH = os.path.join(TITLE_II_DATA_PATH, "programs", "rcpp")
+
 
 def search():
     out_json = jsonutils.create_test_message()
@@ -503,6 +515,291 @@ def programs_crop_insurance_summary_search():
     data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
 
     return data_json
+
+
+# /pdl/titles/title-i/subtitles/subtitle-a/map:
+def titles_title_i_subtitles_subtitle_a_map_search():
+    # set the file path
+    subtitle_data = os.path.join(I_SUBTITLE_A_DATA_PATH, COMMOD_MAP_DATA_JSON)
+
+    # open file
+    with open(subtitle_data, 'r') as map_data:
+        file_data = map_data.read()
+
+    # parse file
+    data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
+
+    return data_json
+
+
+# /pdl/titles/title-i/subtitles/subtitle-a/state-distribution:
+def titles_title_i_subtitles_subtitle_a_state_distribution_search():
+    # set the file path
+    subtitle_data = os.path.join(I_SUBTITLE_A_DATA_PATH, COMMOD_STATE_DISTRIBUTION_DATA_JSON)
+
+    # open file
+    with open(subtitle_data, 'r') as state_data:
+        file_data = state_data.read()
+
+    # parse file
+    data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
+
+    return data_json
+
+
+# /pdl/titles/title-i/subtitles/subtitle-a/subprograms:
+def titles_title_i_subtitles_subtitle_a_subprograms_search():
+    # set the file path
+    subtitle_data = os.path.join(I_SUBTITLE_A_DATA_PATH, COMMOD_SUBPROGRAMS_DATA_JSON)
+
+    # open file
+    with open(subtitle_data, 'r') as subprograms_data:
+        file_data = subprograms_data.read()
+
+    # parse file
+    data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
+
+    return data_json
+
+
+# /pdl/titles/title-i/subtitles/subtitle-d/state-distribution:
+def titles_title_i_subtitles_subtitle_d_state_distribution_search():
+    # set the file path
+    subtitle_data = os.path.join(I_SUBTITLE_D_DATA_PATH, DMC_STATE_DISTRIBUTION_DATA_JSON)
+
+    # open file
+    with open(subtitle_data, 'r') as state_data:
+        file_data = state_data.read()
+
+    # parse file
+    data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
+
+    return data_json
+
+
+# /pdl/titles/title-i/subtitles/subtitle-d/subprograms:
+def titles_title_i_subtitles_subtitle_d_subprograms_search():
+    # set the file path
+    subtitle_data = os.path.join(I_SUBTITLE_D_DATA_PATH, DMC_SUBPROGRAMS_DATA_JSON)
+
+    # open file
+    with open(subtitle_data, 'r') as subprograms_data:
+        file_data = subprograms_data.read()
+
+    # parse file
+    data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
+
+    return data_json
+
+
+# /pdl/titles/title-i/subtitles/subtitle-e/state-distribution:
+def titles_title_i_subtitles_subtitle_e_state_distribution_search():
+    # set the file path
+    subtitle_data = os.path.join(I_SUBTITLE_E_DATA_PATH, SADA_STATE_DISTRIBUTION_DATA_JSON)
+
+    # open file
+    with open(subtitle_data, 'r') as state_data:
+        file_data = state_data.read()
+
+    # parse file
+    data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
+
+    return data_json
+
+
+# /pdl/titles/title-i/subtitles/subtitle-e/subprograms:
+def titles_title_i_subtitles_subtitle_e_subprograms_search():
+    # set the file path
+    subtitle_data = os.path.join(I_SUBTITLE_E_DATA_PATH, SADA_SUBPROGRAMS_DATA_JSON)
+
+    # open file
+    with open(subtitle_data, 'r') as subprograms_data:
+        file_data = subprograms_data.read()
+
+    # parse file
+    data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
+
+    return data_json
+
+
+# /pdl/titles/title-ii/programs/eqip/map
+def titles_title_ii_programs_eqip_map_search():
+    # set the file path
+    eqip_data = os.path.join(II_EQIP_DATA_PATH, EQIP_MAP_DATA_JSON)
+
+    # open file
+    with open(eqip_data, 'r') as map_data:
+        file_data = map_data.read()
+
+        # parse file
+        data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
+
+        return data_json
+
+
+# /pdl/titles/title-ii/programs/eqip/state-distribution
+def titles_title_ii_programs_eqip_state_distribution_search():
+    # set the file path
+    eqip_data = os.path.join(II_EQIP_DATA_PATH, EQIP_STATE_DISTRIBUTION_DATA_JSON)
+
+    # open file
+    with open(eqip_data, 'r') as map_data:
+        file_data = map_data.read()
+
+        # parse file
+        data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
+
+        return data_json
+
+
+# /pdl/titles/title-ii/programs/eqip/practice-categories
+def titles_title_ii_programs_eqip_practice_categories_search():
+    # set the file path
+    eqip_data = os.path.join(II_EQIP_DATA_PATH, EQIP_PRACTICE_CATEGORIES_DATA_JSON)
+
+    # open file
+    with open(eqip_data, 'r') as map_data:
+        file_data = map_data.read()
+
+        # parse file
+        data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
+
+        return data_json
+
+
+# /pdl/titles/title-ii/programs/csp/map
+def titles_title_ii_programs_csp_map_search():
+    # set the file path
+    csp_data = os.path.join(II_CSP_DATA_PATH, CSP_MAP_DATA_JSON)
+
+    # open file
+    with open(csp_data, 'r') as map_data:
+        file_data = map_data.read()
+
+        # parse file
+        data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
+
+        return data_json
+
+
+# /pdl/titles/title-ii/programs/csp/state-distribution
+def titles_title_ii_programs_csp_state_distribution_search():
+    # set the file path
+    csp_data = os.path.join(II_CSP_DATA_PATH, CSP_STATE_DISTRIBUTION_DATA_JSON)
+
+    # open file
+    with open(csp_data, 'r') as map_data:
+        file_data = map_data.read()
+
+        # parse file
+        data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
+
+        return data_json
+
+
+# /pdl/titles/title-ii/programs/csp/practice-categories
+def titles_title_ii_programs_csp_practice_categories_search():
+    # set the file path
+    csp_data = os.path.join(II_CSP_DATA_PATH, CSP_PRACTICE_CATEGORIES_DATA_JSON)
+
+    # open file
+    with open(csp_data, 'r') as map_data:
+        file_data = map_data.read()
+
+        # parse file
+        data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
+
+        return data_json
+
+
+# /pdl/titles/title-ii/programs/crp/state-distribution
+def titles_title_ii_programs_crp_state_distribution_search():
+    # set the file path
+    crp_data = os.path.join(II_CRP_DATA_PATH, CRP_STATE_DISTRIBUTION_DATA_JSON)
+
+    # open file
+    with open(crp_data, 'r') as map_data:
+        file_data = map_data.read()
+
+        # parse file
+        data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
+
+        return data_json
+
+
+# /pdl/titles/title-ii/programs/crp/subprograms
+def titles_title_ii_programs_crp_subprograms_search():
+    # set the file path
+    crp_data = os.path.join(II_CRP_DATA_PATH, CRP_SUBPROGRAMS_DATA_JSON)
+
+    # open file
+    with open(crp_data, 'r') as map_data:
+        file_data = map_data.read()
+
+        # parse file
+        data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
+
+        return data_json
+
+
+# /pdl/titles/title-ii/programs/acep/state-distribution
+def titles_title_ii_programs_acep_state_distribution_search():
+    # set the file path
+    acep_data = os.path.join(II_ACEP_DATA_PATH, ACEP_STATE_DISTRIBUTION_DATA_JSON)
+
+    # open file
+    with open(acep_data, 'r') as map_data:
+        file_data = map_data.read()
+
+        # parse file
+        data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
+
+        return data_json
+
+
+# /pdl/titles/title-ii/programs/acep/subprograms
+def titles_title_ii_programs_acep_subprograms_search():
+    # set the file path
+    acep_data = os.path.join(II_ACEP_DATA_PATH, ACEP_SUBPROGRAMS_DATA_JSON)
+
+    # open file
+    with open(acep_data, 'r') as map_data:
+        file_data = map_data.read()
+
+        # parse file
+        data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
+
+        return data_json
+
+
+# /pdl/titles/title-ii/programs/rcpp/state-distribution
+def titles_title_ii_programs_rcpp_state_distribution_search():
+    # set the file path
+    rcpp_data = os.path.join(II_RCPP_DATA_PATH, RCPP_STATE_DISTRIBUTION_DATA_JSON)
+
+    # open file
+    with open(rcpp_data, 'r') as map_data:
+        file_data = map_data.read()
+
+        # parse file
+        data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
+
+        return data_json
+
+
+# /pdl/titles/title-ii/programs/rcpp/subprograms
+def titles_title_ii_programs_rcpp_subprograms_search():
+    # set the file path
+    rcpp_data = os.path.join(II_RCPP_DATA_PATH, RCPP_SUBPROGRAMS_DATA_JSON)
+
+    # open file
+    with open(rcpp_data, 'r') as map_data:
+        file_data = map_data.read()
+
+        # parse file
+        data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
+
+        return data_json
 
 
 # construct state

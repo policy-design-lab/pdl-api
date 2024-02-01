@@ -617,6 +617,386 @@ paths:
           description: Unauthorized
         500:
           description: Internal error
+  /pdl/titles/title-i/subtitles/subtitle-a/state-distribution:
+    get:
+      tags:
+        - "Title I: Commodities - Subtitle A"
+      summary: Gets the Subtitle A commodities data for all states.
+      description: |
+        Returns  the Subtitle A commodities data for all states in JSON format.
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: string
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
+  /pdl/titles/title-i/subtitles/subtitle-a/subprograms:
+    get:
+      tags:
+        - "Title I: Commodities - Subtitle A"
+      summary: Gets the Subtitle A commodities distribution data for all subprograms.
+      description: |
+        Returns the Subtitle A commodities distribution data for all subprograms in JSON format.
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: string
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
+  /pdl/titles/title-i/subtitles/subtitle-a/map:
+    get:
+      tags:
+        - "Title I: Commodities - Subtitle A"
+      summary: Gets the Subtitle A commodities payment distribution data for map visualization.
+      description: |
+        Returns  the Subtitle A commodities payment distribution data for map visualization in JSON format.
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: string
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
+  /pdl/titles/title-i/subtitles/subtitle-d/state-distribution:
+    get:
+      tags:
+        - "Title I: Commodities - Subtitle D"
+      summary: Gets the Subtitle D commodities data for all states.
+      description: |
+        Returns  the Subtitle D commodities data for all states in JSON format.
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: string
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
+  /pdl/titles/title-i/subtitles/subtitle-d/subprograms:
+    get:
+      tags:
+        - "Title I: Commodities - Subtitle D"
+      summary: Gets the Subtitle D commodities distribution data for all subprograms.
+      description: |
+        Returns the Subtitle D commodities distribution data for all subprograms in JSON format.
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: string
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
+  /pdl/titles/title-i/subtitles/subtitle-e/state-distribution:
+    get:
+      tags:
+        - "Title I: Commodities - Subtitle E"
+      summary: Gets the Subtitle E commodities data for all states.
+      description: |
+        Returns  the Subtitle E commodities data for all states in JSON format.
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: string
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
+  /pdl/titles/title-i/subtitles/subtitle-e/subprograms:
+    get:
+      tags:
+        - "Title I: Commodities - Subtitle E"
+      summary: Gets the Subtitle E commodities distribution data for all subprograms.
+      description: |
+        Returns the Subtitle E commodities distribution data for all subprograms in JSON format.
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: string
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
+  /pdl/titles/title-ii/programs/eqip/map:
+    get:
+      tags:
+        - "Title II: Conservation - EQIP"
+      summary: Gets the EQIP conservation data for map visualization.
+      description: |
+        Returns  the EQIP conservation data for map visualization in JSON format.
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: string
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
+  /pdl/titles/title-ii/programs/eqip/state-distribution:
+    get:
+      tags:
+        - "Title II: Conservation - EQIP"
+      summary: Gets the EQIP conservation data for all states.
+      description: |
+        Returns  the EQIP conservation data for all states in JSON format.
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: string
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
+  /pdl/titles/title-ii/programs/eqip/practice-categories:
+    get:
+      tags:
+        - "Title II: Conservation - EQIP"
+      summary: Gets the EQIP conservation data for all practice categories.
+      description: |
+        Returns the EQIP conservation data for all practice categories in JSON format.
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: string
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
+  /pdl/titles/title-ii/programs/csp/map:
+    get:
+      tags:
+        - "Title II: Conservation - CSP"
+      summary: Gets the CSP conservation data for map visualization.
+      description: |
+        Returns  the CSP conservation data for map visualization in JSON format.
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: string
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
+  /pdl/titles/title-ii/programs/csp/state-distribution:
+    get:
+      tags:
+        - "Title II: Conservation - CSP"
+      summary: Gets the CSP conservation data for all states.
+      description: |
+        Returns  the CSP conservation data for all states in JSON format.
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: string
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
+  /pdl/titles/title-ii/programs/csp/practice-categories:
+    get:
+      tags:
+        - "Title II: Conservation - CSP"
+      summary: Gets the CSP conservation data for all program categories.
+      description: |
+        Returns the CSP conservation data for all program categories in JSON format.
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: string
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
+  /pdl/titles/title-ii/programs/crp/state-distribution:
+    get:
+      tags:
+        - "Title II: Conservation - CRP"
+      summary: Gets the CRP conservation data for all states.
+      description: |
+        Returns  the CRP conservation data for all states in JSON format.
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: string
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
+  /pdl/titles/title-ii/programs/crp/subprograms:
+    get:
+      tags:
+        - "Title II: Conservation - CRP"
+      summary: Gets the CRP conservation distribution data for all subprograms.
+      description: |
+        Returns the CRP conservation distribution data for all subprograms in JSON format.
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: string
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
+  /pdl/titles/title-ii/programs/acep/state-distribution:
+    get:
+      tags:
+        - "Title II: Conservation - ACEP"
+      summary: Gets the ACEP conservation data for all states.
+      description: |
+        Returns  the ACEP conservation data for all states in JSON format.
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: string
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
+  /pdl/titles/title-ii/programs/acep/subprograms:
+    get:
+      tags:
+        - "Title II: Conservation - ACEP"
+      summary: Gets the ACEP conservation distribution data for all subprograms.
+      description: |
+        Returns the ACEP conservation distribution data for all subprograms in JSON format.
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: string
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
+  /pdl/titles/title-ii/programs/rcpp/state-distribution:
+    get:
+      tags:
+        - "Title II: Conservation - RCPP"
+      summary: Gets the RCPP conservation data for all states.
+      description: |
+        Returns  the RCPP conservation data for all states in JSON format.
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: string
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
+  /pdl/titles/title-ii/programs/rcpp/subprograms:
+    get:
+      tags:
+        - "Title II: Conservation - RCPP"
+      summary: Gets the RCPP conservation distribution data for all subprograms.
+      description: |
+        Returns the RCPP conservation distribution data for all subprograms in JSON format.
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: string
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
 components:
   schemas:
     Summary:
