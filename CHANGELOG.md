@@ -7,7 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Changed
 - API Endpoints changed for Title I and Title II. [#155](https://github.com/policy-design-lab/pdl-api/issues/155)
-
+- Subtitle A JSON files updated to match with other subtitle JSON files. [#157](https://github.com/policy-design-lab/pdl-api/issues/157)
+  
 ## [0.8.0] - 2023-11-09
 
 ### Added
