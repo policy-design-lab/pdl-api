@@ -35,12 +35,15 @@ RCPP_STATE_DISTRIBUTION_DATA_JSON = "rcpp_state_distribution_data.json"
 RCPP_SUBPROGRAMS_DATA_JSON = "rcpp_subprograms_data.json"
 SNAP_JSON_DATA_PATH = os.path.join("controllers", "data", "snap")
 SNAP_DATA_JSON = "snap_state_distribution_data.json"
+SNAP_STATE_DISTRIBUTION_DATA_JSON = "snap_state_distribution_data.json"
+SNAP_SUBPROGRAMS_DATA_JSON = "snap_subprograms_data.json"
 EQIP_JSON_DATA_PATH = os.path.join("controllers", "data", "conservation", "eqip")
 EQIP_MAP_DATA_JSON = "eqip_map_data.json"
 EQIP_STATE_DISTRIBUTION_DATA_JSON = "eqip_state_distribution_data.json"
 EQIP_PRACTICE_CATEGORIES_DATA_JSON = "eqip_practice_categories_data.json"
 SNAP_JSON_DATA_PATH = os.path.join("controllers", "data", "snap")
 SNAP_DATA_JSON = "snap_state_distribution_data.json"
+SNAP_SUBPROGRAMS_DATA_JSON = "summary.json"
 CROP_INSURANCE_JSON_DATA_PATH = os.path.join("controllers", "data", "crop-insurance")
 CROP_INSURANCE_SUMMARY_DATA_JSON = "crop_insurance_subprograms_data.json"
 CROP_INSURANCE_STATE_DISTRIBUTION_DATA_JSON = "crop_insurance_state_distribution_data.json"
@@ -56,6 +59,12 @@ II_CSP_DATA_PATH = os.path.join(TITLE_II_DATA_PATH, "programs", "csp")
 II_CRP_DATA_PATH = os.path.join(TITLE_II_DATA_PATH, "programs", "crp")
 II_ACEP_DATA_PATH = os.path.join(TITLE_II_DATA_PATH, "programs", "acep")
 II_RCPP_DATA_PATH = os.path.join(TITLE_II_DATA_PATH, "programs", "rcpp")
+
+TITLE_IV_DATA_PATH = os.path.join("controllers", "data", "title-iv")
+IV_SNAP_DATA_PATH = os.path.join(TITLE_IV_DATA_PATH, "programs", "snap")
+
+TITLE_XI_DATA_PATH = os.path.join("controllers", "data", "title-xi")
+XI_CROP_INS_DATA_PATH = os.path.join(TITLE_XI_DATA_PATH, "programs", "crop-insurance")
 
 
 def search():
@@ -794,6 +803,66 @@ def titles_title_ii_programs_rcpp_summary_search():
 
     # open file
     with open(rcpp_data, 'r') as map_data:
+        file_data = map_data.read()
+
+        # parse file
+        data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
+
+        return data_json
+
+
+# /pdl/titles/title-xi/programs/crop-insurance/state-distribution
+def titles_title_xi_programs_crop_insurance_state_distribution_search():
+    # set the file path
+    crop_ins_data = os.path.join(XI_CROP_INS_DATA_PATH, CROP_INSURANCE_STATE_DISTRIBUTION_DATA_JSON)
+
+    # open file
+    with open(crop_ins_data, 'r') as map_data:
+        file_data = map_data.read()
+
+        # parse file
+        data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
+
+        return data_json
+
+
+# /pdl/titles/title-ii/programs/crop-insurance/subprograms
+def titles_title_xi_programs_crop_insurance_summary_search():
+    # set the file path
+    crop_ins_data = os.path.join(XI_CROP_INS_DATA_PATH, CROP_INSURANCE_SUMMARY_DATA_JSON)
+
+    # open file
+    with open(crop_ins_data, 'r') as map_data:
+        file_data = map_data.read()
+
+        # parse file
+        data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
+
+        return data_json
+
+
+# /pdl/titles/title-iv/programs/snap/state-distribution
+def titles_title_iv_programs_snap_state_distribution_search():
+    # set the file path
+    snap_data = os.path.join(IV_SNAP_DATA_PATH, SNAP_STATE_DISTRIBUTION_DATA_JSON)
+
+    # open file
+    with open(snap_data, 'r') as map_data:
+        file_data = map_data.read()
+
+        # parse file
+        data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
+
+        return data_json
+
+
+# /pdl/titles/title-iv/programs/snap/subprograms
+def titles_title_iv_programs_snap_summary_search():
+    # set the file path
+    snap_data = os.path.join(IV_SNAP_DATA_PATH, SNAP_SUBPROGRAMS_DATA_JSON)
+
+    # open file
+    with open(snap_data, 'r') as map_data:
         file_data = map_data.read()
 
         # parse file
