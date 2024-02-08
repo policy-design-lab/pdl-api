@@ -548,7 +548,7 @@ def titles_title_i_subtitles_subtitle_a_state_distribution_search():
 
 
 # /pdl/titles/title-i/subtitles/subtitle-a/subprograms:
-def titles_title_i_subtitles_subtitle_a_subprograms_search():
+def titles_title_i_subtitles_subtitle_a_summary_search():
     # set the file path
     subtitle_data = os.path.join(I_SUBTITLE_A_DATA_PATH, COMMOD_SUBPROGRAMS_DATA_JSON)
 
@@ -578,7 +578,7 @@ def titles_title_i_subtitles_subtitle_d_state_distribution_search():
 
 
 # /pdl/titles/title-i/subtitles/subtitle-d/subprograms:
-def titles_title_i_subtitles_subtitle_d_subprograms_search():
+def titles_title_i_subtitles_subtitle_d_summary_search():
     # set the file path
     subtitle_data = os.path.join(I_SUBTITLE_D_DATA_PATH, DMC_SUBPROGRAMS_DATA_JSON)
 
@@ -608,7 +608,7 @@ def titles_title_i_subtitles_subtitle_e_state_distribution_search():
 
 
 # /pdl/titles/title-i/subtitles/subtitle-e/subprograms:
-def titles_title_i_subtitles_subtitle_e_subprograms_search():
+def titles_title_i_subtitles_subtitle_e_summary_search():
     # set the file path
     subtitle_data = os.path.join(I_SUBTITLE_E_DATA_PATH, SADA_SUBPROGRAMS_DATA_JSON)
 
@@ -653,7 +653,7 @@ def titles_title_ii_programs_eqip_state_distribution_search():
 
 
 # /pdl/titles/title-ii/programs/eqip/practice-categories
-def titles_title_ii_programs_eqip_practice_categories_search():
+def titles_title_ii_programs_eqip_summary_search():
     # set the file path
     eqip_data = os.path.join(II_EQIP_DATA_PATH, EQIP_PRACTICE_CATEGORIES_DATA_JSON)
 
@@ -698,7 +698,7 @@ def titles_title_ii_programs_csp_state_distribution_search():
 
 
 # /pdl/titles/title-ii/programs/csp/practice-categories
-def titles_title_ii_programs_csp_practice_categories_search():
+def titles_title_ii_programs_csp_summary_search():
     # set the file path
     csp_data = os.path.join(II_CSP_DATA_PATH, CSP_PRACTICE_CATEGORIES_DATA_JSON)
 
@@ -728,7 +728,7 @@ def titles_title_ii_programs_crp_state_distribution_search():
 
 
 # /pdl/titles/title-ii/programs/crp/subprograms
-def titles_title_ii_programs_crp_subprograms_search():
+def titles_title_ii_programs_crp_summary_search():
     # set the file path
     crp_data = os.path.join(II_CRP_DATA_PATH, CRP_SUBPROGRAMS_DATA_JSON)
 
@@ -758,7 +758,7 @@ def titles_title_ii_programs_acep_state_distribution_search():
 
 
 # /pdl/titles/title-ii/programs/acep/subprograms
-def titles_title_ii_programs_acep_subprograms_search():
+def titles_title_ii_programs_acep_summary_search():
     # set the file path
     acep_data = os.path.join(II_ACEP_DATA_PATH, ACEP_SUBPROGRAMS_DATA_JSON)
 
@@ -788,7 +788,7 @@ def titles_title_ii_programs_rcpp_state_distribution_search():
 
 
 # /pdl/titles/title-ii/programs/rcpp/subprograms
-def titles_title_ii_programs_rcpp_subprograms_search():
+def titles_title_ii_programs_rcpp_summary_search():
     # set the file path
     rcpp_data = os.path.join(II_RCPP_DATA_PATH, RCPP_SUBPROGRAMS_DATA_JSON)
 

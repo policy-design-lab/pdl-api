@@ -637,7 +637,7 @@ paths:
           description: Unauthorized
         500:
           description: Internal error
-  /pdl/titles/title-i/subtitles/subtitle-a/subprograms:
+  /pdl/titles/title-i/subtitles/subtitle-a/summary:
     get:
       tags:
         - "Title I: Commodities - Subtitle A"
@@ -697,7 +697,7 @@ paths:
           description: Unauthorized
         500:
           description: Internal error
-  /pdl/titles/title-i/subtitles/subtitle-d/subprograms:
+  /pdl/titles/title-i/subtitles/subtitle-d/summary:
     get:
       tags:
         - "Title I: Commodities - Subtitle D"
@@ -737,7 +737,7 @@ paths:
           description: Unauthorized
         500:
           description: Internal error
-  /pdl/titles/title-i/subtitles/subtitle-e/subprograms:
+  /pdl/titles/title-i/subtitles/subtitle-e/summary:
     get:
       tags:
         - "Title I: Commodities - Subtitle E"
@@ -797,7 +797,7 @@ paths:
           description: Unauthorized
         500:
           description: Internal error
-  /pdl/titles/title-ii/programs/eqip/practice-categories:
+  /pdl/titles/title-ii/programs/eqip/summary:
     get:
       tags:
         - "Title II: Conservation - EQIP"
@@ -857,7 +857,7 @@ paths:
           description: Unauthorized
         500:
           description: Internal error
-  /pdl/titles/title-ii/programs/csp/practice-categories:
+  /pdl/titles/title-ii/programs/csp/summary:
     get:
       tags:
         - "Title II: Conservation - CSP"
@@ -897,7 +897,7 @@ paths:
           description: Unauthorized
         500:
           description: Internal error
-  /pdl/titles/title-ii/programs/crp/subprograms:
+  /pdl/titles/title-ii/programs/crp/summary:
     get:
       tags:
         - "Title II: Conservation - CRP"
@@ -937,7 +937,7 @@ paths:
           description: Unauthorized
         500:
           description: Internal error
-  /pdl/titles/title-ii/programs/acep/subprograms:
+  /pdl/titles/title-ii/programs/acep/summary:
     get:
       tags:
         - "Title II: Conservation - ACEP"
@@ -977,7 +977,7 @@ paths:
           description: Unauthorized
         500:
           description: Internal error
-  /pdl/titles/title-ii/programs/rcpp/subprograms:
+  /pdl/titles/title-ii/programs/rcpp/summary:
     get:
       tags:
         - "Title II: Conservation - RCPP"
