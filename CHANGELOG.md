@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Summary endpoint for Title 1 and Title 2. [#163](https://github.com/policy-design-lab/pdl-api/issues/163)
+- Title XI endpoints for crop insurance data. [#165](https://github.com/policy-design-lab/pdl-api/issues/165)
+- Title IV endpoints for SNAP data. [#166](https://github.com/policy-design-lab/pdl-api/issues/166)
+
 ### Changed
 - Update the API to use the renamed json files. [#162](https://github.com/policy-design-lab/pdl-api/issues/162)
 
