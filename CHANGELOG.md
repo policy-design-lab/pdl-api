@@ -4,7 +4,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.10.0] - 2024-02-09
+
+### Added
+- Summary endpoint for Title 1 and Title 2. [#163](https://github.com/policy-design-lab/pdl-api/issues/163)
+- Title XI endpoints for crop insurance data. [#165](https://github.com/policy-design-lab/pdl-api/issues/165)
+- Title IV endpoints for SNAP data. [#166](https://github.com/policy-design-lab/pdl-api/issues/166)
+
+### Changed
+- Update the API to use the renamed json files. [#162](https://github.com/policy-design-lab/pdl-api/issues/162)
+
 ## [0.9.0] - 2024-02-02
+
 ### Changed
 - API Endpoints changed for Title I and Title II. [#155](https://github.com/policy-design-lab/pdl-api/issues/155)
 - Subtitle A JSON files updated to match with other subtitle JSON files. [#157](https://github.com/policy-design-lab/pdl-api/issues/157)
