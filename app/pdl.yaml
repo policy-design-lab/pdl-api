@@ -637,7 +637,7 @@ paths:
           description: Unauthorized
         500:
           description: Internal error
-  /pdl/titles/title-i/subtitles/subtitle-a/subprograms:
+  /pdl/titles/title-i/subtitles/subtitle-a/summary:
     get:
       tags:
         - "Title I: Commodities - Subtitle A"
@@ -697,7 +697,7 @@ paths:
           description: Unauthorized
         500:
           description: Internal error
-  /pdl/titles/title-i/subtitles/subtitle-d/subprograms:
+  /pdl/titles/title-i/subtitles/subtitle-d/summary:
     get:
       tags:
         - "Title I: Commodities - Subtitle D"
@@ -737,7 +737,7 @@ paths:
           description: Unauthorized
         500:
           description: Internal error
-  /pdl/titles/title-i/subtitles/subtitle-e/subprograms:
+  /pdl/titles/title-i/subtitles/subtitle-e/summary:
     get:
       tags:
         - "Title I: Commodities - Subtitle E"
@@ -797,7 +797,7 @@ paths:
           description: Unauthorized
         500:
           description: Internal error
-  /pdl/titles/title-ii/programs/eqip/practice-categories:
+  /pdl/titles/title-ii/programs/eqip/summary:
     get:
       tags:
         - "Title II: Conservation - EQIP"
@@ -857,7 +857,7 @@ paths:
           description: Unauthorized
         500:
           description: Internal error
-  /pdl/titles/title-ii/programs/csp/practice-categories:
+  /pdl/titles/title-ii/programs/csp/summary:
     get:
       tags:
         - "Title II: Conservation - CSP"
@@ -897,7 +897,7 @@ paths:
           description: Unauthorized
         500:
           description: Internal error
-  /pdl/titles/title-ii/programs/crp/subprograms:
+  /pdl/titles/title-ii/programs/crp/summary:
     get:
       tags:
         - "Title II: Conservation - CRP"
@@ -937,7 +937,7 @@ paths:
           description: Unauthorized
         500:
           description: Internal error
-  /pdl/titles/title-ii/programs/acep/subprograms:
+  /pdl/titles/title-ii/programs/acep/summary:
     get:
       tags:
         - "Title II: Conservation - ACEP"
@@ -977,13 +977,93 @@ paths:
           description: Unauthorized
         500:
           description: Internal error
-  /pdl/titles/title-ii/programs/rcpp/subprograms:
+  /pdl/titles/title-ii/programs/rcpp/summary:
     get:
       tags:
         - "Title II: Conservation - RCPP"
       summary: Gets the RCPP conservation distribution data for all subprograms.
       description: |
         Returns the RCPP conservation distribution data for all subprograms in JSON format.
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: string
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
+  /pdl/titles/title-xi/programs/crop-insurance/state-distribution:
+    get:
+      tags:
+        - "Crop insurance State Distribution Data"
+      summary: Gets the Crop Insurance state distribution data.
+      description: |
+        Returns the Crop Insurance State Distribution Data in JSON format.
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: string
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
+  /pdl/titles/title-xi/programs/crop-insurance/summary:
+    get:
+      tags:
+        - "Crop insurance summary Data"
+      summary: Gets the crop insurance summary data.
+      description: |
+        Returns the Crop Insurance Summary Data in JSON format.
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: string
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
+  /pdl/titles/title-iv/programs/snap/state-distribution:
+    get:
+      tags:
+        - "SNAP State Distribution Data"
+      summary: Gets the SNAP state distribution data.
+      description: |
+        Returns the SNAP State Distribution Data in JSON format.
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: string
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
+  /pdl/titles/title-iv/programs/snap/summary:
+    get:
+      tags:
+        - "SNAP summary Data"
+      summary: Gets the SNAP summary data.
+      description: |
+        Returns the SNAP Summary Data in JSON format.
       responses:
         200:
           description: Ok
