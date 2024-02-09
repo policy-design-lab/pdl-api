@@ -556,7 +556,7 @@ def titles_title_i_subtitles_subtitle_a_state_distribution_search():
     return data_json
 
 
-# /pdl/titles/title-i/subtitles/subtitle-a/subprograms:
+# /pdl/titles/title-i/subtitles/subtitle-a/summary:
 def titles_title_i_subtitles_subtitle_a_summary_search():
     # set the file path
     subtitle_data = os.path.join(I_SUBTITLE_A_DATA_PATH, COMMOD_SUBPROGRAMS_DATA_JSON)
@@ -586,7 +586,7 @@ def titles_title_i_subtitles_subtitle_d_state_distribution_search():
     return data_json
 
 
-# /pdl/titles/title-i/subtitles/subtitle-d/subprograms:
+# /pdl/titles/title-i/subtitles/subtitle-d/summary:
 def titles_title_i_subtitles_subtitle_d_summary_search():
     # set the file path
     subtitle_data = os.path.join(I_SUBTITLE_D_DATA_PATH, DMC_SUBPROGRAMS_DATA_JSON)
@@ -616,7 +616,7 @@ def titles_title_i_subtitles_subtitle_e_state_distribution_search():
     return data_json
 
 
-# /pdl/titles/title-i/subtitles/subtitle-e/subprograms:
+# /pdl/titles/title-i/subtitles/subtitle-e/summary:
 def titles_title_i_subtitles_subtitle_e_summary_search():
     # set the file path
     subtitle_data = os.path.join(I_SUBTITLE_E_DATA_PATH, SADA_SUBPROGRAMS_DATA_JSON)
@@ -661,7 +661,7 @@ def titles_title_ii_programs_eqip_state_distribution_search():
         return data_json
 
 
-# /pdl/titles/title-ii/programs/eqip/practice-categories
+# /pdl/titles/title-ii/programs/eqip/summary
 def titles_title_ii_programs_eqip_summary_search():
     # set the file path
     eqip_data = os.path.join(II_EQIP_DATA_PATH, EQIP_PRACTICE_CATEGORIES_DATA_JSON)
@@ -706,7 +706,7 @@ def titles_title_ii_programs_csp_state_distribution_search():
         return data_json
 
 
-# /pdl/titles/title-ii/programs/csp/practice-categories
+# /pdl/titles/title-ii/programs/csp/summary
 def titles_title_ii_programs_csp_summary_search():
     # set the file path
     csp_data = os.path.join(II_CSP_DATA_PATH, CSP_PRACTICE_CATEGORIES_DATA_JSON)
@@ -736,7 +736,7 @@ def titles_title_ii_programs_crp_state_distribution_search():
         return data_json
 
 
-# /pdl/titles/title-ii/programs/crp/subprograms
+# /pdl/titles/title-ii/programs/crp/summary
 def titles_title_ii_programs_crp_summary_search():
     # set the file path
     crp_data = os.path.join(II_CRP_DATA_PATH, CRP_SUBPROGRAMS_DATA_JSON)
@@ -766,7 +766,7 @@ def titles_title_ii_programs_acep_state_distribution_search():
         return data_json
 
 
-# /pdl/titles/title-ii/programs/acep/subprograms
+# /pdl/titles/title-ii/programs/acep/summary
 def titles_title_ii_programs_acep_summary_search():
     # set the file path
     acep_data = os.path.join(II_ACEP_DATA_PATH, ACEP_SUBPROGRAMS_DATA_JSON)
@@ -796,7 +796,7 @@ def titles_title_ii_programs_rcpp_state_distribution_search():
         return data_json
 
 
-# /pdl/titles/title-ii/programs/rcpp/subprograms
+# /pdl/titles/title-ii/programs/rcpp/summary
 def titles_title_ii_programs_rcpp_summary_search():
     # set the file path
     rcpp_data = os.path.join(II_RCPP_DATA_PATH, RCPP_SUBPROGRAMS_DATA_JSON)
@@ -826,7 +826,7 @@ def titles_title_xi_programs_crop_insurance_state_distribution_search():
         return data_json
 
 
-# /pdl/titles/title-ii/programs/crop-insurance/subprograms
+# /pdl/titles/title-ii/programs/crop-insurance/summary
 def titles_title_xi_programs_crop_insurance_summary_search():
     # set the file path
     crop_ins_data = os.path.join(XI_CROP_INS_DATA_PATH, CROP_INSURANCE_SUMMARY_DATA_JSON)
@@ -856,7 +856,7 @@ def titles_title_iv_programs_snap_state_distribution_search():
         return data_json
 
 
-# /pdl/titles/title-iv/programs/snap/subprograms
+# /pdl/titles/title-iv/programs/snap/summary
 def titles_title_iv_programs_snap_summary_search():
     # set the file path
     snap_data = os.path.join(IV_SNAP_DATA_PATH, SNAP_SUBPROGRAMS_DATA_JSON)
