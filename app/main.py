@@ -7,8 +7,8 @@ from controllers.configs import Config as cfg
 from app.models.db import db
 from flask_cors import CORS
 
-db_connenction_url = "postgresql://%s:%s@%s:%s/%s" % \
-                     (cfg.DB_USERNAME, cfg.DB_PASSWORD, cfg.DB_HOST, cfg.DB_PORT, cfg.DB_NAME)
+db_connection_url = "postgresql://%s:%s@%s:%s/%s" % \
+                    (cfg.DB_USERNAME, cfg.DB_PASSWORD, cfg.DB_HOST, cfg.DB_PORT, cfg.DB_NAME)
 
 debug = cfg.DEBUG
 
@@ -29,7 +29,7 @@ connexion_app.add_api('pdl.yaml', base_path=cfg.URL_PREFIX, arguments={'title': 
 
 app = connexion_app.app
 
-app.config['SQLALCHEMY_DATABASE_URI'] = db_connenction_url
+app.config['SQLALCHEMY_DATABASE_URI'] = db_connection_url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['PROPAGATE_EXCEPTIONS'] = True
 app.config['JSON_SORT_KEYS'] = False

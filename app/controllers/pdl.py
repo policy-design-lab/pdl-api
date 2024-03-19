@@ -1,12 +1,21 @@
 import logging
 import json
 import os
+
 import app.utils.jsonutils as jsonutils
 import app.utils.rest_handlers as rs_handlers
 
 from flask import request
+from sqlalchemy import func, text, desc, Numeric, BigInteger
 from app.models.state import State
 from app.models.statecode import StateCode
+from app.models.title import Title
+from app.models.program import Program
+from app.models.db import db, engine, Session
+from app.models.subtitle import Subtitle
+from app.models.payment import Payment
+from app.models.subprogram import Subprogram
+
 from collections import OrderedDict
 
 LANDING_PAGE_DATA_PATH = os.path.join("controllers", "data", "landingpage")
@@ -419,7 +428,7 @@ def programs_conservation_acep_subprograms_search():
     data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
 
     return data_json
-  
+
 
 # RCPP state distribution data
 def programs_conservation_rcpp_state_distribution_search():
@@ -429,7 +438,7 @@ def programs_conservation_rcpp_state_distribution_search():
     # open file
     with open(rcpp_data, 'r') as state_data:
         file_data = state_data.read()
-      
+
     # parse file
     data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
 
@@ -444,7 +453,7 @@ def programs_conservation_rcpp_subprograms_search():
     # open file
     with open(rcpp_data, 'r') as practice_data:
         file_data = practice_data.read()
-      
+
     # parse file
     data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
 
@@ -543,17 +552,11 @@ def titles_title_i_subtitles_subtitle_a_map_search():
 
 # /pdl/titles/title-i/subtitles/subtitle-a/state-distribution:
 def titles_title_i_subtitles_subtitle_a_state_distribution_search():
-    # set the file path
-    subtitle_data = os.path.join(I_SUBTITLE_A_DATA_PATH, COMMOD_STATE_DISTRIBUTION_DATA_JSON)
-
-    # open file
-    with open(subtitle_data, 'r') as state_data:
-        file_data = state_data.read()
-
-    # parse file
-    data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
-
-    return data_json
+    subtitle_id = 100
+    start_year = 2014
+    end_year = 2021
+    endpoint_response = generate_title_i_state_distribution_response(subtitle_id, start_year, end_year)
+    return endpoint_response
 
 
 # /pdl/titles/title-i/subtitles/subtitle-a/summary:
@@ -940,3 +943,174 @@ def construct_allprogram_result(prog):
     }
 
     return result
+
+def generate_title_i_state_distribution_response(subtitle_id, start_year, end_year):
+    session = Session()
+
+    # Construct the subquery
+    subquery = (session.query(func.sum(Payment.payment))
+                .filter(Payment.subtitle_id == subtitle_id, Payment.year.between(start_year, end_year))
+                .scalar_subquery())
+    # Construct the main query
+    query = session.query(
+        Payment.state_code.label('state'),
+        Subtitle.name.label('subtitleName'),
+        (func.cast(func.sum(Payment.payment) / subquery * 100, Numeric(5, 2))).label(
+            'totalPaymentInPercentageNationwide'),
+        func.sum(Payment.payment).label('totalPaymentInDollars')
+    ).join(
+        Subtitle, Payment.subtitle_id == Subtitle.id
+    ).filter(
+        Payment.subtitle_id == subtitle_id
+    ).group_by(
+        Payment.state_code, Subtitle.name
+    ).order_by(
+        desc('totalPaymentInPercentageNationwide')
+    )
+    # Extract the column names
+    column_names = [item['name'] for item in query.statement.column_descriptions]
+
+    # Execute the query
+    result = query.all()
+
+    # Build subtitle response dictionary
+    subtitle_response_dict = dict()
+    for row in result:
+        response_dict = dict(zip(column_names, row))
+        subtitle_response_dict[response_dict['state']] = response_dict
+
+    # Find all programs under the subtitle
+    subtitle = Subtitle.query.filter_by(id=subtitle_id).first()
+    programs = Program.query.filter_by(subtitle_id=subtitle.id).all()
+    program_ids = [program.id for program in programs]
+
+    # For each program, find the subprograms
+    subprograms = []
+    for program_id in program_ids:
+        subprograms += Subprogram.query.filter_by(program_id=program_id).all()
+    subprogram_ids = [subprogram.id for subprogram in subprograms]
+
+    program_response_dict = dict()
+    # For each program, find state code, total payment, total payment percentage, average recipient count,
+    # and average base acres during the given years
+    for program_id in program_ids:
+
+        # Construct the subquery
+        subquery = (session.query(func.sum(Payment.payment))
+                    .filter(Payment.program_id == program_id, Payment.year.between(start_year, end_year))
+                    .label('totalPaymentInDollars'))
+
+        # Construct the main query
+        query = session.query(
+            Payment.state_code.label('state'),
+            Program.name.label('programName'),
+            func.sum(Payment.payment).label('totalPaymentInDollars'),
+            func.round(func.avg(Payment.base_acres), 2).label('averageAreaInAcres'),
+            # TODO: Check why the recipient count needed to be multiplied by 2
+            func.cast(func.avg(Payment.recipient_count) * 2, BigInteger).label('averageRecipientCount'),
+            (func.cast(func.sum(Payment.payment) / subquery * 100, Numeric(5, 2))).label(
+                'totalPaymentInPercentageNationwide')
+        ).join(
+            Program, Payment.program_id == Program.id
+        ).filter(
+            Payment.program_id == program_id
+        ).group_by(
+            Program.name, Payment.state_code
+        ).order_by(
+            Payment.state_code, desc('totalPaymentInPercentageNationwide')
+        )
+
+        # Extract the column names
+        column_names = [item['name'] for item in query.statement.column_descriptions]
+
+        # Execute the query
+        result = query.all()
+
+        for row in result:
+            response_dict = dict(zip(column_names, row))
+            state = response_dict['state']
+
+            # Special handling
+            response_dict['subPrograms'] = []
+            if response_dict['averageAreaInAcres'] is None:
+                response_dict['averageAreaInAcres'] = 0.0
+            del response_dict['state']
+
+            if state not in program_response_dict:
+                program_response_dict[state] = {"programs": [response_dict]}
+            else:
+                program_response_dict[state]["programs"].append(response_dict)
+
+    subprogram_response_dict = dict()
+    for subprogram_id in subprogram_ids:
+        # Construct the subquery
+        subquery = (session.query(func.sum(Payment.payment))
+                    .filter(Payment.sub_program_id == subprogram_id, Payment.year.between(start_year, end_year))
+                    .label('totalPaymentInDollars'))
+
+        # Construct the main query
+        query = (session.query(
+            Payment.state_code.label('state'),
+            Program.name.label('programName'),
+            Subprogram.name.label('subProgramName'),
+            func.sum(Payment.payment).label('totalPaymentInDollars'),
+            (func.cast(func.sum(Payment.payment) / subquery * 100, Numeric(5, 2))).label(
+                'totalPaymentInPercentageNationwide'),
+            (func.cast(func.sum(Payment.payment) / subquery * 100, Numeric(5, 2))).label(
+                'totalPaymentInPercentageWithinState'),
+            func.round(func.avg(Payment.base_acres), 2).label('averageAreaInAcres'),
+            func.cast(func.avg(Payment.recipient_count) * 2, BigInteger).label('averageRecipientCount')
+        ).join(
+            Subprogram, Payment.sub_program_id == Subprogram.id
+        ).join(
+            Program, Payment.program_id == Program.id
+        ).filter(
+            Payment.sub_program_id == subprogram_id
+        ).group_by(
+            Program.name, Subprogram.name, Payment.state_code
+        ).order_by(
+            Payment.state_code, desc('totalPaymentInPercentageNationwide')
+        ))
+
+        # Execute the query
+        result = query.all()
+
+        # Extract the column names
+        column_names = [item['name'] for item in query.statement.column_descriptions]
+
+        for row in result:
+            response_dict = dict(zip(column_names, row))
+            state = response_dict['state']
+            program_name = response_dict['programName']
+
+            # Special handling
+            if response_dict['averageAreaInAcres'] is None:
+                response_dict['averageAreaInAcres'] = 0.0
+            del response_dict['state']
+            del response_dict['programName']
+
+            if state not in subprogram_response_dict:
+                subprogram_response_dict[state] = dict()
+                subprogram_response_dict[state][program_name] = [response_dict]
+            else:
+                if program_name in subprogram_response_dict[state]:
+                    subprogram_response_dict[state][program_name].append(response_dict)
+                else:
+                    subprogram_response_dict[state][program_name] = [response_dict]
+
+    # Merge the subtitle and program response dictionaries
+    for state in subtitle_response_dict:
+        if state in program_response_dict:
+            subtitle_response_dict[state].update(program_response_dict[state])
+            for program in subtitle_response_dict[state]["programs"]:
+                if state in subprogram_response_dict and program["programName"] in subprogram_response_dict[state]:
+                    program["subPrograms"] = subprogram_response_dict[state][program["programName"]]
+
+    # Create endpoint response dictionary
+    endpoint_response_list = []
+    for state in subtitle_response_dict:
+        endpoint_response_list.append(subtitle_response_dict[state])
+    response = {str(start_year) + "-" + str(end_year): endpoint_response_list}
+
+    return response
+
