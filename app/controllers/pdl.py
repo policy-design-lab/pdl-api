@@ -559,17 +559,11 @@ def titles_title_i_subtitles_subtitle_a_state_distribution_search():
 
 # /pdl/titles/title-i/subtitles/subtitle-a/summary:
 def titles_title_i_subtitles_subtitle_a_summary_search():
-    # set the file path
-    subtitle_data = os.path.join(I_SUBTITLE_A_DATA_PATH, COMMOD_SUBPROGRAMS_DATA_JSON)
-
-    # open file
-    with open(subtitle_data, 'r') as subprograms_data:
-        file_data = subprograms_data.read()
-
-    # parse file
-    data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
-
-    return data_json
+    subtitle_id = 100
+    start_year = 2014
+    end_year = 2021
+    endpoint_response = generate_title_i_summary_response(subtitle_id, start_year, end_year)
+    return endpoint_response
 
 
 # /pdl/titles/title-i/subtitles/subtitle-d/state-distribution:
@@ -1116,3 +1110,124 @@ def generate_title_i_state_distribution_response(subtitle_id, start_year, end_ye
     response = {str(start_year) + "-" + str(end_year): endpoint_response_list}
 
     return response
+
+
+def generate_title_i_summary_response(subtitle_id, start_year, end_year):
+    session = Session()
+
+    # Construct the main query
+    subtitle_query = session.query(
+        Subtitle.name.label('subtitleName'),
+        func.sum(Payment.payment).label('totalPaymentInDollars')
+    ).join(
+        Subtitle, Payment.subtitle_id == Subtitle.id
+    ).filter(
+        Payment.subtitle_id == subtitle_id, Payment.year.between(start_year, end_year)
+    ).group_by(
+        Subtitle.name
+    )
+
+    # Extract the column names
+    column_names = [item['name'] for item in subtitle_query.statement.column_descriptions]
+
+    # Execute the query
+    subtitle_result = subtitle_query.all()
+
+    # Build subtitle response dictionary
+    subtitle_response_dict = dict()
+    for row in subtitle_result:
+        subtitle_response_dict = dict(zip(column_names, row))
+        subtitle_response_dict["programs"] = []
+
+    # Find all programs under the subtitle
+    subtitle = Subtitle.query.filter_by(id=subtitle_id).first()
+    programs = Program.query.filter_by(subtitle_id=subtitle.id).all()
+    program_ids = [program.id for program in programs]
+
+    # Construct the subquery
+    subtitle_subquery = (session.query(func.sum(Payment.payment))
+                         .filter(Payment.subtitle_id == subtitle_id, Payment.year.between(start_year, end_year)))
+
+    program_response_dict = dict()
+    # For each program, total payment and total payment percentage during the given years
+    for program_id in program_ids:
+
+        # Construct the subquery
+        program_subquery = (session.query(func.sum(Payment.payment))
+                            .filter(Payment.program_id == program_id,
+                                    Payment.year.between(start_year, end_year))
+                            .label('totalPaymentInDollars'))
+
+        # Construct the main query
+        program_query = (session.query(
+            Program.name.label('programName'),
+            func.sum(Payment.payment).label('totalPaymentInDollars'),
+            (func.cast(func.sum(Payment.payment) / subtitle_subquery * 100, Numeric(5, 2))).label(
+                'totalPaymentInPercentage')
+        ).join(
+            Program, Payment.program_id == Program.id
+        ).filter(
+            Payment.program_id == program_id
+        ).group_by(
+            Program.name
+        ))
+
+        # Extract the column names
+        column_names = [item['name'] for item in program_query.statement.column_descriptions]
+
+        # Execute the query
+        program_result = program_query.all()
+
+        for row in program_result:
+            response_dict = dict(zip(column_names, row))
+
+            # Special handling
+            response_dict['subPrograms'] = []
+            subtitle_response_dict["programs"].append(response_dict)
+
+        subprogram_response_dict = dict()
+
+        # For each program, find the subprograms
+        subprograms = Subprogram.query.filter_by(program_id=program_id).all()
+        subprogram_ids = [subprogram.id for subprogram in subprograms]
+
+        for subprogram_id in subprogram_ids:
+            # Construct the subquery
+            subprogram_subquery = (session.query(func.sum(Payment.payment))
+                                   .filter(Payment.sub_program_id == subprogram_id,
+                                           Payment.year.between(start_year, end_year))
+                                   .label('totalPaymentInDollars'))
+
+            # Construct the main query
+            subprogram_query = (session.query(
+                Program.name.label('programName'),
+                Subprogram.name.label('subProgramName'),
+                func.sum(Payment.payment).label('totalPaymentInDollars'),
+                (func.cast(func.sum(Payment.payment) / subprogram_subquery * 100, Numeric(5, 2))).label(
+                    'totalPaymentInPercentage')
+                # TODO: Fix the percentage. Currently, it's alweays showing as 100.0
+            ).join(
+                Subprogram, Payment.sub_program_id == Subprogram.id
+            ).join(
+                Program, Payment.program_id == Program.id
+            ).filter(
+                Payment.sub_program_id == subprogram_id
+            ).group_by(
+                Program.name, Subprogram.name
+            ))
+
+            # Execute the query
+            subprogram_result = subprogram_query.all()
+
+            # Extract the column names
+            column_names = [item['name'] for item in subprogram_query.statement.column_descriptions]
+
+            for row in subprogram_result:
+                response_dict = dict(zip(column_names, row))
+                program_name = response_dict['programName']
+
+                for program in subtitle_response_dict["programs"]:
+                    if program["programName"] == program_name:
+                        program["subPrograms"].append(response_dict)
+
+    return subtitle_response_dict
