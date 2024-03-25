@@ -1,22 +1,20 @@
-import logging
 import json
+import logging
 import os
+from collections import OrderedDict
+
+from flask import request
+from sqlalchemy import func, desc, Numeric, BigInteger
 
 import app.utils.jsonutils as jsonutils
 import app.utils.rest_handlers as rs_handlers
-
-from flask import request
-from sqlalchemy import func, text, desc, Numeric, BigInteger
+from app.models.db import Session
+from app.models.payment import Payment
+from app.models.program import Program
 from app.models.state import State
 from app.models.statecode import StateCode
-from app.models.title import Title
-from app.models.program import Program
-from app.models.db import db, engine, Session
-from app.models.subtitle import Subtitle
-from app.models.payment import Payment
 from app.models.subprogram import Subprogram
-
-from collections import OrderedDict
+from app.models.subtitle import Subtitle
 
 LANDING_PAGE_DATA_PATH = os.path.join("controllers", "data", "landingpage")
 ALLPROGRAM_DATA_JSON = "allprograms.json"
@@ -944,18 +942,18 @@ def construct_allprogram_result(prog):
 
     return result
 
+
 def generate_title_i_state_distribution_response(subtitle_id, start_year, end_year):
     session = Session()
 
     # Construct the subquery
-    subquery = (session.query(func.sum(Payment.payment))
-                .filter(Payment.subtitle_id == subtitle_id, Payment.year.between(start_year, end_year))
-                .scalar_subquery())
+    subtitle_subquery = (session.query(func.sum(Payment.payment))
+                         .filter(Payment.subtitle_id == subtitle_id, Payment.year.between(start_year, end_year)))
     # Construct the main query
-    query = session.query(
+    subtitle_query = session.query(
         Payment.state_code.label('state'),
         Subtitle.name.label('subtitleName'),
-        (func.cast(func.sum(Payment.payment) / subquery * 100, Numeric(5, 2))).label(
+        (func.cast(func.sum(Payment.payment) / subtitle_subquery * 100, Numeric(5, 2))).label(
             'totalPaymentInPercentageNationwide'),
         func.sum(Payment.payment).label('totalPaymentInDollars')
     ).join(
@@ -968,10 +966,10 @@ def generate_title_i_state_distribution_response(subtitle_id, start_year, end_ye
         desc('totalPaymentInPercentageNationwide')
     )
     # Extract the column names
-    column_names = [item['name'] for item in query.statement.column_descriptions]
+    column_names = [item['name'] for item in subtitle_query.statement.column_descriptions]
 
     # Execute the query
-    result = query.all()
+    result = subtitle_query.all()
 
     # Build subtitle response dictionary
     subtitle_response_dict = dict()
@@ -996,19 +994,19 @@ def generate_title_i_state_distribution_response(subtitle_id, start_year, end_ye
     for program_id in program_ids:
 
         # Construct the subquery
-        subquery = (session.query(func.sum(Payment.payment))
-                    .filter(Payment.program_id == program_id, Payment.year.between(start_year, end_year))
-                    .label('totalPaymentInDollars'))
+        program_subquery = (session.query(func.sum(Payment.payment))
+                            .filter(Payment.program_id == program_id, Payment.year.between(start_year, end_year))
+                            .label('totalPaymentInDollars'))
 
         # Construct the main query
-        query = session.query(
+        program_query = session.query(
             Payment.state_code.label('state'),
             Program.name.label('programName'),
             func.sum(Payment.payment).label('totalPaymentInDollars'),
             func.round(func.avg(Payment.base_acres), 2).label('averageAreaInAcres'),
             # TODO: Check why the recipient count needed to be multiplied by 2
             func.cast(func.avg(Payment.recipient_count) * 2, BigInteger).label('averageRecipientCount'),
-            (func.cast(func.sum(Payment.payment) / subquery * 100, Numeric(5, 2))).label(
+            (func.cast(func.sum(Payment.payment) / program_subquery * 100, Numeric(5, 2))).label(
                 'totalPaymentInPercentageNationwide')
         ).join(
             Program, Payment.program_id == Program.id
@@ -1021,10 +1019,10 @@ def generate_title_i_state_distribution_response(subtitle_id, start_year, end_ye
         )
 
         # Extract the column names
-        column_names = [item['name'] for item in query.statement.column_descriptions]
+        column_names = [item['name'] for item in program_query.statement.column_descriptions]
 
         # Execute the query
-        result = query.all()
+        result = program_query.all()
 
         for row in result:
             response_dict = dict(zip(column_names, row))
@@ -1044,22 +1042,20 @@ def generate_title_i_state_distribution_response(subtitle_id, start_year, end_ye
     subprogram_response_dict = dict()
     for subprogram_id in subprogram_ids:
         # Construct the subquery
-        subquery = (session.query(func.sum(Payment.payment))
-                    .filter(Payment.sub_program_id == subprogram_id, Payment.year.between(start_year, end_year))
-                    .label('totalPaymentInDollars'))
+        subprogram_subquery = (session.query(func.sum(Payment.payment))
+                               .filter(Payment.sub_program_id == subprogram_id, Payment.year.between(start_year, end_year))
+                               .label('totalPaymentInDollars'))
 
         # Construct the main query
-        query = (session.query(
+        subprogram_query = (session.query(
             Payment.state_code.label('state'),
             Program.name.label('programName'),
             Subprogram.name.label('subProgramName'),
             func.sum(Payment.payment).label('totalPaymentInDollars'),
-            (func.cast(func.sum(Payment.payment) / subquery * 100, Numeric(5, 2))).label(
+            (func.cast(func.sum(Payment.payment) / subprogram_subquery * 100, Numeric(5, 2))).label(
                 'totalPaymentInPercentageNationwide'),
-            (func.cast(func.sum(Payment.payment) / subquery * 100, Numeric(5, 2))).label(
-                'totalPaymentInPercentageWithinState'),
             func.round(func.avg(Payment.base_acres), 2).label('averageAreaInAcres'),
-            func.cast(func.avg(Payment.recipient_count) * 2, BigInteger).label('averageRecipientCount')
+            func.cast(func.avg(Payment.recipient_count), BigInteger).label('averageRecipientCount')
         ).join(
             Subprogram, Payment.sub_program_id == Subprogram.id
         ).join(
@@ -1073,10 +1069,10 @@ def generate_title_i_state_distribution_response(subtitle_id, start_year, end_ye
         ))
 
         # Execute the query
-        result = query.all()
+        result = subprogram_query.all()
 
         # Extract the column names
-        column_names = [item['name'] for item in query.statement.column_descriptions]
+        column_names = [item['name'] for item in subprogram_query.statement.column_descriptions]
 
         for row in result:
             response_dict = dict(zip(column_names, row))
@@ -1105,6 +1101,13 @@ def generate_title_i_state_distribution_response(subtitle_id, start_year, end_ye
             for program in subtitle_response_dict[state]["programs"]:
                 if state in subprogram_response_dict and program["programName"] in subprogram_response_dict[state]:
                     program["subPrograms"] = subprogram_response_dict[state][program["programName"]]
+                    for subprogram in program["subPrograms"]:
+                        if subtitle_response_dict[state]["totalPaymentInDollars"] != 0.0:
+                            subprogram["totalPaymentInPercentageWithinState"] = (
+                                round(subprogram["totalPaymentInDollars"] /
+                                      subtitle_response_dict[state]["totalPaymentInDollars"] * 100, 2))
+                        else:
+                            subprogram["totalPaymentInPercentageWithinState"] = 0.0
 
     # Create endpoint response dictionary
     endpoint_response_list = []
@@ -1113,4 +1116,3 @@ def generate_title_i_state_distribution_response(subtitle_id, start_year, end_ye
     response = {str(start_year) + "-" + str(end_year): endpoint_response_list}
 
     return response
-
