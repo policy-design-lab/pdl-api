@@ -922,6 +922,13 @@ def generate_title_i_state_distribution_response(subtitle_id, start_year, end_ye
     subtitle_subquery_recipient_count = (session.query(func.sum(Payment.recipient_count))
                                          .filter(Payment.subtitle_id == subtitle_id, Payment.year.between(start_year, end_year)).scalar_subquery())
 
+    subtitle_subquery_recipient_count_by_year_state = (session.query(func.avg(Payment.recipient_count).label("averageRecipientCount"), Payment.year, Payment.state_code)
+                                                       .filter(Payment.subtitle_id == subtitle_id,
+                                                               Payment.year.between(start_year, end_year))
+                                                       .order_by(desc("averageRecipientCount"))
+                                                       .group_by(Payment.state_code, Payment.year)
+                                                       .all())
+
     # Construct the main query
     subtitle_query = session.query(
         Payment.state_code.label('state'),
@@ -954,6 +961,11 @@ def generate_title_i_state_distribution_response(subtitle_id, start_year, end_ye
     subtitle_response_dict = dict()
     for row in result:
         response_dict = dict(zip(column_names, row))
+
+        # Special handling
+        response_dict["totalCountsInPercentageNationwide"] = response_dict["averageRecipientCountInPercentageNationwide"]
+        if response_dict['averageAreaInAcres'] is None:
+            response_dict['averageAreaInAcres'] = 0.0
         subtitle_response_dict[response_dict['state']] = response_dict
 
     # Find all programs under the subtitle
@@ -973,20 +985,27 @@ def generate_title_i_state_distribution_response(subtitle_id, start_year, end_ye
     for program_id in program_ids:
 
         # Construct the subquery
-        program_subquery = (session.query(func.sum(Payment.payment))
-                            .filter(Payment.program_id == program_id, Payment.year.between(start_year, end_year))
-                            .label('totalPaymentInDollars'))
+        program_subquery_total_payment = (session.query(func.sum(Payment.payment))
+                                          .filter(Payment.program_id == program_id, Payment.year.between(start_year, end_year))
+                                          .label('totalPaymentInDollars'))
+        program_subquery_recipient_count = (session.query(func.sum(Payment.recipient_count))
+                                            .filter(Payment.program_id == program_id,
+                                                    Payment.year.between(start_year, end_year)).scalar_subquery())
 
         # Construct the main query
         program_query = session.query(
             Payment.state_code.label('state'),
             Program.name.label('programName'),
             func.sum(Payment.payment).label('totalPaymentInDollars'),
+            func.cast(func.sum(Payment.recipient_count), Integer).label('totalCounts'),
             func.round(func.avg(Payment.base_acres), 2).label('averageAreaInAcres'),
-            # TODO: Check why the recipient count needed to be multiplied by 2
-            func.cast(func.avg(Payment.recipient_count) * 2, BigInteger).label('averageRecipientCount'),
-            (func.cast(func.sum(Payment.payment) / program_subquery * 100, Numeric(5, 2))).label(
-                'totalPaymentInPercentageNationwide')
+            # TODO: Fix average recipient calculation
+            func.cast(func.avg(Payment.recipient_count), BigInteger).label('averageRecipientCount'),
+            (func.cast(func.sum(Payment.payment) / program_subquery_total_payment * 100, Numeric(5, 2))).label(
+                'totalPaymentInPercentageNationwide'),
+            (func.cast(func.sum(Payment.recipient_count) / program_subquery_recipient_count * 100,
+                       Numeric(5, 2))).label(
+                'averageRecipientCountInPercentageNationwide')
         ).join(
             Program, Payment.program_id == Program.id
         ).filter(
@@ -1009,6 +1028,8 @@ def generate_title_i_state_distribution_response(subtitle_id, start_year, end_ye
             state = response_dict['state']
 
             # Special handling
+            response_dict["totalCountsInPercentageNationwide"] = response_dict[
+                "averageRecipientCountInPercentageNationwide"]
             response_dict['subPrograms'] = []
             if response_dict['averageAreaInAcres'] is None:
                 response_dict['averageAreaInAcres'] = 0.0
@@ -1082,13 +1103,28 @@ def generate_title_i_state_distribution_response(subtitle_id, start_year, end_ye
             for program in subtitle_response_dict[state]["programs"]:
                 if state in subprogram_response_dict and program["programName"] in subprogram_response_dict[state]:
                     program["subPrograms"] = subprogram_response_dict[state][program["programName"]]
-                    for subprogram in program["subPrograms"]:
-                        if subtitle_response_dict[state]["totalPaymentInDollars"] != 0.0:
-                            subprogram["totalPaymentInPercentageWithinState"] = (
-                                round(subprogram["totalPaymentInDollars"] /
-                                      subtitle_response_dict[state]["totalPaymentInDollars"] * 100, 2))
-                        else:
-                            subprogram["totalPaymentInPercentageWithinState"] = 0.0
+
+                if subtitle_response_dict[state]["totalPaymentInDollars"] != 0.0:
+                    program["totalPaymentInPercentageWithinState"] = (
+                        round(program["totalPaymentInDollars"] / subtitle_response_dict[state]["totalPaymentInDollars"] * 100, 2))
+                else:
+                    program["totalPaymentInPercentageWithinState"] = 0.0
+
+                if subtitle_response_dict[state]["totalCounts"] != 0:
+                    program["averageRecipientCountInPercentageWithinState"] = (
+                        round(program["averageRecipientCount"] / subtitle_response_dict[state]["totalCounts"] * 100, 2))
+                    program["totalCountsInPercentageWithinState"] = program["averageRecipientCountInPercentageWithinState"]
+                else:
+                    program["averageRecipientCountInPercentageWithinState"] = 0.0
+                    program["totalCountsInPercentageWithinState"] = 0.0
+
+                for subprogram in program["subPrograms"]:
+                    if subtitle_response_dict[state]["totalPaymentInDollars"] != 0.0:
+                        subprogram["totalPaymentInPercentageWithinState"] = (
+                            round(subprogram["totalPaymentInDollars"] /
+                                  subtitle_response_dict[state]["totalPaymentInDollars"] * 100, 2))
+                    else:
+                        subprogram["totalPaymentInPercentageWithinState"] = 0.0
         else:
             subtitle_response_dict[state].update({"programs": []})
 
