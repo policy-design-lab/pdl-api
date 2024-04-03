@@ -33,10 +33,10 @@ tags:
   description: "Title II ACEP conservation data."
 - name: "Title II: Conservation - RCPP (Regional Conservation Partnership Program)"
   description: "Title II RCPP conservation data."
-- name: "Title XI: Crop insurance"
-  description: "Title XI Crop Insurance data."
 - name: "Title IV: SNAP (Supplemental Nutrition Assistant Program)"
   description: "Title IV SNAP data."
+- name: "Title XI: Crop insurance"
+  description: "Title XI Crop Insurance data."
 paths:
   /pdl/summary:
     get:

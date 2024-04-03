@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Changed
+### Removed
 - Retired old endpoints. [#179](https://github.com/policy-design-lab/pdl-api/issues/179)
 
 ## [0.11.0] - 2024-02-22
