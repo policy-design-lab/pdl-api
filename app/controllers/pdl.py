@@ -19,59 +19,46 @@ from app.models.subtitle import Subtitle
 LANDING_PAGE_DATA_PATH = os.path.join("controllers", "data", "landingpage")
 ALLPROGRAM_DATA_JSON = "allprograms.json"
 SUMMARY_DATA_JSON = "summary.json"
-COMMOD_JSON_DATA_PATH = os.path.join("controllers", "data", "commodities")
-COMMOD_MAP_DATA_JSON = "commodities_map_data.json"
-COMMOD_STATE_DISTRIBUTION_DATA_JSON = "commodities_state_distribution_data.json"
-COMMOD_SUBPROGRAMS_DATA_JSON = "commodities_subprograms_data.json"
-DMC_STATE_DISTRIBUTION_DATA_JSON = "dmc_state_distribution_data.json"
-DMC_SUBPROGRAMS_DATA_JSON = "dmc_subprograms_data.json"
-SADA_STATE_DISTRIBUTION_DATA_JSON = "sada_state_distribution_data.json"
-SADA_SUBPROGRAMS_DATA_JSON = "sada_subprograms_data.json"
-CSP_JSON_DATA_PATH = os.path.join("controllers", "data", "conservation", "csp")
-CSP_MAP_DATA_JSON = "csp_map_data.json"
-CSP_STATE_DISTRIBUTION_DATA_JSON = "csp_state_distribution_data.json"
-CSP_PRACTICE_CATEGORIES_DATA_JSON = "csp_practice_categories_data.json"
-CRP_JSON_DATA_PATH = os.path.join("controllers", "data", "conservation", "crp")
-CRP_STATE_DISTRIBUTION_DATA_JSON = "crp_state_distribution_data.json"
-CRP_SUBPROGRAMS_DATA_JSON = "crp_subprograms_data.json"
-ACEP_JSON_DATA_PATH = os.path.join("controllers", "data", "conservation", "acep")
-ACEP_STATE_DISTRIBUTION_DATA_JSON = "acep_state_distribution_data.json"
-ACEP_SUBPROGRAMS_DATA_JSON = "acep_subprograms_data.json"
-RCPP_JSON_DATA_PATH = os.path.join("controllers", "data", "conservation", "rcpp")
-RCPP_STATE_DISTRIBUTION_DATA_JSON = "rcpp_state_distribution_data.json"
-RCPP_SUBPROGRAMS_DATA_JSON = "rcpp_subprograms_data.json"
-SNAP_JSON_DATA_PATH = os.path.join("controllers", "data", "snap")
-SNAP_DATA_JSON = "snap_state_distribution_data.json"
-SNAP_STATE_DISTRIBUTION_DATA_JSON = "snap_state_distribution_data.json"
-SNAP_SUBPROGRAMS_DATA_JSON = "snap_subprograms_data.json"
-EQIP_JSON_DATA_PATH = os.path.join("controllers", "data", "conservation", "eqip")
-EQIP_MAP_DATA_JSON = "eqip_map_data.json"
-EQIP_STATE_DISTRIBUTION_DATA_JSON = "eqip_state_distribution_data.json"
-EQIP_PRACTICE_CATEGORIES_DATA_JSON = "eqip_practice_categories_data.json"
-SNAP_JSON_DATA_PATH = os.path.join("controllers", "data", "snap")
-SNAP_DATA_JSON = "snap_state_distribution_data.json"
-SNAP_SUBPROGRAMS_DATA_JSON = "summary.json"
-CROP_INSURANCE_JSON_DATA_PATH = os.path.join("controllers", "data", "crop-insurance")
-CROP_INSURANCE_SUMMARY_DATA_JSON = "crop_insurance_subprograms_data.json"
-CROP_INSURANCE_STATE_DISTRIBUTION_DATA_JSON = "crop_insurance_state_distribution_data.json"
 
 TITLE_I_DATA_PATH = os.path.join("controllers", "data", "title-i")
 I_SUBTITLE_A_DATA_PATH = os.path.join(TITLE_I_DATA_PATH, "subtitle-a")
+COMMOD_MAP_DATA_JSON = "commodities_map_data.json"
+COMMOD_STATE_DISTRIBUTION_DATA_JSON = "commodities_state_distribution_data.json"
+COMMOD_SUBPROGRAMS_DATA_JSON = "commodities_subprograms_data.json"
 I_SUBTITLE_D_DATA_PATH = os.path.join(TITLE_I_DATA_PATH, "subtitle-d")
+DMC_STATE_DISTRIBUTION_DATA_JSON = "dmc_state_distribution_data.json"
+DMC_SUBPROGRAMS_DATA_JSON = "dmc_subprograms_data.json"
 I_SUBTITLE_E_DATA_PATH = os.path.join(TITLE_I_DATA_PATH, "subtitle-e")
+SADA_STATE_DISTRIBUTION_DATA_JSON = "sada_state_distribution_data.json"
+SADA_SUBPROGRAMS_DATA_JSON = "sada_subprograms_data.json"
 
 TITLE_II_DATA_PATH = os.path.join("controllers", "data", "title-ii")
 II_EQIP_DATA_PATH = os.path.join(TITLE_II_DATA_PATH, "programs", "eqip")
+EQIP_MAP_DATA_JSON = "eqip_map_data.json"
+EQIP_STATE_DISTRIBUTION_DATA_JSON = "eqip_state_distribution_data.json"
+EQIP_PRACTICE_CATEGORIES_DATA_JSON = "eqip_practice_categories_data.json"
 II_CSP_DATA_PATH = os.path.join(TITLE_II_DATA_PATH, "programs", "csp")
+CSP_MAP_DATA_JSON = "csp_map_data.json"
+CSP_STATE_DISTRIBUTION_DATA_JSON = "csp_state_distribution_data.json"
+CSP_PRACTICE_CATEGORIES_DATA_JSON = "csp_practice_categories_data.json"
 II_CRP_DATA_PATH = os.path.join(TITLE_II_DATA_PATH, "programs", "crp")
+CRP_STATE_DISTRIBUTION_DATA_JSON = "crp_state_distribution_data.json"
+CRP_SUBPROGRAMS_DATA_JSON = "crp_subprograms_data.json"
 II_ACEP_DATA_PATH = os.path.join(TITLE_II_DATA_PATH, "programs", "acep")
+ACEP_STATE_DISTRIBUTION_DATA_JSON = "acep_state_distribution_data.json"
+ACEP_SUBPROGRAMS_DATA_JSON = "acep_subprograms_data.json"
 II_RCPP_DATA_PATH = os.path.join(TITLE_II_DATA_PATH, "programs", "rcpp")
-
+RCPP_STATE_DISTRIBUTION_DATA_JSON = "rcpp_state_distribution_data.json"
+RCPP_SUBPROGRAMS_DATA_JSON = "rcpp_subprograms_data.json"
 TITLE_IV_DATA_PATH = os.path.join("controllers", "data", "title-iv")
 IV_SNAP_DATA_PATH = os.path.join(TITLE_IV_DATA_PATH, "programs", "snap")
+SNAP_STATE_DISTRIBUTION_DATA_JSON = "snap_state_distribution_data.json"
+SNAP_SUBPROGRAMS_DATA_JSON = "summary.json"
 
 TITLE_XI_DATA_PATH = os.path.join("controllers", "data", "title-xi")
 XI_CROP_INS_DATA_PATH = os.path.join(TITLE_XI_DATA_PATH, "programs", "crop-insurance")
+CROP_INSURANCE_SUMMARY_DATA_JSON = "crop_insurance_subprograms_data.json"
+CROP_INSURANCE_STATE_DISTRIBUTION_DATA_JSON = "crop_insurance_state_distribution_data.json"
 
 
 def search():
@@ -201,336 +188,6 @@ def allprograms_search():
         data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
 
         return data_json
-
-
-# SNAP state distribution data
-def programs_snap_state_distribution_search():
-    # set the file path
-    eqip_data = os.path.join(SNAP_JSON_DATA_PATH, SNAP_DATA_JSON)
-
-    # open file
-    with open(eqip_data, 'r') as map_data:
-        file_data = map_data.read()
-
-        # parse file
-        data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
-
-        return data_json
-
-
-# commodities map data
-def programs_commodities_map_search():
-    # set the file path
-    csp_data = os.path.join(COMMOD_JSON_DATA_PATH, COMMOD_MAP_DATA_JSON)
-
-    # open file
-    with open(csp_data, 'r') as map_data:
-        file_data = map_data.read()
-
-        # parse file
-        data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
-
-        return data_json
-
-
-# Commodities state distribution data
-def programs_commodities_state_distribution_search():
-    # set the file path
-    csp_data = os.path.join(COMMOD_JSON_DATA_PATH, COMMOD_STATE_DISTRIBUTION_DATA_JSON)
-
-    # open file
-    with open(csp_data, 'r') as state_data:
-        file_data = state_data.read()
-
-    # parse file
-    data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
-
-    return data_json
-
-
-# Commodities subprogram data
-def programs_commodities_subprograms_search():
-    # set the file path
-    csp_data = os.path.join(COMMOD_JSON_DATA_PATH, COMMOD_SUBPROGRAMS_DATA_JSON)
-
-    # open file
-    with open(csp_data, 'r') as subprograms_data:
-        file_data = subprograms_data.read()
-
-    # parse file
-    data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
-
-    return data_json
-
-
-# DMC state distribution data
-def programs_commodities_dmc_state_distribution_search():
-    # set the file path
-    dmc_data = os.path.join(COMMOD_JSON_DATA_PATH, DMC_STATE_DISTRIBUTION_DATA_JSON)
-
-    # open file
-    with open(dmc_data, 'r') as state_data:
-        file_data = state_data.read()
-
-    # parse file
-    data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
-
-    return data_json
-
-
-# DMC practice subprograms data
-def programs_commodities_dmc_subprograms_search():
-    # set the file path
-    dmc_data = os.path.join(COMMOD_JSON_DATA_PATH, DMC_SUBPROGRAMS_DATA_JSON)
-
-    # open file
-    with open(dmc_data, 'r') as practice_data:
-        file_data = practice_data.read()
-
-    # parse file
-    data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
-
-    return data_json
-
-
-# SADA state distribution data
-def programs_commodities_sada_state_distribution_search():
-    # set the file path
-    dmc_data = os.path.join(COMMOD_JSON_DATA_PATH, SADA_STATE_DISTRIBUTION_DATA_JSON)
-
-    # open file
-    with open(dmc_data, 'r') as state_data:
-        file_data = state_data.read()
-
-    # parse file
-    data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
-
-    return data_json
-
-
-# SADA practice subprograms data
-def programs_commodities_sada_subprograms_search():
-    # set the file path
-    dmc_data = os.path.join(COMMOD_JSON_DATA_PATH, SADA_SUBPROGRAMS_DATA_JSON)
-
-    # open file
-    with open(dmc_data, 'r') as practice_data:
-        file_data = practice_data.read()
-
-    # parse file
-    data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
-
-    return data_json
-
-
-# CSP map data
-def programs_conservation_csp_map_search():
-    # set the file path
-    csp_data = os.path.join(CSP_JSON_DATA_PATH, CSP_MAP_DATA_JSON)
-
-    # open file
-    with open(csp_data, 'r') as map_data:
-        file_data = map_data.read()
-
-        # parse file
-        data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
-
-        return data_json
-
-
-# CSP state distribution data
-def programs_conservation_csp_state_distribution_search():
-    # set the file path
-    csp_data = os.path.join(CSP_JSON_DATA_PATH, CSP_STATE_DISTRIBUTION_DATA_JSON)
-
-    # open file
-    with open(csp_data, 'r') as state_data:
-        file_data = state_data.read()
-
-    # parse file
-    data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
-
-    return data_json
-
-
-# CSP practice category data
-def programs_conservation_csp_practice_categories_search():
-    # set the file path
-    csp_data = os.path.join(CSP_JSON_DATA_PATH, CSP_PRACTICE_CATEGORIES_DATA_JSON)
-
-    # open file
-    with open(csp_data, 'r') as practice_data:
-        file_data = practice_data.read()
-
-    # parse file
-    data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
-
-    return data_json
-
-
-# CRP state distribution data
-def programs_conservation_crp_state_distribution_search():
-    # set the file path
-    crp_data = os.path.join(CRP_JSON_DATA_PATH, CRP_STATE_DISTRIBUTION_DATA_JSON)
-
-    # open file
-    with open(crp_data, 'r') as state_data:
-        file_data = state_data.read()
-
-    # parse file
-    data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
-
-    return data_json
-
-
-# CRP practice category data
-def programs_conservation_crp_subprograms_search():
-    # set the file path
-    crp_data = os.path.join(CRP_JSON_DATA_PATH, CRP_SUBPROGRAMS_DATA_JSON)
-
-    # open file
-    with open(crp_data, 'r') as practice_data:
-        file_data = practice_data.read()
-
-    # parse file
-    data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
-
-    return data_json
-
-
-# ACEP state distribution data
-def programs_conservation_acep_state_distribution_search():
-    # set the file path
-    acep_data = os.path.join(ACEP_JSON_DATA_PATH, ACEP_STATE_DISTRIBUTION_DATA_JSON)
-
-    # open file
-    with open(acep_data, 'r') as state_data:
-        file_data = state_data.read()
-
-    # parse file
-    data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
-
-    return data_json
-
-
-# ACEP practice subprograms data
-def programs_conservation_acep_subprograms_search():
-    # set the file path
-    acep_data = os.path.join(ACEP_JSON_DATA_PATH, ACEP_SUBPROGRAMS_DATA_JSON)
-
-    # open file
-    with open(acep_data, 'r') as practice_data:
-        file_data = practice_data.read()
-
-    # parse file
-    data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
-
-    return data_json
-
-
-# RCPP state distribution data
-def programs_conservation_rcpp_state_distribution_search():
-    # set the file path
-    rcpp_data = os.path.join(RCPP_JSON_DATA_PATH, RCPP_STATE_DISTRIBUTION_DATA_JSON)
-
-    # open file
-    with open(rcpp_data, 'r') as state_data:
-        file_data = state_data.read()
-
-    # parse file
-    data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
-
-    return data_json
-
-
-# RCPP practice subprograms data
-def programs_conservation_rcpp_subprograms_search():
-    # set the file path
-    rcpp_data = os.path.join(RCPP_JSON_DATA_PATH, RCPP_SUBPROGRAMS_DATA_JSON)
-
-    # open file
-    with open(rcpp_data, 'r') as practice_data:
-        file_data = practice_data.read()
-
-    # parse file
-    data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
-
-    return data_json
-
-
-# EQIP Map Data
-def programs_conservation_eqip_map_search():
-    # set the file path
-    eqip_data = os.path.join(EQIP_JSON_DATA_PATH, EQIP_MAP_DATA_JSON)
-
-    # open file
-    with open(eqip_data, 'r') as map_data:
-        file_data = map_data.read()
-
-    # parse file
-    data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
-
-    return data_json
-
-
-# EQIP payment distribution data for all states
-def programs_conservation_eqip_state_distribution_search():
-    # set the file path
-    eqip_data = os.path.join(EQIP_JSON_DATA_PATH, EQIP_STATE_DISTRIBUTION_DATA_JSON)
-
-    # open file
-    with open(eqip_data, 'r') as map_data:
-        file_data = map_data.read()
-
-    # parse file
-    data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
-
-    return data_json
-
-
-# EQIP payment distribution data by practice categories
-def programs_conservation_eqip_practice_categories_search():
-    # set the file path
-    eqip_data = os.path.join(EQIP_JSON_DATA_PATH, EQIP_PRACTICE_CATEGORIES_DATA_JSON)
-
-    # open file
-    with open(eqip_data, 'r') as map_data:
-        file_data = map_data.read()
-
-    # parse file
-    data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
-
-    return data_json
-
-
-# Crop Insurance payment distribution data for all states
-def programs_crop_insurance_state_distribution_search():
-    # set the file path
-    eqip_data = os.path.join(CROP_INSURANCE_JSON_DATA_PATH, CROP_INSURANCE_STATE_DISTRIBUTION_DATA_JSON)
-
-    # open file
-    with open(eqip_data, 'r') as map_data:
-        file_data = map_data.read()
-
-    # parse file
-    data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
-
-    return data_json
-
-
-# Crop Insurance summary data for all states
-def programs_crop_insurance_summary_search():
-    # set the file path
-    eqip_data = os.path.join(CROP_INSURANCE_JSON_DATA_PATH, CROP_INSURANCE_SUMMARY_DATA_JSON)
-
-    # open file
-    with open(eqip_data, 'r') as map_data:
-        file_data = map_data.read()
-
-    # parse file
-    data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
-
-    return data_json
 
 
 # /pdl/titles/title-i/subtitles/subtitle-a/map:

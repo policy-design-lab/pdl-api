@@ -15,16 +15,28 @@ tags:
   description: "Farm Bill summary data."
 - name: "All Programs"
   description: "All programs data."
-- name: "Title I: Commodities"
-  description: "Farm Bill Title I: Commodities data."
-- name: "Title II: Conservation - CSP"
-  description: "Farm Bill Title II: Conservation - Conservation Stewardship Program (CSP) data."
-- name: "Title II: Conservation - EQIP"
-  description: "Farm Bill Title II: Conservation - Environmental Quality Incentives Program (EQIP) data."
-- name: "SNAP State Distribution Data"
-  description: "Supplemental Nutrition Assistant Program (SNAP) state distribution data"
 - name: "States"
   description: "Information related to States."
+- name: "Title I: Commodities - Subtitle A"
+  description: "Title I Subtitle A commodities data."
+- name: "Title I: Commodities - Subtitle D, Dairy Margin Coverage"
+  description: "Title I Subtitle D Dairy Margin Coverage data."
+- name: "Title I: Commodities - Subtitle E, Supplemental Agricultural Disaster Assistance"
+  description: "Title I Subtitle E Supplemental Agricultural Disaster Assistance data."
+- name: "Title II: Conservation - EQIP (Environmental Quality Incentives Program)"
+  description: "Title II EQIP conservation data."
+- name: "Title II: Conservation - CSP (Conservation Stewardship Program)"
+  description: "Title II CSP conservation data."
+- name: "Title II: Conservation - CRP (Conservation Reserve Program)"
+  description: "Title II CRP conservation data."
+- name: "Title II: Conservation - ACEP (Agricultural Conservation Easement Program)"
+  description: "Title II ACEP conservation data."
+- name: "Title II: Conservation - RCPP (Regional Conservation Partnership Program)"
+  description: "Title II RCPP conservation data."
+- name: "Title IV: SNAP (Supplemental Nutrition Assistant Program)"
+  description: "Title IV SNAP data."
+- name: "Title XI: Crop insurance"
+  description: "Title XI Crop Insurance data."
 paths:
   /pdl/summary:
     get:
@@ -177,453 +189,13 @@ paths:
           description: Unauthorized
         500:
           description: Internal error
-  /pdl/programs/commodities/map:
-    get:
-      tags:
-        - "Title I: Commodities"
-      summary: Gets the Commodities payment distribution data for map visualization.
-      description: |
-        Returns  the Commodities payment distribution data for map visualization in JSON format.
-      responses:
-        200:
-          description: Ok
-          content:
-            application/json:
-              schema:
-                type: string
-        400:
-          description: Bad request
-        401:
-          description: Unauthorized
-        500:
-          description: Internal error
-  /pdl/programs/commodities/state-distribution:
-    get:
-      tags:
-        - "Title I: Commodities"
-      summary: Gets the Commodities payment distribution data for all states.
-      description: |
-        Returns the Commodities payment distribution data for all states in JSON format.
-      responses:
-        200:
-          description: Ok
-          content:
-            application/json:
-              schema:
-                type: string
-        400:
-          description: Bad request
-        401:
-          description: Unauthorized
-        500:
-          description: Internal error
-  /pdl/programs/commodities/subprograms:
-    get:
-      tags:
-        - "Title I: Commodities"
-      summary: Gets the Commodities payment distribution data for all subprograms.
-      description: |
-        Returns the Commodities payment distribution data for all subprograms in JSON format.
-      responses:
-        200:
-          description: Ok
-          content:
-            application/json:
-              schema:
-                type: string
-        400:
-          description: Bad request
-        401:
-          description: Unauthorized
-        500:
-          description: Internal error
-  /pdl/programs/commodities/dmc/state-distribution:
-    get:
-      tags:
-        - "Title I: Commodities - DMC"
-      summary: Gets the DMC commodities data for all states.
-      description: |
-        Returns  the DMC commodities data for all states in JSON format.
-      responses:
-        200:
-          description: Ok
-          content:
-            application/json:
-              schema:
-                type: string
-        400:
-          description: Bad request
-        401:
-          description: Unauthorized
-        500:
-          description: Internal error
-  /pdl/programs/commodities/dmc/subprograms:
-    get:
-      tags:
-        - "Title I: Commodities - DMC"
-      summary: Gets the DMC commodities distribution data for all subprograms.
-      description: |
-        Returns the DMC commodities distribution data for all subprograms in JSON format.
-      responses:
-        200:
-          description: Ok
-          content:
-            application/json:
-              schema:
-                type: string
-        400:
-          description: Bad request
-        401:
-          description: Unauthorized
-        500:
-          description: Internal error
-  /pdl/programs/commodities/sada/state-distribution:
-    get:
-      tags:
-        - "Title I: Commodities - SADA"
-      summary: Gets the SADA commodities data for all states.
-      description: |
-        Returns  the SADA commodities data for all states in JSON format.
-      responses:
-        200:
-          description: Ok
-          content:
-            application/json:
-              schema:
-                type: string
-        400:
-          description: Bad request
-        401:
-          description: Unauthorized
-        500:
-          description: Internal error
-  /pdl/programs/commodities/sada/subprograms:
-    get:
-      tags:
-        - "Title I: Commodities - SADA"
-      summary: Gets the SADA commodities distribution data for all subprograms.
-      description: |
-        Returns the SADA commodities distribution data for all subprograms in JSON format.
-      responses:
-        200:
-          description: Ok
-          content:
-            application/json:
-              schema:
-                type: string
-        400:
-          description: Bad request
-        401:
-          description: Unauthorized
-        500:
-          description: Internal error
-  /pdl/programs/conservation/csp/map:
-    get:
-      tags:
-        - "Title II: Conservation - CSP"
-      summary: Gets the CSP conservation data for map visualization.
-      description: |
-        Returns  the CSP conservation data for map visualization in JSON format.
-      responses:
-        200:
-          description: Ok
-          content:
-            application/json:
-              schema:
-                type: string
-        400:
-          description: Bad request
-        401:
-          description: Unauthorized
-        500:
-          description: Internal error
-  /pdl/programs/conservation/csp/state-distribution:
-    get:
-      tags:
-        - "Title II: Conservation - CSP"
-      summary: Gets the CSP conservation data for all states.
-      description: |
-        Returns  the CSP conservation data for all states in JSON format.
-      responses:
-        200:
-          description: Ok
-          content:
-            application/json:
-              schema:
-                type: string
-        400:
-          description: Bad request
-        401:
-          description: Unauthorized
-        500:
-          description: Internal error
-  /pdl/programs/conservation/csp/practice-categories:
-    get:
-      tags:
-        - "Title II: Conservation - CSP"
-      summary: Gets the CSP conservation data for all practice categories.
-      description: |
-        Returns  the CSP conservation data for all practice categories in JSON format.
-      responses:
-        200:
-          description: Ok
-          content:
-            application/json:
-              schema:
-                type: string
-        400:
-          description: Bad request
-        401:
-          description: Unauthorized
-        500:
-          description: Internal error
-  /pdl/programs/conservation/crp/state-distribution:
-    get:
-      tags:
-        - "Title II: Conservation - CRP"
-      summary: Gets the CRP conservation data for all states.
-      description: |
-        Returns  the CRP conservation data for all states in JSON format.
-      responses:
-        200:
-          description: Ok
-          content:
-            application/json:
-              schema:
-                type: string
-        400:
-          description: Bad request
-        401:
-          description: Unauthorized
-        500:
-          description: Internal error
-  /pdl/programs/conservation/crp/subprograms:
-    get:
-      tags:
-        - "Title II: Conservation - CRP"
-      summary: Gets the CRP conservation distribution data for all subprograms.
-      description: |
-        Returns the CRP conservation distribution data for all subprograms in JSON format.
-      responses:
-        200:
-          description: Ok
-          content:
-            application/json:
-              schema:
-                type: string
-        400:
-          description: Bad request
-        401:
-          description: Unauthorized
-        500:
-          description: Internal error
-  /pdl/programs/conservation/acep/state-distribution:
-    get:
-      tags:
-        - "Title II: Conservation - ACEP"
-      summary: Gets the ACEP conservation data for all states.
-      description: |
-        Returns  the ACEP conservation data for all states in JSON format.
-      responses:
-        200:
-          description: Ok
-          content:
-            application/json:
-              schema:
-                type: string
-        400:
-          description: Bad request
-        401:
-          description: Unauthorized
-        500:
-          description: Internal error
-  /pdl/programs/conservation/acep/subprograms:
-    get:
-      tags:
-        - "Title II: Conservation - ACEP"
-      summary: Gets the ACEP conservation distribution data for all subprograms.
-      description: |
-        Returns the ACEP conservation distribution data for all subprograms in JSON format.
-      responses:
-        200:
-          description: Ok
-          content:
-            application/json:
-              schema:
-                type: string
-        400:
-          description: Bad request
-        401:
-          description: Unauthorized
-        500:
-          description: Internal error
-  /pdl/programs/conservation/rcpp/state-distribution:
-    get:
-      tags:
-        - "Title II: Conservation - RCPP"
-      summary: Gets the RCPP conservation data for all states.
-      description: |
-        Returns  the RCPP conservation data for all states in JSON format.
-      responses:
-        200:
-          description: Ok
-          content:
-            application/json:
-              schema:
-                type: string
-        400:
-          description: Bad request
-        401:
-          description: Unauthorized
-        500:
-          description: Internal error
-  /pdl/programs/conservation/rcpp/subprograms:
-    get:
-      tags:
-        - "Title II: Conservation - RCPP"
-      summary: Gets the RCPP conservation distribution data for all subprograms.
-      description: |
-        Returns the RCPP conservation distribution data for all subprograms in JSON format.
-      responses:
-        200:
-          description: Ok
-          content:
-            application/json:
-              schema:
-                type: string
-        400:
-          description: Bad request
-        401:
-          description: Unauthorized
-        500:
-          description: Internal error
-  /pdl/programs/conservation/eqip/map:
-    get:
-      tags:
-        - "Title II: Conservation - EQIP"
-      summary: Gets the EQIP payment distribution data for map visualization.
-      description: |
-        Returns  the EQIP payment distribution data for map visualization in JSON format.
-      responses:
-        200:
-          description: Ok
-          content:
-            application/json:
-              schema:
-                type: string
-        400:
-          description: Bad request
-        401:
-          description: Unauthorized
-        500:
-          description: Internal error
-  /pdl/programs/conservation/eqip/state-distribution:
-    get:
-      tags:
-        - "Title II: Conservation - EQIP"
-      summary: Gets the EQIP payment distribution data for all states.
-      description: |
-        Returns the EQIP payment distribution data for all states in JSON format.
-      responses:
-        200:
-          description: Ok
-          content:
-            application/json:
-              schema:
-                type: string
-        400:
-          description: Bad request
-        401:
-          description: Unauthorized
-        500:
-          description: Internal error
-  /pdl/programs/conservation/eqip/practice-categories:
-    get:
-      tags:
-        - "Title II: Conservation - EQIP"
-      summary: Gets the EQIP payment distribution data for all practice categories.
-      description: |
-        Returns the EQIP payment distribution data for all practice categories in JSON format.
-      responses:
-        200:
-          description: Ok
-          content:
-            application/json:
-              schema:
-                type: string
-        400:
-          description: Bad request
-        401:
-          description: Unauthorized
-        500:
-          description: Internal error
-  /pdl/programs/snap/state-distribution:
-    get:
-      tags:
-        - "SNAP State Distribution Data"
-      summary: Gets the SNAP state distribution data.
-      description: |
-        Returns the SNAP State Distribution Data in JSON format.
-      responses:
-        200:
-          description: Ok
-          content:
-            application/json:
-              schema:
-                type: string
-        400:
-          description: Bad request
-        401:
-          description: Unauthorized
-        500:
-          description: Internal error
-  /pdl/programs/crop-insurance/state-distribution:
-    get:
-      tags:
-        - "Crop insurance State Distribution Data"
-      summary: Gets the Crop Insurance state distribution data.
-      description: |
-        Returns the Crop Insurance State Distribution Data in JSON format.
-      responses:
-        200:
-          description: Ok
-          content:
-            application/json:
-              schema:
-                type: string
-        400:
-          description: Bad request
-        401:
-          description: Unauthorized
-        500:
-          description: Internal error
-  /pdl/programs/crop-insurance/summary:
-    get:
-      tags:
-        - "Crop insurance summary Data"
-      summary: Gets the crop insurance summary data.
-      description: |
-        Returns the Crop Insurance Summary Data in JSON format.
-      responses:
-        200:
-          description: Ok
-          content:
-            application/json:
-              schema:
-                type: string
-        400:
-          description: Bad request
-        401:
-          description: Unauthorized
-        500:
-          description: Internal error
   /pdl/titles/title-i/subtitles/subtitle-a/state-distribution:
     get:
       tags:
         - "Title I: Commodities - Subtitle A"
-      summary: Gets the Subtitle A commodities data for all states.
+      summary: Gets the Title I Subtitle A commodities data for all states.
       description: |
-        Returns  the Subtitle A commodities data for all states in JSON format.
+        Returns  the Title I Subtitle A commodities data for all states in JSON format.
       responses:
         200:
           description: Ok
@@ -641,9 +213,9 @@ paths:
     get:
       tags:
         - "Title I: Commodities - Subtitle A"
-      summary: Gets the Subtitle A commodities distribution data for all subprograms.
+      summary: Gets the Title I Subtitle A commodities distribution data for all subprograms.
       description: |
-        Returns the Subtitle A commodities distribution data for all subprograms in JSON format.
+        Returns the Title I Subtitle A commodities distribution data for all subprograms in JSON format.
       responses:
         200:
           description: Ok
@@ -661,9 +233,9 @@ paths:
     get:
       tags:
         - "Title I: Commodities - Subtitle A"
-      summary: Gets the Subtitle A commodities payment distribution data for map visualization.
+      summary: Gets the Title I Subtitle A commodities payment distribution data for map visualization.
       description: |
-        Returns  the Subtitle A commodities payment distribution data for map visualization in JSON format.
+        Returns  the Title I Subtitle A commodities payment distribution data for map visualization in JSON format.
       responses:
         200:
           description: Ok
@@ -680,10 +252,10 @@ paths:
   /pdl/titles/title-i/subtitles/subtitle-d/state-distribution:
     get:
       tags:
-        - "Title I: Commodities - Subtitle D"
-      summary: Gets the Subtitle D commodities data for all states.
+        - "Title I: Commodities - Subtitle D, Dairy Margin Coverage"
+      summary: Gets the Title I Subtitle D Dairy Margin Coverage data for all states.
       description: |
-        Returns  the Subtitle D commodities data for all states in JSON format.
+        Returns  the Title I Subtitle D Dairy Margin Coverage data for all states in JSON format.
       responses:
         200:
           description: Ok
@@ -700,10 +272,10 @@ paths:
   /pdl/titles/title-i/subtitles/subtitle-d/summary:
     get:
       tags:
-        - "Title I: Commodities - Subtitle D"
-      summary: Gets the Subtitle D commodities distribution data for all subprograms.
+        - "Title I: Commodities - Subtitle D, Dairy Margin Coverage"
+      summary: Gets the Title I Subtitle D Dairy Margin Coverage distribution data for all subprograms.
       description: |
-        Returns the Subtitle D commodities distribution data for all subprograms in JSON format.
+        Returns the Title I Subtitle D Dairy Margin Coverage distribution data for all subprograms in JSON format.
       responses:
         200:
           description: Ok
@@ -720,10 +292,10 @@ paths:
   /pdl/titles/title-i/subtitles/subtitle-e/state-distribution:
     get:
       tags:
-        - "Title I: Commodities - Subtitle E"
-      summary: Gets the Subtitle E commodities data for all states.
+        - "Title I: Commodities - Subtitle E, Supplemental Agricultural Disaster Assistance"
+      summary: Gets the Title I Subtitle E Supplemental Agricultural Disaster Assistance data for all states.
       description: |
-        Returns  the Subtitle E commodities data for all states in JSON format.
+        Returns  the Title I Subtitle E Supplemental Agricultural Disaster Assistance data for all states in JSON format.
       responses:
         200:
           description: Ok
@@ -740,10 +312,10 @@ paths:
   /pdl/titles/title-i/subtitles/subtitle-e/summary:
     get:
       tags:
-        - "Title I: Commodities - Subtitle E"
-      summary: Gets the Subtitle E commodities distribution data for all subprograms.
+        - "Title I: Commodities - Subtitle E, Supplemental Agricultural Disaster Assistance"
+      summary: Gets the Title I Subtitle E Supplemental Agricultural Disaster Assistance distribution data for all subprograms.
       description: |
-        Returns the Subtitle E commodities distribution data for all subprograms in JSON format.
+        Returns the Title I Subtitle E Supplemental Agricultural Disaster Assistance distribution data for all subprograms in JSON format.
       responses:
         200:
           description: Ok
@@ -760,10 +332,10 @@ paths:
   /pdl/titles/title-ii/programs/eqip/map:
     get:
       tags:
-        - "Title II: Conservation - EQIP"
-      summary: Gets the EQIP conservation data for map visualization.
+        - "Title II: Conservation - EQIP (Environmental Quality Incentives Program)"
+      summary: Gets the Title II EQIP conservation data for map visualization.
       description: |
-        Returns  the EQIP conservation data for map visualization in JSON format.
+        Returns  the Title II EQIP conservation data for map visualization in JSON format.
       responses:
         200:
           description: Ok
@@ -780,10 +352,10 @@ paths:
   /pdl/titles/title-ii/programs/eqip/state-distribution:
     get:
       tags:
-        - "Title II: Conservation - EQIP"
-      summary: Gets the EQIP conservation data for all states.
+        - "Title II: Conservation - EQIP (Environmental Quality Incentives Program)"
+      summary: Gets the Title II EQIP conservation data for all states.
       description: |
-        Returns  the EQIP conservation data for all states in JSON format.
+        Returns  the Title II EQIP conservation data for all states in JSON format.
       responses:
         200:
           description: Ok
@@ -800,10 +372,10 @@ paths:
   /pdl/titles/title-ii/programs/eqip/summary:
     get:
       tags:
-        - "Title II: Conservation - EQIP"
-      summary: Gets the EQIP conservation data for all practice categories.
+        - "Title II: Conservation - EQIP (Environmental Quality Incentives Program)"
+      summary: Gets the Title II EQIP conservation data for all practice categories.
       description: |
-        Returns the EQIP conservation data for all practice categories in JSON format.
+        Returns the Title II EQIP conservation data for all practice categories in JSON format.
       responses:
         200:
           description: Ok
@@ -820,10 +392,10 @@ paths:
   /pdl/titles/title-ii/programs/csp/map:
     get:
       tags:
-        - "Title II: Conservation - CSP"
-      summary: Gets the CSP conservation data for map visualization.
+        - "Title II: Conservation - CSP (Conservation Stewardship Program)"
+      summary: Gets the Title II CSP conservation data for map visualization.
       description: |
-        Returns  the CSP conservation data for map visualization in JSON format.
+        Returns  the Title II CSP conservation data for map visualization in JSON format.
       responses:
         200:
           description: Ok
@@ -840,10 +412,10 @@ paths:
   /pdl/titles/title-ii/programs/csp/state-distribution:
     get:
       tags:
-        - "Title II: Conservation - CSP"
-      summary: Gets the CSP conservation data for all states.
+        - "Title II: Conservation - CSP (Conservation Stewardship Program)"
+      summary: Gets the Title II CSP conservation data for all states.
       description: |
-        Returns  the CSP conservation data for all states in JSON format.
+        Returns  the Title II CSP conservation data for all states in JSON format.
       responses:
         200:
           description: Ok
@@ -860,10 +432,10 @@ paths:
   /pdl/titles/title-ii/programs/csp/summary:
     get:
       tags:
-        - "Title II: Conservation - CSP"
-      summary: Gets the CSP conservation data for all program categories.
+        - "Title II: Conservation - CSP (Conservation Stewardship Program)"
+      summary: Gets the Title II CSP conservation data for all program categories.
       description: |
-        Returns the CSP conservation data for all program categories in JSON format.
+        Returns the Title II CSP conservation data for all program categories in JSON format.
       responses:
         200:
           description: Ok
@@ -880,10 +452,10 @@ paths:
   /pdl/titles/title-ii/programs/crp/state-distribution:
     get:
       tags:
-        - "Title II: Conservation - CRP"
-      summary: Gets the CRP conservation data for all states.
+        - "Title II: Conservation - CRP (Conservation Reserve Program)"
+      summary: Gets the Title II CRP conservation data for all states.
       description: |
-        Returns  the CRP conservation data for all states in JSON format.
+        Returns  the Title II CRP conservation data for all states in JSON format.
       responses:
         200:
           description: Ok
@@ -900,10 +472,10 @@ paths:
   /pdl/titles/title-ii/programs/crp/summary:
     get:
       tags:
-        - "Title II: Conservation - CRP"
-      summary: Gets the CRP conservation distribution data for all subprograms.
+        - "Title II: Conservation - CRP (Conservation Reserve Program)"
+      summary: Gets the Title II CRP conservation distribution data for all subprograms.
       description: |
-        Returns the CRP conservation distribution data for all subprograms in JSON format.
+        Returns the Title II CRP conservation distribution data for all subprograms in JSON format.
       responses:
         200:
           description: Ok
@@ -920,10 +492,10 @@ paths:
   /pdl/titles/title-ii/programs/acep/state-distribution:
     get:
       tags:
-        - "Title II: Conservation - ACEP"
-      summary: Gets the ACEP conservation data for all states.
+        - "Title II: Conservation - ACEP (Agricultural Conservation Easement Program)"
+      summary: Gets the Title II ACEP conservation data for all states.
       description: |
-        Returns  the ACEP conservation data for all states in JSON format.
+        Returns  the Title II ACEP conservation data for all states in JSON format.
       responses:
         200:
           description: Ok
@@ -940,10 +512,10 @@ paths:
   /pdl/titles/title-ii/programs/acep/summary:
     get:
       tags:
-        - "Title II: Conservation - ACEP"
-      summary: Gets the ACEP conservation distribution data for all subprograms.
+        - "Title II: Conservation - ACEP (Agricultural Conservation Easement Program)"
+      summary: Gets the Title II ACEP conservation distribution data for all subprograms.
       description: |
-        Returns the ACEP conservation distribution data for all subprograms in JSON format.
+        Returns the Title II ACEP conservation distribution data for all subprograms in JSON format.
       responses:
         200:
           description: Ok
@@ -960,10 +532,10 @@ paths:
   /pdl/titles/title-ii/programs/rcpp/state-distribution:
     get:
       tags:
-        - "Title II: Conservation - RCPP"
-      summary: Gets the RCPP conservation data for all states.
+        - "Title II: Conservation - RCPP (Regional Conservation Partnership Program)"
+      summary: Gets the Title II RCPP conservation data for all states.
       description: |
-        Returns  the RCPP conservation data for all states in JSON format.
+        Returns  the Title II RCPP conservation data for all states in JSON format.
       responses:
         200:
           description: Ok
@@ -980,10 +552,10 @@ paths:
   /pdl/titles/title-ii/programs/rcpp/summary:
     get:
       tags:
-        - "Title II: Conservation - RCPP"
-      summary: Gets the RCPP conservation distribution data for all subprograms.
+        - "Title II: Conservation - RCPP (Regional Conservation Partnership Program)"
+      summary: Gets the Title II RCPP conservation distribution data for all subprograms.
       description: |
-        Returns the RCPP conservation distribution data for all subprograms in JSON format.
+        Returns the Title II RCPP conservation distribution data for all subprograms in JSON format.
       responses:
         200:
           description: Ok
@@ -1000,10 +572,10 @@ paths:
   /pdl/titles/title-xi/programs/crop-insurance/state-distribution:
     get:
       tags:
-        - "Crop insurance State Distribution Data"
-      summary: Gets the Crop Insurance state distribution data.
+        - "Title XI: Crop insurance"
+      summary: Gets the Title XI Crop Insurance state distribution data.
       description: |
-        Returns the Crop Insurance State Distribution Data in JSON format.
+        Returns the Title XI Crop Insurance State Distribution Data in JSON format.
       responses:
         200:
           description: Ok
@@ -1020,10 +592,10 @@ paths:
   /pdl/titles/title-xi/programs/crop-insurance/summary:
     get:
       tags:
-        - "Crop insurance summary Data"
-      summary: Gets the crop insurance summary data.
+        - "Title XI: Crop insurance"
+      summary: Gets the Title XI crop insurance summary data.
       description: |
-        Returns the Crop Insurance Summary Data in JSON format.
+        Returns the Title XI Crop Insurance Summary Data in JSON format.
       responses:
         200:
           description: Ok
@@ -1040,10 +612,10 @@ paths:
   /pdl/titles/title-iv/programs/snap/state-distribution:
     get:
       tags:
-        - "SNAP State Distribution Data"
-      summary: Gets the SNAP state distribution data.
+        - "Title IV: SNAP (Supplemental Nutrition Assistant Program)"
+      summary: Gets the Title IV SNAP state distribution data.
       description: |
-        Returns the SNAP State Distribution Data in JSON format.
+        Returns the Title IV SNAP State Distribution Data in JSON format.
       responses:
         200:
           description: Ok
@@ -1060,10 +632,10 @@ paths:
   /pdl/titles/title-iv/programs/snap/summary:
     get:
       tags:
-        - "SNAP summary Data"
-      summary: Gets the SNAP summary data.
+        - "Title IV: SNAP (Supplemental Nutrition Assistant Program)"
+      summary: Gets the Title IV SNAP summary data.
       description: |
-        Returns the SNAP Summary Data in JSON format.
+        Returns the Title IV SNAP Summary Data in JSON format.
       responses:
         200:
           description: Ok
