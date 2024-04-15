@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Update Title-1 endpoints to use database calls. [#182](https://github.com/policy-design-lab/pdl-api/issues/182) 
+
 ### Removed
 - Retired old endpoints. [#179](https://github.com/policy-design-lab/pdl-api/issues/179)
 
