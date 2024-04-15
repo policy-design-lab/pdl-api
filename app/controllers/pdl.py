@@ -619,7 +619,7 @@ def generate_title_i_state_distribution_response(subtitle_id, start_year, end_ye
     for row in result:
         response_dict = dict(zip(column_names, row))
 
-        # Special handling
+        # Cleanup / renaming attributes
         response_dict["totalCountsInPercentageNationwide"] = response_dict["averageRecipientCountInPercentageNationwide"]
         if response_dict['averageAreaInAcres'] is None:
             response_dict['averageAreaInAcres'] = 0.0
@@ -649,6 +649,8 @@ def generate_title_i_state_distribution_response(subtitle_id, start_year, end_ye
                                             .filter(Payment.program_id == program_id,
                                                     Payment.year.between(start_year, end_year)).scalar_subquery())
 
+        total_years = end_year - start_year + 1  # Use total years to calculate average recipient count
+
         # Construct the main query
         program_query = session.query(
             Payment.state_code.label('state'),
@@ -656,8 +658,7 @@ def generate_title_i_state_distribution_response(subtitle_id, start_year, end_ye
             func.sum(Payment.payment).label('totalPaymentInDollars'),
             func.cast(func.sum(Payment.recipient_count), Integer).label('totalCounts'),
             func.round(func.avg(Payment.base_acres), 2).label('averageAreaInAcres'),
-            # TODO: Fix average recipient calculation
-            func.cast(func.avg(Payment.recipient_count), BigInteger).label('averageRecipientCount'),
+            func.cast(func.sum(Payment.recipient_count) / total_years, BigInteger).label('averageRecipientCount'),
             (func.cast(func.sum(Payment.payment) / program_subquery_total_payment * 100, Numeric(5, 2))).label(
                 'totalPaymentInPercentageNationwide'),
             (func.cast(func.sum(Payment.recipient_count) / program_subquery_recipient_count * 100,
@@ -684,7 +685,7 @@ def generate_title_i_state_distribution_response(subtitle_id, start_year, end_ye
             response_dict = dict(zip(column_names, row))
             state = response_dict['state']
 
-            # Special handling
+            # Cleanup / renaming attributes
             response_dict["totalCountsInPercentageNationwide"] = response_dict[
                 "averageRecipientCountInPercentageNationwide"]
             response_dict['subPrograms'] = []
@@ -738,7 +739,7 @@ def generate_title_i_state_distribution_response(subtitle_id, start_year, end_ye
             state = response_dict['state']
             program_name = response_dict['programName']
 
-            # Special handling
+            # Cleanup / renaming attributes
             if response_dict['averageAreaInAcres'] is None:
                 response_dict['averageAreaInAcres'] = 0.0
             del response_dict['state']
@@ -880,7 +881,7 @@ def generate_title_i_summary_response(subtitle_id, start_year, end_year):
         for row in program_result:
             response_dict = dict(zip(column_names, row))
 
-            # Special handling
+            # Cleanup / renaming attributes
             response_dict['subPrograms'] = []
             subtitle_response_dict["programs"].append(response_dict)
 
