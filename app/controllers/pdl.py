@@ -579,13 +579,6 @@ def generate_title_i_state_distribution_response(subtitle_id, start_year, end_ye
     subtitle_subquery_recipient_count = (session.query(func.sum(Payment.recipient_count))
                                          .filter(Payment.subtitle_id == subtitle_id, Payment.year.between(start_year, end_year)).scalar_subquery())
 
-    subtitle_subquery_recipient_count_by_year_state = (session.query(func.avg(Payment.recipient_count).label("averageRecipientCount"), Payment.year, Payment.state_code)
-                                                       .filter(Payment.subtitle_id == subtitle_id,
-                                                               Payment.year.between(start_year, end_year))
-                                                       .order_by(desc("averageRecipientCount"))
-                                                       .group_by(Payment.state_code, Payment.year)
-                                                       .all())
-
     # Construct the main query
     subtitle_query = session.query(
         Payment.state_code.label('state'),
@@ -838,7 +831,6 @@ def generate_title_i_summary_response(subtitle_id, start_year, end_year):
     subtitle_subquery = (session.query(func.sum(Payment.payment))
                          .filter(Payment.subtitle_id == subtitle_id, Payment.year.between(start_year, end_year)).scalar_subquery())
 
-    program_response_dict = dict()
     # For each program, total payment and total payment percentage during the given years
     for program_id in program_ids:
 
@@ -890,12 +882,6 @@ def generate_title_i_summary_response(subtitle_id, start_year, end_year):
         subprogram_ids = [subprogram.id for subprogram in subprograms]
 
         for subprogram_id in subprogram_ids:
-            # Construct the subquery
-            subprogram_subquery = (session.query(func.sum(Payment.payment))
-                                   .filter(Payment.sub_program_id == subprogram_id,
-                                           Payment.year.between(start_year, end_year))
-                                   .label('totalPaymentInDollars'))
-
             # Construct the main query
             subprogram_query = (session.query(
                 Program.name.label('programName'),
