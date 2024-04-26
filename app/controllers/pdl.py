@@ -762,9 +762,10 @@ def generate_title_i_state_distribution_response(subtitle_id, start_year, end_ye
                     program["totalPaymentInPercentageWithinState"] = 0.0
 
                 if subtitle_response_dict[state]["totalCounts"] != 0:
-                    program["averageRecipientCountInPercentageWithinState"] = (
-                        round(program["averageRecipientCount"] / subtitle_response_dict[state]["totalCounts"] * 100, 2))
-                    program["totalCountsInPercentageWithinState"] = program["averageRecipientCountInPercentageWithinState"]
+                    program["totalCountsInPercentageWithinState"] = (
+                        round(program["totalCounts"] / subtitle_response_dict[state]["totalCounts"] * 100, 2))
+                    # TODO: Temporary fix. The below attribute may need to be calculated based on the average recipient count or removed if not needed.
+                    program["averageRecipientCountInPercentageWithinState"] = program["totalCountsInPercentageWithinState"]
                 else:
                     program["averageRecipientCountInPercentageWithinState"] = 0.0
                     program["totalCountsInPercentageWithinState"] = 0.0
