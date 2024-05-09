@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Title 1 Commodities total state distribution and summary endpoint. [#193](https://github.com/policy-design-lab/pdl-api/issues/193)
+
+
 ### Changed
 - All programs and summary JSON files based on already mapped data. [#188](https://github.com/policy-design-lab/pdl-api/issues/179)
 
