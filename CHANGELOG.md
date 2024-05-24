@@ -6,9 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- EQIP IRA endpoint [#195](https://github.com/policy-design-lab/pdl-api/issues/195)
+
 ### Changed
 - All programs and summary JSON files based on already mapped data. [#188](https://github.com/policy-design-lab/pdl-api/issues/179)
-
 ## [0.12.0] - 2024-04-09
 
 ### Changed
