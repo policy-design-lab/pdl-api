@@ -7,12 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.13.0] - 2024-06-03
 
 ### Changed
+- Update Title-1 endpoints to use database calls. [#182](https://github.com/policy-design-lab/pdl-api/issues/182) 
 - All programs and summary JSON files based on already mapped data. [#188](https://github.com/policy-design-lab/pdl-api/issues/179)
 
 ## [0.12.0] - 2024-04-09
-
-### Changed
-- Update Title-1 endpoints to use database calls. [#182](https://github.com/policy-design-lab/pdl-api/issues/182) 
 
 ### Removed
 - Retired old endpoints. [#179](https://github.com/policy-design-lab/pdl-api/issues/179)
