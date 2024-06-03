@@ -8,8 +8,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Title 1 Commodities total state distribution and summary endpoint. [#193](https://github.com/policy-design-lab/pdl-api/issues/193)
-
-### Changed
 - EQIP IRA endpoint [#195](https://github.com/policy-design-lab/pdl-api/issues/195)
 
 ## [0.13.0] - 2024-06-03
