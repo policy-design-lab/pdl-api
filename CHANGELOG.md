@@ -6,9 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Update Title-4 endpoints to use database calls. [#190](https://github.com/policy-design-lab/pdl-api/issues/190)
+
 ### Added
-- Title 1 Commodities total state distribution and summary endpoint. [#193](https://github.com/policy-design-lab/pdl-api/issues/193)
-- EQIP IRA endpoint [#195](https://github.com/policy-design-lab/pdl-api/issues/195)
+- EQIP IRA endpoint for state distrubtion [#195](https://github.com/policy-design-lab/pdl-api/issues/195)
+- EQIP IRA endpoint for practice categories [#200](https://github.com/plcy/pdl-api/issues/200)
 
 ## [0.13.0] - 2024-06-03
 
