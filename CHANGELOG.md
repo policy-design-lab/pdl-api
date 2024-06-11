@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Update Title-4 endpoints to use database calls. [#190](https://github.com/policy-design-lab/pdl-api/issues/190)
+
 ### Added
 - EQIP IRA endpoint [#195](https://github.com/policy-design-lab/pdl-api/issues/195)
 

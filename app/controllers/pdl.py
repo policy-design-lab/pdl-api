@@ -15,6 +15,7 @@ from app.models.state import State
 from app.models.statecode import StateCode
 from app.models.subprogram import Subprogram
 from app.models.subtitle import Subtitle
+from collections import defaultdict
 
 LANDING_PAGE_DATA_PATH = os.path.join("controllers", "data", "landingpage")
 ALLPROGRAM_DATA_JSON = "allprograms.json"
@@ -504,32 +505,11 @@ def titles_title_xi_programs_crop_insurance_summary_search():
 
 # /pdl/titles/title-iv/programs/snap/state-distribution
 def titles_title_iv_programs_snap_state_distribution_search():
-    # set the file path
-    snap_data = os.path.join(IV_SNAP_DATA_PATH, SNAP_STATE_DISTRIBUTION_DATA_JSON)
-
-    # open file
-    with open(snap_data, 'r') as map_data:
-        file_data = map_data.read()
-
-        # parse file
-        data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
-
-        return data_json
-
-
-# /pdl/titles/title-iv/programs/snap/summary
-def titles_title_iv_programs_snap_summary_search():
-    # set the file path
-    snap_data = os.path.join(IV_SNAP_DATA_PATH, SNAP_SUBPROGRAMS_DATA_JSON)
-
-    # open file
-    with open(snap_data, 'r') as map_data:
-        file_data = map_data.read()
-
-        # parse file
-        data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
-
-        return data_json
+    program_id = 106
+    start_year = 2018
+    end_year = 2022
+    endpoint_response = generate_title_iv_state_distribution_response(program_id, start_year, end_year)
+    return endpoint_response
 
 
 # construct state
@@ -601,6 +581,116 @@ def construct_allprogram_result(prog):
     }
 
     return result
+
+
+def generate_title_iv_state_distribution_response(program_id, start_year, end_year):
+    session = Session()
+
+    # construct the query
+    program_query = session.query(
+        Payment.state_code.label('state'),
+        Program.name.label('programName'),
+        Payment.year.label('year'),
+        Payment.payment.label('totalPaymentInDollars'),
+        Payment.recipient_count.label('totalCounts')).join(
+        Program, Payment.program_id == Program.id).filter(
+        Payment.program_id == program_id,
+        Payment.year.between(start_year, end_year)
+    )
+
+    # execute the query
+    program_result = program_query.all()
+
+    # create dictionaries
+    program_response_dict = defaultdict(list)
+    year_dict = defaultdict(list)
+    total_national_payment_dict = defaultdict(float)
+    total_national_count_dict = defaultdict(int)
+
+    # aggregate data
+    for record in program_result:
+        year = str(record[2])
+        state = record[0]
+        payment = record[3]
+        recipient_count = record[4]
+
+        year_dict[year].append({
+            'state': state,
+            'totalPaymentInDollars': payment,
+            'averageMonthlyParticipation': recipient_count
+        })
+
+        # update total national payment and count for the year
+        total_national_payment_dict[year] += payment
+        total_national_count_dict[year] += recipient_count
+
+    # create output response dictionary
+    for year, data in year_dict.items():
+        program_response_dict[year] = []
+        total_payment_nationwide = total_national_payment_dict[year]
+        total_participation_nationwide = total_national_count_dict[year]
+        for item in data:
+            state = item['state']
+            total_payment = item['totalPaymentInDollars']
+            average_participation = item['averageMonthlyParticipation']
+
+            total_payment_percentage = (total_payment / total_payment_nationwide) * 100
+            average_participation_percentage = (average_participation / total_participation_nationwide) * 100
+
+            program_response_dict[year].append({
+                'state': state,
+                'totalPaymentInDollars': total_payment,
+                'totalPaymentInPercentageNationwide': round(total_payment_percentage, 2),
+                'averageMonthlyParticipation': average_participation,
+                'averageMonthlyParticipationInPercentageNationwide': round(average_participation_percentage, 2)
+            })
+
+        # sort states by decreasing order of total payment in dollars
+        program_response_dict[year] = \
+            sorted(program_response_dict[year], key=lambda x: x['totalPaymentInDollars'], reverse=True)
+
+    # calculate total payment and average monthly participation for each state across all years
+    state_total_data = defaultdict(lambda: {'totalPaymentInDollars': 0, 'averageMonthlyParticipation': 0})
+
+    for year, data in year_dict.items():
+        for item in data:
+            state = item['state']
+            total_payment = item['totalPaymentInDollars']
+            average_participation = item['averageMonthlyParticipation']
+
+            state_total_data[state]['totalPaymentInDollars'] += total_payment
+            state_total_data[state]['averageMonthlyParticipation'] += average_participation
+
+    # calculate the sum of total national payment and count for all years
+    total_national_payment = sum(total_national_payment_dict.values())
+    total_national_count = sum(total_national_count_dict.values())
+
+    # add the total data for each state to the program_response_dict
+    total_states_data = []
+    for state, total_data in state_total_data.items():
+        total_payment = total_data['totalPaymentInDollars']
+        total_participation = total_data['averageMonthlyParticipation']
+
+        #  calculate percentage using the total national payment and count across all years
+        total_payment_percentage = (total_payment / total_national_payment) * 100
+        total_participation_percentage = (total_participation / total_national_count) * 100
+
+        # append total data for each state to the list
+        total_states_data.append({
+            'state': state,
+            'totalPaymentInDollars': total_payment,
+            'totalPaymentInPercentageNationwide': round(total_payment_percentage, 2),
+            'averageMonthlyParticipation': total_participation,
+            'averageMonthlyParticipationInPercentageNationwide': round(total_participation_percentage, 2)
+        })
+
+    # Sort the total states data by decreasing order of total payment in dollars
+    total_states_data = sorted(total_states_data, key=lambda x: x['totalPaymentInDollars'], reverse=True)
+
+    # Add the total states data to the program_response_dict under the key 'TotalStates'
+    program_response_dict[str(start_year) + '-' + str(end_year)] = total_states_data
+
+    return program_response_dict
 
 
 def generate_title_i_state_distribution_response(subtitle_id, start_year, end_year):
