@@ -431,26 +431,6 @@ paths:
           description: Unauthorized
         500:
           description: Internal error
-  /pdl/titles/title-ii/programs/eqip-ira/category:
-    get:
-      tags:
-        - "Title II: Conservation - EQIP IRA (Environmental Quality Incentives Program - Inflation Reduction Act)"
-      summary: Gets the Title II EQIP IRA data for the list of all categories for each year.
-      description: |
-        Returns the Title II EQIP IRA data for the list of all categories for each year in JSON format.
-      responses:
-        200:
-          description: Ok
-          content:
-            application/json:
-              schema:
-                type: string
-        400:
-          description: Bad request
-        401:
-          description: Unauthorized
-        500:
-          description: Internal error
   /pdl/titles/title-ii/programs/csp/map:
     get:
       tags:

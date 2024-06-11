@@ -40,8 +40,7 @@ EQIP_MAP_DATA_JSON = "eqip_map_data.json"
 EQIP_STATE_DISTRIBUTION_DATA_JSON = "eqip_state_distribution_data.json"
 EQIP_PRACTICE_CATEGORIES_DATA_JSON = "eqip_practice_categories_data.json"
 EQIP_IRA_STATE_DISTRIBUTION_DATA_JSON = "eqip_ira_state_distribution.json"
-EQIP_IRA_SUMMARY_DATA_JSON = "eqip_ira_summary.json"
-EQIP_IRA_PRACTICE_CATEGORIES_DATA_JSON = "eqip_ira_practices.json"
+EQIP_IRA_PRACTICE_CATEGORIES_DATA_JSON = "eqip_ira_summary.json"
 II_CSP_DATA_PATH = os.path.join(TITLE_II_DATA_PATH, "programs", "csp")
 CSP_MAP_DATA_JSON = "csp_map_data.json"
 CSP_STATE_DISTRIBUTION_DATA_JSON = "csp_state_distribution_data.json"
@@ -326,21 +325,6 @@ def titles_title_ii_programs_eqip_ira_state_distribution_search():
 
 # /pdl/titles/title-ii/programs/eqip-ira/summary
 def titles_title_ii_programs_eqip_ira_summary_search():
-    # set the file path
-    eqip_ira_data = os.path.join(II_EQIP_IRA_DATA_PATH, EQIP_IRA_SUMMARY_DATA_JSON)
-
-    # open file
-    with open(eqip_ira_data, 'r') as map_data:
-        file_data = map_data.read()
-
-        # parse file
-        data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
-
-        return data_json
-
-
-# /pdl/titles/title-ii/programs/eqip-ira/category
-def titles_title_ii_programs_eqip_ira_category_search():
     # set the file path
     eqip_ira_data = os.path.join(II_EQIP_IRA_DATA_PATH, EQIP_IRA_PRACTICE_CATEGORIES_DATA_JSON)
 
