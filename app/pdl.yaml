@@ -471,7 +471,7 @@ paths:
           description: Unauthorized
         500:
           description: Internal error
-  /pdl/titles/title-ii/programs/eqip-ira/category:
+  /pdl/titles/title-ii/programs/eqip-ira/practice-names:
     get:
       tags:
         - "Title II: Conservation - EQIP IRA (Environmental Quality Incentives Program - Inflation Reduction Act)"

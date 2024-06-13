@@ -196,7 +196,7 @@ def allprograms_search():
         return data_json
 
 
-# /pdl/titles/title-i/map:
+# /pdl/titles/title-i/summary:
 def titles_title_i_summary_search():
     start_year = 2014
     end_year = 2021
@@ -359,7 +359,7 @@ def titles_title_ii_programs_eqip_ira_summary_search():
 
 
 # /pdl/titles/title-ii/programs/eqip-ira/category
-def titles_title_ii_programs_eqip_ira_category_search():
+def titles_title_ii_programs_eqip_ira_practice_names_search():
     # set the file path
     eqip_ira_data = os.path.join(II_EQIP_IRA_DATA_PATH, EQIP_IRA_PRACTICE_CATEGORIES_DATA_JSON)
 
