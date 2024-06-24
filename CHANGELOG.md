@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Update Title-4 endpoints to use database calls. [#190](https://github.com/policy-design-lab/pdl-api/issues/190)
+- Update EQIP IRA data with changed name of US Virgin Islands. [#201](https://github.com/policy-design-lab/pdl-api/issues/201)
 
 ### Added
 - Endpoints for Title I's state distribution and summary. [#193](https://github.com/policy-design-lab/pdl-api/issues/193)
