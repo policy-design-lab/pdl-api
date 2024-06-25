@@ -9,11 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Update Title-4 endpoints to use database calls. [#190](https://github.com/policy-design-lab/pdl-api/issues/190)
 - Update EQIP IRA data with changed name of US Virgin Islands. [#201](https://github.com/policy-design-lab/pdl-api/issues/201)
+- Update EQIP IRA state distribution data [#205](https://githoub.com/policy-design-lab/pdl-api/issues/205)
 
 ### Added
 - Endpoints for Title I's state distribution and summary. [#193](https://github.com/policy-design-lab/pdl-api/issues/193)
 - EQIP IRA endpoint for state distribution [#195](https://github.com/policy-design-lab/pdl-api/issues/195)
-- EQIP IRA endpoint for practice categories [#200](https://github.com/plcy/pdl-api/issues/200)
+- EQIP IRA endpoint for practice categories [#200](https://github.com/policy-design-lab/pdl-api/issues/200)
+- EQIP IRA endpoint for aggregated prediction data [#204](https://github.com/policy-design-lab/pdl-api/issues/204)
 
 ## [0.13.0] - 2024-06-03
 
