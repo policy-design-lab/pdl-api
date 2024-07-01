@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update EQIP IRA state distribution data [#205](https://githoub.com/policy-design-lab/pdl-api/issues/205)
 - Update EQIP IRA summary data with future predctions. [#207](https://github.com/policy-design-lab/pdl-api/issues/207)
 - Update EQIP IRA state distribution data [#208](https://github.com/policy-design-lab/pdl-api/issues/208)
+- EQIP IRA state distribution's nationwide data matches with summary [#210](https://github.com/policy-design-lab/pdl-api/issues/210)
 
 ### Added
 - Endpoints for Title I's state distribution and summary. [#193](https://github.com/policy-design-lab/pdl-api/issues/193)
