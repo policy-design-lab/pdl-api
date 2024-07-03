@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: Policy Design Lab API
   description: Policy Design Lab API Documentation
-  version: 0.13.0
+  version: 0.14.0
 servers:
 - url: https://localhost
   description: Production server
@@ -25,6 +25,8 @@ tags:
   description: "Title I Subtitle E Supplemental Agricultural Disaster Assistance data."
 - name: "Title II: Conservation - EQIP (Environmental Quality Incentives Program)"
   description: "Title II EQIP conservation data."
+- name: "Title II: Conservation - EQIP IRA (Environmental Quality Incentives Program - Inflation Reduction Act)"
+  description: "Title II EQIP IRA data."
 - name: "Title II: Conservation - CSP (Conservation Stewardship Program)"
   description: "Title II CSP conservation data."
 - name: "Title II: Conservation - CRP (Conservation Reserve Program)"
@@ -183,6 +185,46 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/AllPrograms'
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
+  /pdl/titles/title-i/summary:
+    get:
+      tags:
+        - "Title I: Commodities"
+      summary: Gets the Title I summary data for all states.
+      description: |
+        Returns  the Title I summary data for all states in JSON format.
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: string
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
+  /pdl/titles/title-i/state-distribution:
+    get:
+      tags:
+        - "Title I: Commodities"
+      summary: Gets the Title I's state distribution data for all states.
+      description: |
+        Returns  the Title I state distribution data for all states in JSON format.
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: string
         400:
           description: Bad request
         401:
@@ -376,6 +418,86 @@ paths:
       summary: Gets the Title II EQIP conservation data for all practice categories.
       description: |
         Returns the Title II EQIP conservation data for all practice categories in JSON format.
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: string
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
+  /pdl/titles/title-ii/programs/eqip-ira/state-distribution:
+    get:
+      tags:
+        - "Title II: Conservation - EQIP IRA (Environmental Quality Incentives Program - Inflation Reduction Act)"
+      summary: Gets the Title II EQIP IRA data for all states.
+      description: |
+        Returns  the Title II EQIP IRA data for all states in JSON format.
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: string
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
+  /pdl/titles/title-ii/programs/eqip-ira/summary:
+    get:
+      tags:
+        - "Title II: Conservation - EQIP IRA (Environmental Quality Incentives Program - Inflation Reduction Act)"
+      summary: Gets the Title II EQIP IRA data for all practice categories.
+      description: |
+        Returns the Title II EQIP IRA data for all practice categories in JSON format.
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: string
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
+  /pdl/titles/title-ii/programs/eqip-ira/practice-names:
+    get:
+      tags:
+        - "Title II: Conservation - EQIP IRA (Environmental Quality Incentives Program - Inflation Reduction Act)"
+      summary: Gets the Title II EQIP IRA data for the list of all categories for each year.
+      description: |
+        Returns the Title II EQIP IRA data for the list of all categories for each year in JSON format.
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: string
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
+  /pdl/titles/title-ii/programs/eqip-ira/predicted:
+    get:
+      tags:
+        - "Title II: Conservation - EQIP IRA (Environmental Quality Incentives Program - Inflation Reduction Act)"
+      summary: Gets the Title II EQIP IRA aggregate prediction data for each states.
+      description: |
+        Returns the Title II EQIP IRA aggregated prediction data for each state in JSON format.
       responses:
         200:
           description: Ok
@@ -616,26 +738,6 @@ paths:
       summary: Gets the Title IV SNAP state distribution data.
       description: |
         Returns the Title IV SNAP State Distribution Data in JSON format.
-      responses:
-        200:
-          description: Ok
-          content:
-            application/json:
-              schema:
-                type: string
-        400:
-          description: Bad request
-        401:
-          description: Unauthorized
-        500:
-          description: Internal error
-  /pdl/titles/title-iv/programs/snap/summary:
-    get:
-      tags:
-        - "Title IV: SNAP (Supplemental Nutrition Assistant Program)"
-      summary: Gets the Title IV SNAP summary data.
-      description: |
-        Returns the Title IV SNAP Summary Data in JSON format.
       responses:
         200:
           description: Ok
