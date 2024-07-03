@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: Policy Design Lab API
   description: Policy Design Lab API Documentation
-  version: 0.13.0
+  version: 0.14.0
 servers:
 - url: https://localhost
   description: Production server
