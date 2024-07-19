@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - EQIP IRA's practice name list for the future got aggregated. [#218](https://github.com/polciy-design-lab/pdl-api/issues/218)
+- EQIP IRA summary and state distribution JSON data. [#222](https://github.com/polciy-design-lab/pdl-api/issues/222)
 
 ## [0.14.0] - 2024-07-03
 
