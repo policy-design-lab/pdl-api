@@ -387,17 +387,11 @@ def titles_title_ii_programs_csp_map_search():
 
 # /pdl/titles/title-ii/programs/csp/state-distribution
 def titles_title_ii_programs_csp_state_distribution_search():
-    # set the file path
-    csp_data = os.path.join(II_CSP_DATA_PATH, CSP_STATE_DISTRIBUTION_DATA_JSON)
-
-    # open file
-    with open(csp_data, 'r') as map_data:
-        file_data = map_data.read()
-
-        # parse file
-        data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
-
-        return data_json
+    program_id = 107
+    start_year = 2018
+    end_year = 2022
+    endpoint_response = generate_title_ii_state_distribution_response(program_id, start_year, end_year)
+    return endpoint_response
 
 
 # /pdl/titles/title-ii/programs/csp/summary
@@ -1245,23 +1239,30 @@ def generate_title_ii_state_distribution_response(program_id, start_year, end_ye
 
         if statute_name not in practice_categories_dict:
             practice_categories_dict[statute_name] = {'practiceCategories': [response_dict]}
-        practice_categories_dict[statute_name]['practiceCategories'].append(response_dict)
+        else:
+            practice_categories_dict[statute_name]['practiceCategories'].append(response_dict)
+
+    # Extract practice category groupings from the practice categories dict
+    practice_category_groupings = list()
+    for statute_name in practice_categories_dict:
+        practice_category_groupings.append(statute_name)
 
     # Get total payment for each state based on practice category groupings
-    state_total_payment_by_practice_category_grouping_query = session.query(
+    state_total_payment_by_practice_category_grouping_query = (session.query(
         Payment.state_code.label('state'),
         PracticeCategory.category_grouping.label('statuteName'),
         func.sum(Payment.payment).label('totalPaymentInDollars')
-    ).outerjoin(
+    ).join(
         PracticeCategory, Payment.practice_category_id == PracticeCategory.id
     ).filter(
         Payment.program_id == program_id,
-        Payment.year.between(start_year, end_year)
+        Payment.year.between(start_year, end_year),
+        PracticeCategory.program_id == program_id
     ).group_by(
         Payment.state_code, PracticeCategory.category_grouping,
     ).order_by(
         Payment.state_code, PracticeCategory.category_grouping
-    )
+    ))
 
     # Extract the column names
     state_total_payment_by_practice_category_grouping_column_names = [item['name'] for item in state_total_payment_by_practice_category_grouping_query.statement.column_descriptions]
@@ -1285,21 +1286,15 @@ def generate_title_ii_state_distribution_response(program_id, start_year, end_ye
 
     # Add missing statutes with zero payment
     for state in state_practice_category_grouping_dict:
-        found_6a_statute = False
-        found_6b_statute = False
+        practice_category_groupings_copy = practice_category_groupings.copy()
+
         for statute in state_practice_category_grouping_dict[state]["statutes"]:
-            if statute["statuteName"] == "(6)(A) Practices":
-                found_6a_statute = True
-            elif statute["statuteName"] == "(6)(B) Practices":
-                found_6b_statute = True
-        if not found_6a_statute:
+            if statute["statuteName"] in practice_category_groupings_copy:
+                practice_category_groupings_copy.remove(statute["statuteName"])
+
+        for statute_name in practice_category_groupings_copy:
             state_practice_category_grouping_dict[state]["statutes"].append({
-                "statuteName": "(6)(A) Practices",
-                "totalPaymentInDollars": 0.0
-            })
-        if not found_6b_statute:
-            state_practice_category_grouping_dict[state]["statutes"].append({
-                "statuteName": "(6)(B) Practices",
+                "statuteName": statute_name,
                 "totalPaymentInDollars": 0.0
             })
 
@@ -1313,7 +1308,8 @@ def generate_title_ii_state_distribution_response(program_id, start_year, end_ye
         PracticeCategory, Payment.practice_category_id == PracticeCategory.id
     ).filter(
         Payment.program_id == program_id,
-        Payment.year.between(start_year, end_year)
+        Payment.year.between(start_year, end_year),
+        PracticeCategory.program_id == program_id
     ).group_by(
         Payment.state_code, PracticeCategory.category_grouping, PracticeCategory.display_name
     ).order_by(
@@ -1382,7 +1378,8 @@ def generate_title_ii_state_distribution_response(program_id, start_year, end_ye
         PracticeCategory, Payment.practice_category_id == PracticeCategory.id
     ).filter(
         Payment.program_id == program_id,
-        Payment.year.between(start_year, end_year)
+        Payment.year.between(start_year, end_year),
+        PracticeCategory.program_id == program_id
     ).group_by(
         PracticeCategory.display_name
     ).order_by(
