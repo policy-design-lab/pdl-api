@@ -3,7 +3,6 @@ import logging
 import os
 from collections import OrderedDict
 
-import sqlalchemy
 from flask import request
 from sqlalchemy import func, desc, Numeric, BigInteger, Integer
 
@@ -302,7 +301,6 @@ def titles_title_ii_programs_eqip_map_search():
 
 # /pdl/titles/title-ii/programs/eqip/state-distribution
 def titles_title_ii_programs_eqip_state_distribution_search():
-
     program_id = 106
     start_year = 2018
     end_year = 2022
@@ -312,17 +310,11 @@ def titles_title_ii_programs_eqip_state_distribution_search():
 
 # /pdl/titles/title-ii/programs/eqip/summary
 def titles_title_ii_programs_eqip_summary_search():
-    # set the file path
-    eqip_data = os.path.join(II_EQIP_DATA_PATH, EQIP_PRACTICE_CATEGORIES_DATA_JSON)
-
-    # open file
-    with open(eqip_data, 'r') as map_data:
-        file_data = map_data.read()
-
-        # parse file
-        data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
-
-        return data_json
+    program_id = 106
+    start_year = 2018
+    end_year = 2022
+    endpoint_response = generate_title_ii_summary_response(program_id, start_year, end_year)
+    return endpoint_response
 
 
 # /pdl/titles/title-ii/programs/eqip-ira/state-distribution
@@ -396,17 +388,11 @@ def titles_title_ii_programs_csp_state_distribution_search():
 
 # /pdl/titles/title-ii/programs/csp/summary
 def titles_title_ii_programs_csp_summary_search():
-    # set the file path
-    csp_data = os.path.join(II_CSP_DATA_PATH, CSP_PRACTICE_CATEGORIES_DATA_JSON)
-
-    # open file
-    with open(csp_data, 'r') as map_data:
-        file_data = map_data.read()
-
-        # parse file
-        data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
-
-        return data_json
+    program_id = 107
+    start_year = 2018
+    end_year = 2022
+    endpoint_response = generate_title_ii_summary_response(program_id, start_year, end_year)
+    return endpoint_response
 
 
 # /pdl/titles/title-ii/programs/crp/state-distribution
@@ -1459,4 +1445,138 @@ def generate_title_ii_state_distribution_response(program_id, start_year, end_ye
         endpoint_response_list.append(program_response_dict[state])
     response = {str(start_year) + "-" + str(end_year): endpoint_response_list}
 
+    return response
+
+
+def generate_title_ii_summary_response(program_id, start_year, end_year):
+    session = Session()
+
+    # Get practice categories for the program
+    practice_categories_query = session.query(
+        PracticeCategory.display_name.label('practiceCategoryName'),
+        PracticeCategory.category_grouping.label('statuteName')
+    ).filter(
+        PracticeCategory.program_id == program_id
+    )
+
+    # Extract the column names
+    practice_categories_column_names = [item['name'] for item in
+                                        practice_categories_query.statement.column_descriptions]
+
+    # Execute the query
+    practice_categories_result = practice_categories_query.all()
+
+    practice_categories_dict = dict()
+    for row in practice_categories_result:
+        response_dict = dict(zip(practice_categories_column_names, row))
+        statute_name = response_dict['statuteName']
+
+        # Cleanup / renaming attributes
+        del response_dict['statuteName']
+
+        response_dict["totalPaymentInDollars"] = 0.0
+        response_dict["totalPaymentInPercentage"] = 0.0
+
+        if statute_name not in practice_categories_dict:
+            practice_categories_dict[statute_name] = {'practiceCategories': [response_dict]}
+        else:
+            practice_categories_dict[statute_name]['practiceCategories'].append(response_dict)
+
+    # Get total payment by practice category groupings
+    total_payment_by_practice_category_grouping_query = (session.query(
+        PracticeCategory.category_grouping.label('statuteName'),
+        func.sum(Payment.payment).label('totalPaymentInDollars')
+    ).join(
+        PracticeCategory, Payment.practice_category_id == PracticeCategory.id
+    ).filter(
+        Payment.program_id == program_id,
+        Payment.year.between(start_year, end_year),
+        PracticeCategory.program_id == program_id
+    ).group_by(
+        PracticeCategory.category_grouping,
+    ))
+
+    # Extract the column names
+    total_payment_by_practice_category_grouping_column_names = [item['name'] for item in total_payment_by_practice_category_grouping_query.statement.column_descriptions]
+
+    # Execute the query
+    total_payment_by_practice_category_grouping_result = total_payment_by_practice_category_grouping_query.all()
+
+    # Generate result dictionary
+    total_payment_by_practice_category_grouping_dict = dict()
+    total_payment_all_practice_category_groupings = 0
+    for row in total_payment_by_practice_category_grouping_result:
+        response_dict = dict(zip(total_payment_by_practice_category_grouping_column_names, row))
+        statute_name = response_dict['statuteName']
+        total_payment_all_practice_category_groupings += response_dict['totalPaymentInDollars']
+
+        # Cleanup / renaming attributes
+        del response_dict['statuteName']
+
+        total_payment_by_practice_category_grouping_dict[statute_name] = response_dict
+
+    for statute_name in total_payment_by_practice_category_grouping_dict:
+        total_payment_by_practice_category_grouping_dict[statute_name]['totalPaymentInPercentage'] = round(total_payment_by_practice_category_grouping_dict[statute_name]['totalPaymentInDollars'] / total_payment_all_practice_category_groupings * 100, 2)
+
+    # Get total payment by practice categories
+    total_payment_by_practice_categories_query = (session.query(
+        PracticeCategory.display_name.label('practiceCategoryName'),
+        PracticeCategory.category_grouping.label('statuteName'),
+        func.sum(Payment.payment).label('totalPaymentInDollars')
+    ).join(
+        PracticeCategory, Payment.practice_category_id == PracticeCategory.id
+    ).filter(
+        Payment.program_id == program_id,
+        Payment.year.between(start_year, end_year),
+        PracticeCategory.program_id == program_id
+    ).group_by(
+        PracticeCategory.category_grouping, PracticeCategory.display_name
+    ).order_by(
+        desc('totalPaymentInDollars')
+    ))
+
+    # Extract the column names
+    total_payment_by_practice_categories_column_names = [item['name'] for item in
+                                                         total_payment_by_practice_categories_query.statement.column_descriptions]
+
+    # Execute the query
+    total_payment_by_practice_categories_result = total_payment_by_practice_categories_query.all()
+
+    # Generate result dictionary
+    total_payment_by_practice_categories_dict = dict()
+    for row in total_payment_by_practice_categories_result:
+        response_dict = dict(zip(total_payment_by_practice_categories_column_names, row))
+        statute_name = response_dict['statuteName']
+
+        # Cleanup / renaming attributes
+        del response_dict['statuteName']
+
+        if statute_name not in total_payment_by_practice_categories_dict:
+            total_payment_by_practice_categories_dict[statute_name] = {'practiceCategories': [response_dict]}
+        else:
+            total_payment_by_practice_categories_dict[statute_name]['practiceCategories'].append(response_dict)
+
+    for statute_name in total_payment_by_practice_categories_dict:
+        for practice_category in total_payment_by_practice_categories_dict[statute_name]['practiceCategories']:
+            practice_category['totalPaymentInPercentage'] = round(practice_category['totalPaymentInDollars'] / total_payment_by_practice_category_grouping_dict[statute_name]['totalPaymentInDollars'] * 100, 2)
+
+    # Add missing practice categories with zero payment
+    for statute_name in practice_categories_dict:
+        for practice in practice_categories_dict[statute_name]['practiceCategories']:
+            found = False
+            for practice_category in total_payment_by_practice_categories_dict[statute_name]['practiceCategories']:
+                if practice['practiceCategoryName'] == practice_category['practiceCategoryName']:
+                    found = True
+                    break
+            if not found:
+                total_payment_by_practice_categories_dict[statute_name]['practiceCategories'].append(practice)
+
+    endpoint_response_list = list()
+    for statute_name in total_payment_by_practice_categories_dict:
+        endpoint_response_list.append({"statuteName": statute_name,
+                                       "practiceCategories": total_payment_by_practice_categories_dict[statute_name]['practiceCategories'],
+                                       "totalPaymentInDollars": total_payment_by_practice_category_grouping_dict[statute_name]['totalPaymentInDollars'],
+                                       "totalPaymentInPercentage": total_payment_by_practice_category_grouping_dict[statute_name]['totalPaymentInPercentage']})
+
+    response = {"statutes": endpoint_response_list}
     return response
