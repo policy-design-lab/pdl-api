@@ -4,16 +4,32 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [0.15.0] - 2024-07-19
+
+### Added
+- Issue templates. [#220](https://github.com/policy-design-lab/pdl-api/issues/220)
+
+### Changed
+- EQIP IRA's practice name list for the future got aggregated. [#218](https://github.com/polciy-design-lab/pdl-api/issues/218)
+- EQIP IRA summary and state distribution JSON data. [#222](https://github.com/polciy-design-lab/pdl-api/issues/222)
+
+## [0.14.0] - 2024-07-03
 
 ### Changed
 - Update Title-4 endpoints to use database calls. [#190](https://github.com/policy-design-lab/pdl-api/issues/190)
 - Update EQIP IRA data with changed name of US Virgin Islands. [#201](https://github.com/policy-design-lab/pdl-api/issues/201)
+- Update EQIP IRA state distribution data [#205](https://githoub.com/policy-design-lab/pdl-api/issues/205)
+- Update EQIP IRA summary data with future predctions. [#207](https://github.com/policy-design-lab/pdl-api/issues/207)
+- Update EQIP IRA state distribution data [#208](https://github.com/policy-design-lab/pdl-api/issues/208)
+- EQIP IRA state distribution's nationwide data matches with summary [#210](https://github.com/policy-design-lab/pdl-api/issues/210)
+- EQIP IRA to use only 50 U.S. state data [#212](https://github.com/policy-design-lab/pdl-api/issues/212)
+- EQIP IRA's budget authority data updated [#214](https://github.com/polciy-design-lab/pdl-api/issues/214)
 
 ### Added
 - Endpoints for Title I's state distribution and summary. [#193](https://github.com/policy-design-lab/pdl-api/issues/193)
 - EQIP IRA endpoint for state distribution [#195](https://github.com/policy-design-lab/pdl-api/issues/195)
-- EQIP IRA endpoint for practice categories [#200](https://github.com/plcy/pdl-api/issues/200)
+- EQIP IRA endpoint for practice categories [#200](https://github.com/policy-design-lab/pdl-api/issues/200)
+- EQIP IRA endpoint for aggregated prediction data [#204](https://github.com/policy-design-lab/pdl-api/issues/204)
 
 ## [0.13.0] - 2024-06-03
 
@@ -143,6 +159,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Open API specification file. [#50](https://github.com/policy-design-lab/pdl-api/issues/50)
 
+[0.15.0]: https://github.com/policy-design-lab/pdl-api/compare/0.14.0...0.15.0
+[0.14.0]: https://github.com/policy-design-lab/pdl-api/compare/0.13.0...0.14.0
 [0.13.0]: https://github.com/policy-design-lab/pdl-api/compare/0.12.0...0.13.0
 [0.12.0]: https://github.com/policy-design-lab/pdl-api/compare/0.11.0...0.12.0
 [0.11.0]: https://github.com/policy-design-lab/pdl-api/compare/0.10.0...0.11.0
