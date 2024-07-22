@@ -10,11 +10,14 @@ class Payment(db.Model):
     subtitle_id = db.Column(db.Integer)
     program_id = db.Column(db.Integer)
     sub_program_id = db.Column(db.Integer)
+    practice_category_id = db.Column(db.Integer)
     state_code = db.Column(db.String())
     year = db.Column(db.Integer)
     payment = db.Column(db.Float)
     recipient_count = db.Column(db.Integer)
     base_acres = db.Column(db.Float)
+    practice_code = db.Column(db.String())
+    practice_code_variant = db.Column(db.String())
 
     def __init__(self, title_id, subtitle_id, program_id, sub_program_id, state_code, year, payment, recipient_count, base_acres):
         self.title_id = title_id
