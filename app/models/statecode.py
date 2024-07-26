@@ -3,6 +3,7 @@ from app.models.db import db
 
 class StateCode(db.Model):
     __tablename__ = 'statecodes'
+    __table_args__ = {"schema": "public"}
 
     state_code = db.Column(db.String(), primary_key=True)
     state_name = db.Column(db.String())

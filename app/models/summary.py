@@ -3,6 +3,7 @@ from app.models.db import db
 
 class Summary(db.Model):
     __tablename__ = 'summary'
+    __table_args__ = {"schema": "public"}
 
     summary_code = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String())
