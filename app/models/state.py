@@ -3,7 +3,7 @@ from app.models.db import db
 
 class State(db.Model):
     __tablename__ = 'states'
-    __table_args__ = {"schema": "pdl"}
+    __table_args__ = {"schema": "public"}
 
     state_fips = db.Column(db.String(), primary_key=True)
     state_code = db.Column(db.String())
