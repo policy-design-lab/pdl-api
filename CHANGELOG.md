@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Changed
 - EQIP and CSP endpoints to use data from the database. [#203](https://github.com/policy-design-lab/pdl-api/issues/203)
 
+## Fixed
+- Error when calling GET states endpoint after recent change. [#228](https://github.com/policy-design-lab/pdl-api/issues/228)
+
 ## [0.15.0] - 2024-07-19
 
 ### Added
