@@ -533,7 +533,7 @@ def titles_title_xi_programs_crop_insurance_summary_search():
 
 # /pdl/titles/title-iv/programs/snap/state-distribution
 def titles_title_iv_programs_snap_state_distribution_search():
-    program_id = 106
+    program_id = 111
     start_year = 2018
     end_year = 2022
     endpoint_response = generate_title_iv_state_distribution_response(program_id, start_year, end_year)
