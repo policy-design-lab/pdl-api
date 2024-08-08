@@ -1274,6 +1274,7 @@ def generate_title_ii_state_distribution_response(program_id, start_year, end_ye
 
     # Create result dictionary
     state_practice_category_grouping_dict = dict()
+    total_payment_by_practice_category_grouping_dict = dict()
     for row in state_total_payment_by_practice_category_grouping_result:
         response_dict = dict(zip(state_total_payment_by_practice_category_grouping_column_names, row))
         state = response_dict['state']
@@ -1285,6 +1286,12 @@ def generate_title_ii_state_distribution_response(program_id, start_year, end_ye
             state_practice_category_grouping_dict[state]["statutes"].append(response_dict)
         else:
             state_practice_category_grouping_dict[state] = {"statutes": [response_dict]}
+
+        # Calculate total payment by practice category groupings
+        if response_dict['statuteName'] in total_payment_by_practice_category_grouping_dict:
+            total_payment_by_practice_category_grouping_dict[response_dict['statuteName']] += response_dict['totalPaymentInDollars']
+        else:
+            total_payment_by_practice_category_grouping_dict[response_dict['statuteName']] = response_dict['totalPaymentInDollars']
 
     # Add missing statutes with zero payment
     for state in state_practice_category_grouping_dict:
@@ -1454,6 +1461,8 @@ def generate_title_ii_state_distribution_response(program_id, start_year, end_ye
                 practice_category['totalPaymentInPercentageWithinState'] = round(practice_category['totalPaymentInDollars'] / state_dict['totalPaymentInDollars'] * 100, 2)
 
             statute.update(state_total_payment_by_practice_categories_dict[state][statute['statuteName']])
+            statute['totalPaymentInPercentageWithinState'] = round(statute['totalPaymentInDollars'] / state_dict['totalPaymentInDollars'] * 100, 2)
+            statute['totalPaymentInPercentageNationwide'] = round(statute['totalPaymentInDollars'] / total_payment_by_practice_category_grouping_dict[statute['statuteName']] * 100, 2)
 
     # Create endpoint response dictionary
     endpoint_response_list = []
