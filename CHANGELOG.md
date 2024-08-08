@@ -11,7 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Fixed
 - Error when calling GET states endpoint after recent change. [#228](https://github.com/policy-design-lab/pdl-api/issues/228)
-- Error due to the previous SNAP program ID being used. [#230](https://github.com/policy-design-lab/pdl-api/issues/230) 
+- Error due to the previous SNAP program ID being used. [#230](https://github.com/policy-design-lab/pdl-api/issues/230)
+- Missing attributes in CSP response statute objects. [#232](https://github.com/policy-design-lab/pdl-api/issues/232) 
 
 ## [0.15.0] - 2024-07-19
 
