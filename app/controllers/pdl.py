@@ -68,6 +68,12 @@ XI_CROP_INS_DATA_PATH = os.path.join(TITLE_XI_DATA_PATH, "programs", "crop-insur
 CROP_INSURANCE_SUMMARY_DATA_JSON = "crop_insurance_subprograms_data.json"
 CROP_INSURANCE_STATE_DISTRIBUTION_DATA_JSON = "crop_insurance_state_distribution_data.json"
 
+TITLE_I_SUBTITLE_A_NAME = "Total Commodities Programs, Subtitle A"
+TITLE_I_SUBTITLE_D_NAME = "Dairy Margin Coverage, Subtitle D"
+TITLE_I_SUBTITLE_E_NAME = "Supplemental Agricultural Disaster Assistance, Subtitle E"
+TITLE_II_EQIP_PROGRAM_NAME = "Environmental Quality Incentives Program (EQIP)"
+TITLE_II_CSP_PROGRAM_NAME = "Conservation Stewardship Program (CSP)"
+TITLE_IV_SNAP_PROGRAM_NAME = "Supplemental Nutrition Assistance Program (SNAP)"
 
 def search():
     out_json = jsonutils.create_test_message()
@@ -233,7 +239,14 @@ def titles_title_i_subtitles_subtitle_a_map_search():
 
 # /pdl/titles/title-i/subtitles/subtitle-a/state-distribution:
 def titles_title_i_subtitles_subtitle_a_state_distribution_search():
-    subtitle_id = 100
+    subtitle_id = get_subtitle_id(TITLE_I_SUBTITLE_A_NAME)
+    if subtitle_id is None:
+        msg = {
+            "reason": "No record for the given subtitle name " + TITLE_I_SUBTITLE_A_NAME,
+            "error": "Not found: " + request.url,
+        }
+        logging.error("Subtitle A: " + json.dumps(msg))
+        return rs_handlers.not_found(msg)
     start_year = 2014
     end_year = 2021
     endpoint_response = generate_title_i_state_distribution_response(subtitle_id, start_year, end_year)
@@ -242,7 +255,14 @@ def titles_title_i_subtitles_subtitle_a_state_distribution_search():
 
 # /pdl/titles/title-i/subtitles/subtitle-a/summary:
 def titles_title_i_subtitles_subtitle_a_summary_search():
-    subtitle_id = 100
+    subtitle_id = get_subtitle_id(TITLE_I_SUBTITLE_A_NAME)
+    if subtitle_id is None:
+        msg = {
+            "reason": "No record for the given subtitle name " + TITLE_I_SUBTITLE_A_NAME,
+            "error": "Not found: " + request.url,
+        }
+        logging.error("Subtitle A: " + json.dumps(msg))
+        return rs_handlers.not_found(msg)
     start_year = 2014
     end_year = 2021
     endpoint_response = generate_title_i_summary_response(subtitle_id, start_year, end_year)
@@ -251,7 +271,14 @@ def titles_title_i_subtitles_subtitle_a_summary_search():
 
 # /pdl/titles/title-i/subtitles/subtitle-d/state-distribution:
 def titles_title_i_subtitles_subtitle_d_state_distribution_search():
-    subtitle_id = 101
+    subtitle_id = get_subtitle_id(TITLE_I_SUBTITLE_D_NAME)
+    if subtitle_id is None:
+        msg = {
+            "reason": "No record for the given subtitle name " + TITLE_I_SUBTITLE_D_NAME,
+            "error": "Not found: " + request.url,
+        }
+        logging.error("Subtitle D: " + json.dumps(msg))
+        return rs_handlers.not_found(msg)
     start_year = 2014
     end_year = 2021
     endpoint_response = generate_title_i_state_distribution_response(subtitle_id, start_year, end_year)
@@ -260,7 +287,14 @@ def titles_title_i_subtitles_subtitle_d_state_distribution_search():
 
 # /pdl/titles/title-i/subtitles/subtitle-d/summary:
 def titles_title_i_subtitles_subtitle_d_summary_search():
-    subtitle_id = 101
+    subtitle_id = get_subtitle_id(TITLE_I_SUBTITLE_D_NAME)
+    if subtitle_id is None:
+        msg = {
+            "reason": "No record for the given subtitle name " + TITLE_I_SUBTITLE_D_NAME,
+            "error": "Not found: " + request.url,
+        }
+        logging.error("Subtitle D: " + json.dumps(msg))
+        return rs_handlers.not_found(msg)
     start_year = 2014
     end_year = 2021
     endpoint_response = generate_title_i_summary_response(subtitle_id, start_year, end_year)
@@ -269,7 +303,14 @@ def titles_title_i_subtitles_subtitle_d_summary_search():
 
 # /pdl/titles/title-i/subtitles/subtitle-e/state-distribution:
 def titles_title_i_subtitles_subtitle_e_state_distribution_search():
-    subtitle_id = 102
+    subtitle_id = get_subtitle_id(TITLE_I_SUBTITLE_E_NAME)
+    if subtitle_id is None:
+        msg = {
+            "reason": "No record for the given subtitle name " + TITLE_I_SUBTITLE_E_NAME,
+            "error": "Not found: " + request.url,
+        }
+        logging.error("Subtitle E: " + json.dumps(msg))
+        return rs_handlers.not_found(msg)
     start_year = 2014
     end_year = 2021
     endpoint_response = generate_title_i_state_distribution_response(subtitle_id, start_year, end_year)
@@ -278,7 +319,14 @@ def titles_title_i_subtitles_subtitle_e_state_distribution_search():
 
 # /pdl/titles/title-i/subtitles/subtitle-e/summary:
 def titles_title_i_subtitles_subtitle_e_summary_search():
-    subtitle_id = 102
+    subtitle_id = get_subtitle_id(TITLE_I_SUBTITLE_E_NAME)
+    if subtitle_id is None:
+        msg = {
+            "reason": "No record for the given subtitle name " + TITLE_I_SUBTITLE_E_NAME,
+            "error": "Not found: " + request.url,
+        }
+        logging.error("Subtitle E: " + json.dumps(msg))
+        return rs_handlers.not_found(msg)
     start_year = 2014
     end_year = 2021
     endpoint_response = generate_title_i_summary_response(subtitle_id, start_year, end_year)
@@ -302,7 +350,15 @@ def titles_title_ii_programs_eqip_map_search():
 
 # /pdl/titles/title-ii/programs/eqip/state-distribution
 def titles_title_ii_programs_eqip_state_distribution_search():
-    program_id = 106
+    program_id = get_program_id(TITLE_II_EQIP_PROGRAM_NAME)
+    if program_id is None:
+        msg = {
+            "reason": "No record for the given program name " + TITLE_II_EQIP_PROGRAM_NAME,
+            "error": "Not found: " + request.url,
+        }
+        logging.error("EQIP: " + json.dumps(msg))
+        return rs_handlers.not_found(msg)
+
     start_year = 2018
     end_year = 2022
     endpoint_response = generate_title_ii_state_distribution_response(program_id, start_year, end_year)
@@ -311,7 +367,14 @@ def titles_title_ii_programs_eqip_state_distribution_search():
 
 # /pdl/titles/title-ii/programs/eqip/summary
 def titles_title_ii_programs_eqip_summary_search():
-    program_id = 106
+    program_id = get_program_id(TITLE_II_EQIP_PROGRAM_NAME)
+    if program_id is None:
+        msg = {
+            "reason": "No record for the given program name " + TITLE_II_EQIP_PROGRAM_NAME,
+            "error": "Not found: " + request.url,
+        }
+        logging.error("EQIP: " + json.dumps(msg))
+        return rs_handlers.not_found(msg)
     start_year = 2018
     end_year = 2022
     endpoint_response = generate_title_ii_summary_response(program_id, start_year, end_year)
@@ -395,7 +458,14 @@ def titles_title_ii_programs_csp_map_search():
 
 # /pdl/titles/title-ii/programs/csp/state-distribution
 def titles_title_ii_programs_csp_state_distribution_search():
-    program_id = 107
+    program_id = get_program_id(TITLE_II_CSP_PROGRAM_NAME)
+    if program_id is None:
+        msg = {
+            "reason": "No record for the given program name " + TITLE_II_CSP_PROGRAM_NAME,
+            "error": "Not found: " + request.url,
+        }
+        logging.error("CSP: " + json.dumps(msg))
+        return rs_handlers.not_found(msg)
     start_year = 2018
     end_year = 2022
     endpoint_response = generate_title_ii_state_distribution_response(program_id, start_year, end_year)
@@ -404,7 +474,14 @@ def titles_title_ii_programs_csp_state_distribution_search():
 
 # /pdl/titles/title-ii/programs/csp/summary
 def titles_title_ii_programs_csp_summary_search():
-    program_id = 107
+    program_id = get_program_id(TITLE_II_CSP_PROGRAM_NAME)
+    if program_id is None:
+        msg = {
+            "reason": "No record for the given program name " + TITLE_II_CSP_PROGRAM_NAME,
+            "error": "Not found: " + request.url,
+        }
+        logging.error("CSP: " + json.dumps(msg))
+        return rs_handlers.not_found(msg)
     start_year = 2018
     end_year = 2022
     endpoint_response = generate_title_ii_summary_response(program_id, start_year, end_year)
@@ -533,7 +610,14 @@ def titles_title_xi_programs_crop_insurance_summary_search():
 
 # /pdl/titles/title-iv/programs/snap/state-distribution
 def titles_title_iv_programs_snap_state_distribution_search():
-    program_id = 111
+    program_id = get_program_id(TITLE_IV_SNAP_PROGRAM_NAME)
+    if program_id is None:
+        msg = {
+            "reason": "No record for the given program name " + TITLE_IV_SNAP_PROGRAM_NAME,
+            "error": "Not found: " + request.url,
+        }
+        logging.error("SNAP: " + json.dumps(msg))
+        return rs_handlers.not_found(msg)
     start_year = 2018
     end_year = 2022
     endpoint_response = generate_title_iv_state_distribution_response(program_id, start_year, end_year)
@@ -609,6 +693,22 @@ def construct_allprogram_result(prog):
     }
 
     return result
+
+
+def get_program_id(program_name):
+    session = Session()
+    program = session.query(Program).filter_by(name=program_name).first()
+    if program is None:
+        return None
+    return program.id
+
+
+def get_subtitle_id(subtitle_name):
+    session = Session()
+    subtitle = session.query(Subtitle).filter_by(name=subtitle_name).first()
+    if subtitle is None:
+        return None
+    return subtitle.id
 
 
 def generate_title_iv_state_distribution_response(program_id, start_year, end_year):
