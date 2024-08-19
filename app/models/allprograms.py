@@ -3,6 +3,7 @@ from app.models.db import db
 
 class AllProgram(db.Model):
     __tablename__ = 'allprograms'
+    __table_args__ = {"schema": "public"}
 
     all_program_code = db.Column(db.Integer(), primary_key=True)
     state = db.Column(db.String())

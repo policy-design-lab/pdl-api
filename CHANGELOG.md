@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.16.0] - 2024-08-16
+
+## Changed
+- EQIP and CSP endpoints to use data from the database. [#203](https://github.com/policy-design-lab/pdl-api/issues/203)
+
+## Fixed
+- Error when calling GET states endpoint after recent change. [#228](https://github.com/policy-design-lab/pdl-api/issues/228)
+- Error due to the previous SNAP program ID being used. [#230](https://github.com/policy-design-lab/pdl-api/issues/230)
+- Missing attributes in CSP response statute objects. [#232](https://github.com/policy-design-lab/pdl-api/issues/232) 
+
 ## [0.15.0] - 2024-07-19
 
 ### Added
@@ -159,6 +169,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Open API specification file. [#50](https://github.com/policy-design-lab/pdl-api/issues/50)
 
+[0.16.0]: https://github.com/policy-design-lab/pdl-api/compare/0.15.0...0.16.0
 [0.15.0]: https://github.com/policy-design-lab/pdl-api/compare/0.14.0...0.15.0
 [0.14.0]: https://github.com/policy-design-lab/pdl-api/compare/0.13.0...0.14.0
 [0.13.0]: https://github.com/policy-design-lab/pdl-api/compare/0.12.0...0.13.0
