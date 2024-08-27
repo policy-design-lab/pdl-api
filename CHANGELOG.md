@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.16.0] - 2024-08-16
 
+## Added
+- CSP IRA endpoints including state distribution and summary. [#234](https://github.com/policy-design-lab/pdl-api/issues/234)
+
 ## Changed
 - EQIP and CSP endpoints to use data from the database. [#203](https://github.com/policy-design-lab/pdl-api/issues/203)
 
