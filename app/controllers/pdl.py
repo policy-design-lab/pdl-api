@@ -49,6 +49,11 @@ II_CSP_DATA_PATH = os.path.join(TITLE_II_DATA_PATH, "programs", "csp")
 CSP_MAP_DATA_JSON = "csp_map_data.json"
 CSP_STATE_DISTRIBUTION_DATA_JSON = "csp_state_distribution_data.json"
 CSP_PRACTICE_CATEGORIES_DATA_JSON = "csp_practice_categories_data.json"
+II_CSP_IRA_DATA_PATH = os.path.join(TITLE_II_DATA_PATH, "programs", "csp-ira")
+CSP_IRA_STATE_DISTRIBUTION_DATA_JSON = "csp_ira_state_distribution.json"
+CSP_IRA_SUMMARY_DATA_JSON = "csp_ira_summary.json"
+CSP_IRA_PRACTICE_CATEGORIES_DATA_JSON = "csp_ira_practices.json"
+CSP_IRA_AGGREGATE_DATA_JSON = "csp_ira_aggregated_prediction.json"
 II_CRP_DATA_PATH = os.path.join(TITLE_II_DATA_PATH, "programs", "crp")
 CRP_STATE_DISTRIBUTION_DATA_JSON = "crp_state_distribution_data.json"
 CRP_SUBPROGRAMS_DATA_JSON = "crp_subprograms_data.json"
@@ -486,6 +491,66 @@ def titles_title_ii_programs_csp_summary_search():
     end_year = 2022
     endpoint_response = generate_title_ii_summary_response(program_id, start_year, end_year)
     return endpoint_response
+
+
+# /pdl/titles/title-ii/programs/csp_ira/state-distribution
+def titles_title_ii_programs_csp_ira_state_distribution_search():
+    # set the file path
+    csp_ira_data = os.path.join(II_CSP_IRA_DATA_PATH, CSP_IRA_STATE_DISTRIBUTION_DATA_JSON)
+
+    # open file
+    with open(csp_ira_data, 'r') as state_distribution_data:
+        file_data = state_distribution_data.read()
+
+        # parse file
+        data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
+
+        return data_json
+
+
+# /pdl/titles/title-ii/programs/csp-ira/summary
+def titles_title_ii_programs_csp_ira_summary_search():
+    # set the file path
+    csp_ira_data = os.path.join(II_CSP_IRA_DATA_PATH, CSP_IRA_SUMMARY_DATA_JSON)
+
+    # open file
+    with open(csp_ira_data, 'r') as summary_data:
+        file_data = summary_data.read()
+
+        # parse file
+        data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
+
+        return data_json
+
+
+# /pdl/titles/title-ii/programs/csp-ira/practice-names
+def titles_title_ii_programs_csp_ira_practice_names_search():
+    # set the file path
+    csp_ira_data = os.path.join(II_CSP_IRA_DATA_PATH, CSP_IRA_PRACTICE_CATEGORIES_DATA_JSON)
+
+    # open file
+    with open(csp_ira_data, 'r') as practice_data:
+        file_data = practice_data.read()
+
+        # parse file
+        data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
+
+        return data_json
+
+
+# /pdl/titles/title-ii/programs/csp-ira/predicted
+def titles_title_ii_programs_csp_ira_predicted_search():
+    # set the file path
+    csp_ira_data = os.path.join(II_CSP_IRA_DATA_PATH, CSP_IRA_AGGREGATE_DATA_JSON)
+
+    # open file
+    with open(csp_ira_data, 'r') as predicted_data:
+        file_data = predicted_data.read()
+
+        # parse file
+        data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
+
+        return data_json
 
 
 # /pdl/titles/title-ii/programs/crp/state-distribution
