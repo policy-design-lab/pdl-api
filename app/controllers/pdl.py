@@ -1408,15 +1408,17 @@ def generate_title_ii_state_distribution_response(program_id, start_year, end_ye
     sub_programs_dict = dict()
     for row in sub_programs_result:
         response_dict = dict(zip(sub_programs_column_names, row))
+        sub_program_name = response_dict['subProgramName']
+        del response_dict['subProgramName']
 
-        sub_programs_dict[response_dict['subProgramId']] = response_dict['subProgramName']
+        sub_programs_dict[sub_program_name] = response_dict
 
     # Get sub-sub programs for the sub program
-    for sub_program_id in sub_programs_dict:
+    for sub_program_name in sub_programs_dict:
 
         sub_sub_programs_query = session.query(SubSubProgram.id.label('subSubProgramId'),
                                                SubSubProgram.name.label("subSubProgramName")
-                                               ).filter(SubSubProgram.sub_program_id == sub_program_id)
+                                               ).filter(SubSubProgram.sub_program_id == sub_programs_dict[sub_program_name]['subProgramId'])
 
         # Extract the column names
         sub_sub_programs_column_names = [item['name'] for item in sub_sub_programs_query.statement.column_descriptions]
@@ -1424,13 +1426,12 @@ def generate_title_ii_state_distribution_response(program_id, start_year, end_ye
         # Execute the query
         sub_sub_programs_result = sub_sub_programs_query.all()
 
-        sub_sub_programs_dict = dict()
+        sub_sub_programs_list = []
         for row in sub_sub_programs_result:
             response_dict = dict(zip(sub_sub_programs_column_names, row))
+            sub_sub_programs_list.append(response_dict)
 
-            sub_sub_programs_dict[response_dict['subSubProgramId']] = response_dict['subSubProgramName']
-
-        sub_programs_dict[sub_program_id] = sub_sub_programs_dict
+        sub_programs_dict[sub_program_name]["subSubPrograms"] = sub_sub_programs_list
 
     # Get practice categories for the program
     practice_categories_query = session.query(
@@ -1678,6 +1679,7 @@ def generate_title_ii_state_distribution_response(program_id, start_year, end_ye
         response_dict["totalContractsInPercentageNationwide"] = 0.0
         response_dict["totalAreaInPercentageWithinState"] = 0.0
         response_dict["totalAreaInPercentageNationwide"] = 0.0
+        response_dict["subSubPrograms"] = []
 
         if state in state_total_values_by_sub_programs_dict:
             state_total_values_by_sub_programs_dict[state]["subPrograms"].append(response_dict)
@@ -1721,6 +1723,101 @@ def generate_title_ii_state_distribution_response(program_id, start_year, end_ye
         del response_dict['subProgramName']
 
         total_values_by_sub_programs_dict[sub_program_name] = response_dict
+
+    # Get total values by sub-sub programs by state
+    state_total_values_by_sub_sub_programs_query = (session.query(
+        Payment.state_code.label('state'),
+        SubSubProgram.name.label('subSubProgramName'),
+        func.sum(Payment.payment).label('totalPaymentInDollars'),
+        func.cast(func.sum(Payment.recipient_count).label('totalRecipients'), Integer),
+        func.cast(func.sum(Payment.farm_count).label('totalFarms'), Integer),
+        func.cast(func.sum(Payment.contract_count).label('totalContracts'), Integer),
+        func.cast(func.sum(Payment.base_acres).label('totalAreaInAcres'), Integer),
+    ).join(
+        SubSubProgram, Payment.sub_sub_program_id == SubSubProgram.id
+    ).filter(
+        Payment.program_id == program_id,
+        Payment.year.between(start_year, end_year)
+    ).group_by(
+        Payment.state_code, SubSubProgram.name
+    ).order_by(
+        desc('totalPaymentInDollars')
+    ))
+
+    # Extract the column names
+    state_total_values_by_sub_sub_programs_column_names = [item['name'] for item in state_total_values_by_sub_sub_programs_query.statement.column_descriptions]
+
+    # Execute the query
+    state_total_values_by_sub_sub_programs_result = state_total_values_by_sub_sub_programs_query.all()
+
+    # Generate result dictionary
+    state_total_values_by_sub_sub_programs_dict = dict()
+
+    for row in state_total_values_by_sub_sub_programs_result:
+        response_dict = dict(zip(state_total_values_by_sub_sub_programs_column_names, row))
+        state = response_dict['state']
+        sub_sub_program_name = response_dict['subSubProgramName']
+
+        # Cleanup / renaming attributes
+        del response_dict['state']
+        # del response_dict['subSubProgramName']
+
+        response_dict["totalPaymentInPercentageNationwide"] = 0.0
+        response_dict["totalPaymentInPercentageWithinState"] = 0.0
+        response_dict["totalRecipientsInPercentageWithinState"] = 0.0
+        response_dict["totalRecipientsInPercentageNationwide"] = 0.0
+        response_dict["totalFarmsInPercentageWithinState"] = 0.0
+        response_dict["totalFarmsInPercentageNationwide"] = 0.0
+        response_dict["totalContractsInPercentageWithinState"] = 0.0
+        response_dict["totalContractsInPercentageNationwide"] = 0.0
+        response_dict["totalAreaInPercentageWithinState"] = 0.0
+        response_dict["totalAreaInPercentageNationwide"] = 0.0
+
+        if state in state_total_values_by_sub_sub_programs_dict:
+            state_total_values_by_sub_sub_programs_dict[state].append({sub_sub_program_name: response_dict})
+        else:
+            state_total_values_by_sub_sub_programs_dict[state] = [{sub_sub_program_name: response_dict}]
+
+    # Sort the sub-sub programs by alphabetical order of their names
+    for state in state_total_values_by_sub_sub_programs_dict:
+        state_total_values_by_sub_sub_programs_dict[state] = sorted(state_total_values_by_sub_sub_programs_dict[state], key=lambda x: list(x.keys())[0])
+
+    # Get total values by sub-sub programs
+    total_values_by_sub_sub_programs_query = (session.query(
+        SubSubProgram.name.label('subSubProgramName'),
+        func.sum(Payment.payment).label('totalPaymentInDollars'),
+        func.cast(func.sum(Payment.recipient_count).label('totalRecipients'), Integer),
+        func.cast(func.sum(Payment.farm_count).label('totalFarms'), Integer),
+        func.cast(func.sum(Payment.contract_count).label('totalContracts'), Integer),
+        func.cast(func.sum(Payment.base_acres).label('totalAreaInAcres'), Integer),
+    ).join(
+        SubSubProgram, Payment.sub_sub_program_id == SubSubProgram.id
+    ).filter(
+        Payment.program_id == program_id,
+        Payment.year.between(start_year, end_year)
+    ).group_by(
+        SubSubProgram.name
+    ).order_by(
+        desc('totalPaymentInDollars')
+    ))
+
+    # Extract the column names
+    total_values_by_sub_sub_programs_column_names = [item['name'] for item in total_values_by_sub_sub_programs_query.statement.column_descriptions]
+
+    # Execute the query
+    total_values_by_sub_sub_programs_result = total_values_by_sub_sub_programs_query.all()
+
+    # Generate result dictionary
+    total_values_by_sub_sub_programs_dict = dict()
+
+    for row in total_values_by_sub_sub_programs_result:
+        response_dict = dict(zip(total_values_by_sub_sub_programs_column_names, row))
+        sub_sub_program_name = response_dict['subSubProgramName']
+
+        # Cleanup / renaming attributes
+        del response_dict['subSubProgramName']
+
+        total_values_by_sub_sub_programs_dict[sub_sub_program_name] = response_dict
 
     # Total payment for the given period
     total_payments_subquery = session.query(func.sum(Payment.payment).label('totalPaymentInDollars')).filter(
@@ -1823,26 +1920,16 @@ def generate_title_ii_state_distribution_response(program_id, start_year, end_ye
             for sub_program in state_dict["subPrograms"]:
                 sub_program_name = sub_program["subProgramName"]
                 if sub_program_name in total_values_by_sub_programs_dict:
-                    if state_dict["totalPaymentInDollars"] is not None and state_dict["totalPaymentInDollars"] != 0:
-                        sub_program["totalPaymentInPercentageWithinState"] = round(sub_program["totalPaymentInDollars"] / state_dict["totalPaymentInDollars"] * 100, 2)
-                    if state_dict["totalRecipients"] is not None and state_dict["totalRecipients"] != 0:
-                        sub_program["totalRecipientsInPercentageWithinState"] = round(sub_program["totalRecipients"] / state_dict["totalRecipients"] * 100, 2)
-                    if state_dict["totalFarms"] is not None and state_dict["totalFarms"] != 0:
-                        sub_program["totalFarmsInPercentageWithinState"] = round(sub_program["totalFarms"] / state_dict["totalFarms"] * 100, 2)
-                    if state_dict["totalContracts"] is not None and state_dict["totalContracts"] != 0:
-                        sub_program["totalContractsInPercentageWithinState"] = round(sub_program["totalContracts"] / state_dict["totalContracts"] * 100, 2)
-                    if state_dict["totalAreaInAcres"] is not None and state_dict["totalAreaInAcres"] != 0:
-                        sub_program["totalAreaInPercentageWithinState"] = round(sub_program["totalAreaInAcres"] / state_dict["totalAreaInAcres"] * 100, 2)
-                    if total_values_by_sub_programs_dict[sub_program_name]["totalPaymentInDollars"] is not None and total_values_by_sub_programs_dict[sub_program_name]["totalPaymentInDollars"] != 0:
-                        sub_program["totalPaymentInPercentageNationwide"] = round(sub_program["totalPaymentInDollars"] / total_values_by_sub_programs_dict[sub_program_name]["totalPaymentInDollars"] * 100, 2)
-                    if total_values_by_sub_programs_dict[sub_program_name]["totalRecipients"] is not None and total_values_by_sub_programs_dict[sub_program_name]["totalRecipients"] != 0:
-                        sub_program["totalRecipientsInPercentageNationwide"] = round(sub_program["totalRecipients"] / total_values_by_sub_programs_dict[sub_program_name]["totalRecipients"] * 100, 2)
-                    if total_values_by_sub_programs_dict[sub_program_name]["totalFarms"] is not None and total_values_by_sub_programs_dict[sub_program_name]["totalFarms"] != 0:
-                        sub_program["totalFarmsInPercentageNationwide"] = round(sub_program["totalFarms"] / total_values_by_sub_programs_dict[sub_program_name]["totalFarms"] * 100, 2)
-                    if total_values_by_sub_programs_dict[sub_program_name]["totalContracts"] is not None and total_values_by_sub_programs_dict[sub_program_name]["totalContracts"] != 0:
-                        sub_program["totalContractsInPercentageNationwide"] = round(sub_program["totalContracts"] / total_values_by_sub_programs_dict[sub_program_name]["totalContracts"] * 100, 2)
-                    if total_values_by_sub_programs_dict[sub_program_name]["totalAreaInAcres"] is not None and total_values_by_sub_programs_dict[sub_program_name]["totalAreaInAcres"] != 0:
-                        sub_program["totalAreaInPercentageNationwide"] = round(sub_program["totalAreaInAcres"] / total_values_by_sub_programs_dict[sub_program_name]["totalAreaInAcres"] * 100, 2)
+                    __calculate_and_add_percentages(state_dict, sub_program, total_values_by_sub_programs_dict, sub_program_name)
+
+                if sub_program_name in sub_programs_dict and "subSubPrograms" in sub_programs_dict[sub_program_name] and len(sub_programs_dict[sub_program_name]["subSubPrograms"]) > 0 and state in state_total_values_by_sub_sub_programs_dict:
+                    for sub_sub_program_dict in state_total_values_by_sub_sub_programs_dict[state]:
+                        for sub_sub_program_temp in sub_programs_dict[sub_program_name]["subSubPrograms"]:
+                            sub_sub_program_name = list(sub_sub_program_dict.keys())[0]
+                            sub_sub_program = sub_sub_program_dict[sub_sub_program_name]
+                            if sub_sub_program_name == sub_sub_program_temp["subSubProgramName"]:
+                                __calculate_and_add_percentages(state_dict, sub_sub_program, total_values_by_sub_sub_programs_dict, sub_sub_program_name)
+                                sub_program["subSubPrograms"].append(sub_sub_program)
     # Create endpoint response dictionary
     endpoint_response_list = []
     for state in program_response_dict:
@@ -1850,6 +1937,48 @@ def generate_title_ii_state_distribution_response(program_id, start_year, end_ye
     response = {str(start_year) + "-" + str(end_year): endpoint_response_list}
 
     return response
+
+
+def __calculate_and_add_percentages(state_dict, entity_dict, total_values_dict, entity_name):
+    if state_dict["totalPaymentInDollars"] is not None and state_dict["totalPaymentInDollars"] != 0:
+        entity_dict["totalPaymentInPercentageWithinState"] = round(
+            entity_dict["totalPaymentInDollars"] / state_dict["totalPaymentInDollars"] * 100, 2)
+    if state_dict["totalRecipients"] is not None and state_dict["totalRecipients"] != 0:
+        entity_dict["totalRecipientsInPercentageWithinState"] = round(
+            entity_dict["totalRecipients"] / state_dict["totalRecipients"] * 100, 2)
+    if state_dict["totalFarms"] is not None and state_dict["totalFarms"] != 0:
+        entity_dict["totalFarmsInPercentageWithinState"] = round(
+            entity_dict["totalFarms"] / state_dict["totalFarms"] * 100, 2)
+    if state_dict["totalContracts"] is not None and state_dict["totalContracts"] != 0:
+        entity_dict["totalContractsInPercentageWithinState"] = round(
+            entity_dict["totalContracts"] / state_dict["totalContracts"] * 100, 2)
+    if state_dict["totalAreaInAcres"] is not None and state_dict["totalAreaInAcres"] != 0:
+        entity_dict["totalAreaInPercentageWithinState"] = round(
+            entity_dict["totalAreaInAcres"] / state_dict["totalAreaInAcres"] * 100, 2)
+    if total_values_dict[entity_name]["totalPaymentInDollars"] is not None and \
+            total_values_dict[entity_name]["totalPaymentInDollars"] != 0:
+        entity_dict["totalPaymentInPercentageNationwide"] = round(
+            entity_dict["totalPaymentInDollars"] / total_values_dict[entity_name][
+                "totalPaymentInDollars"] * 100, 2)
+    if total_values_dict[entity_name]["totalRecipients"] is not None and \
+            total_values_dict[entity_name]["totalRecipients"] != 0:
+        entity_dict["totalRecipientsInPercentageNationwide"] = round(
+            entity_dict["totalRecipients"] / total_values_dict[entity_name][
+                "totalRecipients"] * 100, 2)
+    if total_values_dict[entity_name]["totalFarms"] is not None and \
+            total_values_dict[entity_name]["totalFarms"] != 0:
+        entity_dict["totalFarmsInPercentageNationwide"] = round(
+            entity_dict["totalFarms"] / total_values_dict[entity_name]["totalFarms"] * 100, 2)
+    if total_values_dict[entity_name]["totalContracts"] is not None and \
+            total_values_dict[entity_name]["totalContracts"] != 0:
+        entity_dict["totalContractsInPercentageNationwide"] = round(
+            entity_dict["totalContracts"] / total_values_dict[entity_name]["totalContracts"] * 100,
+            2)
+    if total_values_dict[entity_name]["totalAreaInAcres"] is not None and \
+            total_values_dict[entity_name]["totalAreaInAcres"] != 0:
+        entity_dict["totalAreaInPercentageNationwide"] = round(
+            entity_dict["totalAreaInAcres"] / total_values_dict[entity_name][
+                "totalAreaInAcres"] * 100, 2)
 
 
 def generate_title_ii_summary_response(program_id, start_year, end_year):
