@@ -4,14 +4,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.16.0] - 2024-08-16
+## [0.17.0] - 2024-08-28
 
 ## Added
 - CSP IRA endpoints including state distribution and summary. [#234](https://github.com/policy-design-lab/pdl-api/issues/234)
 
+### Changed
+- Endpoints by removing hardcoded program and subtitle IDs. [#232](https://github.com/policy-design-lab/pdl-api/issues/232)
+
+## [0.16.0] - 2024-08-16
+
 ## Changed
 - EQIP and CSP endpoints to use data from the database. [#203](https://github.com/policy-design-lab/pdl-api/issues/203)
-- Endpoints by removing hardcoded program and subtitle IDs. [#232](https://github.com/policy-design-lab/pdl-api/issues/232)
 
 ## Fixed
 - Error when calling GET states endpoint after recent change. [#228](https://github.com/policy-design-lab/pdl-api/issues/228)
@@ -173,6 +177,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Open API specification file. [#50](https://github.com/policy-design-lab/pdl-api/issues/50)
 
+[0.17.0]: https://github.com/policy-design-lab/pdl-api/compare/0.16.0...0.17.0
 [0.16.0]: https://github.com/policy-design-lab/pdl-api/compare/0.15.0...0.16.0
 [0.15.0]: https://github.com/policy-design-lab/pdl-api/compare/0.14.0...0.15.0
 [0.14.0]: https://github.com/policy-design-lab/pdl-api/compare/0.13.0...0.14.0
