@@ -4,9 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## Unreleased
+
+### Changed
+
+- CRP endpoints to use data from the database. [#237](https://github.com/policy-design-lab/pdl-api/issues/237)
+
 ## [0.17.0] - 2024-08-28
 
-## Added
+### Added
 - CSP IRA endpoints including state distribution and summary. [#234](https://github.com/policy-design-lab/pdl-api/issues/234)
 
 ### Changed
@@ -14,10 +20,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.16.0] - 2024-08-16
 
-## Changed
+### Changed
 - EQIP and CSP endpoints to use data from the database. [#203](https://github.com/policy-design-lab/pdl-api/issues/203)
 
-## Fixed
+### Fixed
 - Error when calling GET states endpoint after recent change. [#228](https://github.com/policy-design-lab/pdl-api/issues/228)
 - Error due to the previous SNAP program ID being used. [#230](https://github.com/policy-design-lab/pdl-api/issues/230)
 - Missing attributes in CSP response statute objects. [#232](https://github.com/policy-design-lab/pdl-api/issues/232) 
