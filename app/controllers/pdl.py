@@ -1395,6 +1395,15 @@ def generate_title_i_summary_response(subtitle_id, start_year, end_year):
 def generate_title_ii_state_distribution_response(program_id, start_year, end_year):
     session = Session()
 
+    # Get program name
+    program_name = session.query(Program.name).filter(Program.id == program_id).first()[0]
+
+    total_crp_sub_program_id = None
+    if program_name == TITLE_II_CRP_PROGRAM_NAME:
+        # Find ID of the sub program with name 'Total CRP' for the program
+        total_crp_sub_program_id = session.query(SubProgram.id).filter(SubProgram.program_id == program_id,
+                                                                       SubProgram.name == 'Total CRP').first()[0]
+
     # Get sub programs for the program
     sub_programs_query = session.query(SubProgram.id.label('subProgramId'),
                                        SubProgram.name.label("subProgramName")
@@ -1682,10 +1691,12 @@ def generate_title_ii_state_distribution_response(program_id, start_year, end_ye
         response_dict["totalAreaInPercentageNationwide"] = 0.0
         response_dict["subSubPrograms"] = []
 
-        if state in state_total_values_by_sub_programs_dict:
-            state_total_values_by_sub_programs_dict[state]["subPrograms"].append(response_dict)
-        else:
-            state_total_values_by_sub_programs_dict[state] = {"subPrograms": [response_dict]}
+        # In CRP, exclude 'Total CRP' sub program from the response
+        if program_name == TITLE_II_CRP_PROGRAM_NAME and response_dict['subProgramName'] != 'Total CRP':
+            if state in state_total_values_by_sub_programs_dict:
+                state_total_values_by_sub_programs_dict[state]["subPrograms"].append(response_dict)
+            else:
+                state_total_values_by_sub_programs_dict[state] = {"subPrograms": [response_dict]}
 
     # Get total values by sub programs
     total_values_by_sub_programs_query = (session.query(
@@ -1820,44 +1831,84 @@ def generate_title_ii_state_distribution_response(program_id, start_year, end_ye
 
         total_values_by_sub_sub_programs_dict[sub_sub_program_name] = response_dict
 
-    # Total payment for the given period
-    total_payments_subquery = session.query(func.sum(Payment.payment).label('totalPaymentInDollars')).filter(
-        Payment.program_id == program_id,
-        Payment.year.between(start_year, end_year),
-        Payment.sub_sub_program_id == None  # noqa: Needed for SQLAlchemy
-    )
+    # Total payment for the given period. Special handling for CRP, as its 'Total CRP' sub program contains the total values.
+    if program_name != TITLE_II_CRP_PROGRAM_NAME:
+        total_payments_subquery = session.query(func.sum(Payment.payment).label('totalPaymentInDollars')).filter(
+            Payment.program_id == program_id,
+            Payment.year.between(start_year, end_year),
+            Payment.sub_sub_program_id == None  # noqa: Needed for SQLAlchemy
+        )
+    else:
+        total_payments_subquery = session.query(func.sum(Payment.payment).label('totalPaymentInDollars')).filter(
+            Payment.program_id == program_id,
+            Payment.sub_program_id == total_crp_sub_program_id,
+            Payment.year.between(start_year, end_year),
+            Payment.sub_sub_program_id == None  # noqa: Needed for SQLAlchemy
+        )
     nationwide_total_payment = total_payments_subquery.scalar()
 
     # Total recipients for the given period
-    total_recipients_subquery = session.query(func.sum(Payment.recipient_count).label('totalRecipients')).filter(
-        Payment.program_id == program_id,
-        Payment.year.between(start_year, end_year),
-        Payment.sub_sub_program_id == None  # noqa: Needed for SQLAlchemy
-    )
+    if program_name != TITLE_II_CRP_PROGRAM_NAME:
+        total_recipients_subquery = session.query(func.sum(Payment.recipient_count).label('totalRecipients')).filter(
+            Payment.program_id == program_id,
+            Payment.year.between(start_year, end_year),
+            Payment.sub_sub_program_id == None  # noqa: Needed for SQLAlchemy
+        )
+    else:
+        total_recipients_subquery = session.query(func.sum(Payment.recipient_count).label('totalRecipients')).filter(
+            Payment.program_id == program_id,
+            Payment.sub_program_id == total_crp_sub_program_id,
+            Payment.year.between(start_year, end_year),
+            Payment.sub_sub_program_id == None  # noqa: Needed for SQLAlchemy
+        )
     nationwide_total_recipients = total_recipients_subquery.scalar()
 
     # Total contracts for the given period
-    total_contracts_subquery = session.query(func.sum(Payment.contract_count).label('totalContracts')).filter(
-        Payment.program_id == program_id,
-        Payment.year.between(start_year, end_year),
-        Payment.sub_sub_program_id == None  # noqa: Needed for SQLAlchemy
-    )
+    if program_name != TITLE_II_CRP_PROGRAM_NAME:
+        total_contracts_subquery = session.query(func.sum(Payment.contract_count).label('totalContracts')).filter(
+            Payment.program_id == program_id,
+            Payment.year.between(start_year, end_year),
+            Payment.sub_sub_program_id == None  # noqa: Needed for SQLAlchemy
+        )
+    else:
+        total_contracts_subquery = session.query(func.sum(Payment.contract_count).label('totalContracts')).filter(
+            Payment.program_id == program_id,
+            Payment.sub_program_id == total_crp_sub_program_id,
+            Payment.year.between(start_year, end_year),
+            Payment.sub_sub_program_id == None  # noqa: Needed for SQLAlchemy
+        )
     nationwide_total_contracts = total_contracts_subquery.scalar()
 
     # Total farms for the given period
-    total_farms_subquery = session.query(func.sum(Payment.farm_count).label('totalFarms')).filter(
-        Payment.program_id == program_id,
-        Payment.year.between(start_year, end_year),
-        Payment.sub_sub_program_id == None  # noqa: Needed for SQLAlchemy
-    )
+    if program_name != TITLE_II_CRP_PROGRAM_NAME:
+        total_farms_subquery = session.query(func.sum(Payment.farm_count).label('totalFarms')).filter(
+            Payment.program_id == program_id,
+            Payment.year.between(start_year, end_year),
+            Payment.sub_sub_program_id == None  # noqa: Needed for SQLAlchemy
+        )
+    else:
+        total_farms_subquery = session.query(func.sum(Payment.farm_count).label('totalFarms')).filter(
+            Payment.program_id == program_id,
+            Payment.sub_program_id == total_crp_sub_program_id,
+            Payment.year.between(start_year, end_year),
+            Payment.sub_sub_program_id == None  # noqa: Needed for SQLAlchemy
+        )
     nationwide_total_farms = total_farms_subquery.scalar()
 
     # Total area in acres for the given period
-    total_area_in_acres_subquery = session.query(func.sum(Payment.base_acres).label('totalAreaInAcres')).filter(
-        Payment.program_id == program_id,
-        Payment.year.between(start_year, end_year),
-        Payment.sub_sub_program_id == None  # noqa: Needed for SQLAlchemy
-    )
+    if program_name != TITLE_II_CRP_PROGRAM_NAME:
+        total_area_in_acres_subquery = session.query(func.sum(Payment.base_acres).label('totalAreaInAcres')).filter(
+            Payment.program_id == program_id,
+            Payment.year.between(start_year, end_year),
+            Payment.sub_sub_program_id == None  # noqa: Needed for SQLAlchemy
+        )
+    else:
+        total_area_in_acres_subquery = session.query(func.sum(Payment.base_acres).label('totalAreaInAcres')).filter(
+            Payment.program_id == program_id,
+            Payment.sub_program_id == total_crp_sub_program_id,
+            Payment.year.between(start_year, end_year),
+            Payment.sub_sub_program_id == None  # noqa: Needed for SQLAlchemy
+        )
     nationwide_total_area_in_acres = total_area_in_acres_subquery.scalar()
 
     # Top-level query
@@ -1882,6 +1933,21 @@ def generate_title_ii_state_distribution_response(program_id, start_year, end_ye
     ).order_by(
         desc('totalPaymentInDollars')
     )
+
+    if program_name != TITLE_II_CRP_PROGRAM_NAME:
+        query = query.filter(
+            Payment.program_id == program_id,
+            Payment.year.between(start_year, end_year),
+            Payment.sub_sub_program_id == None  # noqa: Needed for SQLAlchemy
+        )
+    # In CRP, use the 'Total CRP' sub program to calculate the top-level total values
+    else:
+        query = query.filter(
+            Payment.program_id == program_id,
+            Payment.sub_program_id == total_crp_sub_program_id,
+            Payment.year.between(start_year, end_year),
+            Payment.sub_sub_program_id == None  # noqa: Needed for SQLAlchemy
+        )
 
     # Extract the column names
     column_names = [item['name'] for item in query.statement.column_descriptions]
