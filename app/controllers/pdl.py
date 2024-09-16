@@ -2051,6 +2051,50 @@ def __calculate_and_add_percentages(state_dict, entity_dict, total_values_dict, 
 def generate_title_ii_summary_response(program_id, start_year, end_year):
     session = Session()
 
+    # Get program name
+    program_name = session.query(Program.name).filter(Program.id == program_id).first()[0]
+
+    total_crp_sub_program_id = None
+    if program_name == TITLE_II_CRP_PROGRAM_NAME:
+        # Find ID of the sub program with name 'Total CRP' for the program
+        total_crp_sub_program_id = session.query(SubProgram.id).filter(SubProgram.program_id == program_id,
+                                                                       SubProgram.name == 'Total CRP').first()[0]
+
+    # Calculate total values for the given period
+    total_values_query = (session.query(func.sum(Payment.payment).label('totalPaymentInDollars'),
+                                        func.cast(func.sum(Payment.recipient_count).label('totalRecipients'), Integer),
+                                        func.cast(func.sum(Payment.farm_count).label('totalFarms'), Integer),
+                                        func.cast(func.sum(Payment.contract_count).label('totalContracts'), Integer),
+                                        func.cast(func.sum(Payment.base_acres).label('totalAreaInAcres'), Integer)))
+
+    if program_name != TITLE_II_CRP_PROGRAM_NAME:
+        total_values_query = total_values_query.filter(
+            Payment.program_id == program_id,
+            Payment.year.between(start_year, end_year),
+            Payment.sub_sub_program_id == None  # noqa: Needed for SQLAlchemy
+        )
+    # In CRP, use the 'Total CRP' sub program to calculate the top-level total values
+    else:
+        total_values_query = total_values_query.filter(
+            Payment.program_id == program_id,
+            Payment.sub_program_id == total_crp_sub_program_id,
+            Payment.year.between(start_year, end_year),
+            Payment.sub_sub_program_id == None  # noqa: Needed for SQLAlchemy
+        )
+
+    # Extract the column names
+    total_values_column_names = [item['name'] for item in total_values_query.statement.column_descriptions]
+
+    # Execute the query
+    total_values_result = total_values_query.all()
+
+    # Generate result dictionary
+    total_values_dict = dict()
+
+    for row in total_values_result:
+        response_dict = dict(zip(total_values_column_names, row))
+        total_values_dict = response_dict
+
     # Get sub programs for the program
     sub_programs_query = session.query(
         SubProgram.name.label('subProgramName'),
@@ -2067,10 +2111,13 @@ def generate_title_ii_summary_response(program_id, start_year, end_year):
 
     for row in sub_programs_result:
         response_dict = dict(zip(sub_programs_column_names, row))
-        response_dict["totalPaymentInDollars"] = 0.0
-        response_dict["totalPaymentInPercentage"] = 0.0
-        sub_program_name = response_dict['subProgramName']
-        sub_programs_dict[sub_program_name] = response_dict
+
+        # In CRP, exclude 'Total CRP' sub program from the response
+        if program_name == TITLE_II_CRP_PROGRAM_NAME and response_dict['subProgramName'] != 'Total CRP':
+            response_dict["totalPaymentInDollars"] = 0.0
+            response_dict["totalPaymentInPercentage"] = 0.0
+            sub_program_name = response_dict['subProgramName']
+            sub_programs_dict[sub_program_name] = response_dict
 
     # Construct the program total subquery
     program_subquery_total_payment = (session.query(func.sum(Payment.payment))
@@ -2112,10 +2159,11 @@ def generate_title_ii_summary_response(program_id, start_year, end_year):
         response_dict = dict(zip(total_values_by_sub_programs_column_names, row))
         sub_program_name = response_dict['subProgramName']
 
-        # Cleanup / renaming attributes
-        del response_dict['subProgramName']
-
-        total_values_by_sub_programs_dict[sub_program_name] = response_dict
+        # In CRP, exclude 'Total CRP' sub program from the response
+        if program_name == TITLE_II_CRP_PROGRAM_NAME and response_dict['subProgramName'] != 'Total CRP':
+            # Cleanup / renaming attributes
+            del response_dict['subProgramName']
+            total_values_by_sub_programs_dict[sub_program_name] = response_dict
 
     for sub_program_name in sub_programs_dict:
         # Get sub-sub programs for the sub program
@@ -2321,5 +2369,5 @@ def generate_title_ii_summary_response(program_id, start_year, end_year):
     # Sort the sub programs by total payment in descending order
     sub_programs_list = sorted(sub_programs_list, key=lambda x: x['totalPaymentInDollars'], reverse=True)
 
-    response = {"statutes": statutes_list, "subPrograms": sub_programs_list}
+    response = {**total_values_dict, "statutes": statutes_list, "subPrograms": sub_programs_list}
     return response
