@@ -7,7 +7,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### Changed
-
 - CRP endpoints to use data from the database. [#237](https://github.com/policy-design-lab/pdl-api/issues/237)
 
 ## [0.17.0] - 2024-08-28
