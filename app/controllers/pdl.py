@@ -84,7 +84,6 @@ TITLE_I_SUBTITLE_D_NAME = "Dairy Margin Coverage, Subtitle D"
 TITLE_I_SUBTITLE_E_NAME = "Supplemental Agricultural Disaster Assistance, Subtitle E"
 TITLE_II_EQIP_PROGRAM_NAME = "Environmental Quality Incentives Program (EQIP)"
 TITLE_II_CSP_PROGRAM_NAME = "Conservation Stewardship Program (CSP)"
-TITLE_II_ACEP_PROGRAM_NAME = "Agricultural Conservation Easement Program (ACEP)"
 TITLE_II_CRP_PROGRAM_NAME = "Conservation Reserve Program (CRP)"
 TITLE_IV_SNAP_PROGRAM_NAME = "Supplemental Nutrition Assistance Program (SNAP)"
 
@@ -595,34 +594,32 @@ def titles_title_ii_programs_crp_summary_search():
 
 # /pdl/titles/title-ii/programs/acep/state-distribution
 def titles_title_ii_programs_acep_state_distribution_search():
-    program_id = get_program_id(TITLE_II_ACEP_PROGRAM_NAME)
-    if program_id is None:
-        msg = {
-            "reason": "No record for the given program name " + TITLE_II_ACEP_PROGRAM_NAME,
-            "error": "Not found: " + request.url,
-        }
-        logging.error("ACEP: " + json.dumps(msg))
-        return rs_handlers.not_found(msg)
-    start_year = 2018
-    end_year = 2022
-    endpoint_response = generate_title_ii_state_distribution_response(program_id, start_year, end_year)
-    return endpoint_response
+    # set the file path
+    acep_data = os.path.join(II_ACEP_DATA_PATH, ACEP_STATE_DISTRIBUTION_DATA_JSON)
+
+    # open file
+    with open(acep_data, 'r') as map_data:
+        file_data = map_data.read()
+
+        # parse file
+        data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
+
+        return data_json
 
 
 # /pdl/titles/title-ii/programs/acep/summary
 def titles_title_ii_programs_acep_summary_search():
-    program_id = get_program_id(TITLE_II_ACEP_PROGRAM_NAME)
-    if program_id is None:
-        msg = {
-            "reason": "No record for the given program name " + TITLE_II_ACEP_PROGRAM_NAME,
-            "error": "Not found: " + request.url,
-        }
-        logging.error("ACEP: " + json.dumps(msg))
-        return rs_handlers.not_found(msg)
-    start_year = 2018
-    end_year = 2022
-    endpoint_response = generate_title_ii_summary_response(program_id, start_year, end_year)
-    return endpoint_response
+    # set the file path
+    acep_data = os.path.join(II_ACEP_DATA_PATH, ACEP_SUBPROGRAMS_DATA_JSON)
+
+    # open file
+    with open(acep_data, 'r') as map_data:
+        file_data = map_data.read()
+
+        # parse file
+        data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
+
+        return data_json
 
 
 # /pdl/titles/title-ii/programs/rcpp/state-distribution
