@@ -22,6 +22,9 @@ from collections import defaultdict
 LANDING_PAGE_DATA_PATH = os.path.join("controllers", "data", "landingpage")
 ALLPROGRAM_DATA_JSON = "allprograms.json"
 SUMMARY_DATA_JSON = "summary.json"
+YIELDS_DATA_PATH = os.path.join("controllers", "data", "yields")
+FSA_YIELDS_DATA_JSON = "fsaYields.json"
+RMA_YIELDS_DATA_JSON = "rmaYields.json"
 
 TITLE_I_DATA_PATH = os.path.join("controllers", "data", "title-i")
 I_SUBTITLE_A_DATA_PATH = os.path.join(TITLE_I_DATA_PATH, "subtitle-a")
@@ -207,6 +210,41 @@ def allprograms_search():
         data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
 
         return data_json
+
+# /pdl/yields:
+def yields_search(program=None, crop=None):
+
+    if program == "FSA" and crop == "corn" or crop == "soybean":
+        fsayields_data = os.path.join(YIELDS_DATA_PATH, FSA_YIELDS_DATA_JSON)
+
+        # open file
+        with open(fsayields_data, 'r') as json_data:
+            file_data = json_data.read()
+
+            # parse file
+            data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
+
+            return data_json[crop]
+
+    elif program == "RMA" and crop == "corn" or crop == "soybean":
+        rmayields_data = os.path.join(YIELDS_DATA_PATH, RMA_YIELDS_DATA_JSON)
+
+        # open file
+        with open(rmayields_data, 'r') as json_data:
+            file_data = json_data.read()
+
+            # parse file
+            data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
+
+            return data_json[crop]
+    else:
+        msg = {
+            "reason": "Could not find the program and crop yield data for " + program + " and " + crop ,
+            "error": "Not found: " + request.url,
+        }
+        logging.error("Could not find program and crop yield data: " + json.dumps(msg))
+        return rs_handlers.not_found(msg)
+
 
 
 # /pdl/titles/title-i/summary:
