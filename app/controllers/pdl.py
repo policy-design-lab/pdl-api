@@ -213,8 +213,7 @@ def allprograms_search():
 
 # /pdl/yields:
 def yields_search(program=None, crop=None):
-
-    if program == "FSA" and crop == "corn" or crop == "soybean":
+    if program == "FSA" and (crop == "corn" or crop == "soybean"):
         fsayields_data = os.path.join(YIELDS_DATA_PATH, FSA_YIELDS_DATA_JSON)
 
         # open file
@@ -226,7 +225,7 @@ def yields_search(program=None, crop=None):
 
             return data_json[crop]
 
-    elif program == "RMA" and crop == "corn" or crop == "soybean":
+    elif program == "RMA" and (crop == "corn" or crop == "soybean"):
         rmayields_data = os.path.join(YIELDS_DATA_PATH, RMA_YIELDS_DATA_JSON)
 
         # open file
