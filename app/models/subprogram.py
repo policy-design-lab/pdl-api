@@ -1,7 +1,7 @@
 from app.models.db import db
 
 
-class Subprogram(db.Model):
+class SubProgram(db.Model):
     __tablename__ = 'sub_programs'
     __table_args__ = {"schema": "pdl"}
 

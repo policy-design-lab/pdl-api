@@ -15,7 +15,7 @@ from app.models.practice_category import PracticeCategory
 from app.models.state import State
 from app.models.statecode import StateCode
 from app.models.sub_subprogram import SubSubProgram
-from app.models.subprogram import Subprogram
+from app.models.subprogram import SubProgram
 from app.models.subtitle import Subtitle
 from app.models.title import Title
 from collections import defaultdict
