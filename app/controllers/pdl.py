@@ -2075,7 +2075,8 @@ def generate_title_xi_state_distribution_response(program_id, start_year, end_ye
         })
 
     state_aggregate_dict = defaultdict(lambda: {
-        'programName': TTTLE_IX_CROP_INSURANCE_PROGRAM_NAME,
+        'state': '',
+        # 'programName': TTTLE_IX_CROP_INSURANCE_PROGRAM_NAME,
         'totalIndemnitiesInDollars': 0,
         'totalPremiumInDollars': 0,
         'totalPremiumSubsidyInDollars': 0,
@@ -2121,10 +2122,27 @@ def generate_title_xi_state_distribution_response(program_id, start_year, end_ye
         # round the loss ratio to 3 decimal places
         values['lossRatio'] = round(values['lossRatio'], 3)
 
-    # sort states by decreasing order of total payment in dollars
+    # # sort states by decreasing order of total payment in dollars
+    # state_aggregate_dict = dict(state_aggregate_dict)
+    # state_aggregate_dict = sorted(state_aggregate_dict.items(), key=lambda x: x[1]['totalIndemnitiesInDollars'],
+    #                               reverse=True)
+
+    # modify the structure of the output so the state goes inside the dictionary
     state_aggregate_dict = dict(state_aggregate_dict)
-    state_aggregate_dict = sorted(state_aggregate_dict.items(), key=lambda x: x[1]['totalIndemnitiesInDollars'],
-                                  reverse=True)
+
+    # convert the data into the required format
+    final_output = []
+    for state, values in state_aggregate_dict.items():
+        values['state'] = state  # add the state into the dictionary
+        final_output.append(values)
+
+    # Sort the final output based on totalIndemnitiesInDollars in reverse order
+    final_output = sorted(final_output, key=lambda x: x['totalIndemnitiesInDollars'], reverse=True)
+
+    # Add the total states data to the program_response_dict under the key 'TotalStates'
+    program_response_dict[str(start_year) + '-' + str(end_year)] = final_output
+
+    return program_response_dict
 
     # Add the total states data to the program_response_dict under the key 'TotalStates'
     program_response_dict[str(start_year) + '-' + str(end_year)] = state_aggregate_dict
@@ -2537,7 +2555,6 @@ def generate_title_xi_summary_response(program_id, start_year, end_year):
 
     # aggregate dictionary for summing
     aggregate_dict = {
-        'programName': TTTLE_IX_CROP_INSURANCE_PROGRAM_NAME,
         'totalIndemnitiesInDollars': 0,
         'totalPremiumInDollars': 0,
         'totalPremiumSubsidyInDollars': 0,
