@@ -14,7 +14,7 @@ class SubProgram(db.Model):
         self.name = name
 
     def __repr__(self):
-        return 'Subprograms(program_id=%s, name=%s)' % (self.program_id, self.name)
+        return 'SubPrograms(program_id=%s, name=%s)' % (self.program_id, self.name)
 
     def json(self):
         return {'program_id': self.program_id, 'name': self.name}

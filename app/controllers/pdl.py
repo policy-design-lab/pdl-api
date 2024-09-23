@@ -668,7 +668,7 @@ def titles_title_xi_programs_crop_insurance_state_distribution_search():
             "reason": "No record for the given program name " + TTTLE_IX_CROP_INSURANCE_PROGRAM_NAME,
             "error": "Not found: " + request.url,
         }
-        logging.error("CRP: " + json.dumps(msg))
+        logging.error("Crop Insurance: " + json.dumps(msg))
         return rs_handlers.not_found(msg)
     start_year = 2018
     end_year = 2022
@@ -684,7 +684,7 @@ def titles_title_xi_programs_crop_insurance_summary_search():
             "reason": "No record for the given program name " + TTTLE_IX_CROP_INSURANCE_PROGRAM_NAME,
             "error": "Not found: " + request.url,
         }
-        logging.error("CRP: " + json.dumps(msg))
+        logging.error("Crop Insurance: " + json.dumps(msg))
         return rs_handlers.not_found(msg)
     start_year = 2018
     end_year = 2022
