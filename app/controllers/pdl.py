@@ -77,7 +77,7 @@ CROP_INSURANCE_STATE_DISTRIBUTION_DATA_JSON = "crop_insurance_state_distribution
 TITLE_I_NAME = "Title I: Commodities"
 TITLE_II_NAME = "Title II: Conservation"
 TITLE_IV_NAME = "Title IV: Nutrition"
-TITLE_IX_NAME = "Title IX: Crop Insurance"
+TITLE_XI_NAME = "Title IX: Crop Insurance"
 
 TITLE_I_SUBTITLE_A_NAME = "Total Commodities Programs, Subtitle A"
 TITLE_I_SUBTITLE_D_NAME = "Dairy Margin Coverage, Subtitle D"
@@ -88,6 +88,8 @@ TITLE_II_CRP_PROGRAM_NAME = "Conservation Reserve Program (CRP)"
 TITLE_II_ACEP_PROGRAM_NAME = "Agricultural Conservation Easement Program (ACEP)"
 TITLE_II_RCPP_PROGRAM_NAME = "Regional Conservation Partnership Program (RCPP)"
 TITLE_IV_SNAP_PROGRAM_NAME = "Supplemental Nutrition Assistance Program (SNAP)"
+TITLE_XI_CROP_INSURANCE_PROGRAM_NAME = "Crop Insurance"
+
 
 def search():
     out_json = jsonutils.create_test_message()
@@ -660,32 +662,34 @@ def titles_title_ii_programs_rcpp_summary_search():
 
 # /pdl/titles/title-xi/programs/crop-insurance/state-distribution
 def titles_title_xi_programs_crop_insurance_state_distribution_search():
-    # set the file path
-    crop_ins_data = os.path.join(XI_CROP_INS_DATA_PATH, CROP_INSURANCE_STATE_DISTRIBUTION_DATA_JSON)
+    program_id = get_program_id(TITLE_XI_CROP_INSURANCE_PROGRAM_NAME)
+    if program_id is None:
+        msg = {
+            "reason": "No record for the given program name " + TITLE_XI_CROP_INSURANCE_PROGRAM_NAME,
+            "error": "Not found: " + request.url,
+        }
+        logging.error("Crop Insurance: " + json.dumps(msg))
+        return rs_handlers.not_found(msg)
+    start_year = 2018
+    end_year = 2022
+    endpoint_response = generate_title_xi_state_distribution_response(program_id, start_year, end_year)
+    return endpoint_response
 
-    # open file
-    with open(crop_ins_data, 'r') as map_data:
-        file_data = map_data.read()
 
-        # parse file
-        data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
-
-        return data_json
-
-
-# /pdl/titles/title-ii/programs/crop-insurance/summary
+# /pdl/titles/title-xi/programs/crop-insurance/summary
 def titles_title_xi_programs_crop_insurance_summary_search():
-    # set the file path
-    crop_ins_data = os.path.join(XI_CROP_INS_DATA_PATH, CROP_INSURANCE_SUMMARY_DATA_JSON)
-
-    # open file
-    with open(crop_ins_data, 'r') as map_data:
-        file_data = map_data.read()
-
-        # parse file
-        data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
-
-        return data_json
+    program_id = get_program_id(TITLE_XI_CROP_INSURANCE_PROGRAM_NAME)
+    if program_id is None:
+        msg = {
+            "reason": "No record for the given program name " + TITLE_XI_CROP_INSURANCE_PROGRAM_NAME,
+            "error": "Not found: " + request.url,
+        }
+        logging.error("Crop Insurance: " + json.dumps(msg))
+        return rs_handlers.not_found(msg)
+    start_year = 2018
+    end_year = 2022
+    endpoint_response = generate_title_xi_summary_response(program_id, start_year, end_year)
+    return endpoint_response
 
 
 # /pdl/titles/title-iv/programs/snap/state-distribution
@@ -2012,6 +2016,140 @@ def generate_title_ii_state_distribution_response(program_id, start_year, end_ye
     return response
 
 
+def generate_title_xi_state_distribution_response(program_id, start_year, end_year):
+    session = Session()
+
+    num_years = end_year - start_year + 1
+
+    # construct the query
+    program_query = session.query(
+        Payment.state_code.label('state'),
+        Program.name.label('programName'),
+        Payment.year.label('year'),
+        Payment.base_acres.label('base_acres'),
+        Payment.premium_policy_count.label('premium_policy_count'),
+        Payment.liability_amount.label('liability_amount'),
+        Payment.premium_amount.label('premium_amount'),
+        Payment.premium_subsidy_amount.label('premium_subsidy_amount'),
+        Payment.indemnity_amount.label('indemnity_amount'),
+        Payment.farmer_premium_amount.label('farmer_premium_amount'),
+        Payment.loss_ratio.label('loss_ratio'),
+        Payment.net_farmer_benefit_amount.label('net_farmer_benefit_amount')).join(
+        Program, Payment.program_id == Program.id).filter(
+        Payment.program_id == program_id,
+        Payment.year.between(start_year, end_year)
+    )
+
+    # execute the query
+    program_result = program_query.all()
+
+    # create dictionaries
+    program_response_dict = defaultdict(list)
+    year_dict = defaultdict(list)
+
+    # aggregate data
+    for record in program_result:
+        year = str(record[2])
+        state = record[0]
+        base_acres = record[3]
+        premium_policy_count = record[4]
+        liability_amount = record[5]
+        premium_amount = record[6]
+        premium_subsidy_amount = record[7]
+        indemnity_amount = record[8]
+        farmer_premium_amount = record[9]
+        loss_ratio = record[10]
+        net_farmer_benefit_amount = record[11]
+
+        year_dict[year].append({
+            'state': state,
+            'totalIndemnitiesInDollars': indemnity_amount,
+            'totalPremiumInDollars': premium_amount,
+            'totalPremiumSubsidyInDollars': premium_subsidy_amount,
+            'totalFarmerPaidPremiumInDollars': farmer_premium_amount,
+            'totalNetFarmerBenefitInDollars': net_farmer_benefit_amount,
+            'totalPoliciesEarningPremium': premium_policy_count,
+            'totalLiabilitiesInDollars': liability_amount,
+            'totalInsuredAreaInAcres': base_acres,
+            'lossRatio': loss_ratio
+        })
+
+    state_aggregate_dict = defaultdict(lambda: {
+        'state': '',
+        'programName': TITLE_XI_CROP_INSURANCE_PROGRAM_NAME,
+        'totalIndemnitiesInDollars': 0,
+        'totalPremiumInDollars': 0,
+        'totalPremiumSubsidyInDollars': 0,
+        'totalFarmerPaidPremiumInDollars': 0,
+        'totalNetFarmerBenefitInDollars': 0,
+        'totalPoliciesEarningPremium': 0,
+        'totalLiabilitiesInDollars': 0,
+        'totalInsuredAreaInAcres': 0,
+        'averageLiabilitiesInDollars': 0,
+        'averageInsuredAreaInAcres': 0,
+        'lossRatio': 0,
+        'subPrograms': []
+    })
+
+    # Loop through each year and aggregate data by state
+    for year, records in year_dict.items():
+        for record in records:
+            state = record['state']
+
+            # Sum the values across all years for each state
+            state_aggregate_dict[state]['totalIndemnitiesInDollars'] += record['totalIndemnitiesInDollars']
+            state_aggregate_dict[state]['totalPremiumInDollars'] += record['totalPremiumInDollars']
+            state_aggregate_dict[state]['totalPremiumSubsidyInDollars'] += record['totalPremiumSubsidyInDollars']
+            state_aggregate_dict[state]['totalFarmerPaidPremiumInDollars'] += record['totalFarmerPaidPremiumInDollars']
+            state_aggregate_dict[state]['totalNetFarmerBenefitInDollars'] += record['totalNetFarmerBenefitInDollars']
+            state_aggregate_dict[state]['totalPoliciesEarningPremium'] += record['totalPoliciesEarningPremium']
+            state_aggregate_dict[state]['totalLiabilitiesInDollars'] += record['totalLiabilitiesInDollars']
+            state_aggregate_dict[state]['totalInsuredAreaInAcres'] += record['totalInsuredAreaInAcres']
+
+    # Calculate average loss ratio for each state
+    for state, values in state_aggregate_dict.items():
+        # Calculate average insured area in acres
+        values['averageInsuredAreaInAcres'] = values['totalInsuredAreaInAcres'] / num_years
+        del values['totalInsuredAreaInAcres']
+
+        # Calculate average liabilities in dollars
+        values['averageLiabilitiesInDollars'] = values['totalLiabilitiesInDollars'] / num_years
+        del values['totalLiabilitiesInDollars']
+
+        # Loss_ratio is indemnities / premium so create the average loss ratio
+        values['lossRatio'] = values['totalIndemnitiesInDollars'] / values['totalPremiumInDollars']
+
+        # round the loss ratio to 3 decimal places
+        values['lossRatio'] = round(values['lossRatio'], 3)
+
+    # # sort states by decreasing order of total payment in dollars
+    # state_aggregate_dict = dict(state_aggregate_dict)
+    # state_aggregate_dict = sorted(state_aggregate_dict.items(), key=lambda x: x[1]['totalIndemnitiesInDollars'],
+    #                               reverse=True)
+
+    # modify the structure of the output so the state goes inside the dictionary
+    state_aggregate_dict = dict(state_aggregate_dict)
+
+    # convert the data into the required format
+    final_output = []
+    for state, values in state_aggregate_dict.items():
+        values['state'] = state  # add the state into the dictionary
+        final_output.append(values)
+
+    # Sort the final output based on totalIndemnitiesInDollars in reverse order
+    final_output = sorted(final_output, key=lambda x: x['totalIndemnitiesInDollars'], reverse=True)
+
+    # Add the total states data to the program_response_dict under the key 'TotalStates'
+    program_response_dict[str(start_year) + '-' + str(end_year)] = final_output
+
+    return program_response_dict
+
+    # Add the total states data to the program_response_dict under the key 'TotalStates'
+    program_response_dict[str(start_year) + '-' + str(end_year)] = state_aggregate_dict
+
+    return program_response_dict
+
+
 def __calculate_and_add_percentages(state_dict, entity_dict, total_values_dict, entity_name):
     if state_dict["totalPaymentInDollars"] is not None and state_dict["totalPaymentInDollars"] != 0:
         entity_dict["totalPaymentInPercentageWithinState"] = round(
@@ -2377,3 +2515,103 @@ def generate_title_ii_summary_response(program_id, start_year, end_year):
 
     response = {**total_values_dict, "statutes": statutes_list, "subPrograms": sub_programs_list}
     return response
+
+
+def generate_title_xi_summary_response(program_id, start_year, end_year):
+    session = Session()
+
+    num_years = end_year - start_year + 1
+
+    # construct the query
+    program_query = session.query(
+        Payment.state_code.label('state'),
+        Program.name.label('programName'),
+        Payment.year.label('year'),
+        Payment.base_acres.label('base_acres'),
+        Payment.premium_policy_count.label('premium_policy_count'),
+        Payment.liability_amount.label('liability_amount'),
+        Payment.premium_amount.label('premium_amount'),
+        Payment.premium_subsidy_amount.label('premium_subsidy_amount'),
+        Payment.indemnity_amount.label('indemnity_amount'),
+        Payment.farmer_premium_amount.label('farmer_premium_amount'),
+        Payment.loss_ratio.label('loss_ratio'),
+        Payment.net_farmer_benefit_amount.label('net_farmer_benefit_amount')).join(
+        Program, Payment.program_id == Program.id).filter(
+        Payment.program_id == program_id,
+        Payment.year.between(start_year, end_year)
+    )
+
+    # execute the query
+    program_result = program_query.all()
+
+    # calculate how many unique states are in the data
+    states = set()
+    for record in program_result:
+        state = record[0]  # Assuming state is the first column in the result
+        states.add(state)
+
+        # Calculate the number of unique states
+    num_unique_states = len(states)
+
+    # aggregate dictionary for summing
+    aggregate_dict = {
+        'totalIndemnitiesInDollars': 0,
+        'totalPremiumInDollars': 0,
+        'totalPremiumSubsidyInDollars': 0,
+        'totalFarmerPaidPremiumInDollars': 0,
+        'totalNetFarmerBenefitInDollars': 0,
+        'totalPoliciesEarningPremium': 0,
+        'totalLiabilitiesInDollars': 0,
+        'totalInsuredAreaInAcres': 0,
+        'averageLiabilitiesInDollars': 0,
+        'averageInsuredAreaInAcres': 0,
+        'lossRatio': 0,
+        'subPrograms': []
+    }
+
+    # Aggregate data for all columns
+    for record in program_result:
+        base_acres = record[3] or 0
+        premium_policy_count = record[4] or 0
+        liability_amount = record[5] or 0
+        premium_amount = record[6] or 0
+        premium_subsidy_amount = record[7] or 0
+        indemnity_amount = record[8] or 0
+        farmer_premium_amount = record[9] or 0
+        loss_ratio = record[10]
+        net_farmer_benefit_amount = record[11] or 0
+
+        # Aggregate sums for each field
+        aggregate_dict['totalIndemnitiesInDollars'] += indemnity_amount
+        aggregate_dict['totalPremiumInDollars'] += premium_amount
+        aggregate_dict['totalPremiumSubsidyInDollars'] += premium_subsidy_amount
+        aggregate_dict['totalFarmerPaidPremiumInDollars'] += farmer_premium_amount
+        aggregate_dict['totalNetFarmerBenefitInDollars'] += net_farmer_benefit_amount
+        aggregate_dict['totalLiabilitiesInDollars'] += liability_amount
+        aggregate_dict['totalInsuredAreaInAcres'] += base_acres
+        aggregate_dict['totalPoliciesEarningPremium'] += premium_policy_count
+
+    # Final calculations
+    # Calculate average liabilities and insured area across years
+    if num_years > 0:
+        aggregate_dict['averageLiabilitiesInDollars'] = aggregate_dict['totalLiabilitiesInDollars'] \
+                                                        / num_years / num_unique_states
+        aggregate_dict['averageInsuredAreaInAcres'] = aggregate_dict['totalInsuredAreaInAcres'] \
+                                                      / num_years / num_unique_states
+
+    # make average values to have two decimal points
+    aggregate_dict['averageLiabilitiesInDollars'] = round(aggregate_dict['averageLiabilitiesInDollars'], 2)
+    aggregate_dict['averageInsuredAreaInAcres'] = round(aggregate_dict['averageInsuredAreaInAcres'], 2)
+
+    # Loss_ratio is indemnities / premium so create the average loss ratio
+    aggregate_dict['lossRatio'] = aggregate_dict['totalIndemnitiesInDollars'] / aggregate_dict['totalPremiumInDollars']
+
+    # round the loss ratio to 3 decimal places
+    aggregate_dict['lossRatio'] = round(aggregate_dict['lossRatio'], 3)
+
+    # remove unnecessary entry
+    del aggregate_dict['totalInsuredAreaInAcres']
+    del aggregate_dict['totalLiabilitiesInDollars']
+
+    return aggregate_dict
+
