@@ -88,7 +88,7 @@ TITLE_II_CRP_PROGRAM_NAME = "Conservation Reserve Program (CRP)"
 TITLE_II_ACEP_PROGRAM_NAME = "Agricultural Conservation Easement Program (ACEP)"
 TITLE_II_RCPP_PROGRAM_NAME = "Regional Conservation Partnership Program (RCPP)"
 TITLE_IV_SNAP_PROGRAM_NAME = "Supplemental Nutrition Assistance Program (SNAP)"
-TTTLE_XI_CROP_INSURANCE_PROGRAM_NAME = "Crop Insurance"
+TITLE_XI_CROP_INSURANCE_PROGRAM_NAME = "Crop Insurance"
 
 
 def search():
@@ -662,10 +662,10 @@ def titles_title_ii_programs_rcpp_summary_search():
 
 # /pdl/titles/title-xi/programs/crop-insurance/state-distribution
 def titles_title_xi_programs_crop_insurance_state_distribution_search():
-    program_id = get_program_id(TTTLE_XI_CROP_INSURANCE_PROGRAM_NAME)
+    program_id = get_program_id(TITLE_XI_CROP_INSURANCE_PROGRAM_NAME)
     if program_id is None:
         msg = {
-            "reason": "No record for the given program name " + TTTLE_XI_CROP_INSURANCE_PROGRAM_NAME,
+            "reason": "No record for the given program name " + TITLE_XI_CROP_INSURANCE_PROGRAM_NAME,
             "error": "Not found: " + request.url,
         }
         logging.error("Crop Insurance: " + json.dumps(msg))
@@ -678,10 +678,10 @@ def titles_title_xi_programs_crop_insurance_state_distribution_search():
 
 # /pdl/titles/title-xi/programs/crop-insurance/summary
 def titles_title_xi_programs_crop_insurance_summary_search():
-    program_id = get_program_id(TTTLE_XI_CROP_INSURANCE_PROGRAM_NAME)
+    program_id = get_program_id(TITLE_XI_CROP_INSURANCE_PROGRAM_NAME)
     if program_id is None:
         msg = {
-            "reason": "No record for the given program name " + TTTLE_XI_CROP_INSURANCE_PROGRAM_NAME,
+            "reason": "No record for the given program name " + TITLE_XI_CROP_INSURANCE_PROGRAM_NAME,
             "error": "Not found: " + request.url,
         }
         logging.error("Crop Insurance: " + json.dumps(msg))
@@ -2076,7 +2076,7 @@ def generate_title_xi_state_distribution_response(program_id, start_year, end_ye
 
     state_aggregate_dict = defaultdict(lambda: {
         'state': '',
-        'programName': TTTLE_XI_CROP_INSURANCE_PROGRAM_NAME,
+        'programName': TITLE_XI_CROP_INSURANCE_PROGRAM_NAME,
         'totalIndemnitiesInDollars': 0,
         'totalPremiumInDollars': 0,
         'totalPremiumSubsidyInDollars': 0,
