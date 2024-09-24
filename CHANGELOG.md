@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CRP endpoints to use data from the database. [#237](https://github.com/policy-design-lab/pdl-api/issues/237)
 - ACEP endpoints to use data from the database. [#239](https://github.com/policy-design-lab/pdl-api/issues/239)
 - RCPP endpoints to use data from the database. [#241](https://github.com/policy-design-lab/pdl-api/issues/241)
+- PrgramName attribute has been removed from crop insurance's state-distibution output [#255](https://github.com/polciy-design-lab/pdl-api/issues/255)
 
 ## [0.17.0] - 2024-08-28
 

@@ -2076,7 +2076,6 @@ def generate_title_xi_state_distribution_response(program_id, start_year, end_ye
 
     state_aggregate_dict = defaultdict(lambda: {
         'state': '',
-        'programName': TITLE_XI_CROP_INSURANCE_PROGRAM_NAME,
         'totalIndemnitiesInDollars': 0,
         'totalPremiumInDollars': 0,
         'totalPremiumSubsidyInDollars': 0,
