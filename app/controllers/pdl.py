@@ -2,10 +2,8 @@ import json
 import logging
 import os
 from collections import OrderedDict
-
 from flask import request
-from sqlalchemy import func, desc, Numeric, BigInteger, Integer, case, text
-import decimal
+from sqlalchemy import func, desc, Numeric, BigInteger, Integer, text
 
 import app.utils.jsonutils as jsonutils
 import app.utils.rest_handlers as rs_handlers
@@ -20,10 +18,6 @@ from app.models.subprogram import SubProgram
 from app.models.subtitle import Subtitle
 from app.models.title import Title
 from collections import defaultdict
-
-# Set up logging to capture errors
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
 
 LANDING_PAGE_DATA_PATH = os.path.join("controllers", "data", "landingpage")
 ALLPROGRAM_DATA_JSON = "allprograms.json"
@@ -104,16 +98,11 @@ def search():
 
 # GET all the entries from summary table
 def summary_search():
-    summary_data = os.path.join(LANDING_PAGE_DATA_PATH, SUMMARY_DATA_JSON)
+    start_year = 2018
+    end_year = 2022
 
-    # open file
-    with open(summary_data, 'r') as json_data:
-        file_data = json_data.read()
-
-        # parse file
-        data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
-
-        return data_json
+    endpoint_response = generate_summary_response(start_year, end_year)
+    return endpoint_response
 
 
 # GET all the entries from states table
@@ -768,38 +757,47 @@ def generate_allprograms_response(start_year, end_year):
     session = Session()
 
     try:
-        # Start building the SQL query dynamically
+        # Building the SQL query dynamically
         year_columns = []
 
         for year in range(start_year, end_year + 1):
             year_columns.append(f"""
             -- Title I: Commodities
-            SUM(CASE WHEN t.name = 'Title I: Commodities' AND p.year = {year} THEN p.payment ELSE 0 END) AS "Title I {year}",
+            SUM(CASE WHEN t.name = 'Title I: Commodities' AND p.year = {year} THEN p.payment ELSE 0 END) 
+            AS "Title I {year}",
             -- Title II: Conservation
-            SUM(CASE WHEN t.name = 'Title II: Conservation' AND p.year = {year} THEN p.payment ELSE 0 END) AS "Title II {year}",
+            SUM(CASE WHEN t.name = 'Title II: Conservation' AND p.year = {year} THEN p.payment ELSE 0 END) 
+            AS "Title II {year}",
             -- Title IV: SNAP
-            SUM(CASE WHEN t.name = 'Title IV: Nutrition' AND p.year = {year} THEN p.payment ELSE 0 END) AS "SNAP {year}",
+            SUM(CASE WHEN t.name = 'Title IV: Nutrition' AND p.year = {year} THEN p.payment ELSE 0 END) 
+            AS "SNAP {year}",
             -- Title IX: Crop Insurance
-            SUM(CASE WHEN t.name = 'Title IX: Crop Insurance' AND p.year = {year} THEN p.net_farmer_benefit_amount ELSE 0 END) AS "Crop Insurance {year}",
+            SUM(CASE WHEN t.name = 'Title IX: Crop Insurance' AND p.year = {year} 
+            THEN p.net_farmer_benefit_amount ELSE 0 END) AS "Crop Insurance {year}",
             -- All Programs Total for {year}
-            SUM(CASE WHEN p.year = {year} THEN COALESCE(p.payment, 0) + COALESCE(p.net_farmer_benefit_amount, 0) ELSE 0 END) AS "{year} All Programs Total"
+            SUM(CASE WHEN p.year = {year} THEN COALESCE(p.payment, 0) + COALESCE(p.net_farmer_benefit_amount, 0) 
+            ELSE 0 END) AS "{year} All Programs Total"
             """)
 
         # Add the totals for each program and the overall total
         totals = f"""
         -- Corrected total for Title I
-        SUM(CASE WHEN t.name = 'Title I: Commodities' AND p.year BETWEEN {start_year} AND {end_year} THEN p.payment ELSE 0 END) AS "Title I Total",
+        SUM(CASE WHEN t.name = 'Title I: Commodities' AND p.year BETWEEN {start_year} AND {end_year} 
+        THEN p.payment ELSE 0 END) AS "Title I Total",
         -- Corrected total for Title II
-        SUM(CASE WHEN t.name = 'Title II: Conservation' AND p.year BETWEEN {start_year} AND {end_year} THEN p.payment ELSE 0 END) AS "Title II Total",
+        SUM(CASE WHEN t.name = 'Title II: Conservation' AND p.year BETWEEN {start_year} AND {end_year} 
+        THEN p.payment ELSE 0 END) AS "Title II Total",
         -- Corrected total for SNAP
-        SUM(CASE WHEN t.name = 'Title IV: Nutrition' AND p.year BETWEEN {start_year} AND {end_year} THEN p.payment ELSE 0 END) AS "SNAP Total",
+        SUM(CASE WHEN t.name = 'Title IV: Nutrition' AND p.year BETWEEN {start_year} AND {end_year} 
+        THEN p.payment ELSE 0 END) AS "SNAP Total",
         -- Corrected total for Crop Insurance
-        SUM(CASE WHEN t.name = 'Title IX: Crop Insurance' AND p.year BETWEEN {start_year} AND {end_year} THEN p.net_farmer_benefit_amount ELSE 0 END) AS "Crop Insurance Total",
+        SUM(CASE WHEN t.name = 'Title IX: Crop Insurance' AND p.year BETWEEN {start_year} AND {end_year} 
+        THEN p.net_farmer_benefit_amount ELSE 0 END) AS "Crop Insurance Total",
         -- 18-22 All Programs Total
         SUM(COALESCE(p.payment, 0) + COALESCE(p.net_farmer_benefit_amount, 0)) AS "18-22 All Programs Total"
         """
 
-        # Combine the query
+        # Combine the query of non dynamic part
         sql_query = f"""
         SELECT
             p.state_code AS "State",
@@ -815,16 +813,10 @@ def generate_allprograms_response(start_year, end_year):
             p.state_code;
         """
 
-        # Log the generated SQL query for debugging purposes
-        logging.info(f"Executing query: {sql_query}")
-
-        # Execute the query
         result = session.execute(text(sql_query))
 
-        # Fetch column names from the result set
         columns = result.keys()
 
-        # Process the result into a dictionary format
         state_data = []
         for row in result:
             result_dict = dict(zip(columns, row))  # Using zip() to match columns with their values
@@ -834,11 +826,11 @@ def generate_allprograms_response(start_year, end_year):
                 "State": result_dict.get("State")
             }
 
-            # First, add Title I data for all years in the correct order
+            # Add Title I data for all years in the correct order
             for year in range(start_year, end_year + 1):
                 formatted_result[f"Title I {year}"] = result_dict.get(f"Title I {year}", 0)
 
-            # Then, add Title I Total
+            # Add Title I Total
             formatted_result["Title I Total"] = result_dict.get("Title I Total", 0)
 
             # Add Title II data for all years
@@ -872,12 +864,83 @@ def generate_allprograms_response(start_year, end_year):
             # Append the formatted result to the state data
             state_data.append(formatted_result)
 
-        # Return the formatted data
         return state_data
 
     except Exception as e:
-        # Log any errors that occur
         logging.error(f"Error occurred: {str(e)}")
+        return {"error": str(e)}
+
+    finally:
+        session.close()
+
+
+def generate_summary_response(start_year, end_year):
+    session = Session()
+
+    try:
+        # Generate dynamic SQL query to fetch the summary
+        query = f"""
+        SELECT
+            t.name AS "Title",
+            p.state_code AS "State",
+            p.year AS "Fiscal Year",
+            COALESCE(p.payment, 0) + COALESCE(p.net_farmer_benefit_amount, 0) AS "Amount"
+        FROM
+            pdl.payments p
+        JOIN
+            pdl.titles t ON p.title_id = t.id
+        WHERE
+            p.year BETWEEN {start_year} AND {end_year}
+        ORDER BY
+            CASE
+                WHEN t.name = 'Title I: Commodities' THEN 1
+                WHEN t.name = 'Title II: Conservation' THEN 2
+                WHEN t.name = 'Title IX: Crop Insurance' THEN 3
+                WHEN t.name = 'Title IV: Nutrition' THEN 4
+                ELSE 5
+            END,
+            p.state_code, p.year;
+        """
+
+        # Execute the query
+        result = session.execute(text(query))
+
+        # Fetch column names from the result set
+        columns = result.keys()
+
+        # Map titles to desired names
+        title_mapping = {
+            "Title IV: Nutrition": "Supplemental Nutrition Assistance Program (SNAP)",
+            "Title IX: Crop Insurance": "Crop Insurance"
+        }
+
+        # Process the result into a dictionary format
+        summary_data = []
+        for row in result:
+            result_dict = dict(zip(columns, row))  # Using zip() to match columns with their values
+
+            # Get the title and apply the mapping if it exists
+            title = result_dict.get("Title")
+            mapped_title = title_mapping.get(title, title)
+
+            # Format each entry in the desired summary structure, replacing `None` with empty strings
+            formatted_entry = {
+                "Title": mapped_title,
+                "State": result_dict.get("State"),
+                "Fiscal Year": result_dict.get("Fiscal Year"),
+                "Amount": result_dict.get("Amount"),
+                "Average Monthly Participation": ""  # Set empty string instead of None
+            }
+
+            # Append the formatted entry to the summary data
+            summary_data.append(formatted_entry)
+
+        # Return the formatted summary data as JSON
+        return summary_data
+
+    except Exception as e:
+        # Log any errors that occur
+        logger.error(f"Error occurred: {str(e)}")
         return {"error": str(e)}
 
     finally:
