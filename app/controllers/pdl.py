@@ -878,28 +878,31 @@ def generate_summary_response(start_year, end_year):
     session = Session()
 
     try:
-        # Generate dynamic SQL query to fetch the summary
+        # Generate dynamic SQL query to fetch the summary, ensuring sums are correctly applied
         query = f"""
         SELECT
             t.name AS "Title",
             p.state_code AS "State",
             p.year AS "Fiscal Year",
-            COALESCE(p.payment, 0) + COALESCE(p.net_farmer_benefit_amount, 0) AS "Amount"
+            SUM(COALESCE(p.payment, 0) + COALESCE(p.net_farmer_benefit_amount, 0)) AS "Amount",
+            SUM(COALESCE(p.recipient_count, 0)) AS "Average Monthly Participation"
         FROM
             pdl.payments p
         JOIN
             pdl.titles t ON p.title_id = t.id
         WHERE
             p.year BETWEEN {start_year} AND {end_year}
+        GROUP BY
+            t.name, p.state_code, p.year
         ORDER BY
             CASE
                 WHEN t.name = 'Title I: Commodities' THEN 1
                 WHEN t.name = 'Title II: Conservation' THEN 2
                 WHEN t.name = 'Title IX: Crop Insurance' THEN 3
-                WHEN t.name = 'Title IV: Nutrition' THEN 4
-                ELSE 5
+                WHEN t.name = 'Title IV: Nutrition' THEN 4  -- SNAP comes last
             END,
-            p.state_code, p.year;
+            p.year,
+            p.state_code;
         """
 
         # Execute the query
@@ -923,13 +926,13 @@ def generate_summary_response(start_year, end_year):
             title = result_dict.get("Title")
             mapped_title = title_mapping.get(title, title)
 
-            # Format each entry in the desired summary structure, replacing `None` with empty strings
+            # Format each entry in the desired summary structure, using `recipient_count` for Average Monthly Participation
             formatted_entry = {
                 "Title": mapped_title,
                 "State": result_dict.get("State"),
                 "Fiscal Year": result_dict.get("Fiscal Year"),
                 "Amount": result_dict.get("Amount"),
-                "Average Monthly Participation": ""  # Set empty string instead of None
+                "Average Monthly Participation": result_dict.get("Average Monthly Participation") if result_dict.get("Average Monthly Participation") else ""
             }
 
             # Append the formatted entry to the summary data
