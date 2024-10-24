@@ -6,12 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 ### Changed
+- Landing page values to use data from the database. [#258](https://github.com/policy-design-lab/pdl-api/issues/258)
+
+## [0.18.0] - 2024-10-07
+
+### Changed
 - Crop Insurance endpoints to use data from the database. [#241](https://github.com/policy-design-lab/pdl-api/issues/241)
 - CRP endpoints to use data from the database. [#237](https://github.com/policy-design-lab/pdl-api/issues/237)
 - ACEP endpoints to use data from the database. [#239](https://github.com/policy-design-lab/pdl-api/issues/239)
 - RCPP endpoints to use data from the database. [#241](https://github.com/policy-design-lab/pdl-api/issues/241)
 - ProgramName attribute has been removed from crop insurance's state-distibution output [#255](https://github.com/polciy-design-lab/pdl-api/issues/255)
-- Landing page values to use data from the database. [#258](https://github.com/policy-design-lab/pdl-api/issues/258)
 
 ## [0.17.0] - 2024-08-28
 
@@ -186,6 +190,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Open API specification file. [#50](https://github.com/policy-design-lab/pdl-api/issues/50)
 
+[0.18.0]: https://github.com/policy-design-lab/pdl-api/compare/0.17.0...0.18.0
 [0.17.0]: https://github.com/policy-design-lab/pdl-api/compare/0.16.0...0.17.0
 [0.16.0]: https://github.com/policy-design-lab/pdl-api/compare/0.15.0...0.16.0
 [0.15.0]: https://github.com/policy-design-lab/pdl-api/compare/0.14.0...0.15.0
