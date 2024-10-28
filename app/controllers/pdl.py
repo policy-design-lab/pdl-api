@@ -797,7 +797,7 @@ def generate_allprograms_response(start_year, end_year):
         SUM(COALESCE(p.payment, 0) + COALESCE(p.net_farmer_benefit_amount, 0)) AS "18-22 All Programs Total"
         """
 
-        # Combine the query of non dynamic part
+        # Combine the query of non-dynamic part
         sql_query = f"""
         SELECT
             p.state_code AS "State",
@@ -818,6 +818,29 @@ def generate_allprograms_response(start_year, end_year):
         columns = result.keys()
 
         state_data = []
+        total_row = {"State": "Total"}
+
+        # Initialize total_row with zero values for all keys in the desired order
+        for year in range(start_year, end_year + 1):
+            total_row[f"Title I {year}"] = 0
+        total_row["Title I Total"] = 0
+
+        for year in range(start_year, end_year + 1):
+            total_row[f"Title II {year}"] = 0
+        total_row["Title II Total"] = 0
+
+        for year in range(start_year, end_year + 1):
+            total_row[f"Crop Insurance {year}"] = 0
+        total_row["Crop Insurance Total"] = 0
+
+        for year in range(start_year, end_year + 1):
+            total_row[f"SNAP {year}"] = 0
+        total_row["SNAP Total"] = 0
+
+        for year in range(start_year, end_year + 1):
+            total_row[f"{year} All Programs Total"] = 0
+        total_row["18-22 All Programs Total"] = 0
+
         for row in result:
             result_dict = dict(zip(columns, row))  # Using zip() to match columns with their values
 
@@ -828,41 +851,59 @@ def generate_allprograms_response(start_year, end_year):
 
             # Add Title I data for all years in the correct order
             for year in range(start_year, end_year + 1):
-                formatted_result[f"Title I {year}"] = result_dict.get(f"Title I {year}", 0)
+                value = result_dict.get(f"Title I {year}", 0)
+                formatted_result[f"Title I {year}"] = value
+                total_row[f"Title I {year}"] += value
 
             # Add Title I Total
             formatted_result["Title I Total"] = result_dict.get("Title I Total", 0)
+            total_row["Title I Total"] += formatted_result["Title I Total"]
 
             # Add Title II data for all years
             for year in range(start_year, end_year + 1):
-                formatted_result[f"Title II {year}"] = result_dict.get(f"Title II {year}", 0)
+                value = result_dict.get(f"Title II {year}", 0)
+                formatted_result[f"Title II {year}"] = value
+                total_row[f"Title II {year}"] += value
 
             # Add Title II Total
             formatted_result["Title II Total"] = result_dict.get("Title II Total", 0)
+            total_row["Title II Total"] += formatted_result["Title II Total"]
 
             # Add Crop Insurance data for all years
             for year in range(start_year, end_year + 1):
-                formatted_result[f"Crop Insurance {year}"] = result_dict.get(f"Crop Insurance {year}", 0)
+                value = result_dict.get(f"Crop Insurance {year}", 0)
+                formatted_result[f"Crop Insurance {year}"] = value
+                total_row[f"Crop Insurance {year}"] += value
 
             # Add Crop Insurance Total
             formatted_result["Crop Insurance Total"] = result_dict.get("Crop Insurance Total", 0)
+            total_row["Crop Insurance Total"] += formatted_result["Crop Insurance Total"]
 
             # Add SNAP data for all years
             for year in range(start_year, end_year + 1):
-                formatted_result[f"SNAP {year}"] = result_dict.get(f"SNAP {year}", 0)
+                value = result_dict.get(f"SNAP {year}", 0)
+                formatted_result[f"SNAP {year}"] = value
+                total_row[f"SNAP {year}"] += value
 
             # Add SNAP Total
             formatted_result["SNAP Total"] = result_dict.get("SNAP Total", 0)
+            total_row["SNAP Total"] += formatted_result["SNAP Total"]
 
             # Add the all programs total for each year
             for year in range(start_year, end_year + 1):
-                formatted_result[f"{year} All Programs Total"] = result_dict.get(f"{year} All Programs Total", 0)
+                value = result_dict.get(f"{year} All Programs Total", 0)
+                formatted_result[f"{year} All Programs Total"] = value
+                total_row[f"{year} All Programs Total"] += value
 
             # Add the final total for all programs between the years
             formatted_result["18-22 All Programs Total"] = result_dict.get("18-22 All Programs Total", 0)
+            total_row["18-22 All Programs Total"] += formatted_result["18-22 All Programs Total"]
 
             # Append the formatted result to the state data
             state_data.append(formatted_result)
+
+        # Append the total row at the end of state data
+        state_data.append(total_row)
 
         return state_data
 
