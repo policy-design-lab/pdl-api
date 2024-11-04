@@ -781,20 +781,20 @@ def generate_allprograms_response(start_year, end_year):
 
         # Add the totals for each program and the overall total
         totals = f"""
-        -- Corrected total for Title I
+        -- Title I Total 
         SUM(CASE WHEN t.name = 'Title I: Commodities' AND p.year BETWEEN {start_year} AND {end_year} 
         THEN p.payment ELSE 0 END) AS "Title I Total",
-        -- Corrected total for Title II
+        -- Title II Total 
         SUM(CASE WHEN t.name = 'Title II: Conservation' AND p.year BETWEEN {start_year} AND {end_year} AND (sub_program_id in (SELECT id from pdl.sub_programs where pdl.sub_programs.name = 'Total CRP') OR sub_program_id is NULL)
         THEN p.payment ELSE 0 END) AS "Title II Total",
-        -- Corrected total for SNAP
+        -- SNAP Total 
         SUM(CASE WHEN t.name = 'Title IV: Nutrition' AND p.year BETWEEN {start_year} AND {end_year} 
         THEN p.payment ELSE 0 END) AS "SNAP Total",
-        -- Corrected total for Crop Insurance
+        -- Crop Insurance Total 
         SUM(CASE WHEN t.name = 'Title IX: Crop Insurance' AND p.year BETWEEN {start_year} AND {end_year} 
         THEN p.net_farmer_benefit_amount ELSE 0 END) AS "Crop Insurance Total",
-        -- 18-22 All Programs Total
-        SUM(CASE WHEN (sub_program_id in (SELECT id from pdl.sub_programs where pdl.sub_programs.name = 'Total CRP') OR sub_program_id is NULL) THEN (COALESCE(p.payment, 0) + COALESCE(p.net_farmer_benefit_amount, 0)) ELSE 0 END) AS "18-22 All Programs Total"
+        -- start_year-end_year All Programs Total
+        SUM(CASE WHEN (sub_program_id in (SELECT id from pdl.sub_programs where pdl.sub_programs.name = 'Total CRP') OR sub_program_id is NULL) THEN (COALESCE(p.payment, 0) + COALESCE(p.net_farmer_benefit_amount, 0)) ELSE 0 END) AS "{str(start_year)[-2:]}-{str(end_year)[-2:]} All Programs Total"
         """
 
         # Combine the query of non-dynamic part
@@ -819,6 +819,7 @@ def generate_allprograms_response(start_year, end_year):
 
         state_data = []
         total_row = {"State": "Total"}
+        start_to_end_years_total_key = str(start_year)[-2:] + "-" + str(end_year)[-2:] + " All Programs Total"
 
         # Initialize total_row with zero values for all keys in the desired order
         for year in range(start_year, end_year + 1):
@@ -839,7 +840,7 @@ def generate_allprograms_response(start_year, end_year):
 
         for year in range(start_year, end_year + 1):
             total_row[f"{year} All Programs Total"] = 0
-        total_row["18-22 All Programs Total"] = 0
+        total_row[start_to_end_years_total_key] = 0
 
         for row in result:
             result_dict = dict(zip(columns, row))  # Using zip() to match columns with their values
@@ -896,14 +897,14 @@ def generate_allprograms_response(start_year, end_year):
                 total_row[f"{year} All Programs Total"] += value
 
             # Add the final total for all programs between the years
-            formatted_result["18-22 All Programs Total"] = result_dict.get("18-22 All Programs Total", 0)
+            formatted_result[start_to_end_years_total_key] = result_dict.get(start_to_end_years_total_key, 0)
 
             # Append the formatted result to the state data
             state_data.append(formatted_result)
 
         # Add the final total for all programs between the years
         for year in range(start_year, end_year + 1):
-            total_row["18-22 All Programs Total"] += total_row[f"{year} All Programs Total"]
+            total_row[start_to_end_years_total_key] += total_row[f"{year} All Programs Total"]
 
         # Append the total row at the end of state data
         state_data.append(total_row)
@@ -987,7 +988,7 @@ def generate_summary_response(start_year, end_year):
 
     except Exception as e:
         # Log any errors that occur
-        logger.error(f"Error occurred: {str(e)}")
+        logging.error(f"Error occurred: {str(e)}")
         return {"error": str(e)}
 
     finally:
