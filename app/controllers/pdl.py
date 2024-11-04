@@ -895,6 +895,9 @@ def generate_allprograms_response(start_year, end_year):
                 formatted_result[f"{year} All Programs Total"] = value
                 total_row[f"{year} All Programs Total"] += value
 
+            # Add the final total for all programs between the years
+            formatted_result["18-22 All Programs Total"] = result_dict.get("18-22 All Programs Total", 0)
+
             # Append the formatted result to the state data
             state_data.append(formatted_result)
 
