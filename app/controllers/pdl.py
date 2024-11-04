@@ -775,7 +775,7 @@ def generate_allprograms_response(start_year, end_year):
             SUM(CASE WHEN t.name = 'Title IX: Crop Insurance' AND p.year = {year} 
             THEN p.net_farmer_benefit_amount ELSE 0 END) AS "Crop Insurance {year}",
             -- All Programs Total for {year}
-            SUM(CASE WHEN p.year = {year} AND (sub_program_id in (SELECT id from pdl.sub_programs where pdl.sub_programs.name = 'Total CRP') OR sub_program_id is NULL) THEN (COALESCE(p.payment, 0) + COALESCE(p.net_farmer_benefit_amount, 0)) 
+            SUM(CASE WHEN p.year = {year} AND (sub_program_id in (SELECT id from pdl.sub_programs where pdl.sub_programs.name = 'Total CRP' or pdl.sub_programs.name = 'Agriculture Risk Coverage County Option (ARC-CO)' OR pdl.sub_programs.name = 'Agriculture Risk Coverage Individual Coverage (ARC-IC)') OR sub_program_id is NULL) THEN (COALESCE(p.payment, 0) + COALESCE(p.net_farmer_benefit_amount, 0)) 
             ELSE 0 END) AS "{year} All Programs Total"
             """)
 
@@ -794,7 +794,7 @@ def generate_allprograms_response(start_year, end_year):
         SUM(CASE WHEN t.name = 'Title IX: Crop Insurance' AND p.year BETWEEN {start_year} AND {end_year} 
         THEN p.net_farmer_benefit_amount ELSE 0 END) AS "Crop Insurance Total",
         -- start_year-end_year All Programs Total
-        SUM(CASE WHEN (sub_program_id in (SELECT id from pdl.sub_programs where pdl.sub_programs.name = 'Total CRP') OR sub_program_id is NULL) THEN (COALESCE(p.payment, 0) + COALESCE(p.net_farmer_benefit_amount, 0)) ELSE 0 END) AS "{str(start_year)[-2:]}-{str(end_year)[-2:]} All Programs Total"
+        SUM(CASE WHEN (sub_program_id in (SELECT id from pdl.sub_programs where pdl.sub_programs.name = 'Total CRP' or pdl.sub_programs.name = 'Agriculture Risk Coverage County Option (ARC-CO)' OR pdl.sub_programs.name = 'Agriculture Risk Coverage Individual Coverage (ARC-IC)') OR sub_program_id is NULL) THEN (COALESCE(p.payment, 0) + COALESCE(p.net_farmer_benefit_amount, 0)) ELSE 0 END) AS "{str(start_year)[-2:]}-{str(end_year)[-2:]} All Programs Total"
         """
 
         # Combine the query of non-dynamic part
@@ -936,7 +936,13 @@ def generate_summary_response(start_year, end_year):
         JOIN
             pdl.titles t ON p.title_id = t.id
         WHERE
-            p.year BETWEEN {start_year} AND {end_year}
+            p.year BETWEEN {start_year} AND {end_year} 
+            AND p.sub_program_id IN 
+                (SELECT id FROM pdl.sub_programs 
+                WHERE pdl.sub_programs.name = 'Total CRP' 
+                OR pdl.sub_programs.name = 'Agriculture Risk Coverage County Option (ARC-CO)' 
+                OR pdl.sub_programs.name = 'Agriculture Risk Coverage Individual Coverage (ARC-IC)') 
+            OR p.sub_program_id is NULL
         GROUP BY
             t.name, p.state_code, p.year
         ORDER BY
