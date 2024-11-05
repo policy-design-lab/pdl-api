@@ -762,39 +762,20 @@ def generate_allprograms_response(start_year, end_year):
 
         for year in range(start_year, end_year + 1):
             year_columns.append(f"""
-            -- Title I: Commodities
-            SUM(CASE WHEN t.name = 'Title I: Commodities' AND p.year = {year} THEN p.payment ELSE 0 END) 
-            AS "Title I {year}",
-            -- Title II: Conservation
-            SUM(CASE WHEN t.name = 'Title II: Conservation' AND p.year = {year} THEN p.payment ELSE 0 END) 
-            AS "Title II {year}",
-            -- Title IV: SNAP
-            SUM(CASE WHEN t.name = 'Title IV: Nutrition' AND p.year = {year} THEN p.payment ELSE 0 END) 
-            AS "SNAP {year}",
-            -- Title IX: Crop Insurance
-            SUM(CASE WHEN t.name = 'Title IX: Crop Insurance' AND p.year = {year} 
-            THEN p.net_farmer_benefit_amount ELSE 0 END) AS "Crop Insurance {year}",
-            -- All Programs Total for {year}
-            SUM(CASE WHEN p.year = {year} THEN COALESCE(p.payment, 0) + COALESCE(p.net_farmer_benefit_amount, 0) 
-            ELSE 0 END) AS "{year} All Programs Total"
+            SUM(CASE WHEN t.name = 'Title I: Commodities' AND p.year = {year} THEN p.payment ELSE 0 END) AS "Title I {year}",
+            SUM(CASE WHEN t.name = 'Title II: Conservation' AND p.year = {year} AND (sub_program_id IN (SELECT id FROM pdl.sub_programs WHERE pdl.sub_programs.name = 'Total CRP') OR sub_program_id IS NULL) THEN p.payment ELSE 0 END) AS "Title II {year}",
+            SUM(CASE WHEN t.name = 'Title IV: Nutrition' AND p.year = {year} THEN p.payment ELSE 0 END) AS "SNAP {year}",
+            SUM(CASE WHEN t.name = 'Title IX: Crop Insurance' AND p.year = {year} THEN p.net_farmer_benefit_amount ELSE 0 END) AS "Crop Insurance {year}",
+            SUM(CASE WHEN p.year = {year} AND (sub_program_id IN (SELECT id FROM pdl.sub_programs WHERE pdl.sub_programs.name IN ('Total CRP', 'Agriculture Risk Coverage County Option (ARC-CO)', 'Agriculture Risk Coverage Individual Coverage (ARC-IC)')) OR sub_program_id IS NULL) THEN COALESCE(p.payment, 0) + COALESCE(p.net_farmer_benefit_amount, 0) ELSE 0 END) AS "{year} All Programs Total"
             """)
 
         # Add the totals for each program and the overall total
         totals = f"""
-        -- Corrected total for Title I
-        SUM(CASE WHEN t.name = 'Title I: Commodities' AND p.year BETWEEN {start_year} AND {end_year} 
-        THEN p.payment ELSE 0 END) AS "Title I Total",
-        -- Corrected total for Title II
-        SUM(CASE WHEN t.name = 'Title II: Conservation' AND p.year BETWEEN {start_year} AND {end_year} 
-        THEN p.payment ELSE 0 END) AS "Title II Total",
-        -- Corrected total for SNAP
-        SUM(CASE WHEN t.name = 'Title IV: Nutrition' AND p.year BETWEEN {start_year} AND {end_year} 
-        THEN p.payment ELSE 0 END) AS "SNAP Total",
-        -- Corrected total for Crop Insurance
-        SUM(CASE WHEN t.name = 'Title IX: Crop Insurance' AND p.year BETWEEN {start_year} AND {end_year} 
-        THEN p.net_farmer_benefit_amount ELSE 0 END) AS "Crop Insurance Total",
-        -- 18-22 All Programs Total
-        SUM(COALESCE(p.payment, 0) + COALESCE(p.net_farmer_benefit_amount, 0)) AS "18-22 All Programs Total"
+        SUM(CASE WHEN t.name = 'Title I: Commodities' AND p.year BETWEEN {start_year} AND {end_year} THEN p.payment ELSE 0 END) AS "Title I Total",
+        SUM(CASE WHEN t.name = 'Title II: Conservation' AND p.year BETWEEN {start_year} AND {end_year} AND (sub_program_id IN (SELECT id FROM pdl.sub_programs WHERE pdl.sub_programs.name = 'Total CRP') OR sub_program_id IS NULL) THEN p.payment ELSE 0 END) AS "Title II Total",
+        SUM(CASE WHEN t.name = 'Title IV: Nutrition' AND p.year BETWEEN {start_year} AND {end_year} THEN p.payment ELSE 0 END) AS "SNAP Total",
+        SUM(CASE WHEN t.name = 'Title IX: Crop Insurance' AND p.year BETWEEN {start_year} AND {end_year} THEN p.net_farmer_benefit_amount ELSE 0 END) AS "Crop Insurance Total",
+        SUM(CASE WHEN (sub_program_id IN (SELECT id FROM pdl.sub_programs WHERE pdl.sub_programs.name IN ('Total CRP', 'Agriculture Risk Coverage County Option (ARC-CO)', 'Agriculture Risk Coverage Individual Coverage (ARC-IC)')) OR sub_program_id IS NULL) THEN COALESCE(p.payment, 0) + COALESCE(p.net_farmer_benefit_amount, 0) ELSE 0 END) AS "{str(start_year)[-2:]}-{str(end_year)[-2:]} All Programs Total"
         """
 
         # Combine the query of non-dynamic part
@@ -819,6 +800,7 @@ def generate_allprograms_response(start_year, end_year):
 
         state_data = []
         total_row = {"State": "Total"}
+        start_to_end_years_total_key = str(start_year)[-2:] + "-" + str(end_year)[-2:] + " All Programs Total"
 
         # Initialize total_row with zero values for all keys in the desired order
         for year in range(start_year, end_year + 1):
@@ -839,7 +821,7 @@ def generate_allprograms_response(start_year, end_year):
 
         for year in range(start_year, end_year + 1):
             total_row[f"{year} All Programs Total"] = 0
-        total_row["18-22 All Programs Total"] = 0
+        total_row[start_to_end_years_total_key] = 0
 
         for row in result:
             result_dict = dict(zip(columns, row))  # Using zip() to match columns with their values
@@ -896,11 +878,14 @@ def generate_allprograms_response(start_year, end_year):
                 total_row[f"{year} All Programs Total"] += value
 
             # Add the final total for all programs between the years
-            formatted_result["18-22 All Programs Total"] = result_dict.get("18-22 All Programs Total", 0)
-            total_row["18-22 All Programs Total"] += formatted_result["18-22 All Programs Total"]
+            formatted_result[start_to_end_years_total_key] = result_dict.get(start_to_end_years_total_key, 0)
 
             # Append the formatted result to the state data
             state_data.append(formatted_result)
+
+        # Add the final total for all programs between the years
+        for year in range(start_year, end_year + 1):
+            total_row[start_to_end_years_total_key] += total_row[f"{year} All Programs Total"]
 
         # Append the total row at the end of state data
         state_data.append(total_row)
@@ -931,8 +916,11 @@ def generate_summary_response(start_year, end_year):
             pdl.payments p
         JOIN
             pdl.titles t ON p.title_id = t.id
+        LEFT JOIN
+            pdl.sub_programs sp ON p.sub_program_id = sp.id
         WHERE
             p.year BETWEEN {start_year} AND {end_year}
+            AND (sp.name IN ('Total CRP', 'Agriculture Risk Coverage County Option (ARC-CO)', 'Agriculture Risk Coverage Individual Coverage (ARC-IC)') OR p.sub_program_id IS NULL)
         GROUP BY
             t.name, p.state_code, p.year
         ORDER BY
@@ -940,7 +928,7 @@ def generate_summary_response(start_year, end_year):
                 WHEN t.name = 'Title I: Commodities' THEN 1
                 WHEN t.name = 'Title II: Conservation' THEN 2
                 WHEN t.name = 'Title IX: Crop Insurance' THEN 3
-                WHEN t.name = 'Title IV: Nutrition' THEN 4  -- SNAP comes last
+                WHEN t.name = 'Title IV: Nutrition' THEN 4
             END,
             p.year,
             p.state_code;
@@ -984,7 +972,7 @@ def generate_summary_response(start_year, end_year):
 
     except Exception as e:
         # Log any errors that occur
-        logger.error(f"Error occurred: {str(e)}")
+        logging.error(f"Error occurred: {str(e)}")
         return {"error": str(e)}
 
     finally:
