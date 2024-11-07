@@ -3,7 +3,7 @@ import logging
 import os
 from collections import OrderedDict
 from flask import request
-from sqlalchemy import func, desc, Numeric, BigInteger, Integer, text, distinct, and_
+from sqlalchemy import func, desc, Numeric, BigInteger, Integer, text
 
 import app.utils.jsonutils as jsonutils
 import app.utils.rest_handlers as rs_handlers
@@ -2757,6 +2757,7 @@ def generate_title_ii_practice_names_response(program_id, start_year, end_year):
         )
         .group_by(Payment.year, Payment.practice_code, Practice.name)
         .order_by(Payment.year, Payment.practice_code)
+        .distinct(Payment.year, Payment.practice_code)
     )
 
     # Execute the query
