@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.19.0] - 2024-11-03
+
+### Changed
+- Landing page values to use data from the database. [#258](https://github.com/policy-design-lab/pdl-api/issues/258)
+
+### Fixed
+- Title-II total payment calculation and overall benefits payment amounts calculation in the GET /pdl/allprograms endpoint. [#268](https://github.com/policy-design-lab/pdl-api/issues/268) 
+
 ## [0.18.0] - 2024-10-07
 
 ### Changed
@@ -11,7 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CRP endpoints to use data from the database. [#237](https://github.com/policy-design-lab/pdl-api/issues/237)
 - ACEP endpoints to use data from the database. [#239](https://github.com/policy-design-lab/pdl-api/issues/239)
 - RCPP endpoints to use data from the database. [#241](https://github.com/policy-design-lab/pdl-api/issues/241)
-- PrgramName attribute has been removed from crop insurance's state-distibution output [#255](https://github.com/polciy-design-lab/pdl-api/issues/255)
+- ProgramName attribute has been removed from crop insurance's state-distibution output [#255](https://github.com/polciy-design-lab/pdl-api/issues/255)
 
 ## [0.17.0] - 2024-08-28
 
@@ -186,6 +194,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Open API specification file. [#50](https://github.com/policy-design-lab/pdl-api/issues/50)
 
+[0.19.0]: https://github.com/policy-design-lab/pdl-api/compare/0.18.0...0.19.0
 [0.18.0]: https://github.com/policy-design-lab/pdl-api/compare/0.17.0...0.18.0
 [0.17.0]: https://github.com/policy-design-lab/pdl-api/compare/0.16.0...0.17.0
 [0.16.0]: https://github.com/policy-design-lab/pdl-api/compare/0.15.0...0.16.0
