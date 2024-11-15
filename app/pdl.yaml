@@ -407,6 +407,12 @@ paths:
           explode: false
           schema:
               type: string
+          examples:
+            single:
+              value: "314"
+            multiple:
+              value: "314,315"
+
       responses:
         200:
           description: Ok
