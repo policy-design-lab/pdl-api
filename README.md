@@ -44,4 +44,7 @@ Now you can view the API at http://localhost/pdl/
 
 For swagger doc, go to http://localhost/ui
 
-
+## Short note on total payment calculation
+When calculating the total dollar amounts payment calculation, the following details are considered in the GET /pdl/allprograms endpoint:
+1. In CRP, the "Total CRP" sub program contains the total value of all CRP payments. Just for the purpose of calculating the total values, the other sub programs and sub-sub programs in that can be ignored.
+2. In Crop Insurance, the column `net_farmer_benefits_amount` contain the amount value that should be used for the total payment calculation. The `payment` column value is NULL for that program.

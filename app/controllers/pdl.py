@@ -9,6 +9,7 @@ import app.utils.jsonutils as jsonutils
 import app.utils.rest_handlers as rs_handlers
 from app.models.db import Session
 from app.models.payment import Payment
+from app.models.practice import Practice
 from app.models.program import Program
 from app.models.practice_category import PracticeCategory
 from app.models.state import State
@@ -386,6 +387,22 @@ def titles_title_ii_programs_eqip_summary_search():
     return endpoint_response
 
 
+# /pdl/titles/title-ii/programs/eqip/practice-names
+def titles_title_ii_programs_eqip_practice_names_search():
+    program_id = get_program_id(TITLE_II_EQIP_PROGRAM_NAME)
+    if program_id is None:
+        msg = {
+            "reason": "No record for the given program name " + TITLE_II_EQIP_PROGRAM_NAME,
+            "error": "Not found: " + request.url,
+        }
+        logging.error("EQIP: " + json.dumps(msg))
+        return rs_handlers.not_found(msg)
+    start_year = 2018
+    end_year = 2022
+    endpoint_response = generate_title_ii_practice_names_response(program_id, start_year, end_year)
+    return endpoint_response
+
+
 # /pdl/titles/title-ii/programs/eqip-ira/state-distribution
 def titles_title_ii_programs_eqip_ira_state_distribution_search():
     # set the file path
@@ -490,6 +507,22 @@ def titles_title_ii_programs_csp_summary_search():
     start_year = 2018
     end_year = 2022
     endpoint_response = generate_title_ii_summary_response(program_id, start_year, end_year)
+    return endpoint_response
+
+
+# /pdl/titles/title-ii/programs/eqip/practice-names
+def titles_title_ii_programs_csp_practice_names_search():
+    program_id = get_program_id(TITLE_II_CSP_PROGRAM_NAME)
+    if program_id is None:
+        msg = {
+            "reason": "No record for the given program name " + TITLE_II_CSP_PROGRAM_NAME,
+            "error": "Not found: " + request.url,
+        }
+        logging.error("EQIP: " + json.dumps(msg))
+        return rs_handlers.not_found(msg)
+    start_year = 2018
+    end_year = 2022
+    endpoint_response = generate_title_ii_practice_names_response(program_id, start_year, end_year)
     return endpoint_response
 
 
@@ -762,39 +795,20 @@ def generate_allprograms_response(start_year, end_year):
 
         for year in range(start_year, end_year + 1):
             year_columns.append(f"""
-            -- Title I: Commodities
-            SUM(CASE WHEN t.name = 'Title I: Commodities' AND p.year = {year} THEN p.payment ELSE 0 END) 
-            AS "Title I {year}",
-            -- Title II: Conservation
-            SUM(CASE WHEN t.name = 'Title II: Conservation' AND p.year = {year} THEN p.payment ELSE 0 END) 
-            AS "Title II {year}",
-            -- Title IV: SNAP
-            SUM(CASE WHEN t.name = 'Title IV: Nutrition' AND p.year = {year} THEN p.payment ELSE 0 END) 
-            AS "SNAP {year}",
-            -- Title IX: Crop Insurance
-            SUM(CASE WHEN t.name = 'Title IX: Crop Insurance' AND p.year = {year} 
-            THEN p.net_farmer_benefit_amount ELSE 0 END) AS "Crop Insurance {year}",
-            -- All Programs Total for {year}
-            SUM(CASE WHEN p.year = {year} THEN COALESCE(p.payment, 0) + COALESCE(p.net_farmer_benefit_amount, 0) 
-            ELSE 0 END) AS "{year} All Programs Total"
+            SUM(CASE WHEN t.name = 'Title I: Commodities' AND p.year = {year} THEN p.payment ELSE 0 END) AS "Title I {year}",
+            SUM(CASE WHEN t.name = 'Title II: Conservation' AND p.year = {year} AND (sub_program_id IN (SELECT id FROM pdl.sub_programs WHERE pdl.sub_programs.name = 'Total CRP') OR sub_program_id IS NULL) THEN p.payment ELSE 0 END) AS "Title II {year}",
+            SUM(CASE WHEN t.name = 'Title IV: Nutrition' AND p.year = {year} THEN p.payment ELSE 0 END) AS "SNAP {year}",
+            SUM(CASE WHEN t.name = 'Title IX: Crop Insurance' AND p.year = {year} THEN p.net_farmer_benefit_amount ELSE 0 END) AS "Crop Insurance {year}",
+            SUM(CASE WHEN p.year = {year} AND (sub_program_id IN (SELECT id FROM pdl.sub_programs WHERE pdl.sub_programs.name IN ('Total CRP', 'Agriculture Risk Coverage County Option (ARC-CO)', 'Agriculture Risk Coverage Individual Coverage (ARC-IC)')) OR sub_program_id IS NULL) THEN COALESCE(p.payment, 0) + COALESCE(p.net_farmer_benefit_amount, 0) ELSE 0 END) AS "{year} All Programs Total"
             """)
 
         # Add the totals for each program and the overall total
         totals = f"""
-        -- Corrected total for Title I
-        SUM(CASE WHEN t.name = 'Title I: Commodities' AND p.year BETWEEN {start_year} AND {end_year} 
-        THEN p.payment ELSE 0 END) AS "Title I Total",
-        -- Corrected total for Title II
-        SUM(CASE WHEN t.name = 'Title II: Conservation' AND p.year BETWEEN {start_year} AND {end_year} 
-        THEN p.payment ELSE 0 END) AS "Title II Total",
-        -- Corrected total for SNAP
-        SUM(CASE WHEN t.name = 'Title IV: Nutrition' AND p.year BETWEEN {start_year} AND {end_year} 
-        THEN p.payment ELSE 0 END) AS "SNAP Total",
-        -- Corrected total for Crop Insurance
-        SUM(CASE WHEN t.name = 'Title IX: Crop Insurance' AND p.year BETWEEN {start_year} AND {end_year} 
-        THEN p.net_farmer_benefit_amount ELSE 0 END) AS "Crop Insurance Total",
-        -- 18-22 All Programs Total
-        SUM(COALESCE(p.payment, 0) + COALESCE(p.net_farmer_benefit_amount, 0)) AS "18-22 All Programs Total"
+        SUM(CASE WHEN t.name = 'Title I: Commodities' AND p.year BETWEEN {start_year} AND {end_year} THEN p.payment ELSE 0 END) AS "Title I Total",
+        SUM(CASE WHEN t.name = 'Title II: Conservation' AND p.year BETWEEN {start_year} AND {end_year} AND (sub_program_id IN (SELECT id FROM pdl.sub_programs WHERE pdl.sub_programs.name = 'Total CRP') OR sub_program_id IS NULL) THEN p.payment ELSE 0 END) AS "Title II Total",
+        SUM(CASE WHEN t.name = 'Title IV: Nutrition' AND p.year BETWEEN {start_year} AND {end_year} THEN p.payment ELSE 0 END) AS "SNAP Total",
+        SUM(CASE WHEN t.name = 'Title IX: Crop Insurance' AND p.year BETWEEN {start_year} AND {end_year} THEN p.net_farmer_benefit_amount ELSE 0 END) AS "Crop Insurance Total",
+        SUM(CASE WHEN (sub_program_id IN (SELECT id FROM pdl.sub_programs WHERE pdl.sub_programs.name IN ('Total CRP', 'Agriculture Risk Coverage County Option (ARC-CO)', 'Agriculture Risk Coverage Individual Coverage (ARC-IC)')) OR sub_program_id IS NULL) THEN COALESCE(p.payment, 0) + COALESCE(p.net_farmer_benefit_amount, 0) ELSE 0 END) AS "{str(start_year)[-2:]}-{str(end_year)[-2:]} All Programs Total"
         """
 
         # Combine the query of non-dynamic part
@@ -819,6 +833,7 @@ def generate_allprograms_response(start_year, end_year):
 
         state_data = []
         total_row = {"State": "Total"}
+        start_to_end_years_total_key = str(start_year)[-2:] + "-" + str(end_year)[-2:] + " All Programs Total"
 
         # Initialize total_row with zero values for all keys in the desired order
         for year in range(start_year, end_year + 1):
@@ -839,7 +854,7 @@ def generate_allprograms_response(start_year, end_year):
 
         for year in range(start_year, end_year + 1):
             total_row[f"{year} All Programs Total"] = 0
-        total_row["18-22 All Programs Total"] = 0
+        total_row[start_to_end_years_total_key] = 0
 
         for row in result:
             result_dict = dict(zip(columns, row))  # Using zip() to match columns with their values
@@ -896,11 +911,14 @@ def generate_allprograms_response(start_year, end_year):
                 total_row[f"{year} All Programs Total"] += value
 
             # Add the final total for all programs between the years
-            formatted_result["18-22 All Programs Total"] = result_dict.get("18-22 All Programs Total", 0)
-            total_row["18-22 All Programs Total"] += formatted_result["18-22 All Programs Total"]
+            formatted_result[start_to_end_years_total_key] = result_dict.get(start_to_end_years_total_key, 0)
 
             # Append the formatted result to the state data
             state_data.append(formatted_result)
+
+        # Add the final total for all programs between the years
+        for year in range(start_year, end_year + 1):
+            total_row[start_to_end_years_total_key] += total_row[f"{year} All Programs Total"]
 
         # Append the total row at the end of state data
         state_data.append(total_row)
@@ -931,8 +949,11 @@ def generate_summary_response(start_year, end_year):
             pdl.payments p
         JOIN
             pdl.titles t ON p.title_id = t.id
+        LEFT JOIN
+            pdl.sub_programs sp ON p.sub_program_id = sp.id
         WHERE
             p.year BETWEEN {start_year} AND {end_year}
+            AND (sp.name IN ('Total CRP', 'Agriculture Risk Coverage County Option (ARC-CO)', 'Agriculture Risk Coverage Individual Coverage (ARC-IC)') OR p.sub_program_id IS NULL)
         GROUP BY
             t.name, p.state_code, p.year
         ORDER BY
@@ -940,7 +961,7 @@ def generate_summary_response(start_year, end_year):
                 WHEN t.name = 'Title I: Commodities' THEN 1
                 WHEN t.name = 'Title II: Conservation' THEN 2
                 WHEN t.name = 'Title IX: Crop Insurance' THEN 3
-                WHEN t.name = 'Title IV: Nutrition' THEN 4  -- SNAP comes last
+                WHEN t.name = 'Title IV: Nutrition' THEN 4
             END,
             p.year,
             p.state_code;
@@ -984,7 +1005,7 @@ def generate_summary_response(start_year, end_year):
 
     except Exception as e:
         # Log any errors that occur
-        logger.error(f"Error occurred: {str(e)}")
+        logging.error(f"Error occurred: {str(e)}")
         return {"error": str(e)}
 
     finally:
@@ -2706,6 +2727,56 @@ def generate_title_ii_summary_response(program_id, start_year, end_year):
 
     response = {**total_values_dict, "statutes": statutes_list, "subPrograms": sub_programs_list}
     return response
+
+
+def generate_title_ii_practice_names_response(program_id, start_year, end_year):
+
+    session = Session()
+
+    # Construct the query
+    query = (
+        session.query(
+            Payment.practice_code,
+            func.concat(Practice.name, ' (', Payment.practice_code, ')').label('practice_name_with_code'),
+            Payment.year
+        )
+        .join(Practice, Practice.code == Payment.practice_code)
+        .filter(
+            Payment.program_id == program_id,
+            Payment.year.between(start_year, end_year),
+            Payment.practice_code.isnot(None)
+        )
+        .group_by(Payment.year, Payment.practice_code, Practice.name)
+        .order_by(Payment.year, Payment.practice_code)
+        .distinct(Payment.year, Payment.practice_code)
+    )
+
+    # Execute the query
+    result = query.all()
+
+    # Extract column names
+    column_names = [item['name'] for item in query.statement.column_descriptions]
+
+    # Generate result dictionary
+    practice_names_response = dict()
+    practice_names_for_start_to_end_year = dict()
+
+    for row in result:
+        row_dict = dict(zip(column_names, row))
+
+        if str(row_dict["year"]) not in practice_names_response:
+            practice_names_response[str(row_dict["year"])] = []
+        practice_names_response[str(row_dict["year"])].append(row_dict["practice_name_with_code"])
+
+        practice_names_for_start_to_end_year[row_dict["practice_code"]] = row_dict["practice_name_with_code"]
+
+    # Sort practice_names_for_start_to_end_year by practice code
+    practice_names_for_start_to_end_year = dict(sorted(practice_names_for_start_to_end_year.items(), key=lambda item: item[0]))
+
+    # Add the list of practice names for the entire period
+    practice_names_response[str(start_year) + "-" + str(end_year)] = list(practice_names_for_start_to_end_year.values())
+
+    return practice_names_response
 
 
 def generate_title_xi_summary_response(program_id, start_year, end_year):

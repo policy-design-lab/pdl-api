@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: Policy Design Lab API
   description: Policy Design Lab API Documentation
-  version: 0.18.0
+  version: 0.19.0
 servers:
 - url: https://localhost
   description: Production server
@@ -440,6 +440,26 @@ paths:
           description: Unauthorized
         500:
           description: Internal error
+  /pdl/titles/title-ii/programs/eqip/practice-names:
+    get:
+      tags:
+        - "Title II: Conservation - EQIP (Environmental Quality Incentives Program)"
+      summary: Gets the Title II EQIP list of all practice names for the given start to end year duration.
+      description: |
+        Returns the Title II EQIP list of all practice names for the given start to end year duration.
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
   /pdl/titles/title-ii/programs/eqip-ira/state-distribution:
     get:
       tags:
@@ -580,6 +600,27 @@ paths:
           description: Unauthorized
         500:
           description: Internal error
+  /pdl/titles/title-ii/programs/csp/practice-names:
+    get:
+      tags:
+        - "Title II: Conservation - CSP (Conservation Stewardship Program)"
+      summary: Gets the Title II CSP list of all practice names for the given start to end year duration.
+      description: |
+        Returns the Title II CSP list of all practice names for the given start to end year duration.
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
+
   /pdl/titles/title-ii/programs/csp-ira/state-distribution:
     get:
       tags:
