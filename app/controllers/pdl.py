@@ -354,7 +354,7 @@ def titles_title_ii_programs_eqip_map_search():
 
 
 # /pdl/titles/title-ii/programs/eqip/state-distribution
-def titles_title_ii_programs_eqip_state_distribution_search():
+def titles_title_ii_programs_eqip_state_distribution_search(practice_code=None):
     program_id = get_program_id(TITLE_II_EQIP_PROGRAM_NAME)
     if program_id is None:
         msg = {
@@ -366,7 +366,7 @@ def titles_title_ii_programs_eqip_state_distribution_search():
 
     start_year = 2018
     end_year = 2022
-    endpoint_response = generate_title_ii_state_distribution_response(program_id, start_year, end_year)
+    endpoint_response = generate_title_ii_state_distribution_response(program_id, start_year, end_year, practice_code=practice_code)
     return endpoint_response
 
 
@@ -1591,8 +1591,11 @@ def generate_title_i_summary_response(subtitle_id, start_year, end_year):
     return subtitle_response_dict
 
 
-def generate_title_ii_state_distribution_response(program_id, start_year, end_year):
+def generate_title_ii_state_distribution_response(program_id, start_year, end_year, practice_code=None):
     session = Session()
+
+    # Get practice codes list, if provided in the request
+    practice_codes_list = practice_code.split(",") if practice_code else []
 
     # Get program name
     program_name = session.query(Program.name).filter(Program.id == program_id).first()[0]

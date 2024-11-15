@@ -398,6 +398,15 @@ paths:
       summary: Gets the Title II EQIP conservation data for all states.
       description: |
         Returns  the Title II EQIP conservation data for all states in JSON format.
+      parameters:
+        - name: practice_code
+          in: query
+          description: The parameter for searching EQIP data by the practice code
+          required: false
+          style: form
+          explode: false
+          schema:
+              type: string
       responses:
         200:
           description: Ok
