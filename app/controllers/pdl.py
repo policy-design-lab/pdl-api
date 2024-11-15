@@ -9,6 +9,7 @@ import app.utils.jsonutils as jsonutils
 import app.utils.rest_handlers as rs_handlers
 from app.models.db import Session
 from app.models.payment import Payment
+from app.models.practice import Practice
 from app.models.program import Program
 from app.models.practice_category import PracticeCategory
 from app.models.state import State
@@ -386,6 +387,22 @@ def titles_title_ii_programs_eqip_summary_search():
     return endpoint_response
 
 
+# /pdl/titles/title-ii/programs/eqip/practice-names
+def titles_title_ii_programs_eqip_practice_names_search():
+    program_id = get_program_id(TITLE_II_EQIP_PROGRAM_NAME)
+    if program_id is None:
+        msg = {
+            "reason": "No record for the given program name " + TITLE_II_EQIP_PROGRAM_NAME,
+            "error": "Not found: " + request.url,
+        }
+        logging.error("EQIP: " + json.dumps(msg))
+        return rs_handlers.not_found(msg)
+    start_year = 2018
+    end_year = 2022
+    endpoint_response = generate_title_ii_practice_names_response(program_id, start_year, end_year)
+    return endpoint_response
+
+
 # /pdl/titles/title-ii/programs/eqip-ira/state-distribution
 def titles_title_ii_programs_eqip_ira_state_distribution_search():
     # set the file path
@@ -490,6 +507,22 @@ def titles_title_ii_programs_csp_summary_search():
     start_year = 2018
     end_year = 2022
     endpoint_response = generate_title_ii_summary_response(program_id, start_year, end_year)
+    return endpoint_response
+
+
+# /pdl/titles/title-ii/programs/eqip/practice-names
+def titles_title_ii_programs_csp_practice_names_search():
+    program_id = get_program_id(TITLE_II_CSP_PROGRAM_NAME)
+    if program_id is None:
+        msg = {
+            "reason": "No record for the given program name " + TITLE_II_CSP_PROGRAM_NAME,
+            "error": "Not found: " + request.url,
+        }
+        logging.error("EQIP: " + json.dumps(msg))
+        return rs_handlers.not_found(msg)
+    start_year = 2018
+    end_year = 2022
+    endpoint_response = generate_title_ii_practice_names_response(program_id, start_year, end_year)
     return endpoint_response
 
 
@@ -2691,6 +2724,56 @@ def generate_title_ii_summary_response(program_id, start_year, end_year):
 
     response = {**total_values_dict, "statutes": statutes_list, "subPrograms": sub_programs_list}
     return response
+
+
+def generate_title_ii_practice_names_response(program_id, start_year, end_year):
+
+    session = Session()
+
+    # Construct the query
+    query = (
+        session.query(
+            Payment.practice_code,
+            func.concat(Practice.name, ' (', Payment.practice_code, ')').label('practice_name_with_code'),
+            Payment.year
+        )
+        .join(Practice, Practice.code == Payment.practice_code)
+        .filter(
+            Payment.program_id == program_id,
+            Payment.year.between(start_year, end_year),
+            Payment.practice_code.isnot(None)
+        )
+        .group_by(Payment.year, Payment.practice_code, Practice.name)
+        .order_by(Payment.year, Payment.practice_code)
+        .distinct(Payment.year, Payment.practice_code)
+    )
+
+    # Execute the query
+    result = query.all()
+
+    # Extract column names
+    column_names = [item['name'] for item in query.statement.column_descriptions]
+
+    # Generate result dictionary
+    practice_names_response = dict()
+    practice_names_for_start_to_end_year = dict()
+
+    for row in result:
+        row_dict = dict(zip(column_names, row))
+
+        if str(row_dict["year"]) not in practice_names_response:
+            practice_names_response[str(row_dict["year"])] = []
+        practice_names_response[str(row_dict["year"])].append(row_dict["practice_name_with_code"])
+
+        practice_names_for_start_to_end_year[row_dict["practice_code"]] = row_dict["practice_name_with_code"]
+
+    # Sort practice_names_for_start_to_end_year by practice code
+    practice_names_for_start_to_end_year = dict(sorted(practice_names_for_start_to_end_year.items(), key=lambda item: item[0]))
+
+    # Add the list of practice names for the entire period
+    practice_names_response[str(start_year) + "-" + str(end_year)] = list(practice_names_for_start_to_end_year.values())
+
+    return practice_names_response
 
 
 def generate_title_xi_summary_response(program_id, start_year, end_year):
