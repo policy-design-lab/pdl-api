@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Endpoints to get practice codes and names for EQIP and CSP. [#263](https://github.com/policy-design-lab/pdl-api/issues/263)
+- Total payment grouped by practice codes to state distribution endpoint for EQIP and CSP, with query parameter support. [#275](https://github.com/policy-design-lab/pdl-api/issues/275)
 
 ## [0.19.0] - 2024-11-03
 
