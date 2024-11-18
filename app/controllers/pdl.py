@@ -479,7 +479,7 @@ def titles_title_ii_programs_csp_map_search():
 
 
 # /pdl/titles/title-ii/programs/csp/state-distribution
-def titles_title_ii_programs_csp_state_distribution_search():
+def titles_title_ii_programs_csp_state_distribution_search(practice_code=None):
     program_id = get_program_id(TITLE_II_CSP_PROGRAM_NAME)
     if program_id is None:
         msg = {
@@ -490,7 +490,7 @@ def titles_title_ii_programs_csp_state_distribution_search():
         return rs_handlers.not_found(msg)
     start_year = 2018
     end_year = 2022
-    endpoint_response = generate_title_ii_state_distribution_response(program_id, start_year, end_year)
+    endpoint_response = generate_title_ii_state_distribution_response(program_id, start_year, end_year, practice_code=practice_code)
     return endpoint_response
 
 

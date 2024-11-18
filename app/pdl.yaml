@@ -573,6 +573,20 @@ paths:
       summary: Gets the Title II CSP conservation data for all states.
       description: |
         Returns  the Title II CSP conservation data for all states in JSON format.
+      parameters:
+        - name: practice_code
+          in: query
+          description: The parameter for searching EQIP data by the practice code
+          required: false
+          style: form
+          explode: false
+          schema:
+            type: string
+          examples:
+            single:
+              value: "314"
+            multiple:
+              value: "314,315"
       responses:
         200:
           description: Ok
