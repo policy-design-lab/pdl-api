@@ -576,7 +576,7 @@ paths:
       parameters:
         - name: practice_code
           in: query
-          description: The parameter for searching EQIP data by the practice code
+          description: The parameter for searching CSP data by the practice code
           required: false
           style: form
           explode: false
