@@ -1110,7 +1110,7 @@ def generate_title_iv_state_distribution_response(program_id, start_year, end_ye
             'state': state,
             'totalPaymentInDollars': total_payment,
             'totalPaymentInPercentageNationwide': round(total_payment_percentage, 2),
-            'averageMonthlyParticipation': average_monthly_participation,
+            'averageMonthlyParticipation': round(average_monthly_participation),
             'averageMonthlyParticipationInPercentageNationwide': round(average_monthly_participation_percentage, 2)
         })
 
