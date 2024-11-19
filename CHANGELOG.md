@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Endpoints to get practice codes and names for EQIP and CSP. [#263](https://github.com/policy-design-lab/pdl-api/issues/263)
 - Total payment grouped by practice codes to state distribution endpoint for EQIP and CSP, with query parameter support. [#275](https://github.com/policy-design-lab/pdl-api/issues/275)
 
+### Fixed
+- SNAP average monthly participation and percentage calculation across years. [#278](https://github.com/policy-design-lab/pdl-api/issues/278)
+
 ## [0.19.0] - 2024-11-03
 
 ### Changed
