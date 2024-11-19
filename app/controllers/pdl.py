@@ -355,7 +355,7 @@ def titles_title_ii_programs_eqip_map_search():
 
 
 # /pdl/titles/title-ii/programs/eqip/state-distribution
-def titles_title_ii_programs_eqip_state_distribution_search():
+def titles_title_ii_programs_eqip_state_distribution_search(practice_code=None):
     program_id = get_program_id(TITLE_II_EQIP_PROGRAM_NAME)
     if program_id is None:
         msg = {
@@ -367,7 +367,7 @@ def titles_title_ii_programs_eqip_state_distribution_search():
 
     start_year = 2018
     end_year = 2022
-    endpoint_response = generate_title_ii_state_distribution_response(program_id, start_year, end_year)
+    endpoint_response = generate_title_ii_state_distribution_response(program_id, start_year, end_year, practice_code=practice_code)
     return endpoint_response
 
 
@@ -479,7 +479,7 @@ def titles_title_ii_programs_csp_map_search():
 
 
 # /pdl/titles/title-ii/programs/csp/state-distribution
-def titles_title_ii_programs_csp_state_distribution_search():
+def titles_title_ii_programs_csp_state_distribution_search(practice_code=None):
     program_id = get_program_id(TITLE_II_CSP_PROGRAM_NAME)
     if program_id is None:
         msg = {
@@ -490,7 +490,7 @@ def titles_title_ii_programs_csp_state_distribution_search():
         return rs_handlers.not_found(msg)
     start_year = 2018
     end_year = 2022
-    endpoint_response = generate_title_ii_state_distribution_response(program_id, start_year, end_year)
+    endpoint_response = generate_title_ii_state_distribution_response(program_id, start_year, end_year, practice_code=practice_code)
     return endpoint_response
 
 
@@ -1612,7 +1612,7 @@ def generate_title_i_summary_response(subtitle_id, start_year, end_year):
     return subtitle_response_dict
 
 
-def generate_title_ii_state_distribution_response(program_id, start_year, end_year):
+def generate_title_ii_state_distribution_response(program_id, start_year, end_year, practice_code=None):
     session = Session()
 
     # Get program name
@@ -1828,6 +1828,69 @@ def generate_title_ii_state_distribution_response(program_id, start_year, end_ye
     for state in state_total_payment_by_practice_categories_dict:
         for statute in state_total_payment_by_practice_categories_dict[state]:
             state_total_payment_by_practice_categories_dict[state][statute]['practiceCategories'] = sorted(state_total_payment_by_practice_categories_dict[state][statute]['practiceCategories'], key=lambda x: x['totalPaymentInDollars'], reverse=True)
+
+    # Get practice codes list, if provided in the request
+    practice_codes_list = practice_code.split(",") if practice_code else []
+
+    # Get total payment by practice codes
+    state_total_payment_by_practice_code_query = (session.query(
+        Payment.state_code.label('state'),
+        PracticeCategory.display_name.label('practiceCategoryName'),
+        Payment.practice_code.label('practiceCode'),
+        Practice.name.label('practiceName'),
+        func.sum(Payment.payment).label('totalPaymentInDollars')
+    ).join(
+        PracticeCategory, Payment.practice_category_id == PracticeCategory.id
+    ).join(
+        Practice, Payment.practice_code == Practice.code
+    ).filter(
+        Payment.program_id == program_id,
+        Payment.year.between(start_year, end_year),
+        PracticeCategory.program_id == program_id,
+        Payment.practice_code.in_(practice_codes_list) if practice_codes_list else True
+    ).group_by(
+        Payment.state_code, PracticeCategory.display_name,
+        Payment.practice_code, Practice.name
+    ).order_by(
+        Payment.state_code, PracticeCategory.display_name, Payment.practice_code
+    ))
+
+    # Extract the column names
+    state_total_payment_by_practice_code_column_names = [item['name'] for item in state_total_payment_by_practice_code_query.statement.column_descriptions]
+
+    # Execute the query
+    state_total_payment_by_practice_code_result = state_total_payment_by_practice_code_query.all()
+
+    # Generate result dictionary
+    state_total_payment_by_practice_code_dict = dict()
+
+    for row in state_total_payment_by_practice_code_result:
+        response_dict = dict(zip(state_total_payment_by_practice_code_column_names, row))
+
+        state = response_dict['state']
+        practice_category_name = response_dict['practiceCategoryName']
+        response_dict['practiceName'] = str(response_dict['practiceName']) + ' (' + response_dict['practiceCode'] + ')'
+
+        # Cleanup / renaming attributes
+        del response_dict['state']
+        del response_dict['practiceCode']
+        del response_dict['practiceCategoryName']
+
+        if state in state_total_payment_by_practice_code_dict:
+            if practice_category_name in state_total_payment_by_practice_code_dict[state]:
+                state_total_payment_by_practice_code_dict[state][practice_category_name]['practices'].append(response_dict)
+            else:
+                state_total_payment_by_practice_code_dict[state][practice_category_name] = {'practices': [response_dict]}
+        else:
+            state_total_payment_by_practice_code_dict[state] = {practice_category_name: {'practices': [response_dict]}}
+
+    for state in state_total_payment_by_practice_categories_dict:
+        for statute in state_total_payment_by_practice_categories_dict[state]:
+            for practice_category in state_total_payment_by_practice_categories_dict[state][statute]['practiceCategories']:
+                if state in state_total_payment_by_practice_code_dict and practice_category['practiceCategoryName'] in state_total_payment_by_practice_code_dict[state]:
+                    practice_category['practices'] = state_total_payment_by_practice_code_dict[state][practice_category['practiceCategoryName']]['practices']
+                else:
+                    practice_category['practices'] = []
 
     # Get sum of payment for the given period grouped by practice category
     total_payment_by_practice_categories_query = (session.query(
