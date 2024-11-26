@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.20.0] - 2024-11-25
+
+### Added
+- Endpoints to get practice codes and names for EQIP and CSP. [#263](https://github.com/policy-design-lab/pdl-api/issues/263)
+- Total payment grouped by practice codes to state distribution endpoint for EQIP and CSP, with query parameter support. [#275](https://github.com/policy-design-lab/pdl-api/issues/275)
+
+### Fixed
+- SNAP average monthly participation and percentage calculation across years. [#278](https://github.com/policy-design-lab/pdl-api/issues/278)
+
 ## [0.19.0] - 2024-11-03
 
 ### Changed
@@ -194,6 +203,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Open API specification file. [#50](https://github.com/policy-design-lab/pdl-api/issues/50)
 
+[0.20.0]: https://github.com/policy-design-lab/pdl-api/compare/0.19.0...0.20.0
 [0.19.0]: https://github.com/policy-design-lab/pdl-api/compare/0.18.0...0.19.0
 [0.18.0]: https://github.com/policy-design-lab/pdl-api/compare/0.17.0...0.18.0
 [0.17.0]: https://github.com/policy-design-lab/pdl-api/compare/0.16.0...0.17.0
