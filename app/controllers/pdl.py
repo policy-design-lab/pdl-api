@@ -64,6 +64,8 @@ ACEP_SUBPROGRAMS_DATA_JSON = "acep_subprograms_data.json"
 II_RCPP_DATA_PATH = os.path.join(TITLE_II_DATA_PATH, "programs", "rcpp")
 RCPP_STATE_DISTRIBUTION_DATA_JSON = "rcpp_state_distribution_data.json"
 RCPP_SUBPROGRAMS_DATA_JSON = "rcpp_subprograms_data.json"
+II_HOUSE_DATA_PATH = os.path.join(TITLE_II_DATA_PATH, "programs", "house_outlay")
+HOUSE_PREDICTED_DATA_JSON = "house_outlay_max.json"
 TITLE_IV_DATA_PATH = os.path.join("controllers", "data", "title-iv")
 IV_SNAP_DATA_PATH = os.path.join(TITLE_IV_DATA_PATH, "programs", "snap")
 SNAP_STATE_DISTRIBUTION_DATA_JSON = "snap_state_distribution_data.json"
@@ -585,7 +587,6 @@ def titles_title_ii_programs_csp_ira_predicted_search():
 
         return data_json
 
-
 # /pdl/titles/title-ii/programs/crp/state-distribution
 def titles_title_ii_programs_crp_state_distribution_search():
     program_id = get_program_id(TITLE_II_CRP_PROGRAM_NAME)
@@ -681,6 +682,19 @@ def titles_title_ii_programs_rcpp_summary_search():
     endpoint_response = generate_title_ii_summary_response(program_id, start_year, end_year)
     return endpoint_response
 
+# /pdl/titles/title-ii/programs/house-outlay/predicted
+def titles_title_ii_programs_house_outlay_predicted_search():
+    # set the file path
+    house_outlay_data = os.path.join(II_HOUSE_DATA_PATH, HOUSE_PREDICTED_DATA_JSON)
+
+    # open file
+    with open(house_outlay_data, 'r') as predicted_data:
+        file_data = predicted_data.read()
+
+        # parse file
+        data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
+
+        return data_json
 
 # /pdl/titles/title-xi/programs/crop-insurance/state-distribution
 def titles_title_xi_programs_crop_insurance_state_distribution_search():
