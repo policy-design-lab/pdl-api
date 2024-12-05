@@ -403,7 +403,7 @@ paths:
           in: query
           description: The parameter for searching EQIP data by the practice code
           required: false
-          style: form
+          style: pipeDelimited
           explode: false
           schema:
               type: string
@@ -578,7 +578,7 @@ paths:
           in: query
           description: The parameter for searching CSP data by the practice code
           required: false
-          style: form
+          style: pipeDelimited
           explode: false
           schema:
             type: string
