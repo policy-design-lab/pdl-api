@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add house outlay to Title II endpoint. [#280](https://github.com/policy-design-lab/pdl-api/issues/280)
 - Add practice names to house outlay api. [#288](https://github.com/policy-design-lab/pdl-api/issues/288)
 
+### Changed
+- Switch to using | (pipe) as delimiter for query parameters in EQP and CSP state distribution endpoints. [#286](https://github.com/policy-design-lab/pdl-api/issues/286)
+
 ## [0.20.0] - 2024-11-25
 
 ### Added

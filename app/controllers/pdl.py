@@ -1859,7 +1859,7 @@ def generate_title_ii_state_distribution_response(program_id, start_year, end_ye
             state_total_payment_by_practice_categories_dict[state][statute]['practiceCategories'] = sorted(state_total_payment_by_practice_categories_dict[state][statute]['practiceCategories'], key=lambda x: x['totalPaymentInDollars'], reverse=True)
 
     # Get practice codes list, if provided in the request
-    practice_codes_list = practice_code.split(",") if practice_code else []
+    practice_codes_list = practice_code.split("|") if practice_code else []
 
     # Get total payment by practice codes
     state_total_payment_by_practice_code_query = (session.query(
