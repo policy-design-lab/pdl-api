@@ -18,7 +18,7 @@ Install packages:
 
 Set variables:
 - for local run you have to be connected to the database
-- create .env file under pdl-api/api/controllers folder. 
+- create .env file under pdl-api/app/controllers folder. 
 - The content of .env file should be like
 
       DB_HOST=host machine
