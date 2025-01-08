@@ -684,7 +684,7 @@ def titles_title_ii_programs_rcpp_summary_search():
     return endpoint_response
 
 # /pdl/titles/title-ii/proposals/2024/house/eqip/predicted
-def titles_title_ii_proposals_2024_house_predicted_search():
+def titles_title_ii_proposals_2024_house_eqip_predicted_search():
     # set the file path
     house_outlay_data = os.path.join(II_HOUSE_DATA_PATH, HOUSE_PREDICTED_DATA_JSON)
 
@@ -698,7 +698,7 @@ def titles_title_ii_proposals_2024_house_predicted_search():
         return data_json
 
 # /pdl/titles/title-ii/proposals/2024/house/eqip/practice-names
-def titles_title_ii_proposals_2024_house_practice_names_search():
+def titles_title_ii_proposals_2024_house_eqip_practice_names_search():
     # set the file path
     house_outlay_data = os.path.join(II_HOUSE_DATA_PATH, HOUSE_PREDICTED_PRACTICE_CATEGORIES_DATA_JSON)
 
