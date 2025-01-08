@@ -843,7 +843,7 @@ paths:
           description: Unauthorized
         500:
           description: Internal error
-  /pdl/titles/title-ii/programs/house-outlay/practice-names:
+  /pdl/titles/title-ii/proposals/2024/house/eqip/practice-names:
     get:
       tags:
         - "Title II: House Change Outlay Data"
@@ -863,7 +863,7 @@ paths:
           description: Unauthorized
         500:
           description: Internal error
-  /pdl/titles/title-ii/programs/house-outlay/predicted:
+  /pdl/titles/title-ii/proposals/2024/house/eqip/predicted:
     get:
       tags:
         - "Title II: House Change Outlay Data"
