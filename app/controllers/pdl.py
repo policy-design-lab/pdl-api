@@ -64,7 +64,7 @@ ACEP_SUBPROGRAMS_DATA_JSON = "acep_subprograms_data.json"
 II_RCPP_DATA_PATH = os.path.join(TITLE_II_DATA_PATH, "programs", "rcpp")
 RCPP_STATE_DISTRIBUTION_DATA_JSON = "rcpp_state_distribution_data.json"
 RCPP_SUBPROGRAMS_DATA_JSON = "rcpp_subprograms_data.json"
-II_HOUSE_DATA_PATH = os.path.join(TITLE_II_DATA_PATH, "proposals", "2024", "house", "eqip")
+II_PROPOSALS_2024_HOUSE_EQIP_DATA_PATH = os.path.join(TITLE_II_DATA_PATH, "proposals", "2024", "house", "eqip")
 HOUSE_PREDICTED_DATA_JSON = "house_outlay_max.json"
 HOUSE_PREDICTED_PRACTICE_CATEGORIES_DATA_JSON = "house_outlay_practices.json"
 TITLE_IV_DATA_PATH = os.path.join("controllers", "data", "title-iv")
@@ -686,7 +686,7 @@ def titles_title_ii_programs_rcpp_summary_search():
 # /pdl/titles/title-ii/proposals/2024/house/eqip/predicted
 def titles_title_ii_proposals_2024_house_eqip_predicted_search():
     # set the file path
-    house_outlay_data = os.path.join(II_HOUSE_DATA_PATH, HOUSE_PREDICTED_DATA_JSON)
+    house_outlay_data = os.path.join(II_PROPOSALS_2024_HOUSE_EQIP_DATA_PATH, HOUSE_PREDICTED_DATA_JSON)
 
     # open file
     with open(house_outlay_data, 'r') as predicted_data:
@@ -700,7 +700,7 @@ def titles_title_ii_proposals_2024_house_eqip_predicted_search():
 # /pdl/titles/title-ii/proposals/2024/house/eqip/practice-names
 def titles_title_ii_proposals_2024_house_eqip_practice_names_search():
     # set the file path
-    house_outlay_data = os.path.join(II_HOUSE_DATA_PATH, HOUSE_PREDICTED_PRACTICE_CATEGORIES_DATA_JSON)
+    house_outlay_data = os.path.join(II_PROPOSALS_2024_HOUSE_EQIP_DATA_PATH, HOUSE_PREDICTED_PRACTICE_CATEGORIES_DATA_JSON)
 
     # open file
     with open(house_outlay_data, 'r') as practice_data:
