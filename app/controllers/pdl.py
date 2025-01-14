@@ -1232,37 +1232,33 @@ def generate_title_ii_total_state_distribution_response(title_id, start_year, en
     session = Session()
 
     # construct the query
-    program_query = session.query(
+    program_query = (session.query(
         Payment.state_code.label('state'),
-        Subtitle.name.label('subtitleName'),
         Payment.year.label('year'),
-        Payment.payment.label('totalPaymentInDollars'),
-        Payment.recipient_count.label('totalCounts')).join(
-        Subtitle, Payment.subtitle_id == Subtitle.id).filter(
+        Payment.payment.label('totalPaymentInDollars')
+    ).filter(
         Payment.title_id == title_id,
         Payment.year.between(start_year, end_year)
-    )
+    ))
 
     # execute the query
     result = program_query.all()
 
     # create a nested dictionary to store data by year and state
     data_by_year_and_state = defaultdict(
-        lambda: defaultdict(lambda: {'totalPaymentInDollars': 0, 'totalRecipients': 0}))
-    all_years_summary = defaultdict(lambda: {'totalPaymentInDollars': 0, 'totalRecipients': 0})
+        lambda: defaultdict(lambda: {'totalPaymentInDollars': 0}))
+    all_years_summary = defaultdict(lambda: {'totalPaymentInDollars': 0})
 
     for record in result:
-        state, title_name, year, payments, recipients = record
+        state, year, payments = record
         entry = data_by_year_and_state[year][state]
         entry['state'] = state
         entry['totalPaymentInDollars'] += payments
-        entry['totalRecipients'] += recipients
 
         # add to all years summary
         summary = all_years_summary[state]
         summary['state'] = state
         summary['totalPaymentInDollars'] += payments
-        summary['totalRecipients'] += recipients
 
     # sort by total payment
     sorted_data_by_year = {}
