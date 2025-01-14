@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Add top-level endpoints to Title-II. [#270](https://github.com/policy-design-lab/pdl-api/issues/270)
+
 ### Changed
 - Change house api path. [#295](https://github.com/policy-design-lab/pdl-api/issues/295)
 

@@ -341,6 +341,22 @@ def titles_title_i_subtitles_subtitle_e_summary_search():
     endpoint_response = generate_title_i_summary_response(subtitle_id, start_year, end_year)
     return endpoint_response
 
+# /pdl/titles/title-ii/summary:
+def titles_title_ii_summary_search():
+    start_year = 2014
+    end_year = 2021
+    title_id = 101
+    endpoint_response = generate_title_ii_total_summary_response(title_id, start_year, end_year)
+    return endpoint_response
+
+
+# /pdl/titles/title-ii/state-distribution:
+def titles_title_ii_state_distribution_search():
+    start_year = 2014
+    end_year = 2021
+    title_id = 101
+    endpoint_response = generate_title_ii_total_state_distribution_response(title_id, start_year, end_year)
+    return endpoint_response
 
 # /pdl/titles/title-ii/programs/eqip/map
 def titles_title_ii_programs_eqip_map_search():
@@ -1212,6 +1228,65 @@ def generate_title_i_total_state_distribution_response(title_id, start_year, end
 
     return result_dict
 
+def generate_title_ii_total_state_distribution_response(title_id, start_year, end_year):
+    session = Session()
+
+    # construct the query
+    program_query = session.query(
+        Payment.state_code.label('state'),
+        Subtitle.name.label('subtitleName'),
+        Payment.year.label('year'),
+        Payment.payment.label('totalPaymentInDollars'),
+        Payment.recipient_count.label('totalCounts')).join(
+        Subtitle, Payment.subtitle_id == Subtitle.id).filter(
+        Payment.title_id == title_id,
+        Payment.year.between(start_year, end_year)
+    )
+
+    # execute the query
+    result = program_query.all()
+
+    # create a nested dictionary to store data by year and state
+    data_by_year_and_state = defaultdict(
+        lambda: defaultdict(lambda: {'totalPaymentInDollars': 0, 'totalRecipients': 0}))
+    all_years_summary = defaultdict(lambda: {'totalPaymentInDollars': 0, 'totalRecipients': 0})
+
+    for record in result:
+        state, title_name, year, payments, recipients = record
+        entry = data_by_year_and_state[year][state]
+        entry['state'] = state
+        entry['totalPaymentInDollars'] += payments
+        entry['totalRecipients'] += recipients
+
+        # add to all years summary
+        summary = all_years_summary[state]
+        summary['state'] = state
+        summary['totalPaymentInDollars'] += payments
+        summary['totalRecipients'] += recipients
+
+    # sort by total payment
+    sorted_data_by_year = {}
+    for year, states in data_by_year_and_state.items():
+        sorted_entries = sorted(states.values(), key=lambda x: x['totalPaymentInDollars'], reverse=True)
+        sorted_data_by_year[year] = sorted_entries
+
+    # round the total payment
+    for year, states in sorted_data_by_year.items():
+        for state in states:
+            state['totalPaymentInDollars'] = round(state['totalPaymentInDollars'], 2)
+
+    # all years summary
+    sorted_summary = sorted(all_years_summary.values(), key=lambda x: x['totalPaymentInDollars'], reverse=True)
+
+    # round the total payment
+    for state in sorted_summary:
+        state['totalPaymentInDollars'] = round(state['totalPaymentInDollars'], 2)
+
+    sorted_data_by_year['2014-2021'] = sorted_summary
+
+    result_dict = dict(sorted_data_by_year)
+
+    return result_dict
 
 def generate_title_i_total_summary_response(title_id, start_year, end_year):
     session = Session()
@@ -1291,6 +1366,84 @@ def generate_title_i_total_summary_response(title_id, start_year, end_year):
 
     return final_summary
 
+def generate_title_ii_total_summary_response(title_id, start_year, end_year):
+    session = Session()
+
+    # construct the query
+    program_query = session.query(
+        Payment.state_code.label('state'),
+        Title.name.label('titleName'),
+        Payment.year.label('year'),
+        Payment.payment.label('totalPaymentInDollars'),
+        Payment.recipient_count.label('totalCounts'),
+        Subtitle.name.label('subtitleName')
+    ).join(
+        Title, Payment.title_id == Title.id
+    ).join(
+        Subtitle, Payment.subtitle_id == Subtitle.id
+    ).filter(
+        Payment.title_id == title_id,
+        Payment.year.between(start_year, end_year)
+    )
+    print(program_query)
+
+    # execute the query
+    results = program_query.all()
+
+    # Initialize dictionaries to store aggregated data
+    title_summary = defaultdict(lambda: {
+        'totalPaymentInDollars': 0,
+        'totalCounts': 0,
+        'recipients': [],
+        'subtitles': defaultdict(lambda: {
+            'totalPaymentInDollars': 0,
+            'totalCounts': 0,
+            'recipients': []
+        })
+    })
+
+    # Process each record in the data
+    for state, title_name, year, payment, recipients, subtitle in results:
+        title_summary[title_name]['totalPaymentInDollars'] += payment
+        title_summary[title_name]['totalCounts'] += recipients
+        title_summary[title_name]['recipients'].append(recipients)
+
+        # Aggregate subtitle data
+        subtitle_dict = title_summary[title_name]['subtitles'][subtitle]
+        subtitle_dict['totalPaymentInDollars'] += payment
+        subtitle_dict['totalCounts'] += recipients
+        subtitle_dict['recipients'].append(recipients)
+
+    # Prepare the final summary
+    final_summary = []
+    for title, info in title_summary.items():
+        average_recipient_count = sum(info['recipients']) / len(info['recipients']) if info['recipients'] else 0
+        subtitle_list = []
+        total_payment_title = info['totalPaymentInDollars']
+
+        for subtitle_name, subtitle_info in info['subtitles'].items():
+            subtitle_avg_recipients = sum(subtitle_info['recipients']) / len(subtitle_info['recipients']) if \
+            subtitle_info['recipients'] else 0
+            payment_percentage = (subtitle_info[
+                                      'totalPaymentInDollars'] / total_payment_title * 100) if total_payment_title else 0
+            subtitle_list.append({
+                'programName': subtitle_name,
+                'totalPaymentInDollars': round(subtitle_info['totalPaymentInDollars'], 2),
+                'totalCounts': subtitle_info['totalCounts'],
+                'averageRecipientCount': subtitle_avg_recipients,
+                'totalPaymentInPercentage': round(payment_percentage, 2)
+            })
+
+        title_entry = {
+            'titleName': title,
+            'totalPaymentInDollars': round(info['totalPaymentInDollars'], 2),
+            'totalCounts': info['totalCounts'],
+            'averageRecipientCount': round(average_recipient_count, 2),
+            'subtitles': subtitle_list
+        }
+        final_summary.append(title_entry)
+
+    return final_summary
 
 def generate_title_i_state_distribution_response(subtitle_id, start_year, end_year):
     session = Session()
