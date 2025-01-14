@@ -376,7 +376,7 @@ paths:
   /pdl/titles/title-ii/summary:
     get:
       tags:
-        - "Title II: Commodities"
+        - "Title II: Conservation"
       summary: Gets the Title II summary data for all states.
       description: |
         Returns  the Title II summary data for all states in JSON format.
@@ -396,7 +396,7 @@ paths:
   /pdl/titles/title-ii/state-distribution:
     get:
       tags:
-        - "Title II: Commodities"
+        - "Title II: Conservation"
       summary: Gets the Title II's state distribution data for all states.
       description: |
         Returns  the Title II state distribution data for all states in JSON format.
