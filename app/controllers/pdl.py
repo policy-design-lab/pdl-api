@@ -1375,71 +1375,33 @@ def generate_title_ii_total_summary_response(title_id, start_year, end_year):
         Title.name.label('titleName'),
         Payment.year.label('year'),
         Payment.payment.label('totalPaymentInDollars'),
-        Payment.recipient_count.label('totalCounts'),
-        Subtitle.name.label('subtitleName')
     ).join(
         Title, Payment.title_id == Title.id
-    ).join(
-        Subtitle, Payment.subtitle_id == Subtitle.id
     ).filter(
         Payment.title_id == title_id,
         Payment.year.between(start_year, end_year)
     )
-    print(program_query)
 
     # execute the query
     results = program_query.all()
 
     # Initialize dictionaries to store aggregated data
     title_summary = defaultdict(lambda: {
-        'totalPaymentInDollars': 0,
-        'totalCounts': 0,
-        'recipients': [],
-        'subtitles': defaultdict(lambda: {
-            'totalPaymentInDollars': 0,
-            'totalCounts': 0,
-            'recipients': []
-        })
+        'totalPaymentInDollars': 0
     })
 
     # Process each record in the data
-    for state, title_name, year, payment, recipients, subtitle in results:
+    for state, title_name, year, payment in results:
         title_summary[title_name]['totalPaymentInDollars'] += payment
-        title_summary[title_name]['totalCounts'] += recipients
-        title_summary[title_name]['recipients'].append(recipients)
-
-        # Aggregate subtitle data
-        subtitle_dict = title_summary[title_name]['subtitles'][subtitle]
-        subtitle_dict['totalPaymentInDollars'] += payment
-        subtitle_dict['totalCounts'] += recipients
-        subtitle_dict['recipients'].append(recipients)
 
     # Prepare the final summary
     final_summary = []
     for title, info in title_summary.items():
-        average_recipient_count = sum(info['recipients']) / len(info['recipients']) if info['recipients'] else 0
-        subtitle_list = []
         total_payment_title = info['totalPaymentInDollars']
-
-        for subtitle_name, subtitle_info in info['subtitles'].items():
-            subtitle_avg_recipients = sum(subtitle_info['recipients']) / len(subtitle_info['recipients']) if \
-            subtitle_info['recipients'] else 0
-            payment_percentage = (subtitle_info[
-                                      'totalPaymentInDollars'] / total_payment_title * 100) if total_payment_title else 0
-            subtitle_list.append({
-                'programName': subtitle_name,
-                'totalPaymentInDollars': round(subtitle_info['totalPaymentInDollars'], 2),
-                'totalCounts': subtitle_info['totalCounts'],
-                'averageRecipientCount': subtitle_avg_recipients,
-                'totalPaymentInPercentage': round(payment_percentage, 2)
-            })
 
         title_entry = {
             'titleName': title,
-            'totalPaymentInDollars': round(info['totalPaymentInDollars'], 2),
-            'totalCounts': info['totalCounts'],
-            'averageRecipientCount': round(average_recipient_count, 2),
-            'subtitles': subtitle_list
+            'totalPaymentInDollars': round(info['totalPaymentInDollars'], 2)
         }
         final_summary.append(title_entry)
 
