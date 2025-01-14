@@ -3,7 +3,7 @@ import logging
 import os
 from collections import OrderedDict
 from flask import request
-from sqlalchemy import func, desc, Numeric, BigInteger, Integer, text
+from sqlalchemy import func, desc, Numeric, BigInteger, Integer, text, or_, and_
 
 import app.utils.jsonutils as jsonutils
 import app.utils.rest_handlers as rs_handlers
@@ -1232,22 +1232,32 @@ def generate_title_ii_total_state_distribution_response(title_id, start_year, en
     session = Session()
 
     # construct the query
-    program_query = (session.query(
-        Payment.state_code.label('state'),
-        Payment.year.label('year'),
-        Payment.payment.label('totalPaymentInDollars')
-    ).filter(
-        Payment.title_id == title_id,
-        Payment.year.between(start_year, end_year)
-    ))
+    program_query = (
+        session.query(
+            Payment.state_code.label('state'),
+            Payment.year.label('year'),
+            Payment.payment.label('totalPaymentInDollars')
+        ).filter(
+            Payment.title_id == title_id,
+            Payment.year.between(start_year, end_year),
+            # when calculating the title level summaries, only calculate Total CRP (sub_program_id == 102) from CRP (program_id == 108)
+            or_(
+                and_(
+                    Payment.program_id == 108,
+                    Payment.sub_program_id == 102
+                ),
+                Payment.program_id != 108
+            )
+        )
+    )
 
     # execute the query
     result = program_query.all()
 
     # create a nested dictionary to store data by year and state
     data_by_year_and_state = defaultdict(
-        lambda: defaultdict(lambda: {'totalPaymentInDollars': 0}))
-    all_years_summary = defaultdict(lambda: {'totalPaymentInDollars': 0})
+        lambda: defaultdict(lambda: {'totalPaymentInDollars': 0, 'totalRecipients': 0}))
+    all_years_summary = defaultdict(lambda: {'totalPaymentInDollars': 0, 'totalRecipients': 0})
 
     for record in result:
         state, year, payments = record
@@ -1375,7 +1385,15 @@ def generate_title_ii_total_summary_response(title_id, start_year, end_year):
         Title, Payment.title_id == Title.id
     ).filter(
         Payment.title_id == title_id,
-        Payment.year.between(start_year, end_year)
+        Payment.year.between(start_year, end_year),
+        # when calculating the title level summaries, only calculate Total CRP (sub_program_id == 102) from CRP (program_id == 108)
+        or_(
+            and_(
+                Payment.program_id == 108,
+                Payment.sub_program_id == 102
+            ),
+            Payment.program_id != 108
+        )
     )
 
     # execute the query
@@ -1383,7 +1401,14 @@ def generate_title_ii_total_summary_response(title_id, start_year, end_year):
 
     # Initialize dictionaries to store aggregated data
     title_summary = defaultdict(lambda: {
-        'totalPaymentInDollars': 0
+        'totalPaymentInDollars': 0,
+        'totalCounts': 0,
+        'recipients': [],
+        'subtitles': defaultdict(lambda: {
+            'totalPaymentInDollars': 0,
+            'totalCounts': 0,
+            'recipients': []
+        })
     })
 
     # Process each record in the data
