@@ -24,3 +24,7 @@ class Config:
     DB_NAME = os.getenv('DB_NAME')
     DB_USERNAME = os.getenv('DB_USERNAME')
     DB_PASSWORD = os.getenv('DB_PASSWORD')
+
+    # If API_PORT is not set or is empty (null), default to 5000
+    api_port_env = os.environ.get('API_PORT')
+    API_PORT = int(api_port_env) if api_port_env else 5000

@@ -39,4 +39,4 @@ db.init_app(app)
 CORS(app)
 
 if __name__ == '__main__':
-    app.run(port=5000, host=None, debug=debug)
+    app.run(port=cfg.API_PORT, host=None, debug=debug)

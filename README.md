@@ -25,7 +25,8 @@ Set variables:
       DB_PORT=5432
       DB_NAME=pdl
       DB_USERNAME=username
-      DB_PASSWORD=password`
+      DB_PASSWORD=password
+      API_PORT=API port
 
 Change directory into pdl-api/app 
 `python main.py`
