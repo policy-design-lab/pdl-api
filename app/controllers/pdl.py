@@ -343,8 +343,8 @@ def titles_title_i_subtitles_subtitle_e_summary_search():
 
 # /pdl/titles/title-ii/summary:
 def titles_title_ii_summary_search():
-    start_year = 2014
-    end_year = 2021
+    start_year = 2018
+    end_year = 2022
     title_id = 101
     endpoint_response = generate_title_ii_total_summary_response(title_id, start_year, end_year)
     return endpoint_response
@@ -352,8 +352,8 @@ def titles_title_ii_summary_search():
 
 # /pdl/titles/title-ii/state-distribution:
 def titles_title_ii_state_distribution_search():
-    start_year = 2014
-    end_year = 2021
+    start_year = 2018
+    end_year = 2022
     title_id = 101
     endpoint_response = generate_title_ii_total_state_distribution_response(title_id, start_year, end_year)
     return endpoint_response
@@ -1222,7 +1222,7 @@ def generate_title_i_total_state_distribution_response(title_id, start_year, end
     for state in sorted_summary:
         state['totalPaymentInDollars'] = round(state['totalPaymentInDollars'], 2)
 
-    sorted_data_by_year['2014-2021'] = sorted_summary
+    sorted_data_by_year[str(start_year) + '-' + str(end_year)] = sorted_summary
 
     result_dict = dict(sorted_data_by_year)
 
@@ -1288,7 +1288,7 @@ def generate_title_ii_total_state_distribution_response(title_id, start_year, en
     for state in sorted_summary:
         state['totalPaymentInDollars'] = round(state['totalPaymentInDollars'], 2)
 
-    sorted_data_by_year['2014-2021'] = sorted_summary
+    sorted_data_by_year[str(start_year) + '-' + str(end_year)] = sorted_summary
 
     result_dict = dict(sorted_data_by_year)
 
