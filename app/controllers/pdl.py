@@ -1377,16 +1377,20 @@ def generate_title_ii_total_summary_response(title_id, start_year, end_year):
 
     # construct the query
     program_query = session.query(
-        Payment.state_code.label('state'),
         Title.name.label('titleName'),
-        Payment.year.label('year'),
-        Payment.payment.label('totalPaymentInDollars'),
+        Program.name.label('programName'),
+        func.sum(Payment.payment).label('programPaymentInDollars')
     ).join(
         Title, Payment.title_id == Title.id
+    ).join(
+        Program, and_(
+            Payment.title_id == Program.title_id,
+            Payment.program_id == Program.id
+        )
     ).filter(
         Payment.title_id == title_id,
         Payment.year.between(start_year, end_year),
-        # when calculating the title level summaries, only calculate Total CRP (sub_program_id == 102) from CRP (program_id == 108)
+        # When calculating the title level summaries, only calculate Total CRP (sub_program_id == 102) from CRP (program_id == 108)
         or_(
             and_(
                 Payment.program_id == 108,
@@ -1394,39 +1398,35 @@ def generate_title_ii_total_summary_response(title_id, start_year, end_year):
             ),
             Payment.program_id != 108
         )
+    ).group_by(
+        Payment.title_id,
+        Payment.program_id,
+        Title.name,
+        Program.name
     )
 
     # execute the query
     results = program_query.all()
 
-    # Initialize dictionaries to store aggregated data
-    title_summary = defaultdict(lambda: {
-        'totalPaymentInDollars': 0,
-        'totalCounts': 0,
-        'recipients': [],
-        'subtitles': defaultdict(lambda: {
-            'totalPaymentInDollars': 0,
-            'totalCounts': 0,
-            'recipients': []
-        })
-    })
-
     # Process each record in the data
-    for state, title_name, year, payment in results:
-        title_summary[title_name]['totalPaymentInDollars'] += payment
+    program_list = []
+    title_total_payment = sum(result.programPaymentInDollars for result in results)
+    for title_name, program_name, program_payment in results:
+        payment_percentage = (program_payment / title_total_payment * 100) if title_total_payment else 0
+        program_list.append({
+            'programName': program_name,
+            'totalPaymentInDollars': program_payment,
+            'totalPaymentInPercentage': round(payment_percentage, 2)
+        })
 
-    # Prepare the final summary
-    final_summary = []
-    for title, info in title_summary.items():
-        total_payment_title = info['totalPaymentInDollars']
+    title_name = next(iter(set(result.titleName for result in results)), None) # get the first title name from the result
+    title_entry = {
+        'titleName': title_name,
+        'totalPaymentInDollars': title_total_payment,
+        'programs': program_list
+    }
 
-        title_entry = {
-            'titleName': title,
-            'totalPaymentInDollars': round(info['totalPaymentInDollars'], 2)
-        }
-        final_summary.append(title_entry)
-
-    return final_summary
+    return title_entry
 
 def generate_title_i_state_distribution_response(subtitle_id, start_year, end_year):
     session = Session()
