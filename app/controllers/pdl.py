@@ -742,7 +742,6 @@ def titles_title_xi_programs_crop_insurance_summary_search():
     endpoint_response = generate_title_xi_summary_response(program_id, start_year, end_year)
     return endpoint_response
 
-
 # /pdl/titles/title-iv/programs/snap/state-distribution
 def titles_title_iv_programs_snap_state_distribution_search():
     program_id = get_program_id(TITLE_IV_SNAP_PROGRAM_NAME)
@@ -758,6 +757,23 @@ def titles_title_iv_programs_snap_state_distribution_search():
     endpoint_response = generate_title_iv_state_distribution_response(program_id, start_year, end_year)
     return endpoint_response
 
+# /pdl/titles/title-iv/programs/snap/summary
+def titles_title_iv_programs_snap_summary_search():
+    # set the file path
+    snap_data = os.path.join(IV_SNAP_DATA_PATH, SNAP_SUBPROGRAMS_DATA_JSON)
+
+    # open file
+    with open(snap_data, 'r') as map_data:
+        file_data = map_data.read()
+
+        # parse file
+        data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
+
+        return data_json
+    start_year = 2018
+    end_year = 2022
+    endpoint_response = generate_title_iv_state_distribution_response(program_id, start_year, end_year)
+    return endpoint_response
 
 # construct state
 def construct_state_result(state):
