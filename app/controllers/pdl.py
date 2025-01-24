@@ -3,7 +3,7 @@ import logging
 import os
 from collections import OrderedDict
 from flask import request
-from sqlalchemy import func, desc, Numeric, BigInteger, Integer, text
+from sqlalchemy import func, desc, Numeric, BigInteger, Integer, text, or_, and_
 
 import app.utils.jsonutils as jsonutils
 import app.utils.rest_handlers as rs_handlers
@@ -341,6 +341,22 @@ def titles_title_i_subtitles_subtitle_e_summary_search():
     endpoint_response = generate_title_i_summary_response(subtitle_id, start_year, end_year)
     return endpoint_response
 
+# /pdl/titles/title-ii/summary:
+def titles_title_ii_summary_search():
+    start_year = 2018
+    end_year = 2022
+    title_id = 101
+    endpoint_response = generate_title_ii_total_summary_response(title_id, start_year, end_year)
+    return endpoint_response
+
+
+# /pdl/titles/title-ii/state-distribution:
+def titles_title_ii_state_distribution_search():
+    start_year = 2018
+    end_year = 2022
+    title_id = 101
+    endpoint_response = generate_title_ii_total_state_distribution_response(title_id, start_year, end_year)
+    return endpoint_response
 
 # /pdl/titles/title-ii/programs/eqip/map
 def titles_title_ii_programs_eqip_map_search():
@@ -1206,12 +1222,77 @@ def generate_title_i_total_state_distribution_response(title_id, start_year, end
     for state in sorted_summary:
         state['totalPaymentInDollars'] = round(state['totalPaymentInDollars'], 2)
 
-    sorted_data_by_year['2014-2021'] = sorted_summary
+    sorted_data_by_year[str(start_year) + '-' + str(end_year)] = sorted_summary
 
     result_dict = dict(sorted_data_by_year)
 
     return result_dict
 
+def generate_title_ii_total_state_distribution_response(title_id, start_year, end_year):
+    session = Session()
+
+    # construct the query
+    program_query = (
+        session.query(
+            Payment.state_code.label('state'),
+            Payment.year.label('year'),
+            Payment.payment.label('totalPaymentInDollars')
+        ).filter(
+            Payment.title_id == title_id,
+            Payment.year.between(start_year, end_year),
+            # when calculating the title level summaries, only calculate Total CRP (sub_program_id == 102) from CRP (program_id == 108)
+            or_(
+                and_(
+                    Payment.program_id == 108,
+                    Payment.sub_program_id == 102
+                ),
+                Payment.program_id != 108
+            )
+        )
+    )
+
+    # execute the query
+    result = program_query.all()
+
+    # create a nested dictionary to store data by year and state
+    data_by_year_and_state = defaultdict(
+        lambda: defaultdict(lambda: {'totalPaymentInDollars': 0, 'totalRecipients': 0}))
+    all_years_summary = defaultdict(lambda: {'totalPaymentInDollars': 0, 'totalRecipients': 0})
+
+    for record in result:
+        state, year, payments = record
+        entry = data_by_year_and_state[year][state]
+        entry['state'] = state
+        entry['totalPaymentInDollars'] += payments
+
+        # add to all years summary
+        summary = all_years_summary[state]
+        summary['state'] = state
+        summary['totalPaymentInDollars'] += payments
+
+    # sort by total payment
+    sorted_data_by_year = {}
+    for year, states in data_by_year_and_state.items():
+        sorted_entries = sorted(states.values(), key=lambda x: x['totalPaymentInDollars'], reverse=True)
+        sorted_data_by_year[year] = sorted_entries
+
+    # round the total payment
+    for year, states in sorted_data_by_year.items():
+        for state in states:
+            state['totalPaymentInDollars'] = round(state['totalPaymentInDollars'], 2)
+
+    # all years summary
+    sorted_summary = sorted(all_years_summary.values(), key=lambda x: x['totalPaymentInDollars'], reverse=True)
+
+    # round the total payment
+    for state in sorted_summary:
+        state['totalPaymentInDollars'] = round(state['totalPaymentInDollars'], 2)
+
+    sorted_data_by_year[str(start_year) + '-' + str(end_year)] = sorted_summary
+
+    result_dict = dict(sorted_data_by_year)
+
+    return result_dict
 
 def generate_title_i_total_summary_response(title_id, start_year, end_year):
     session = Session()
@@ -1291,6 +1372,61 @@ def generate_title_i_total_summary_response(title_id, start_year, end_year):
 
     return final_summary
 
+def generate_title_ii_total_summary_response(title_id, start_year, end_year):
+    session = Session()
+
+    # construct the query
+    program_query = session.query(
+        Title.name.label('titleName'),
+        Program.name.label('programName'),
+        func.sum(Payment.payment).label('programPaymentInDollars')
+    ).join(
+        Title, Payment.title_id == Title.id
+    ).join(
+        Program, and_(
+            Payment.title_id == Program.title_id,
+            Payment.program_id == Program.id
+        )
+    ).filter(
+        Payment.title_id == title_id,
+        Payment.year.between(start_year, end_year),
+        # When calculating the title level summaries, only calculate Total CRP (sub_program_id == 102) from CRP (program_id == 108)
+        or_(
+            and_(
+                Payment.program_id == 108,
+                Payment.sub_program_id == 102
+            ),
+            Payment.program_id != 108
+        )
+    ).group_by(
+        Payment.title_id,
+        Payment.program_id,
+        Title.name,
+        Program.name
+    )
+
+    # execute the query
+    results = program_query.all()
+
+    # Process each record in the data
+    program_list = []
+    title_total_payment = sum(result.programPaymentInDollars for result in results)
+    for title_name, program_name, program_payment in results:
+        payment_percentage = (program_payment / title_total_payment * 100) if title_total_payment else 0
+        program_list.append({
+            'programName': program_name,
+            'totalPaymentInDollars': program_payment,
+            'totalPaymentInPercentage': round(payment_percentage, 2)
+        })
+
+    title_name = next(iter(set(result.titleName for result in results)), None) # get the first title name from the result
+    title_entry = {
+        'titleName': title_name,
+        'totalPaymentInDollars': title_total_payment,
+        'programs': program_list
+    }
+
+    return title_entry
 
 def generate_title_i_state_distribution_response(subtitle_id, start_year, end_year):
     session = Session()
