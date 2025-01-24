@@ -42,7 +42,7 @@ Create the PDL API Docker image and run the Docker container:
       docker run -e DB_HOST=db_host -e DB_PORT=5432 -e DB_NAME=pdl -e DB_USERNAME=username -e DB_PASSWORD=password -e API_PORT=port -p port:port pdl/pdl-api 
 
 If the API_PORT is not specify, port is default to 5000:
-      docker run -e DB_HOST=db_host -e DB_PORT=5432 -e DB_NAME=pdl -e DB_USERNAME=username -e DB_PASSWORD=password -p 5000:5000 pdl/pdl
+      `docker run -e DB_HOST=db_host -e DB_PORT=5432 -e DB_NAME=pdl -e DB_USERNAME=username -e DB_PASSWORD=password -p 5000:5000 pdl/pdl`
 
 Now you can view the API at http://localhost/pdl/
 
