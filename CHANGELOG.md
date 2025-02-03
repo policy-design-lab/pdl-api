@@ -12,6 +12,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Change house api path. [#295](https://github.com/policy-design-lab/pdl-api/issues/295)
 
+### Fixed
+- Fix calculation error in house outlay JSON data file. [#306](https://github.com/policy-design-lab/pdl-api/issues/306)
+
 ## [0.21.0] - 2024-12-10
 
 ### Added
