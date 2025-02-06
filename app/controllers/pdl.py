@@ -69,8 +69,6 @@ HOUSE_PREDICTED_DATA_JSON = "house_outlay_max.json"
 HOUSE_PREDICTED_PRACTICE_CATEGORIES_DATA_JSON = "house_outlay_practices.json"
 TITLE_IV_DATA_PATH = os.path.join("controllers", "data", "title-iv")
 IV_SNAP_DATA_PATH = os.path.join(TITLE_IV_DATA_PATH, "programs", "snap")
-SNAP_STATE_DISTRIBUTION_DATA_JSON = "snap_state_distribution_data.json"
-SNAP_SUBPROGRAMS_DATA_JSON = "summary.json"
 
 TITLE_XI_DATA_PATH = os.path.join("controllers", "data", "title-xi")
 XI_CROP_INS_DATA_PATH = os.path.join(TITLE_XI_DATA_PATH, "programs", "crop-insurance")
@@ -775,20 +773,18 @@ def titles_title_iv_programs_snap_state_distribution_search():
 
 # /pdl/titles/title-iv/programs/snap/summary
 def titles_title_iv_programs_snap_summary_search():
-    # set the file path
-    snap_data = os.path.join(IV_SNAP_DATA_PATH, SNAP_SUBPROGRAMS_DATA_JSON)
+    program_id = get_program_id(TITLE_IV_SNAP_PROGRAM_NAME)
+    if program_id is None:
+        msg = {
+            "reason": "No record for the given program name " + TITLE_IV_SNAP_PROGRAM_NAME,
+            "error": "Not found: " + request.url,
+        }
+        logging.error("SNAP: " + json.dumps(msg))
+        return rs_handlers.not_found(msg)
 
-    # open file
-    with open(snap_data, 'r') as map_data:
-        file_data = map_data.read()
-
-        # parse file
-        data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
-
-        return data_json
     start_year = 2018
     end_year = 2022
-    endpoint_response = generate_title_iv_state_distribution_response(program_id, start_year, end_year)
+    endpoint_response = generate_title_iv_summary_response(program_id, start_year, end_year)
     return endpoint_response
 
 # construct state
@@ -1183,6 +1179,30 @@ def generate_title_iv_state_distribution_response(program_id, start_year, end_ye
 
     return program_response_dict
 
+def generate_title_iv_summary_response(program_id, start_year, end_year):
+    session = Session()
+
+    # Construct the query
+    program_query = session.query(
+        func.avg(Payment.recipient_count).label('averageMonthlyRecipientCount'),
+        func.sum(Payment.payment).label('totalPaymentInDollars')
+    ).join(
+        Program, Payment.program_id == Program.id
+    ).filter(
+        Payment.program_id == program_id,
+        Payment.year.between(start_year, end_year)
+    )
+
+    # execute the query
+    result = program_query.first()
+
+    # aggregate dictionary for summing
+    aggregate_dict = {
+        'totalPaymentInDollars': round(result.totalPaymentInDollars, 2),
+        'averageMonthlyParticipation': round(result.averageMonthlyRecipientCount, 2)
+    }
+
+    return aggregate_dict
 
 def generate_title_i_total_state_distribution_response(title_id, start_year, end_year):
     session = Session()
