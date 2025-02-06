@@ -17,6 +17,7 @@ ENV DB_HOST=localhost \
     DB_NAME=pdl \
     DB_USERNAME=user \
     DB_PASSWORD=password \
+    API_PORT=5000 \
     WORKER=4
 
 WORKDIR /usr/src/pdl-api/app
