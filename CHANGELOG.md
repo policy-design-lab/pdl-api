@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Add back summary endpoint to SNAP. [#271](https://github.com/policy-design-lab/pdl-api/issues/271)
 - Add top-level endpoints to Title-II. [#270](https://github.com/policy-design-lab/pdl-api/issues/270)
 
 ### Changed
