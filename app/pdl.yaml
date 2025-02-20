@@ -295,7 +295,7 @@ paths:
           description: Unauthorized
         500:
           description: Internal error
-  /pdl/titles/title-i/subtitles/subtitle-a/arc-pls-payments/current:
+  /pdl/titles/title-i/subtitles/subtitle-a/arc-plc-payments/current:
     get:
       tags:
         - "Title I: Commodities - Subtitle A"
@@ -315,7 +315,7 @@ paths:
           description: Unauthorized
         500:
           description: Internal error
-  /pdl/titles/title-i/subtitles/subtitle-a/arc-pls-payments/proposed:
+  /pdl/titles/title-i/subtitles/subtitle-a/arc-plc-payments/proposed:
     get:
       tags:
         - "Title I: Commodities - Subtitle A"
