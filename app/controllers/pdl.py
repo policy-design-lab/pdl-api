@@ -3,7 +3,7 @@ import json
 import logging
 import os
 from collections import OrderedDict
-from flask import request
+from flask import request, Response
 from sqlalchemy import func, desc, Numeric, BigInteger, Integer, text, or_, and_
 
 import app.utils.jsonutils as jsonutils
@@ -349,11 +349,12 @@ def titles_title_i_subtitles_subtitle_a_arc_plc_payments_current_search():
     # set the file path
     arc_plc_current_data = os.path.join(I_SUBTITLE_A_DATA_PATH, ARC_PLC_DATA_JSON)
 
-    # open file
     with open(arc_plc_current_data, 'rb') as current_data:
         file_data = current_data.read()
 
-    return file_data
+    response = Response(file_data, mimetype='application/json')
+    response.headers['Content-Encoding'] = 'gzip'
+    return response
 
 
 # /pdl/titles/title-i/subtitles/subtitle-a/arc-plc-payments/proposed
@@ -361,11 +362,12 @@ def titles_title_i_subtitles_subtitle_a_arc_plc_payments_proposed_search():
     # set the file path
     arc_plc_proposed_data = os.path.join(I_PROPOSALS_SUBTITLE_A_DATA_PATH, ARC_PLC_PROPOSAL_DATA_JSON)
 
-    # open file
     with open(arc_plc_proposed_data, 'rb') as proposed_data:
         file_data = proposed_data.read()
 
-    return file_data
+    response = Response(file_data, mimetype='application/json')
+    response.headers['Content-Encoding'] = 'gzip'
+    return response
 
 # /pdl/titles/title-ii/summary:
 def titles_title_ii_summary_search():
