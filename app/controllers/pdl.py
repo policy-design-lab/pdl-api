@@ -350,13 +350,10 @@ def titles_title_i_subtitles_subtitle_a_arc_plc_payments_current_search():
     arc_plc_current_data = os.path.join(I_SUBTITLE_A_DATA_PATH, ARC_PLC_DATA_JSON)
 
     # open file
-    with gzip.open(arc_plc_current_data, 'r') as current_data:
+    with open(arc_plc_current_data, 'rb') as current_data:
         file_data = current_data.read()
 
-        # parse file
-        data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
-
-        return data_json
+    return file_data
 
 
 # /pdl/titles/title-i/subtitles/subtitle-a/arc-plc-payments/proposed
@@ -365,13 +362,10 @@ def titles_title_i_subtitles_subtitle_a_arc_plc_payments_proposed_search():
     arc_plc_proposed_data = os.path.join(I_PROPOSALS_SUBTITLE_A_DATA_PATH, ARC_PLC_PROPOSAL_DATA_JSON)
 
     # open file
-    with gzip.open(arc_plc_proposed_data, 'r') as proposed_data:
+    with open(arc_plc_proposed_data, 'rb') as proposed_data:
         file_data = proposed_data.read()
 
-        # parse file
-        data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
-
-        return data_json
+    return file_data
 
 # /pdl/titles/title-ii/summary:
 def titles_title_ii_summary_search():
