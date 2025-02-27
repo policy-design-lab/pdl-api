@@ -25,20 +25,24 @@ Set variables:
       DB_PORT=5432
       DB_NAME=pdl
       DB_USERNAME=username
-      DB_PASSWORD=password`
+      DB_PASSWORD=password
+      API_PORT=API port, default 5000 if not set
 
 Change directory into pdl-api/app 
 `python main.py`
 
-Now you can view the API at http://localhost:5000/pdl/
+Now you can view the API at http://localhost:{API_PORT}/pdl/
 
-For swagger doc, go to http://localhost:5000/ui
+For swagger doc, go to http://localhost:{API_PORT}/ui
 
 ### Using Docker
 Create the PDL API Docker image and run the Docker container:
         
       docker build -t pdl/pdl-api .
-      docker run -e DB_HOST=db_host -e DB_PORT=5432 -e DB_NAME=pdl -e DB_USERNAME=username -e DB_PASSWORD=password -p 80:5000 pdl/pdl-api 
+      docker run -e DB_HOST=db_host -e DB_PORT=5432 -e DB_NAME=pdl -e DB_USERNAME=username -e DB_PASSWORD=password -e API_PORT=port -p port:port pdl/pdl-api 
+
+If the API_PORT is not specify, port is default to 5000:
+      `docker run -e DB_HOST=db_host -e DB_PORT=5432 -e DB_NAME=pdl -e DB_USERNAME=username -e DB_PASSWORD=password -p 5000:5000 pdl/pdl`
 
 Now you can view the API at http://localhost/pdl/
 

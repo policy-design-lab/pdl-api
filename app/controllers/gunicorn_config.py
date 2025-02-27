@@ -1,7 +1,7 @@
 from controllers.configs import Config as cfg
 
 """Gunicorn configuration."""
-bind = '0.0.0.0:5000'
+bind = f'0.0.0.0:{cfg.API_PORT}'
 
 workers = cfg.WORKER
 worker_class = 'gevent'
