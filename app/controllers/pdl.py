@@ -91,6 +91,9 @@ TITLE_II_RCPP_PROGRAM_NAME = "Regional Conservation Partnership Program (RCPP)"
 TITLE_IV_SNAP_PROGRAM_NAME = "Supplemental Nutrition Assistance Program (SNAP)"
 TITLE_XI_CROP_INSURANCE_PROGRAM_NAME = "Crop Insurance"
 
+TITLE_II_START_YEAR = 2014
+TITLE_II_END_YEAR = 2023
+
 
 def search():
     out_json = jsonutils.create_test_message()
@@ -351,9 +354,7 @@ def titles_title_ii_summary_search():
         logging.error("Title II: " + json.dumps(msg))
         return rs_handlers.not_found(msg)
 
-    start_year = 2014
-    end_year = 2023
-    endpoint_response = generate_title_ii_total_summary_response(title_id, start_year, end_year)
+    endpoint_response = generate_title_ii_total_summary_response(title_id, TITLE_II_START_YEAR, TITLE_II_END_YEAR)
     return endpoint_response
 
 
@@ -368,9 +369,7 @@ def titles_title_ii_state_distribution_search():
         logging.error("Title II: " + json.dumps(msg))
         return rs_handlers.not_found(msg)
 
-    start_year = 2014
-    end_year = 2023
-    endpoint_response = generate_title_ii_total_state_distribution_response(title_id, start_year, end_year)
+    endpoint_response = generate_title_ii_total_state_distribution_response(title_id, TITLE_II_START_YEAR, TITLE_II_END_YEAR)
     return endpoint_response
 
 # /pdl/titles/title-ii/programs/eqip/map
@@ -399,9 +398,7 @@ def titles_title_ii_programs_eqip_state_distribution_search(practice_code=None):
         logging.error("EQIP: " + json.dumps(msg))
         return rs_handlers.not_found(msg)
 
-    start_year = 2014
-    end_year = 2023
-    endpoint_response = generate_title_ii_state_distribution_response(program_id, start_year, end_year, practice_code=practice_code)
+    endpoint_response = generate_title_ii_state_distribution_response(program_id, TITLE_II_START_YEAR, TITLE_II_END_YEAR, practice_code=practice_code)
     return endpoint_response
 
 
@@ -415,9 +412,8 @@ def titles_title_ii_programs_eqip_summary_search():
         }
         logging.error("EQIP: " + json.dumps(msg))
         return rs_handlers.not_found(msg)
-    start_year = 2014
-    end_year = 2023
-    endpoint_response = generate_title_ii_summary_response(program_id, start_year, end_year)
+
+    endpoint_response = generate_title_ii_summary_response(program_id, TITLE_II_START_YEAR, TITLE_II_END_YEAR)
     return endpoint_response
 
 
@@ -431,9 +427,8 @@ def titles_title_ii_programs_eqip_practice_names_search():
         }
         logging.error("EQIP: " + json.dumps(msg))
         return rs_handlers.not_found(msg)
-    start_year = 2014
-    end_year = 2023
-    endpoint_response = generate_title_ii_practice_names_response(program_id, start_year, end_year)
+
+    endpoint_response = generate_title_ii_practice_names_response(program_id, TITLE_II_START_YEAR, TITLE_II_END_YEAR)
     return endpoint_response
 
 
@@ -522,9 +517,8 @@ def titles_title_ii_programs_csp_state_distribution_search(practice_code=None):
         }
         logging.error("CSP: " + json.dumps(msg))
         return rs_handlers.not_found(msg)
-    start_year = 2014
-    end_year = 2023
-    endpoint_response = generate_title_ii_state_distribution_response(program_id, start_year, end_year, practice_code=practice_code)
+
+    endpoint_response = generate_title_ii_state_distribution_response(program_id, TITLE_II_START_YEAR, TITLE_II_END_YEAR, practice_code=practice_code)
     return endpoint_response
 
 
@@ -538,9 +532,8 @@ def titles_title_ii_programs_csp_summary_search():
         }
         logging.error("CSP: " + json.dumps(msg))
         return rs_handlers.not_found(msg)
-    start_year = 2014
-    end_year = 2023
-    endpoint_response = generate_title_ii_summary_response(program_id, start_year, end_year)
+
+    endpoint_response = generate_title_ii_summary_response(program_id, TITLE_II_START_YEAR, TITLE_II_END_YEAR)
     return endpoint_response
 
 
@@ -554,9 +547,8 @@ def titles_title_ii_programs_csp_practice_names_search():
         }
         logging.error("EQIP: " + json.dumps(msg))
         return rs_handlers.not_found(msg)
-    start_year = 2014
-    end_year = 2023
-    endpoint_response = generate_title_ii_practice_names_response(program_id, start_year, end_year)
+
+    endpoint_response = generate_title_ii_practice_names_response(program_id, TITLE_II_START_YEAR, TITLE_II_END_YEAR)
     return endpoint_response
 
 
@@ -619,6 +611,7 @@ def titles_title_ii_programs_csp_ira_predicted_search():
 
         return data_json
 
+
 # /pdl/titles/title-ii/programs/crp/state-distribution
 def titles_title_ii_programs_crp_state_distribution_search():
     program_id = get_program_id(TITLE_II_CRP_PROGRAM_NAME)
@@ -629,9 +622,8 @@ def titles_title_ii_programs_crp_state_distribution_search():
         }
         logging.error("CRP: " + json.dumps(msg))
         return rs_handlers.not_found(msg)
-    start_year = 2018
-    end_year = 2022
-    endpoint_response = generate_title_ii_state_distribution_response(program_id, start_year, end_year)
+
+    endpoint_response = generate_title_ii_state_distribution_response(program_id, TITLE_II_START_YEAR, TITLE_II_END_YEAR)
     return endpoint_response
 
 
@@ -645,9 +637,8 @@ def titles_title_ii_programs_crp_summary_search():
         }
         logging.error("CRP: " + json.dumps(msg))
         return rs_handlers.not_found(msg)
-    start_year = 2018
-    end_year = 2022
-    endpoint_response = generate_title_ii_summary_response(program_id, start_year, end_year)
+
+    endpoint_response = generate_title_ii_summary_response(program_id, TITLE_II_START_YEAR, TITLE_II_END_YEAR)
     return endpoint_response
 
 
@@ -661,9 +652,8 @@ def titles_title_ii_programs_acep_state_distribution_search():
         }
         logging.error("ACEP: " + json.dumps(msg))
         return rs_handlers.not_found(msg)
-    start_year = 2018
-    end_year = 2022
-    endpoint_response = generate_title_ii_state_distribution_response(program_id, start_year, end_year)
+
+    endpoint_response = generate_title_ii_state_distribution_response(program_id, TITLE_II_START_YEAR, TITLE_II_END_YEAR)
     return endpoint_response
 
 
@@ -677,9 +667,8 @@ def titles_title_ii_programs_acep_summary_search():
         }
         logging.error("ACEP: " + json.dumps(msg))
         return rs_handlers.not_found(msg)
-    start_year = 2018
-    end_year = 2022
-    endpoint_response = generate_title_ii_summary_response(program_id, start_year, end_year)
+
+    endpoint_response = generate_title_ii_summary_response(program_id, TITLE_II_START_YEAR, TITLE_II_END_YEAR)
     return endpoint_response
 
 
@@ -693,9 +682,8 @@ def titles_title_ii_programs_rcpp_state_distribution_search():
         }
         logging.error("RCPP: " + json.dumps(msg))
         return rs_handlers.not_found(msg)
-    start_year = 2018
-    end_year = 2022
-    endpoint_response = generate_title_ii_state_distribution_response(program_id, start_year, end_year)
+
+    endpoint_response = generate_title_ii_state_distribution_response(program_id, TITLE_II_START_YEAR, TITLE_II_END_YEAR)
     return endpoint_response
 
 
@@ -709,9 +697,8 @@ def titles_title_ii_programs_rcpp_summary_search():
         }
         logging.error("RCPP: " + json.dumps(msg))
         return rs_handlers.not_found(msg)
-    start_year = 2018
-    end_year = 2022
-    endpoint_response = generate_title_ii_summary_response(program_id, start_year, end_year)
+
+    endpoint_response = generate_title_ii_summary_response(program_id, TITLE_II_START_YEAR, TITLE_II_END_YEAR)
     return endpoint_response
 
 # /pdl/titles/title-ii/proposals/2024/house/eqip/predicted
@@ -3006,7 +2993,7 @@ def generate_title_ii_summary_response(program_id, start_year, end_year):
     # Sort the sub programs by total payment in descending order
     sub_programs_list = sorted(sub_programs_list, key=lambda x: x['totalPaymentInDollars'], reverse=True)
 
-    response = {**total_values_dict, "statutes": statutes_list, "subPrograms": sub_programs_list}
+    response = {"startYear": start_year, "endYear": end_year, **total_values_dict, "statutes": statutes_list, "subPrograms": sub_programs_list}
     return response
 
 
