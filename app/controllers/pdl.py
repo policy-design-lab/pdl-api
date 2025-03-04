@@ -339,20 +339,37 @@ def titles_title_i_subtitles_subtitle_e_summary_search():
     endpoint_response = generate_title_i_summary_response(subtitle_id, start_year, end_year)
     return endpoint_response
 
+
 # /pdl/titles/title-ii/summary:
 def titles_title_ii_summary_search():
-    start_year = 2018
-    end_year = 2022
-    title_id = 101
+    title_id = get_title_id(TITLE_II_NAME)
+    if title_id is None:
+        msg = {
+            "reason": "No record for the given title name " + TITLE_II_NAME,
+            "error": "Not found: " + request.url,
+        }
+        logging.error("Title II: " + json.dumps(msg))
+        return rs_handlers.not_found(msg)
+
+    start_year = 2014
+    end_year = 2023
     endpoint_response = generate_title_ii_total_summary_response(title_id, start_year, end_year)
     return endpoint_response
 
 
 # /pdl/titles/title-ii/state-distribution:
 def titles_title_ii_state_distribution_search():
-    start_year = 2018
-    end_year = 2022
-    title_id = 101
+    title_id = get_title_id(TITLE_II_NAME)
+    if title_id is None:
+        msg = {
+            "reason": "No record for the given title name " + TITLE_II_NAME,
+            "error": "Not found: " + request.url,
+        }
+        logging.error("Title II: " + json.dumps(msg))
+        return rs_handlers.not_found(msg)
+
+    start_year = 2014
+    end_year = 2023
     endpoint_response = generate_title_ii_total_state_distribution_response(title_id, start_year, end_year)
     return endpoint_response
 
@@ -382,8 +399,8 @@ def titles_title_ii_programs_eqip_state_distribution_search(practice_code=None):
         logging.error("EQIP: " + json.dumps(msg))
         return rs_handlers.not_found(msg)
 
-    start_year = 2018
-    end_year = 2022
+    start_year = 2014
+    end_year = 2023
     endpoint_response = generate_title_ii_state_distribution_response(program_id, start_year, end_year, practice_code=practice_code)
     return endpoint_response
 
@@ -398,8 +415,8 @@ def titles_title_ii_programs_eqip_summary_search():
         }
         logging.error("EQIP: " + json.dumps(msg))
         return rs_handlers.not_found(msg)
-    start_year = 2018
-    end_year = 2022
+    start_year = 2014
+    end_year = 2023
     endpoint_response = generate_title_ii_summary_response(program_id, start_year, end_year)
     return endpoint_response
 
@@ -414,8 +431,8 @@ def titles_title_ii_programs_eqip_practice_names_search():
         }
         logging.error("EQIP: " + json.dumps(msg))
         return rs_handlers.not_found(msg)
-    start_year = 2018
-    end_year = 2022
+    start_year = 2014
+    end_year = 2023
     endpoint_response = generate_title_ii_practice_names_response(program_id, start_year, end_year)
     return endpoint_response
 
@@ -505,8 +522,8 @@ def titles_title_ii_programs_csp_state_distribution_search(practice_code=None):
         }
         logging.error("CSP: " + json.dumps(msg))
         return rs_handlers.not_found(msg)
-    start_year = 2018
-    end_year = 2022
+    start_year = 2014
+    end_year = 2023
     endpoint_response = generate_title_ii_state_distribution_response(program_id, start_year, end_year, practice_code=practice_code)
     return endpoint_response
 
@@ -521,8 +538,8 @@ def titles_title_ii_programs_csp_summary_search():
         }
         logging.error("CSP: " + json.dumps(msg))
         return rs_handlers.not_found(msg)
-    start_year = 2018
-    end_year = 2022
+    start_year = 2014
+    end_year = 2023
     endpoint_response = generate_title_ii_summary_response(program_id, start_year, end_year)
     return endpoint_response
 
@@ -537,8 +554,8 @@ def titles_title_ii_programs_csp_practice_names_search():
         }
         logging.error("EQIP: " + json.dumps(msg))
         return rs_handlers.not_found(msg)
-    start_year = 2018
-    end_year = 2022
+    start_year = 2014
+    end_year = 2023
     endpoint_response = generate_title_ii_practice_names_response(program_id, start_year, end_year)
     return endpoint_response
 
@@ -1408,6 +1425,7 @@ def generate_title_i_total_summary_response(title_id, start_year, end_year):
 
     return final_summary
 
+
 def generate_title_ii_total_summary_response(title_id, start_year, end_year):
     session = Session()
 
@@ -1459,6 +1477,8 @@ def generate_title_ii_total_summary_response(title_id, start_year, end_year):
     title_entry = {
         'titleName': title_name,
         'totalPaymentInDollars': title_total_payment,
+        'startYear': start_year,
+        'endYear': end_year,
         'programs': program_list
     }
 
