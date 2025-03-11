@@ -970,6 +970,21 @@ paths:
       summary: Gets the Title IV SNAP state distribution data.
       description: |
         Returns the Title IV SNAP State Distribution Data in JSON format.
+      parameters:
+        - name: start_year
+          in: query
+          description: The start year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2018
+        - name: end_year
+          in: query
+          description: The end year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2022
       responses:
         200:
           description: Ok
@@ -990,6 +1005,21 @@ paths:
       summary: Gets the Title IV SNAP summary data.
       description: |
         Returns the Title IV SNAP Summary Data in JSON format.
+      parameters:
+        - name: start_year
+          in: query
+          description: The start year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2018
+        - name: end_year
+          in: query
+          description: The end year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2022
       responses:
         200:
           description: Ok
