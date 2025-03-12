@@ -4,12 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [unreleased]
+
+### Added
+- Add year query parameter to SNAP endpoints. [#303](https://github.com/policy-design-lab/pdl-api/issues/303)
+
 ## [0.22.0] - 2025-02-26
 
 ### Added
 - Add back summary endpoint to SNAP. [#271](https://github.com/policy-design-lab/pdl-api/issues/271)
 - Add top-level endpoints to Title-II. [#270](https://github.com/policy-design-lab/pdl-api/issues/270)
-- Add year query parameter to SNAP endpoints. [#303](https://github.com/policy-design-lab/pdl-api/issues/303)
 
 ### Changed
 - Change house api path. [#295](https://github.com/policy-design-lab/pdl-api/issues/295)
