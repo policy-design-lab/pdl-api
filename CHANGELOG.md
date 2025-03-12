@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Add back summary endpoint to SNAP. [#271](https://github.com/policy-design-lab/pdl-api/issues/271)
 - Add top-level endpoints to Title-II. [#270](https://github.com/policy-design-lab/pdl-api/issues/270)
+- Add year query parameter to Title-I program and top-level endpoints. [#300](https://github.com/policy-design-lab/pdl-api/issues/300)
 
 ### Changed
 - Change house api path. [#295](https://github.com/policy-design-lab/pdl-api/issues/295)
