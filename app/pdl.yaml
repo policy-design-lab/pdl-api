@@ -208,6 +208,8 @@ paths:
           schema:
             type: integer
             example: 2014
+            minimum: 1950
+            maximum: 2050
         - name: end_year
           in: query
           description: The end year for filtering the data.
@@ -215,6 +217,8 @@ paths:
           schema:
             type: integer
             example: 2021
+            minimum: 1950
+            maximum: 2050
       responses:
         200:
           description: Ok
@@ -243,6 +247,8 @@ paths:
           schema:
             type: integer
             example: 2014
+            minimum: 1950
+            maximum: 2050
         - name: end_year
           in: query
           description: The end year for filtering the data.
@@ -250,6 +256,8 @@ paths:
           schema:
             type: integer
             example: 2021
+            minimum: 1950
+            maximum: 2050
       responses:
         200:
           description: Ok
@@ -278,6 +286,8 @@ paths:
           schema:
             type: integer
             example: 2014
+            minimum: 1950
+            maximum: 2050
         - name: end_year
           in: query
           description: The end year for filtering the data.
@@ -285,6 +295,8 @@ paths:
           schema:
             type: integer
             example: 2021
+            minimum: 1950
+            maximum: 2050
       responses:
         200:
           description: Ok
@@ -313,6 +325,8 @@ paths:
           schema:
             type: integer
             example: 2014
+            minimum: 1950
+            maximum: 2050
         - name: end_year
           in: query
           description: The end year for filtering the data.
@@ -320,6 +334,8 @@ paths:
           schema:
             type: integer
             example: 2021
+            minimum: 1950
+            maximum: 2050
       responses:
         200:
           description: Ok
@@ -368,6 +384,8 @@ paths:
           schema:
             type: integer
             example: 2014
+            minimum: 1950
+            maximum: 2050
         - name: end_year
           in: query
           description: The end year for filtering the data.
@@ -375,6 +393,8 @@ paths:
           schema:
             type: integer
             example: 2021
+            minimum: 1950
+            maximum: 2050
       responses:
         200:
           description: Ok
@@ -403,6 +423,8 @@ paths:
           schema:
             type: integer
             example: 2014
+            minimum: 1950
+            maximum: 2050
         - name: end_year
           in: query
           description: The end year for filtering the data.
@@ -410,6 +432,8 @@ paths:
           schema:
             type: integer
             example: 2021
+            minimum: 1950
+            maximum: 2050
       responses:
         200:
           description: Ok
@@ -438,6 +462,8 @@ paths:
           schema:
             type: integer
             example: 2014
+            minimum: 1950
+            maximum: 2050
         - name: end_year
           in: query
           description: The end year for filtering the data.
@@ -445,6 +471,8 @@ paths:
           schema:
             type: integer
             example: 2021
+            minimum: 1950
+            maximum: 2050
       responses:
         200:
           description: Ok
@@ -473,6 +501,8 @@ paths:
           schema:
             type: integer
             example: 2014
+            minimum: 1950
+            maximum: 2050
         - name: end_year
           in: query
           description: The end year for filtering the data.
@@ -480,6 +510,8 @@ paths:
           schema:
             type: integer
             example: 2021
+            minimum: 1950
+            maximum: 2050
       responses:
         200:
           description: Ok
