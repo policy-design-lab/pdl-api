@@ -930,6 +930,25 @@ paths:
       summary: Gets the Title XI Crop Insurance state distribution data.
       description: |
         Returns the Title XI Crop Insurance State Distribution Data in JSON format.
+      parameters:
+        - name: start_year
+          in: query
+          description: The start year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2018
+            minimum: 1950
+            maximum: 2050
+        - name: end_year
+          in: query
+          description: The end year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2022
+            minimum: 1950
+            maximum: 2050
       responses:
         200:
           description: Ok
@@ -950,6 +969,25 @@ paths:
       summary: Gets the Title XI crop insurance summary data.
       description: |
         Returns the Title XI Crop Insurance Summary Data in JSON format.
+      parameters:
+        - name: start_year
+          in: query
+          description: The start year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2018
+            minimum: 1950
+            maximum: 2050
+        - name: end_year
+          in: query
+          description: The end year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2022
+            minimum: 1950
+            maximum: 2050
       responses:
         200:
           description: Ok
