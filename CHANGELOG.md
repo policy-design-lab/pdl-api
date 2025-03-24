@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Add year query parameter to SNAP endpoints. [#303](https://github.com/policy-design-lab/pdl-api/issues/303)
+- Add year query parameter to Crop Insurance endpoints. [#302](https://github.com/policy-design-lab/pdl-api/issues/302)
 
 ## [0.22.0] - 2025-02-26
 
