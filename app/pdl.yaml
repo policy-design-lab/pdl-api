@@ -199,7 +199,26 @@ paths:
         - "Title I: Commodities"
       summary: Gets the Title I summary data for all states.
       description: |
-        Returns  the Title I summary data for all states in JSON format.
+        Returns the Title I summary data for all states in JSON format.
+      parameters:
+        - name: start_year
+          in: query
+          description: The start year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2014
+            minimum: 1950
+            maximum: 2050
+        - name: end_year
+          in: query
+          description: The end year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2021
+            minimum: 1950
+            maximum: 2050
       responses:
         200:
           description: Ok
@@ -219,7 +238,26 @@ paths:
         - "Title I: Commodities"
       summary: Gets the Title I's state distribution data for all states.
       description: |
-        Returns  the Title I state distribution data for all states in JSON format.
+        Returns the Title I state distribution data for all states in JSON format.
+      parameters:
+        - name: start_year
+          in: query
+          description: The start year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2014
+            minimum: 1950
+            maximum: 2050
+        - name: end_year
+          in: query
+          description: The end year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2021
+            minimum: 1950
+            maximum: 2050
       responses:
         200:
           description: Ok
@@ -240,6 +278,25 @@ paths:
       summary: Gets the Title I Subtitle A commodities data for all states.
       description: |
         Returns  the Title I Subtitle A commodities data for all states in JSON format.
+      parameters:
+        - name: start_year
+          in: query
+          description: The start year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2014
+            minimum: 1950
+            maximum: 2050
+        - name: end_year
+          in: query
+          description: The end year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2021
+            minimum: 1950
+            maximum: 2050
       responses:
         200:
           description: Ok
@@ -260,6 +317,25 @@ paths:
       summary: Gets the Title I Subtitle A commodities distribution data for all subprograms.
       description: |
         Returns the Title I Subtitle A commodities distribution data for all subprograms in JSON format.
+      parameters:
+        - name: start_year
+          in: query
+          description: The start year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2014
+            minimum: 1950
+            maximum: 2050
+        - name: end_year
+          in: query
+          description: The end year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2021
+            minimum: 1950
+            maximum: 2050
       responses:
         200:
           description: Ok
@@ -300,6 +376,25 @@ paths:
       summary: Gets the Title I Subtitle D Dairy Margin Coverage data for all states.
       description: |
         Returns  the Title I Subtitle D Dairy Margin Coverage data for all states in JSON format.
+      parameters:
+        - name: start_year
+          in: query
+          description: The start year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2014
+            minimum: 1950
+            maximum: 2050
+        - name: end_year
+          in: query
+          description: The end year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2021
+            minimum: 1950
+            maximum: 2050
       responses:
         200:
           description: Ok
@@ -320,6 +415,25 @@ paths:
       summary: Gets the Title I Subtitle D Dairy Margin Coverage distribution data for all subprograms.
       description: |
         Returns the Title I Subtitle D Dairy Margin Coverage distribution data for all subprograms in JSON format.
+      parameters:
+        - name: start_year
+          in: query
+          description: The start year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2014
+            minimum: 1950
+            maximum: 2050
+        - name: end_year
+          in: query
+          description: The end year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2021
+            minimum: 1950
+            maximum: 2050
       responses:
         200:
           description: Ok
@@ -340,6 +454,25 @@ paths:
       summary: Gets the Title I Subtitle E Supplemental Agricultural Disaster Assistance data for all states.
       description: |
         Returns  the Title I Subtitle E Supplemental Agricultural Disaster Assistance data for all states in JSON format.
+      parameters:
+        - name: start_year
+          in: query
+          description: The start year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2014
+            minimum: 1950
+            maximum: 2050
+        - name: end_year
+          in: query
+          description: The end year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2021
+            minimum: 1950
+            maximum: 2050
       responses:
         200:
           description: Ok
@@ -360,6 +493,25 @@ paths:
       summary: Gets the Title I Subtitle E Supplemental Agricultural Disaster Assistance distribution data for all subprograms.
       description: |
         Returns the Title I Subtitle E Supplemental Agricultural Disaster Assistance distribution data for all subprograms in JSON format.
+      parameters:
+        - name: start_year
+          in: query
+          description: The start year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2014
+            minimum: 1950
+            maximum: 2050
+        - name: end_year
+          in: query
+          description: The end year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2021
+            minimum: 1950
+            maximum: 2050
       responses:
         200:
           description: Ok

@@ -213,18 +213,40 @@ def allprograms_search():
 
 # /pdl/titles/title-i/summary:
 def titles_title_i_summary_search():
-    start_year = 2014
-    end_year = 2021
+    min_year, max_year = 2014, 2021
+    start_year = request.args.get('start_year', type=int, default=min_year)
+    end_year = request.args.get('end_year', type=int, default=max_year)
     title_id = 100
+
+    if start_year and end_year and start_year > end_year:
+        start_year, end_year = min_year, max_year  # Return all data if invalid range
+
+    if start_year is None:
+        start_year = min_year  # Default to earliest available year
+
+    if end_year is None:
+        end_year = max_year  # Default to latest available year
+
     endpoint_response = generate_title_i_total_summary_response(title_id, start_year, end_year)
     return endpoint_response
 
 
 # /pdl/titles/title-i/state-distribution:
 def titles_title_i_state_distribution_search():
-    start_year = 2014
-    end_year = 2021
+    min_year, max_year = 2014, 2021
+    start_year = request.args.get('start_year', type=int, default=min_year)
+    end_year = request.args.get('end_year', type=int, default=max_year)
     title_id = 100
+
+    if start_year and end_year and start_year > end_year:
+        start_year, end_year = min_year, max_year  # Reset to full range if invalid
+
+    if start_year is None:
+        start_year = min_year  # Default to earliest available year
+
+    if end_year is None:
+        end_year = max_year  # Default to latest available year
+
     endpoint_response = generate_title_i_total_state_distribution_response(title_id, start_year, end_year)
     return endpoint_response
 
@@ -254,8 +276,20 @@ def titles_title_i_subtitles_subtitle_a_state_distribution_search():
         }
         logging.error("Subtitle A: " + json.dumps(msg))
         return rs_handlers.not_found(msg)
-    start_year = 2014
-    end_year = 2021
+
+    min_year, max_year = 2014, 2021
+    start_year = request.args.get('start_year', type=int, default=min_year)
+    end_year = request.args.get('end_year', type=int, default=max_year)
+
+    if start_year and end_year and start_year > end_year:
+        start_year, end_year = min_year, max_year  # Reset to full range if invalid
+
+    if start_year is None:
+        start_year = min_year  # Default to earliest available year
+
+    if end_year is None:
+        end_year = max_year  # Default to latest available year
+
     endpoint_response = generate_title_i_state_distribution_response(subtitle_id, start_year, end_year)
     return endpoint_response
 
@@ -270,8 +304,20 @@ def titles_title_i_subtitles_subtitle_a_summary_search():
         }
         logging.error("Subtitle A: " + json.dumps(msg))
         return rs_handlers.not_found(msg)
-    start_year = 2014
-    end_year = 2021
+
+    min_year, max_year = 2014, 2021
+    start_year = request.args.get('start_year', type=int, default=min_year)
+    end_year = request.args.get('end_year', type=int, default=max_year)
+
+    if start_year and end_year and start_year > end_year:
+        start_year, end_year = min_year, max_year  # Reset to full range if invalid
+
+    if start_year is None:
+        start_year = min_year  # Default to earliest available year
+
+    if end_year is None:
+        end_year = max_year  # Default to latest available year
+
     endpoint_response = generate_title_i_summary_response(subtitle_id, start_year, end_year)
     return endpoint_response
 
@@ -286,8 +332,20 @@ def titles_title_i_subtitles_subtitle_d_state_distribution_search():
         }
         logging.error("Subtitle D: " + json.dumps(msg))
         return rs_handlers.not_found(msg)
-    start_year = 2014
-    end_year = 2021
+
+    min_year, max_year = 2014, 2021
+    start_year = request.args.get('start_year', type=int, default=min_year)
+    end_year = request.args.get('end_year', type=int, default=max_year)
+
+    if start_year and end_year and start_year > end_year:
+        start_year, end_year = min_year, max_year  # Reset to full range if invalid
+
+    if start_year is None:
+        start_year = min_year  # Default to earliest available year
+
+    if end_year is None:
+        end_year = max_year  # Default to latest available year
+
     endpoint_response = generate_title_i_state_distribution_response(subtitle_id, start_year, end_year)
     return endpoint_response
 
@@ -302,8 +360,20 @@ def titles_title_i_subtitles_subtitle_d_summary_search():
         }
         logging.error("Subtitle D: " + json.dumps(msg))
         return rs_handlers.not_found(msg)
-    start_year = 2014
-    end_year = 2021
+
+    min_year, max_year = 2014, 2021
+    start_year = request.args.get('start_year', type=int, default=min_year)
+    end_year = request.args.get('end_year', type=int, default=max_year)
+
+    if start_year and end_year and start_year > end_year:
+        start_year, end_year = min_year, max_year  # Reset to full range if invalid
+
+    if start_year is None:
+        start_year = min_year  # Default to earliest available year
+
+    if end_year is None:
+        end_year = max_year  # Default to latest available year
+
     endpoint_response = generate_title_i_summary_response(subtitle_id, start_year, end_year)
     return endpoint_response
 
@@ -318,8 +388,20 @@ def titles_title_i_subtitles_subtitle_e_state_distribution_search():
         }
         logging.error("Subtitle E: " + json.dumps(msg))
         return rs_handlers.not_found(msg)
-    start_year = 2014
-    end_year = 2021
+
+    min_year, max_year = 2014, 2021
+    start_year = request.args.get('start_year', type=int, default=min_year)
+    end_year = request.args.get('end_year', type=int, default=max_year)
+
+    if start_year and end_year and start_year > end_year:
+        start_year, end_year = min_year, max_year  # Reset to full range if invalid
+
+    if start_year is None:
+        start_year = min_year  # Default to earliest available year
+
+    if end_year is None:
+        end_year = max_year  # Default to latest available year
+
     endpoint_response = generate_title_i_state_distribution_response(subtitle_id, start_year, end_year)
     return endpoint_response
 
@@ -334,8 +416,20 @@ def titles_title_i_subtitles_subtitle_e_summary_search():
         }
         logging.error("Subtitle E: " + json.dumps(msg))
         return rs_handlers.not_found(msg)
-    start_year = 2014
-    end_year = 2021
+
+    min_year, max_year = 2014, 2021
+    start_year = request.args.get('start_year', type=int, default=min_year)
+    end_year = request.args.get('end_year', type=int, default=max_year)
+
+    if start_year and end_year and start_year > end_year:
+        start_year, end_year = min_year, max_year  # Reset to full range if invalid
+
+    if start_year is None:
+        start_year = min_year  # Default to earliest available year
+
+    if end_year is None:
+        end_year = max_year  # Default to latest available year
+
     endpoint_response = generate_title_i_summary_response(subtitle_id, start_year, end_year)
     return endpoint_response
 
