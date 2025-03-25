@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Add year query parameter to Title-I program and top-level endpoints. [#300](https://github.com/policy-design-lab/pdl-api/issues/300)
+- Add year query parameter to SNAP endpoints. [#303](https://github.com/policy-design-lab/pdl-api/issues/303)
+- Add year query parameter to Crop Insurance endpoints. [#302](https://github.com/policy-design-lab/pdl-api/issues/302)
+
 ### Changed
 - Update Title II endpoints to include data from 2014 to 2023. [#313](https://github.com/policy-design-lab/pdl-api/issues/313)
 
