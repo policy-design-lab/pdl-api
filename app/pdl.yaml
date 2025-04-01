@@ -23,8 +23,6 @@ tags:
   description: "Title I Subtitle D Dairy Margin Coverage data."
 - name: "Title I: Commodities - Subtitle E, Supplemental Agricultural Disaster Assistance"
   description: "Title I Subtitle E Supplemental Agricultural Disaster Assistance data."
-- name: "Title I: Commodities - ARC/PLC"
-  description: "Title I ARC/PLC commodities data."
 - name: "Title II: Conservation - EQIP (Environmental Quality Incentives Program)"
   description: "Title II EQIP conservation data."
 - name: "Title II: Conservation - EQIP IRA (Environmental Quality Incentives Program - Inflation Reduction Act)"
