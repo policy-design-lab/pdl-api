@@ -319,7 +319,7 @@ paths:
     get:
       tags:
         - "Title I: Commodities - Subtitle A"
-      summary: Gets the Title I Subtitle A commodities payment distribution data for proposed ARC/PLC projections.
+      summary: Gets the projected Title I Subtitle A commodities payment distribution data ARC and PLC.
       description: |
         Returns  the Title I Subtitle A commodities payment distribution data for proposed ARC/PLC projections in JSON format.
       responses:
