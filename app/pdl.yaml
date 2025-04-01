@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: Policy Design Lab API
   description: Policy Design Lab API Documentation
-  version: 0.21.0
+  version: 0.22.0
 servers:
 - url: https://localhost
   description: Production server
@@ -201,7 +201,26 @@ paths:
         - "Title I: Commodities"
       summary: Gets the Title I summary data for all states.
       description: |
-        Returns  the Title I summary data for all states in JSON format.
+        Returns the Title I summary data for all states in JSON format.
+      parameters:
+        - name: start_year
+          in: query
+          description: The start year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2014
+            minimum: 1950
+            maximum: 2050
+        - name: end_year
+          in: query
+          description: The end year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2021
+            minimum: 1950
+            maximum: 2050
       responses:
         200:
           description: Ok
@@ -221,7 +240,26 @@ paths:
         - "Title I: Commodities"
       summary: Gets the Title I's state distribution data for all states.
       description: |
-        Returns  the Title I state distribution data for all states in JSON format.
+        Returns the Title I state distribution data for all states in JSON format.
+      parameters:
+        - name: start_year
+          in: query
+          description: The start year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2014
+            minimum: 1950
+            maximum: 2050
+        - name: end_year
+          in: query
+          description: The end year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2021
+            minimum: 1950
+            maximum: 2050
       responses:
         200:
           description: Ok
@@ -242,6 +280,25 @@ paths:
       summary: Gets the Title I Subtitle A commodities data for all states.
       description: |
         Returns  the Title I Subtitle A commodities data for all states in JSON format.
+      parameters:
+        - name: start_year
+          in: query
+          description: The start year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2014
+            minimum: 1950
+            maximum: 2050
+        - name: end_year
+          in: query
+          description: The end year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2021
+            minimum: 1950
+            maximum: 2050
       responses:
         200:
           description: Ok
@@ -262,6 +319,25 @@ paths:
       summary: Gets the Title I Subtitle A commodities distribution data for all subprograms.
       description: |
         Returns the Title I Subtitle A commodities distribution data for all subprograms in JSON format.
+      parameters:
+        - name: start_year
+          in: query
+          description: The start year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2014
+            minimum: 1950
+            maximum: 2050
+        - name: end_year
+          in: query
+          description: The end year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2021
+            minimum: 1950
+            maximum: 2050
       responses:
         200:
           description: Ok
@@ -342,6 +418,25 @@ paths:
       summary: Gets the Title I Subtitle D Dairy Margin Coverage data for all states.
       description: |
         Returns  the Title I Subtitle D Dairy Margin Coverage data for all states in JSON format.
+      parameters:
+        - name: start_year
+          in: query
+          description: The start year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2014
+            minimum: 1950
+            maximum: 2050
+        - name: end_year
+          in: query
+          description: The end year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2021
+            minimum: 1950
+            maximum: 2050
       responses:
         200:
           description: Ok
@@ -362,6 +457,25 @@ paths:
       summary: Gets the Title I Subtitle D Dairy Margin Coverage distribution data for all subprograms.
       description: |
         Returns the Title I Subtitle D Dairy Margin Coverage distribution data for all subprograms in JSON format.
+      parameters:
+        - name: start_year
+          in: query
+          description: The start year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2014
+            minimum: 1950
+            maximum: 2050
+        - name: end_year
+          in: query
+          description: The end year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2021
+            minimum: 1950
+            maximum: 2050
       responses:
         200:
           description: Ok
@@ -382,6 +496,25 @@ paths:
       summary: Gets the Title I Subtitle E Supplemental Agricultural Disaster Assistance data for all states.
       description: |
         Returns  the Title I Subtitle E Supplemental Agricultural Disaster Assistance data for all states in JSON format.
+      parameters:
+        - name: start_year
+          in: query
+          description: The start year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2014
+            minimum: 1950
+            maximum: 2050
+        - name: end_year
+          in: query
+          description: The end year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2021
+            minimum: 1950
+            maximum: 2050
       responses:
         200:
           description: Ok
@@ -402,6 +535,25 @@ paths:
       summary: Gets the Title I Subtitle E Supplemental Agricultural Disaster Assistance distribution data for all subprograms.
       description: |
         Returns the Title I Subtitle E Supplemental Agricultural Disaster Assistance distribution data for all subprograms in JSON format.
+      parameters:
+        - name: start_year
+          in: query
+          description: The start year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2014
+            minimum: 1950
+            maximum: 2050
+        - name: end_year
+          in: query
+          description: The end year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2021
+            minimum: 1950
+            maximum: 2050
       responses:
         200:
           description: Ok
@@ -972,6 +1124,25 @@ paths:
       summary: Gets the Title XI Crop Insurance state distribution data.
       description: |
         Returns the Title XI Crop Insurance State Distribution Data in JSON format.
+      parameters:
+        - name: start_year
+          in: query
+          description: The start year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2018
+            minimum: 1950
+            maximum: 2050
+        - name: end_year
+          in: query
+          description: The end year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2022
+            minimum: 1950
+            maximum: 2050
       responses:
         200:
           description: Ok
@@ -992,6 +1163,25 @@ paths:
       summary: Gets the Title XI crop insurance summary data.
       description: |
         Returns the Title XI Crop Insurance Summary Data in JSON format.
+      parameters:
+        - name: start_year
+          in: query
+          description: The start year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2018
+            minimum: 1950
+            maximum: 2050
+        - name: end_year
+          in: query
+          description: The end year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2022
+            minimum: 1950
+            maximum: 2050
       responses:
         200:
           description: Ok
@@ -1012,6 +1202,25 @@ paths:
       summary: Gets the Title IV SNAP state distribution data.
       description: |
         Returns the Title IV SNAP State Distribution Data in JSON format.
+      parameters:
+        - name: start_year
+          in: query
+          description: The start year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2018
+            minimum: 1950
+            maximum: 2050
+        - name: end_year
+          in: query
+          description: The end year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2022
+            minimum: 1950
+            maximum: 2050
       responses:
         200:
           description: Ok
@@ -1032,6 +1241,25 @@ paths:
       summary: Gets the Title IV SNAP summary data.
       description: |
         Returns the Title IV SNAP Summary Data in JSON format.
+      parameters:
+        - name: start_year
+          in: query
+          description: The start year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2018
+            minimum: 1950
+            maximum: 2050
+        - name: end_year
+          in: query
+          description: The end year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2022
+            minimum: 1950
+            maximum: 2050
       responses:
         200:
           description: Ok
