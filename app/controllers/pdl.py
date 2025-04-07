@@ -78,7 +78,7 @@ CROP_INSURANCE_STATE_DISTRIBUTION_DATA_JSON = "crop_insurance_state_distribution
 TITLE_I_NAME = "Title I: Commodities"
 TITLE_II_NAME = "Title II: Conservation"
 TITLE_IV_NAME = "Title IV: Nutrition"
-TITLE_XI_NAME = "Title IX: Crop Insurance"
+TITLE_XI_NAME = "Title XI: Crop Insurance"
 
 TITLE_I_SUBTITLE_A_NAME = "Total Commodities Programs, Subtitle A"
 TITLE_I_SUBTITLE_D_NAME = "Dairy Margin Coverage, Subtitle D"
@@ -93,6 +93,8 @@ TITLE_XI_CROP_INSURANCE_PROGRAM_NAME = "Crop Insurance"
 
 TITLE_II_START_YEAR = 2014
 TITLE_II_END_YEAR = 2023
+CROP_INSURANCE_START_YEAR = 2014
+CROP_INSURANCE_END_YEAR = 2023
 
 
 def search():
@@ -809,6 +811,7 @@ def titles_title_ii_proposals_2024_house_eqip_predicted_search():
 
         return data_json
 
+
 # /pdl/titles/title-ii/proposals/2024/house/eqip/practice-names
 def titles_title_ii_proposals_2024_house_eqip_practice_names_search():
     # set the file path
@@ -823,6 +826,7 @@ def titles_title_ii_proposals_2024_house_eqip_practice_names_search():
 
         return data_json
 
+
 # /pdl/titles/title-xi/programs/crop-insurance/state-distribution
 def titles_title_xi_programs_crop_insurance_state_distribution_search():
     program_id = get_program_id(TITLE_XI_CROP_INSURANCE_PROGRAM_NAME)
@@ -834,7 +838,7 @@ def titles_title_xi_programs_crop_insurance_state_distribution_search():
         logging.error("Crop Insurance: " + json.dumps(msg))
         return rs_handlers.not_found(msg)
 
-    min_year, max_year = 2018, 2022
+    min_year, max_year = CROP_INSURANCE_START_YEAR, CROP_INSURANCE_END_YEAR
     start_year = request.args.get('start_year', type=int, default=min_year)
     end_year = request.args.get('end_year', type=int, default=max_year)
 
@@ -842,7 +846,7 @@ def titles_title_xi_programs_crop_insurance_state_distribution_search():
         start_year, end_year = min_year, max_year  # Reset to full range if invalid
 
     if start_year is None:
-        start_year = min_year  # Default to earliest available year
+        start_year = min_year  # Default to the earliest available year
 
     if end_year is None:
         end_year = max_year  # Default to latest available year
@@ -862,7 +866,7 @@ def titles_title_xi_programs_crop_insurance_summary_search():
         logging.error("Crop Insurance: " + json.dumps(msg))
         return rs_handlers.not_found(msg)
 
-    min_year, max_year = 2018, 2022
+    min_year, max_year = CROP_INSURANCE_START_YEAR, CROP_INSURANCE_END_YEAR
     start_year = request.args.get('start_year', type=int, default=min_year)
     end_year = request.args.get('end_year', type=int, default=max_year)
 
@@ -870,7 +874,7 @@ def titles_title_xi_programs_crop_insurance_summary_search():
         start_year, end_year = min_year, max_year  # Reset to full range if invalid
 
     if start_year is None:
-        start_year = min_year  # Default to earliest available year
+        start_year = min_year  # Default to the earliest available year
 
     if end_year is None:
         end_year = max_year  # Default to latest available year
@@ -3226,6 +3230,9 @@ def generate_title_xi_summary_response(program_id, start_year, end_year):
 
     # aggregate dictionary for summing
     aggregate_dict = {
+        'titleName': TITLE_XI_NAME,
+        'startYear': start_year,
+        'endYear': end_year,
         'totalIndemnitiesInDollars': 0,
         'totalPremiumInDollars': 0,
         'totalPremiumSubsidyInDollars': 0,
