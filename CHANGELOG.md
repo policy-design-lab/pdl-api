@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Update Title II endpoints to include data from 2014 to 2023. [#313](https://github.com/policy-design-lab/pdl-api/issues/313)
+- Update Title XI endpoints to include data from 2014 to 2023. [#319](https://github.com/policy-design-lab/pdl-api/issues/319)
 
 ## [0.22.0] - 2025-02-26
 
