@@ -29,7 +29,7 @@ class Config:
     API_PORT = int(os.getenv('API_PORT', '5000'))
 
     # PDL data duration parameters
-    # NOTE: these are the minimum  and maximum years for which data will be retrieved from the database for different endpoints
+    # NOTE: these are the minimum and maximum years for which data will be retrieved from the database for different endpoints
     ALL_PROGRAMS_START_YEAR = int(os.getenv('ALL_PROGRAMS_START_YEAR', '2018'))  # Landing Page endpoint
     ALL_PROGRAMS_END_YEAR = int(os.getenv('ALL_PROGRAMS_END_YEAR', '2022'))  # Landing Page endpoint
 
