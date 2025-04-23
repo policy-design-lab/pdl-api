@@ -1,8 +1,9 @@
+import gzip
 import json
 import logging
 import os
 from collections import OrderedDict
-from flask import request
+from flask import request, Response
 from sqlalchemy import func, desc, Numeric, BigInteger, Integer, text, or_, and_
 
 import app.utils.jsonutils as jsonutils
@@ -29,6 +30,9 @@ I_SUBTITLE_A_DATA_PATH = os.path.join(TITLE_I_DATA_PATH, "subtitle-a")
 COMMOD_MAP_DATA_JSON = "commodities_map_data.json"
 COMMOD_STATE_DISTRIBUTION_DATA_JSON = "commodities_state_distribution_data.json"
 COMMOD_SUBPROGRAMS_DATA_JSON = "commodities_subprograms_data.json"
+ARC_PLC_DATA_JSON = "arc_plc_payments_Current.json.gz"
+I_PROPOSALS_SUBTITLE_A_DATA_PATH = os.path.join(TITLE_I_DATA_PATH, "proposals", "subtitle-a")
+ARC_PLC_PROPOSAL_DATA_JSON = "arc_plc_payments_Proposed.json.gz"
 I_SUBTITLE_D_DATA_PATH = os.path.join(TITLE_I_DATA_PATH, "subtitle-d")
 DMC_STATE_DISTRIBUTION_DATA_JSON = "dmc_state_distribution_data.json"
 DMC_SUBPROGRAMS_DATA_JSON = "dmc_subprograms_data.json"
@@ -435,6 +439,32 @@ def titles_title_i_subtitles_subtitle_e_summary_search():
 
     endpoint_response = generate_title_i_summary_response(subtitle_id, start_year, end_year)
     return endpoint_response
+
+
+# /pdl/titles/title-i/subtitles/subtitle-a/arc-plc-payments/current
+def titles_title_i_subtitles_subtitle_a_arc_plc_payments_current_search():
+    # set the file path
+    arc_plc_current_data = os.path.join(I_SUBTITLE_A_DATA_PATH, ARC_PLC_DATA_JSON)
+
+    with open(arc_plc_current_data, 'rb') as current_data:
+        file_data = current_data.read()
+
+    response = Response(file_data, mimetype='application/json')
+    response.headers['Content-Encoding'] = 'gzip'
+    return response
+
+
+# /pdl/titles/title-i/subtitles/subtitle-a/arc-plc-payments/proposed
+def titles_title_i_subtitles_subtitle_a_arc_plc_payments_proposed_search():
+    # set the file path
+    arc_plc_proposed_data = os.path.join(I_PROPOSALS_SUBTITLE_A_DATA_PATH, ARC_PLC_PROPOSAL_DATA_JSON)
+
+    with open(arc_plc_proposed_data, 'rb') as proposed_data:
+        file_data = proposed_data.read()
+
+    response = Response(file_data, mimetype='application/json')
+    response.headers['Content-Encoding'] = 'gzip'
+    return response
 
 
 # /pdl/titles/title-ii/summary:
