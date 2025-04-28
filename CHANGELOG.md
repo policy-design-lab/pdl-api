@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Update Title II endpoints to include data from 2014 to 2023. [#313](https://github.com/policy-design-lab/pdl-api/issues/313)
+- Update Title XI endpoints to include data from 2014 to 2023. [#319](https://github.com/policy-design-lab/pdl-api/issues/319)
+- Update API endpoints to make start and end years configurable. [#321](https://github.com/policy-design-lab/pdl-api/issues/321)
 
 ## [0.22.0] - 2025-02-26
 
@@ -61,7 +63,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CRP endpoints to use data from the database. [#237](https://github.com/policy-design-lab/pdl-api/issues/237)
 - ACEP endpoints to use data from the database. [#239](https://github.com/policy-design-lab/pdl-api/issues/239)
 - RCPP endpoints to use data from the database. [#241](https://github.com/policy-design-lab/pdl-api/issues/241)
-- ProgramName attribute has been removed from crop insurance's state-distibution output [#255](https://github.com/polciy-design-lab/pdl-api/issues/255)
+- ProgramName attribute has been removed from crop insurance's state-distribution output [#255](https://github.com/polciy-design-lab/pdl-api/issues/255)
 
 ## [0.17.0] - 2024-08-28
 
@@ -96,7 +98,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update Title-4 endpoints to use database calls. [#190](https://github.com/policy-design-lab/pdl-api/issues/190)
 - Update EQIP IRA data with changed name of US Virgin Islands. [#201](https://github.com/policy-design-lab/pdl-api/issues/201)
 - Update EQIP IRA state distribution data [#205](https://githoub.com/policy-design-lab/pdl-api/issues/205)
-- Update EQIP IRA summary data with future predctions. [#207](https://github.com/policy-design-lab/pdl-api/issues/207)
+- Update EQIP IRA summary data with future predictions. [#207](https://github.com/policy-design-lab/pdl-api/issues/207)
 - Update EQIP IRA state distribution data [#208](https://github.com/policy-design-lab/pdl-api/issues/208)
 - EQIP IRA state distribution's nationwide data matches with summary [#210](https://github.com/policy-design-lab/pdl-api/issues/210)
 - EQIP IRA to use only 50 U.S. state data [#212](https://github.com/policy-design-lab/pdl-api/issues/212)
