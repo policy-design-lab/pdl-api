@@ -1,8 +1,10 @@
+import gzip
 import json
 import logging
 import os
 from collections import OrderedDict
-from flask import request
+from app.controllers.configs import Config as cfg
+from flask import request, Response
 from sqlalchemy import func, desc, Numeric, BigInteger, Integer, text, or_, and_
 
 import app.utils.jsonutils as jsonutils
@@ -29,6 +31,9 @@ I_SUBTITLE_A_DATA_PATH = os.path.join(TITLE_I_DATA_PATH, "subtitle-a")
 COMMOD_MAP_DATA_JSON = "commodities_map_data.json"
 COMMOD_STATE_DISTRIBUTION_DATA_JSON = "commodities_state_distribution_data.json"
 COMMOD_SUBPROGRAMS_DATA_JSON = "commodities_subprograms_data.json"
+ARC_PLC_DATA_JSON = "arc_plc_payments_Current.json.gz"
+I_PROPOSALS_SUBTITLE_A_DATA_PATH = os.path.join(TITLE_I_DATA_PATH, "proposals", "subtitle-a")
+ARC_PLC_PROPOSAL_DATA_JSON = "arc_plc_payments_Proposed.json.gz"
 I_SUBTITLE_D_DATA_PATH = os.path.join(TITLE_I_DATA_PATH, "subtitle-d")
 DMC_STATE_DISTRIBUTION_DATA_JSON = "dmc_state_distribution_data.json"
 DMC_SUBPROGRAMS_DATA_JSON = "dmc_subprograms_data.json"
@@ -78,7 +83,7 @@ CROP_INSURANCE_STATE_DISTRIBUTION_DATA_JSON = "crop_insurance_state_distribution
 TITLE_I_NAME = "Title I: Commodities"
 TITLE_II_NAME = "Title II: Conservation"
 TITLE_IV_NAME = "Title IV: Nutrition"
-TITLE_XI_NAME = "Title IX: Crop Insurance"
+TITLE_XI_NAME = "Title XI: Crop Insurance"
 
 TITLE_I_SUBTITLE_A_NAME = "Total Commodities Programs, Subtitle A"
 TITLE_I_SUBTITLE_D_NAME = "Dairy Margin Coverage, Subtitle D"
@@ -91,10 +96,6 @@ TITLE_II_RCPP_PROGRAM_NAME = "Regional Conservation Partnership Program (RCPP)"
 TITLE_IV_SNAP_PROGRAM_NAME = "Supplemental Nutrition Assistance Program (SNAP)"
 TITLE_XI_CROP_INSURANCE_PROGRAM_NAME = "Crop Insurance"
 
-TITLE_II_START_YEAR = 2014
-TITLE_II_END_YEAR = 2023
-
-
 def search():
     out_json = jsonutils.create_test_message()
 
@@ -103,10 +104,7 @@ def search():
 
 # GET all the entries from summary table
 def summary_search():
-    start_year = 2018
-    end_year = 2022
-
-    endpoint_response = generate_summary_response(start_year, end_year)
+    endpoint_response = generate_summary_response(cfg.ALL_PROGRAMS_START_YEAR, cfg.ALL_PROGRAMS_END_YEAR)
     return endpoint_response
 
 
@@ -207,16 +205,13 @@ def statecodes_search(code=None, name=None):
 
 # GET all the entries from states table
 def allprograms_search():
-    start_year = 2018
-    end_year = 2022
-
-    endpoint_response = generate_allprograms_response(start_year, end_year)
+    endpoint_response = generate_allprograms_response(cfg.ALL_PROGRAMS_START_YEAR, cfg.ALL_PROGRAMS_END_YEAR)
     return endpoint_response
 
 
 # /pdl/titles/title-i/summary:
 def titles_title_i_summary_search():
-    min_year, max_year = 2014, 2021
+    min_year, max_year = cfg.TITLE_I_START_YEAR, cfg.TITLE_I_END_YEAR
     start_year = request.args.get('start_year', type=int, default=min_year)
     end_year = request.args.get('end_year', type=int, default=max_year)
     title_id = 100
@@ -236,7 +231,7 @@ def titles_title_i_summary_search():
 
 # /pdl/titles/title-i/state-distribution:
 def titles_title_i_state_distribution_search():
-    min_year, max_year = 2014, 2021
+    min_year, max_year = cfg.TITLE_I_START_YEAR, cfg.TITLE_I_END_YEAR
     start_year = request.args.get('start_year', type=int, default=min_year)
     end_year = request.args.get('end_year', type=int, default=max_year)
     title_id = 100
@@ -280,7 +275,7 @@ def titles_title_i_subtitles_subtitle_a_state_distribution_search():
         logging.error("Subtitle A: " + json.dumps(msg))
         return rs_handlers.not_found(msg)
 
-    min_year, max_year = 2014, 2021
+    min_year, max_year = cfg.TITLE_I_START_YEAR, cfg.TITLE_I_END_YEAR
     start_year = request.args.get('start_year', type=int, default=min_year)
     end_year = request.args.get('end_year', type=int, default=max_year)
 
@@ -308,7 +303,7 @@ def titles_title_i_subtitles_subtitle_a_summary_search():
         logging.error("Subtitle A: " + json.dumps(msg))
         return rs_handlers.not_found(msg)
 
-    min_year, max_year = 2014, 2021
+    min_year, max_year = cfg.TITLE_I_START_YEAR, cfg.TITLE_I_END_YEAR
     start_year = request.args.get('start_year', type=int, default=min_year)
     end_year = request.args.get('end_year', type=int, default=max_year)
 
@@ -336,7 +331,7 @@ def titles_title_i_subtitles_subtitle_d_state_distribution_search():
         logging.error("Subtitle D: " + json.dumps(msg))
         return rs_handlers.not_found(msg)
 
-    min_year, max_year = 2014, 2021
+    min_year, max_year = cfg.TITLE_I_START_YEAR, cfg.TITLE_I_END_YEAR
     start_year = request.args.get('start_year', type=int, default=min_year)
     end_year = request.args.get('end_year', type=int, default=max_year)
 
@@ -364,7 +359,7 @@ def titles_title_i_subtitles_subtitle_d_summary_search():
         logging.error("Subtitle D: " + json.dumps(msg))
         return rs_handlers.not_found(msg)
 
-    min_year, max_year = 2014, 2021
+    min_year, max_year = cfg.TITLE_I_START_YEAR, cfg.TITLE_I_END_YEAR
     start_year = request.args.get('start_year', type=int, default=min_year)
     end_year = request.args.get('end_year', type=int, default=max_year)
 
@@ -392,7 +387,7 @@ def titles_title_i_subtitles_subtitle_e_state_distribution_search():
         logging.error("Subtitle E: " + json.dumps(msg))
         return rs_handlers.not_found(msg)
 
-    min_year, max_year = 2014, 2021
+    min_year, max_year = cfg.TITLE_I_START_YEAR, cfg.TITLE_I_END_YEAR
     start_year = request.args.get('start_year', type=int, default=min_year)
     end_year = request.args.get('end_year', type=int, default=max_year)
 
@@ -420,7 +415,7 @@ def titles_title_i_subtitles_subtitle_e_summary_search():
         logging.error("Subtitle E: " + json.dumps(msg))
         return rs_handlers.not_found(msg)
 
-    min_year, max_year = 2014, 2021
+    min_year, max_year = cfg.TITLE_I_START_YEAR, cfg.TITLE_I_END_YEAR
     start_year = request.args.get('start_year', type=int, default=min_year)
     end_year = request.args.get('end_year', type=int, default=max_year)
 
@@ -437,9 +432,35 @@ def titles_title_i_subtitles_subtitle_e_summary_search():
     return endpoint_response
 
 
+# /pdl/titles/title-i/subtitles/subtitle-a/arc-plc-payments/current
+def titles_title_i_subtitles_subtitle_a_arc_plc_payments_current_search():
+    # set the file path
+    arc_plc_current_data = os.path.join(I_SUBTITLE_A_DATA_PATH, ARC_PLC_DATA_JSON)
+
+    with open(arc_plc_current_data, 'rb') as current_data:
+        file_data = current_data.read()
+
+    response = Response(file_data, mimetype='application/json')
+    response.headers['Content-Encoding'] = 'gzip'
+    return response
+
+
+# /pdl/titles/title-i/subtitles/subtitle-a/arc-plc-payments/proposed
+def titles_title_i_subtitles_subtitle_a_arc_plc_payments_proposed_search():
+    # set the file path
+    arc_plc_proposed_data = os.path.join(I_PROPOSALS_SUBTITLE_A_DATA_PATH, ARC_PLC_PROPOSAL_DATA_JSON)
+
+    with open(arc_plc_proposed_data, 'rb') as proposed_data:
+        file_data = proposed_data.read()
+
+    response = Response(file_data, mimetype='application/json')
+    response.headers['Content-Encoding'] = 'gzip'
+    return response
+
+
 # /pdl/titles/title-ii/summary:
 def titles_title_ii_summary_search():
-    min_year, max_year = TITLE_II_START_YEAR, TITLE_II_END_YEAR
+    min_year, max_year = cfg.TITLE_II_START_YEAR, cfg.TITLE_II_END_YEAR
     start_year = request.args.get('start_year', type=int, default=min_year)
     end_year = request.args.get('end_year', type=int, default=max_year)
 
@@ -461,13 +482,14 @@ def titles_title_ii_summary_search():
     if end_year is None:
         end_year = max_year  # Default to latest available year
 
-    endpoint_response = generate_title_ii_total_summary_response(title_id, start_year, end_year)
+    endpoint_response = generate_title_ii_total_summary_response(title_id, cfg.TITLE_II_START_YEAR, cfg.TITLE_II_END_YEAR)
+
     return endpoint_response
 
 
 # /pdl/titles/title-ii/state-distribution:
 def titles_title_ii_state_distribution_search():
-    min_year, max_year = TITLE_II_START_YEAR, TITLE_II_END_YEAR
+    min_year, max_year = cfg.TITLE_II_START_YEAR, cfg.TITLE_II_END_YEAR
     start_year = request.args.get('start_year', type=int, default=min_year)
     end_year = request.args.get('end_year', type=int, default=max_year)
 
@@ -489,7 +511,8 @@ def titles_title_ii_state_distribution_search():
     if end_year is None:
         end_year = max_year  # Default to latest available year
 
-    endpoint_response = generate_title_ii_total_state_distribution_response(title_id, start_year, end_year)
+    endpoint_response = generate_title_ii_total_state_distribution_response(title_id, cfg.TITLE_II_START_YEAR, cfg.TITLE_II_END_YEAR)
+
     return endpoint_response
 
 # /pdl/titles/title-ii/programs/eqip/map
@@ -509,7 +532,7 @@ def titles_title_ii_programs_eqip_map_search():
 
 # /pdl/titles/title-ii/programs/eqip/state-distribution
 def titles_title_ii_programs_eqip_state_distribution_search(practice_code=None):
-    min_year, max_year = TITLE_II_START_YEAR, TITLE_II_END_YEAR
+    min_year, max_year = cfg.TITLE_II_START_YEAR, cfg.TITLE_II_END_YEAR
     start_year = request.args.get('start_year', type=int, default=min_year)
     end_year = request.args.get('end_year', type=int, default=max_year)
 
@@ -531,13 +554,14 @@ def titles_title_ii_programs_eqip_state_distribution_search(practice_code=None):
     if end_year is None:
         end_year = max_year  # Default to latest available year
 
-    endpoint_response = generate_title_ii_state_distribution_response(program_id, start_year, end_year, practice_code=practice_code)
+    endpoint_response = generate_title_ii_state_distribution_response(program_id, cfg.TITLE_II_START_YEAR, cfg.TITLE_II_END_YEAR, practice_code=practice_code)
+
     return endpoint_response
 
 
 # /pdl/titles/title-ii/programs/eqip/summary
 def titles_title_ii_programs_eqip_summary_search():
-    min_year, max_year = TITLE_II_START_YEAR, TITLE_II_END_YEAR
+    min_year, max_year = cfg.TITLE_II_START_YEAR, cfg.TITLE_II_END_YEAR
     start_year = request.args.get('start_year', type=int, default=min_year)
     end_year = request.args.get('end_year', type=int, default=max_year)
 
@@ -559,13 +583,14 @@ def titles_title_ii_programs_eqip_summary_search():
     if end_year is None:
         end_year = max_year  # Default to latest available year
 
-    endpoint_response = generate_title_ii_summary_response(program_id, start_year, end_year)
+    endpoint_response = generate_title_ii_summary_response(program_id, cfg.TITLE_II_START_YEAR, cfg.TITLE_II_END_YEAR)
+
     return endpoint_response
 
 
 # /pdl/titles/title-ii/programs/eqip/practice-names
 def titles_title_ii_programs_eqip_practice_names_search():
-    min_year, max_year = TITLE_II_START_YEAR, TITLE_II_END_YEAR
+    min_year, max_year = cfg.TITLE_II_START_YEAR, cfg.TITLE_II_END_YEAR
     start_year = request.args.get('start_year', type=int, default=min_year)
     end_year = request.args.get('end_year', type=int, default=max_year)
 
@@ -587,7 +612,9 @@ def titles_title_ii_programs_eqip_practice_names_search():
     if end_year is None:
         end_year = max_year  # Default to latest available year
 
-    endpoint_response = generate_title_ii_practice_names_response(program_id, start_year, end_year)
+
+    endpoint_response = generate_title_ii_practice_names_response(program_id, cfg.TITLE_II_START_YEAR, cfg.TITLE_II_END_YEAR)
+
     return endpoint_response
 
 
@@ -668,7 +695,7 @@ def titles_title_ii_programs_csp_map_search():
 
 # /pdl/titles/title-ii/programs/csp/state-distribution
 def titles_title_ii_programs_csp_state_distribution_search(practice_code=None):
-    min_year, max_year = TITLE_II_START_YEAR, TITLE_II_END_YEAR
+    min_year, max_year = cfg.TITLE_II_START_YEAR, cfg.TITLE_II_END_YEAR
     start_year = request.args.get('start_year', type=int, default=min_year)
     end_year = request.args.get('end_year', type=int, default=max_year)
 
@@ -690,13 +717,14 @@ def titles_title_ii_programs_csp_state_distribution_search(practice_code=None):
     if end_year is None:
         end_year = max_year  # Default to latest available year
 
-    endpoint_response = generate_title_ii_state_distribution_response(program_id, start_year, end_year, practice_code=practice_code)
+    endpoint_response = generate_title_ii_state_distribution_response(program_id, cfg.TITLE_II_START_YEAR, cfg.TITLE_II_END_YEAR, practice_code=practice_code)
+
     return endpoint_response
 
 
 # /pdl/titles/title-ii/programs/csp/summary
 def titles_title_ii_programs_csp_summary_search():
-    min_year, max_year = TITLE_II_START_YEAR, TITLE_II_END_YEAR
+    min_year, max_year = cfg.TITLE_II_START_YEAR, cfg.TITLE_II_END_YEAR
     start_year = request.args.get('start_year', type=int, default=min_year)
     end_year = request.args.get('end_year', type=int, default=max_year)
 
@@ -718,13 +746,14 @@ def titles_title_ii_programs_csp_summary_search():
     if end_year is None:
         end_year = max_year  # Default to latest available year
 
-    endpoint_response = generate_title_ii_summary_response(program_id, start_year, end_year)
+    endpoint_response = generate_title_ii_summary_response(program_id, cfg.TITLE_II_START_YEAR, cfg.TITLE_II_END_YEAR)
+
     return endpoint_response
 
 
 # /pdl/titles/title-ii/programs/eqip/practice-names
 def titles_title_ii_programs_csp_practice_names_search():
-    min_year, max_year = TITLE_II_START_YEAR, TITLE_II_END_YEAR
+    min_year, max_year = cfg.TITLE_II_START_YEAR, cfg.TITLE_II_END_YEAR
     start_year = request.args.get('start_year', type=int, default=min_year)
     end_year = request.args.get('end_year', type=int, default=max_year)
 
@@ -746,7 +775,8 @@ def titles_title_ii_programs_csp_practice_names_search():
     if end_year is None:
         end_year = max_year  # Default to latest available year
 
-    endpoint_response = generate_title_ii_practice_names_response(program_id, start_year, end_year)
+    endpoint_response = generate_title_ii_practice_names_response(program_id, cfg.TITLE_II_START_YEAR, cfg.TITLE_II_END_YEAR)
+
     return endpoint_response
 
 
@@ -812,7 +842,7 @@ def titles_title_ii_programs_csp_ira_predicted_search():
 
 # /pdl/titles/title-ii/programs/crp/state-distribution
 def titles_title_ii_programs_crp_state_distribution_search():
-    min_year, max_year = TITLE_II_START_YEAR, TITLE_II_END_YEAR
+    min_year, max_year = cfg.TITLE_II_START_YEAR, cfg.TITLE_II_END_YEAR
     start_year = request.args.get('start_year', type=int, default=min_year)
     end_year = request.args.get('end_year', type=int, default=max_year)
 
@@ -834,13 +864,14 @@ def titles_title_ii_programs_crp_state_distribution_search():
     if end_year is None:
         end_year = max_year  # Default to latest available year
 
-    endpoint_response = generate_title_ii_state_distribution_response(program_id, start_year, end_year)
+    endpoint_response = generate_title_ii_state_distribution_response(program_id, cfg.TITLE_II_START_YEAR, cfg.TITLE_II_END_YEAR)
+
     return endpoint_response
 
 
 # /pdl/titles/title-ii/programs/crp/summary
 def titles_title_ii_programs_crp_summary_search():
-    min_year, max_year = TITLE_II_START_YEAR, TITLE_II_END_YEAR
+    min_year, max_year = cfg.TITLE_II_START_YEAR, cfg.TITLE_II_END_YEAR
     start_year = request.args.get('start_year', type=int, default=min_year)
     end_year = request.args.get('end_year', type=int, default=max_year)
 
@@ -862,13 +893,14 @@ def titles_title_ii_programs_crp_summary_search():
     if end_year is None:
         end_year = max_year  # Default to latest available year
 
-    endpoint_response = generate_title_ii_summary_response(program_id, start_year, end_year)
+    endpoint_response = generate_title_ii_summary_response(program_id, cfg.TITLE_II_START_YEAR, cfg.TITLE_II_END_YEAR)
+
     return endpoint_response
 
 
 # /pdl/titles/title-ii/programs/acep/state-distribution
 def titles_title_ii_programs_acep_state_distribution_search():
-    min_year, max_year = TITLE_II_START_YEAR, TITLE_II_END_YEAR
+    min_year, max_year = cfg.TITLE_II_START_YEAR, cfg.TITLE_II_END_YEAR
     start_year = request.args.get('start_year', type=int, default=min_year)
     end_year = request.args.get('end_year', type=int, default=max_year)
 
@@ -890,13 +922,13 @@ def titles_title_ii_programs_acep_state_distribution_search():
     if end_year is None:
         end_year = max_year  # Default to latest available year
 
-    endpoint_response = generate_title_ii_state_distribution_response(program_id, start_year, end_year)
+    endpoint_response = generate_title_ii_state_distribution_response(program_id, cfg.TITLE_II_START_YEAR, cfg.TITLE_II_END_YEAR)
     return endpoint_response
 
 
 # /pdl/titles/title-ii/programs/acep/summary
 def titles_title_ii_programs_acep_summary_search():
-    min_year, max_year = TITLE_II_START_YEAR, TITLE_II_END_YEAR
+    min_year, max_year = cfg.TITLE_II_START_YEAR, cfg.TITLE_II_END_YEAR
     start_year = request.args.get('start_year', type=int, default=min_year)
     end_year = request.args.get('end_year', type=int, default=max_year)
 
@@ -918,13 +950,13 @@ def titles_title_ii_programs_acep_summary_search():
     if end_year is None:
         end_year = max_year  # Default to latest available year
 
-    endpoint_response = generate_title_ii_summary_response(program_id, start_year, end_year)
+    endpoint_response = generate_title_ii_summary_response(program_id, cfg.TITLE_II_START_YEAR, cfg.TITLE_II_END_YEAR)
     return endpoint_response
 
 
 # /pdl/titles/title-ii/programs/rcpp/state-distribution
 def titles_title_ii_programs_rcpp_state_distribution_search():
-    min_year, max_year = TITLE_II_START_YEAR, TITLE_II_END_YEAR
+    min_year, max_year = cfg.TITLE_II_START_YEAR, cfg.TITLE_II_END_YEAR
     start_year = request.args.get('start_year', type=int, default=min_year)
     end_year = request.args.get('end_year', type=int, default=max_year)
 
@@ -946,13 +978,13 @@ def titles_title_ii_programs_rcpp_state_distribution_search():
     if end_year is None:
         end_year = max_year  # Default to latest available year
 
-    endpoint_response = generate_title_ii_state_distribution_response(program_id, start_year, end_year)
+    endpoint_response = generate_title_ii_state_distribution_response(program_id, cfg.TITLE_II_START_YEAR, cfg.TITLE_II_END_YEAR)
     return endpoint_response
 
 
 # /pdl/titles/title-ii/programs/rcpp/summary
 def titles_title_ii_programs_rcpp_summary_search():
-    min_year, max_year = TITLE_II_START_YEAR, TITLE_II_END_YEAR
+    min_year, max_year = cfg.TITLE_II_START_YEAR, cfg.TITLE_II_END_YEAR
     start_year = request.args.get('start_year', type=int, default=min_year)
     end_year = request.args.get('end_year', type=int, default=max_year)
 
@@ -974,7 +1006,8 @@ def titles_title_ii_programs_rcpp_summary_search():
     if end_year is None:
         end_year = max_year  # Default to latest available year
 
-    endpoint_response = generate_title_ii_summary_response(program_id, start_year, end_year)
+    endpoint_response = generate_title_ii_summary_response(program_id, cfg.TITLE_II_START_YEAR, cfg.TITLE_II_END_YEAR)
+
     return endpoint_response
 
 # /pdl/titles/title-ii/proposals/2024/house/eqip/predicted
@@ -991,6 +1024,7 @@ def titles_title_ii_proposals_2024_house_eqip_predicted_search():
 
         return data_json
 
+
 # /pdl/titles/title-ii/proposals/2024/house/eqip/practice-names
 def titles_title_ii_proposals_2024_house_eqip_practice_names_search():
     # set the file path
@@ -1005,6 +1039,7 @@ def titles_title_ii_proposals_2024_house_eqip_practice_names_search():
 
         return data_json
 
+
 # /pdl/titles/title-xi/programs/crop-insurance/state-distribution
 def titles_title_xi_programs_crop_insurance_state_distribution_search():
     program_id = get_program_id(TITLE_XI_CROP_INSURANCE_PROGRAM_NAME)
@@ -1016,7 +1051,7 @@ def titles_title_xi_programs_crop_insurance_state_distribution_search():
         logging.error("Crop Insurance: " + json.dumps(msg))
         return rs_handlers.not_found(msg)
 
-    min_year, max_year = 2018, 2022
+    min_year, max_year = cfg.CROP_INSURANCE_START_YEAR, cfg.CROP_INSURANCE_END_YEAR
     start_year = request.args.get('start_year', type=int, default=min_year)
     end_year = request.args.get('end_year', type=int, default=max_year)
 
@@ -1024,7 +1059,7 @@ def titles_title_xi_programs_crop_insurance_state_distribution_search():
         start_year, end_year = min_year, max_year  # Reset to full range if invalid
 
     if start_year is None:
-        start_year = min_year  # Default to earliest available year
+        start_year = min_year  # Default to the earliest available year
 
     if end_year is None:
         end_year = max_year  # Default to latest available year
@@ -1044,7 +1079,7 @@ def titles_title_xi_programs_crop_insurance_summary_search():
         logging.error("Crop Insurance: " + json.dumps(msg))
         return rs_handlers.not_found(msg)
 
-    min_year, max_year = 2018, 2022
+    min_year, max_year = cfg.CROP_INSURANCE_START_YEAR, cfg.CROP_INSURANCE_END_YEAR
     start_year = request.args.get('start_year', type=int, default=min_year)
     end_year = request.args.get('end_year', type=int, default=max_year)
 
@@ -1052,7 +1087,7 @@ def titles_title_xi_programs_crop_insurance_summary_search():
         start_year, end_year = min_year, max_year  # Reset to full range if invalid
 
     if start_year is None:
-        start_year = min_year  # Default to earliest available year
+        start_year = min_year  # Default to the earliest available year
 
     if end_year is None:
         end_year = max_year  # Default to latest available year
@@ -1071,7 +1106,7 @@ def titles_title_iv_programs_snap_state_distribution_search():
         logging.error("SNAP: " + json.dumps(msg))
         return rs_handlers.not_found(msg)
 
-    min_year, max_year = 2018, 2022
+    min_year, max_year = cfg.SNAP_START_YEAR, cfg.SNAP_END_YEAR
     start_year = request.args.get('start_year', type=int, default=min_year)
     end_year = request.args.get('end_year', type=int, default=max_year)
 
@@ -1098,7 +1133,7 @@ def titles_title_iv_programs_snap_summary_search():
         logging.error("SNAP: " + json.dumps(msg))
         return rs_handlers.not_found(msg)
 
-    min_year, max_year = 2018, 2022
+    min_year, max_year = cfg.SNAP_START_YEAR, cfg.SNAP_END_YEAR
     start_year = request.args.get('start_year', type=int, default=min_year)
     end_year = request.args.get('end_year', type=int, default=max_year)
 
@@ -3416,6 +3451,9 @@ def generate_title_xi_summary_response(program_id, start_year, end_year):
 
     # aggregate dictionary for summing
     aggregate_dict = {
+        'titleName': TITLE_XI_NAME,
+        'startYear': start_year,
+        'endYear': end_year,
         'totalIndemnitiesInDollars': 0,
         'totalPremiumInDollars': 0,
         'totalPremiumSubsidyInDollars': 0,
