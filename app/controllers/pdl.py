@@ -2784,6 +2784,10 @@ def generate_title_ii_state_distribution_response(program_id, start_year, end_ye
             state_dict.update(state_practice_category_grouping_dict[state])
         if "statutes" in state_dict:
             for statute in state_dict['statutes']:
+                # skip statutes that have no totals entry yet
+                if statute['statuteName'] not in total_payment_by_practice_category_grouping_dict:
+                    continue
+
                 for practice_category in state_total_payment_by_practice_categories_dict[state][statute['statuteName']]['practiceCategories']:
                     practice_category_name = practice_category['practiceCategoryName']
 
@@ -3280,6 +3284,10 @@ def generate_title_ii_summary_response(program_id, start_year, end_year):
 
     # Add missing practice categories with zero payment
     for statute_name in practice_categories_dict:
+        # skip statutes that have no totals entry yet
+        if statute_name not in total_payment_by_practice_categories_dict:
+            continue
+
         for practice in practice_categories_dict[statute_name]['practiceCategories']:
             found = False
             for practice_category in total_payment_by_practice_categories_dict[statute_name]['practiceCategories']:
