@@ -482,7 +482,7 @@ def titles_title_ii_summary_search():
     if end_year is None:
         end_year = max_year  # Default to latest available year
 
-    endpoint_response = generate_title_ii_total_summary_response(title_id, cfg.TITLE_II_START_YEAR, cfg.TITLE_II_END_YEAR)
+    endpoint_response = generate_title_ii_total_summary_response(title_id, start_year, end_year)
 
     return endpoint_response
 
@@ -511,7 +511,7 @@ def titles_title_ii_state_distribution_search():
     if end_year is None:
         end_year = max_year  # Default to latest available year
 
-    endpoint_response = generate_title_ii_total_state_distribution_response(title_id, cfg.TITLE_II_START_YEAR, cfg.TITLE_II_END_YEAR)
+    endpoint_response = generate_title_ii_total_state_distribution_response(title_id, start_year, end_year)
 
     return endpoint_response
 
@@ -554,7 +554,7 @@ def titles_title_ii_programs_eqip_state_distribution_search(practice_code=None):
     if end_year is None:
         end_year = max_year  # Default to latest available year
 
-    endpoint_response = generate_title_ii_state_distribution_response(program_id, cfg.TITLE_II_START_YEAR, cfg.TITLE_II_END_YEAR, practice_code=practice_code)
+    endpoint_response = generate_title_ii_state_distribution_response(program_id, start_year, end_year, practice_code=practice_code)
 
     return endpoint_response
 
@@ -583,7 +583,7 @@ def titles_title_ii_programs_eqip_summary_search():
     if end_year is None:
         end_year = max_year  # Default to latest available year
 
-    endpoint_response = generate_title_ii_summary_response(program_id, cfg.TITLE_II_START_YEAR, cfg.TITLE_II_END_YEAR)
+    endpoint_response = generate_title_ii_summary_response(program_id, start_year, end_year)
 
     return endpoint_response
 
@@ -613,7 +613,7 @@ def titles_title_ii_programs_eqip_practice_names_search():
         end_year = max_year  # Default to latest available year
 
 
-    endpoint_response = generate_title_ii_practice_names_response(program_id, cfg.TITLE_II_START_YEAR, cfg.TITLE_II_END_YEAR)
+    endpoint_response = generate_title_ii_practice_names_response(program_id, start_year, end_year)
 
     return endpoint_response
 
@@ -717,7 +717,7 @@ def titles_title_ii_programs_csp_state_distribution_search(practice_code=None):
     if end_year is None:
         end_year = max_year  # Default to latest available year
 
-    endpoint_response = generate_title_ii_state_distribution_response(program_id, cfg.TITLE_II_START_YEAR, cfg.TITLE_II_END_YEAR, practice_code=practice_code)
+    endpoint_response = generate_title_ii_state_distribution_response(program_id, start_year, end_year, practice_code=practice_code)
 
     return endpoint_response
 
@@ -746,7 +746,7 @@ def titles_title_ii_programs_csp_summary_search():
     if end_year is None:
         end_year = max_year  # Default to latest available year
 
-    endpoint_response = generate_title_ii_summary_response(program_id, cfg.TITLE_II_START_YEAR, cfg.TITLE_II_END_YEAR)
+    endpoint_response = generate_title_ii_summary_response(program_id, start_year, end_year)
 
     return endpoint_response
 
@@ -775,7 +775,7 @@ def titles_title_ii_programs_csp_practice_names_search():
     if end_year is None:
         end_year = max_year  # Default to latest available year
 
-    endpoint_response = generate_title_ii_practice_names_response(program_id, cfg.TITLE_II_START_YEAR, cfg.TITLE_II_END_YEAR)
+    endpoint_response = generate_title_ii_practice_names_response(program_id, start_year, end_year)
 
     return endpoint_response
 
@@ -864,7 +864,7 @@ def titles_title_ii_programs_crp_state_distribution_search():
     if end_year is None:
         end_year = max_year  # Default to latest available year
 
-    endpoint_response = generate_title_ii_state_distribution_response(program_id, cfg.TITLE_II_START_YEAR, cfg.TITLE_II_END_YEAR)
+    endpoint_response = generate_title_ii_state_distribution_response(program_id, start_year, end_year)
 
     return endpoint_response
 
@@ -893,7 +893,7 @@ def titles_title_ii_programs_crp_summary_search():
     if end_year is None:
         end_year = max_year  # Default to latest available year
 
-    endpoint_response = generate_title_ii_summary_response(program_id, cfg.TITLE_II_START_YEAR, cfg.TITLE_II_END_YEAR)
+    endpoint_response = generate_title_ii_summary_response(program_id, start_year, end_year)
 
     return endpoint_response
 
@@ -922,7 +922,7 @@ def titles_title_ii_programs_acep_state_distribution_search():
     if end_year is None:
         end_year = max_year  # Default to latest available year
 
-    endpoint_response = generate_title_ii_state_distribution_response(program_id, cfg.TITLE_II_START_YEAR, cfg.TITLE_II_END_YEAR)
+    endpoint_response = generate_title_ii_state_distribution_response(program_id, start_year, end_year)
     return endpoint_response
 
 
@@ -950,7 +950,7 @@ def titles_title_ii_programs_acep_summary_search():
     if end_year is None:
         end_year = max_year  # Default to latest available year
 
-    endpoint_response = generate_title_ii_summary_response(program_id, cfg.TITLE_II_START_YEAR, cfg.TITLE_II_END_YEAR)
+    endpoint_response = generate_title_ii_summary_response(program_id, start_year, end_year)
     return endpoint_response
 
 
@@ -978,7 +978,7 @@ def titles_title_ii_programs_rcpp_state_distribution_search():
     if end_year is None:
         end_year = max_year  # Default to latest available year
 
-    endpoint_response = generate_title_ii_state_distribution_response(program_id, cfg.TITLE_II_START_YEAR, cfg.TITLE_II_END_YEAR)
+    endpoint_response = generate_title_ii_state_distribution_response(program_id, start_year, end_year)
     return endpoint_response
 
 
@@ -1006,7 +1006,7 @@ def titles_title_ii_programs_rcpp_summary_search():
     if end_year is None:
         end_year = max_year  # Default to latest available year
 
-    endpoint_response = generate_title_ii_summary_response(program_id, cfg.TITLE_II_START_YEAR, cfg.TITLE_II_END_YEAR)
+    endpoint_response = generate_title_ii_summary_response(program_id, start_year, end_year)
 
     return endpoint_response
 
