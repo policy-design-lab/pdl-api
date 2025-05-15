@@ -572,6 +572,25 @@ paths:
       summary: Gets the Title II summary data for all states.
       description: |
         Returns  the Title II summary data for all states in JSON format.
+      parameters:
+        - name: start_year
+          in: query
+          description: The start year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2014
+            minimum: 1950
+            maximum: 2050
+        - name: end_year
+          in: query
+          description: The end year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2023
+            minimum: 1950
+            maximum: 2050
       responses:
         200:
           description: Ok
@@ -592,6 +611,25 @@ paths:
       summary: Gets the Title II's state distribution data for all states.
       description: |
         Returns  the Title II state distribution data for all states in JSON format.
+      parameters:
+        - name: start_year
+          in: query
+          description: The start year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2014
+            minimum: 1950
+            maximum: 2050
+        - name: end_year
+          in: query
+          description: The end year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2023
+            minimum: 1950
+            maximum: 2050
       responses:
         200:
           description: Ok
@@ -646,7 +684,24 @@ paths:
               value: "314"
             multiple:
               value: "314,315"
-
+        - name: start_year
+          in: query
+          description: The start year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2014
+            minimum: 1950
+            maximum: 2050
+        - name: end_year
+          in: query
+          description: The end year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2023
+            minimum: 1950
+            maximum: 2050
       responses:
         200:
           description: Ok
@@ -667,6 +722,25 @@ paths:
       summary: Gets the Title II EQIP conservation data for all practice categories.
       description: |
         Returns the Title II EQIP conservation data for all practice categories in JSON format.
+      parameters:
+        - name: start_year
+          in: query
+          description: The start year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2014
+            minimum: 1950
+            maximum: 2050
+        - name: end_year
+          in: query
+          description: The end year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2023
+            minimum: 1950
+            maximum: 2050
       responses:
         200:
           description: Ok
@@ -687,6 +761,25 @@ paths:
       summary: Gets the Title II EQIP list of all practice names for the given start to end year duration.
       description: |
         Returns the Title II EQIP list of all practice names for the given start to end year duration.
+      parameters:
+        - name: start_year
+          in: query
+          description: The start year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2014
+            minimum: 1950
+            maximum: 2050
+        - name: end_year
+          in: query
+          description: The end year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2023
+            minimum: 1950
+            maximum: 2050
       responses:
         200:
           description: Ok
@@ -807,6 +900,7 @@ paths:
       summary: Gets the Title II CSP conservation data for all states.
       description: |
         Returns  the Title II CSP conservation data for all states in JSON format.
+
       parameters:
         - name: practice_code
           in: query
@@ -821,6 +915,24 @@ paths:
               value: "314"
             multiple:
               value: "314,315"
+        - name: start_year
+          in: query
+          description: The start year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2014
+            minimum: 1950
+            maximum: 2050
+        - name: end_year
+          in: query
+          description: The end year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2023
+            minimum: 1950
+            maximum: 2050
       responses:
         200:
           description: Ok
@@ -841,6 +953,25 @@ paths:
       summary: Gets the Title II CSP conservation data for all program categories.
       description: |
         Returns the Title II CSP conservation data for all program categories in JSON format.
+      parameters:
+        - name: start_year
+          in: query
+          description: The start year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2014
+            minimum: 1950
+            maximum: 2050
+        - name: end_year
+          in: query
+          description: The end year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2023
+            minimum: 1950
+            maximum: 2050
       responses:
         200:
           description: Ok
@@ -861,6 +992,25 @@ paths:
       summary: Gets the Title II CSP list of all practice names for the given start to end year duration.
       description: |
         Returns the Title II CSP list of all practice names for the given start to end year duration.
+      parameters:
+        - name: start_year
+          in: query
+          description: The start year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2014
+            minimum: 1950
+            maximum: 2050
+        - name: end_year
+          in: query
+          description: The end year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2023
+            minimum: 1950
+            maximum: 2050
       responses:
         200:
           description: Ok
@@ -962,6 +1112,25 @@ paths:
       summary: Gets the Title II CRP conservation data for all states.
       description: |
         Returns  the Title II CRP conservation data for all states in JSON format.
+      parameters:
+        - name: start_year
+          in: query
+          description: The start year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2014
+            minimum: 1950
+            maximum: 2050
+        - name: end_year
+          in: query
+          description: The end year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2023
+            minimum: 1950
+            maximum: 2050
       responses:
         200:
           description: Ok
@@ -982,6 +1151,25 @@ paths:
       summary: Gets the Title II CRP conservation distribution data for all subprograms.
       description: |
         Returns the Title II CRP conservation distribution data for all subprograms in JSON format.
+      parameters:
+        - name: start_year
+          in: query
+          description: The start year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2014
+            minimum: 1950
+            maximum: 2050
+        - name: end_year
+          in: query
+          description: The end year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2023
+            minimum: 1950
+            maximum: 2050
       responses:
         200:
           description: Ok
@@ -1002,6 +1190,25 @@ paths:
       summary: Gets the Title II ACEP conservation data for all states.
       description: |
         Returns  the Title II ACEP conservation data for all states in JSON format.
+      parameters:
+        - name: start_year
+          in: query
+          description: The start year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2014
+            minimum: 1950
+            maximum: 2050
+        - name: end_year
+          in: query
+          description: The end year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2023
+            minimum: 1950
+            maximum: 2050
       responses:
         200:
           description: Ok
@@ -1022,6 +1229,25 @@ paths:
       summary: Gets the Title II ACEP conservation distribution data for all subprograms.
       description: |
         Returns the Title II ACEP conservation distribution data for all subprograms in JSON format.
+      parameters:
+        - name: start_year
+          in: query
+          description: The start year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2014
+            minimum: 1950
+            maximum: 2050
+        - name: end_year
+          in: query
+          description: The end year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2023
+            minimum: 1950
+            maximum: 2050
       responses:
         200:
           description: Ok
@@ -1042,6 +1268,25 @@ paths:
       summary: Gets the Title II RCPP conservation data for all states.
       description: |
         Returns  the Title II RCPP conservation data for all states in JSON format.
+      parameters:
+        - name: start_year
+          in: query
+          description: The start year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2014
+            minimum: 1950
+            maximum: 2050
+        - name: end_year
+          in: query
+          description: The end year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2023
+            minimum: 1950
+            maximum: 2050
       responses:
         200:
           description: Ok
@@ -1062,6 +1307,25 @@ paths:
       summary: Gets the Title II RCPP conservation distribution data for all subprograms.
       description: |
         Returns the Title II RCPP conservation distribution data for all subprograms in JSON format.
+      parameters:
+        - name: start_year
+          in: query
+          description: The start year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2014
+            minimum: 1950
+            maximum: 2050
+        - name: end_year
+          in: query
+          description: The end year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2023
+            minimum: 1950
+            maximum: 2050
       responses:
         200:
           description: Ok
