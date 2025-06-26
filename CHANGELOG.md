@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update Title XI endpoints to include data from 2014 to 2023. [#319](https://github.com/policy-design-lab/pdl-api/issues/319)
 - Update API endpoints to make start and end years configurable. [#321](https://github.com/policy-design-lab/pdl-api/issues/321)
 - Update ARC PLC data. [#324](https://github.com/policy-design-lab/pdl-api/issues/324)
+- Update ARC PLC base acres rules. [#327](https://github.com/policy-design-lab/pdl-api/issues/327)
 
 ## [0.22.0] - 2025-02-26
 
