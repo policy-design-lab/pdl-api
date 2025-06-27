@@ -4,11 +4,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.23.0] - 2025-06-26
+
+### Added
+- Add year query parameter to Title-I program and top-level endpoints. [#300](https://github.com/policy-design-lab/pdl-api/issues/300)
+- Add year query parameter to SNAP endpoints. [#303](https://github.com/policy-design-lab/pdl-api/issues/303)
+- Add year query parameter to Crop Insurance endpoints. [#302](https://github.com/policy-design-lab/pdl-api/issues/302)
+- Add year query parameter to Title-II program and top-level endpoints. [#301](https://github.com/policy-design-lab/pdl-api/issues/301)
+
+### Changed
+- Update Title II endpoints to include data from 2014 to 2023. [#313](https://github.com/policy-design-lab/pdl-api/issues/313)
+- Update Title XI endpoints to include data from 2014 to 2023. [#319](https://github.com/policy-design-lab/pdl-api/issues/319)
+- Update API endpoints to make start and end years configurable. [#321](https://github.com/policy-design-lab/pdl-api/issues/321)
+- Update ARC PLC data. [#324](https://github.com/policy-design-lab/pdl-api/issues/324)
+- Update ARC PLC base acres rules. [#327](https://github.com/policy-design-lab/pdl-api/issues/327)
+
 ## [0.22.0] - 2025-02-26
 
 ### Added
 - Add back summary endpoint to SNAP. [#271](https://github.com/policy-design-lab/pdl-api/issues/271)
 - Add top-level endpoints to Title-II. [#270](https://github.com/policy-design-lab/pdl-api/issues/270)
+- Add endpoints (proposals and current) to support new model H. [#305](https://github.com/policy-design-lab/pdl-api/issues/305)
 
 ### Changed
 - Change house api path. [#295](https://github.com/policy-design-lab/pdl-api/issues/295)
@@ -50,7 +66,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CRP endpoints to use data from the database. [#237](https://github.com/policy-design-lab/pdl-api/issues/237)
 - ACEP endpoints to use data from the database. [#239](https://github.com/policy-design-lab/pdl-api/issues/239)
 - RCPP endpoints to use data from the database. [#241](https://github.com/policy-design-lab/pdl-api/issues/241)
-- ProgramName attribute has been removed from crop insurance's state-distibution output [#255](https://github.com/polciy-design-lab/pdl-api/issues/255)
+- ProgramName attribute has been removed from crop insurance's state-distribution output [#255](https://github.com/polciy-design-lab/pdl-api/issues/255)
 
 ## [0.17.0] - 2024-08-28
 
@@ -85,7 +101,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update Title-4 endpoints to use database calls. [#190](https://github.com/policy-design-lab/pdl-api/issues/190)
 - Update EQIP IRA data with changed name of US Virgin Islands. [#201](https://github.com/policy-design-lab/pdl-api/issues/201)
 - Update EQIP IRA state distribution data [#205](https://githoub.com/policy-design-lab/pdl-api/issues/205)
-- Update EQIP IRA summary data with future predctions. [#207](https://github.com/policy-design-lab/pdl-api/issues/207)
+- Update EQIP IRA summary data with future predictions. [#207](https://github.com/policy-design-lab/pdl-api/issues/207)
 - Update EQIP IRA state distribution data [#208](https://github.com/policy-design-lab/pdl-api/issues/208)
 - EQIP IRA state distribution's nationwide data matches with summary [#210](https://github.com/policy-design-lab/pdl-api/issues/210)
 - EQIP IRA to use only 50 U.S. state data [#212](https://github.com/policy-design-lab/pdl-api/issues/212)
@@ -225,6 +241,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Open API specification file. [#50](https://github.com/policy-design-lab/pdl-api/issues/50)
 
+[0.23.0]: https://github.com/policy-design-lab/pdl-api/compare/0.22.0...0.23.0
 [0.22.0]: https://github.com/policy-design-lab/pdl-api/compare/0.21.0...0.22.0
 [0.21.0]: https://github.com/policy-design-lab/pdl-api/compare/0.20.0...0.21.0
 [0.20.0]: https://github.com/policy-design-lab/pdl-api/compare/0.19.0...0.20.0

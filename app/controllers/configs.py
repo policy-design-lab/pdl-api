@@ -27,3 +27,20 @@ class Config:
 
     # API port, default to 5000
     API_PORT = int(os.getenv('API_PORT', '5000'))
+
+    # PDL data duration parameters
+    # NOTE: these are the minimum and maximum years for which data will be retrieved from the database for different endpoints
+    ALL_PROGRAMS_START_YEAR = int(os.getenv('ALL_PROGRAMS_START_YEAR', '2018'))  # Landing Page endpoint
+    ALL_PROGRAMS_END_YEAR = int(os.getenv('ALL_PROGRAMS_END_YEAR', '2022'))  # Landing Page endpoint
+
+    TITLE_I_START_YEAR = int(os.getenv('TITLE_I_START_YEAR', '2014'))
+    TITLE_I_END_YEAR = int(os.getenv('TITLE_I_END_YEAR', '2021'))
+
+    TITLE_II_START_YEAR = int(os.getenv('TITLE_II_START_YEAR', '2014'))
+    TITLE_II_END_YEAR = int(os.getenv('TITLE_II_END_YEAR', '2023'))
+
+    CROP_INSURANCE_START_YEAR = int(os.getenv('CROP_INSURANCE_START_YEAR', '2014'))
+    CROP_INSURANCE_END_YEAR = int(os.getenv('CROP_INSURANCE_END_YEAR', '2023'))
+
+    SNAP_START_YEAR = int(os.getenv('SNAP_START_YEAR', '2018'))
+    SNAP_END_YEAR = int(os.getenv('SNAP_END_YEAR', '2022'))
