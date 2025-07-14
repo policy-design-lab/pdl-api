@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pdl-api"
-version = "0.22.0"
+version = "0.23.0"
 description = ""
 authors = ["Yong Wook Kim <ywkim@illinois.edu>"]
 readme = "README.md"

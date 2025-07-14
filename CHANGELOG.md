@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Unreleased
+## [0.23.0] - 2025-06-26
 
 ### Added
 - Add year query parameter to Title-I program and top-level endpoints. [#300](https://github.com/policy-design-lab/pdl-api/issues/300)
@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update Title XI endpoints to include data from 2014 to 2023. [#319](https://github.com/policy-design-lab/pdl-api/issues/319)
 - Update API endpoints to make start and end years configurable. [#321](https://github.com/policy-design-lab/pdl-api/issues/321)
 - Update ARC PLC data. [#324](https://github.com/policy-design-lab/pdl-api/issues/324)
+- Update ARC PLC base acres rules. [#327](https://github.com/policy-design-lab/pdl-api/issues/327)
 - Update Title I endpoints to include data from 2014 to 2023. [#192](https://github.com/policy-design-lab/pdl-api/issues/192)
 
 ## [0.22.0] - 2025-02-26
@@ -241,6 +242,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Open API specification file. [#50](https://github.com/policy-design-lab/pdl-api/issues/50)
 
+[0.23.0]: https://github.com/policy-design-lab/pdl-api/compare/0.22.0...0.23.0
 [0.22.0]: https://github.com/policy-design-lab/pdl-api/compare/0.21.0...0.22.0
 [0.21.0]: https://github.com/policy-design-lab/pdl-api/compare/0.20.0...0.21.0
 [0.20.0]: https://github.com/policy-design-lab/pdl-api/compare/0.19.0...0.20.0
