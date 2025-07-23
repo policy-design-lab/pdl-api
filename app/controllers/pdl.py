@@ -32,6 +32,7 @@ COMMOD_MAP_DATA_JSON = "commodities_map_data.json"
 COMMOD_STATE_DISTRIBUTION_DATA_JSON = "commodities_state_distribution_data.json"
 COMMOD_SUBPROGRAMS_DATA_JSON = "commodities_subprograms_data.json"
 ARC_PLC_DATA_JSON = "arc_plc_payments_current.json.gz"
+ARC_PLC_OBBBA_DATA_JSON = "arc_plc_payments_current_obbba.json.gz"
 I_PROPOSALS_SUBTITLE_A_DATA_PATH = os.path.join(TITLE_I_DATA_PATH, "proposals", "subtitle-a")
 ARC_PLC_PROPOSAL_DATA_JSON = "arc_plc_payments_proposed.json.gz"
 I_SUBTITLE_D_DATA_PATH = os.path.join(TITLE_I_DATA_PATH, "subtitle-d")
@@ -444,6 +445,17 @@ def titles_title_i_subtitles_subtitle_a_arc_plc_payments_current_search():
     response.headers['Content-Encoding'] = 'gzip'
     return response
 
+# /pdl/titles/title-i/subtitles/subtitle-a/arc-plc-payments/obbba
+def titles_title_i_subtitles_subtitle_a_arc_plc_payments_obbba_search():
+    # set the file path
+    arc_plc_current_obbba_data = os.path.join(I_SUBTITLE_A_DATA_PATH, ARC_PLC_OBBBA_DATA_JSON)
+
+    with open(arc_plc_current_obbba_data, 'rb') as current_obbba_data:
+        file_data = current_obbba_data.read()
+
+    response = Response(file_data, mimetype='application/json')
+    response.headers['Content-Encoding'] = 'gzip'
+    return response
 
 # /pdl/titles/title-i/subtitles/subtitle-a/arc-plc-payments/proposed
 def titles_title_i_subtitles_subtitle_a_arc_plc_payments_proposed_search():
