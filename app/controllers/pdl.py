@@ -1441,7 +1441,7 @@ def generate_title_iv_state_distribution_response(program_id, start_year, end_ye
         Program.name.label('programName'),
         Payment.year.label('year'),
         Payment.payment.label('totalPaymentInDollars'),
-        Payment.recipient_count.label('totalCounts')
+        Payment.recipient_count.label('totalRecipientCount')
     ).join(
         Program, Payment.program_id == Program.id
     ).filter(
@@ -1575,7 +1575,7 @@ def generate_title_i_total_state_distribution_response(title_id, start_year, end
         Subtitle.name.label('subtitleName'),
         Payment.year.label('year'),
         Payment.payment.label('totalPaymentInDollars'),
-        Payment.recipient_count.label('totalCounts')).join(
+        Payment.recipient_count.label('totalRecipientCount')).join(
         Subtitle, Payment.subtitle_id == Subtitle.id).filter(
         Payment.title_id == title_id,
         Payment.year.between(start_year, end_year)
@@ -1701,7 +1701,7 @@ def generate_title_i_total_summary_response(title_id, start_year, end_year):
         Title.name.label('titleName'),
         Payment.year.label('year'),
         Payment.payment.label('totalPaymentInDollars'),
-        Payment.recipient_count.label('totalCounts'),
+        Payment.recipient_count.label('totalRecipientCount'),
         Subtitle.name.label('subtitleName')
     ).join(
         Title, Payment.title_id == Title.id
@@ -1718,11 +1718,11 @@ def generate_title_i_total_summary_response(title_id, start_year, end_year):
     # Initialize dictionaries to store aggregated data
     title_summary = defaultdict(lambda: {
         'totalPaymentInDollars': 0,
-        'totalCounts': 0,
+        'totalRecipientCount': 0,
         'recipients': [],
         'subtitles': defaultdict(lambda: {
             'totalPaymentInDollars': 0,
-            'totalCounts': 0,
+            'totalRecipientCount': 0,
             'recipients': []
         })
     })
@@ -1730,13 +1730,13 @@ def generate_title_i_total_summary_response(title_id, start_year, end_year):
     # Process each record in the data
     for state, title_name, year, payment, recipients, subtitle in results:
         title_summary[title_name]['totalPaymentInDollars'] += payment
-        title_summary[title_name]['totalCounts'] += recipients
+        title_summary[title_name]['totalRecipientCount'] += recipients
         title_summary[title_name]['recipients'].append(recipients)
 
         # Aggregate subtitle data
         subtitle_dict = title_summary[title_name]['subtitles'][subtitle]
         subtitle_dict['totalPaymentInDollars'] += payment
-        subtitle_dict['totalCounts'] += recipients
+        subtitle_dict['totalRecipientCount'] += recipients
         subtitle_dict['recipients'].append(recipients)
 
     # Prepare the final summary
@@ -1754,7 +1754,7 @@ def generate_title_i_total_summary_response(title_id, start_year, end_year):
             subtitle_list.append({
                 'programName': subtitle_name,
                 'totalPaymentInDollars': round(subtitle_info['totalPaymentInDollars'], 2),
-                'totalCounts': subtitle_info['totalCounts'],
+                'totalRecipientCount': subtitle_info['totalRecipientCount'],
                 'averageRecipientCount': subtitle_avg_recipients,
                 'totalPaymentInPercentage': round(payment_percentage, 2)
             })
@@ -1762,7 +1762,7 @@ def generate_title_i_total_summary_response(title_id, start_year, end_year):
         title_entry = {
             'titleName': title,
             'totalPaymentInDollars': round(info['totalPaymentInDollars'], 2),
-            'totalCounts': info['totalCounts'],
+            'totalRecipientCount': info['totalRecipientCount'],
             'averageRecipientCount': round(average_recipient_count, 2),
             'subtitles': subtitle_list
         }
@@ -1847,7 +1847,7 @@ def generate_title_i_state_distribution_response(subtitle_id, start_year, end_ye
         func.sum(Payment.payment).label('totalPaymentInDollars'),
         func.round(func.avg(Payment.base_acres), 2).label('averageAreaInAcres'),
         func.cast(func.avg(Payment.recipient_count), BigInteger).label('averageRecipientCount'),
-        func.cast(func.sum(Payment.recipient_count), Integer).label('totalCounts'),
+        func.cast(func.sum(Payment.recipient_count), Integer).label('totalRecipientCount'),
         (func.cast(func.sum(Payment.recipient_count) / subtitle_subquery_recipient_count * 100, Numeric(5, 2))).label(
             'averageRecipientCountInPercentageNationwide')
     ).join(
@@ -1872,7 +1872,7 @@ def generate_title_i_state_distribution_response(subtitle_id, start_year, end_ye
         response_dict = dict(zip(column_names, row))
 
         # Cleanup / renaming attributes
-        response_dict["totalCountsInPercentageNationwide"] = response_dict["averageRecipientCountInPercentageNationwide"]
+        response_dict["totalRecipientCountInPercentageNationwide"] = response_dict["averageRecipientCountInPercentageNationwide"]
         if response_dict['averageAreaInAcres'] is None:
             response_dict['averageAreaInAcres'] = 0.0
         subtitle_response_dict[response_dict['state']] = response_dict
@@ -1908,7 +1908,7 @@ def generate_title_i_state_distribution_response(subtitle_id, start_year, end_ye
             Payment.state_code.label('state'),
             Program.name.label('programName'),
             func.sum(Payment.payment).label('totalPaymentInDollars'),
-            func.cast(func.sum(Payment.recipient_count), Integer).label('totalCounts'),
+            func.cast(func.sum(Payment.recipient_count), Integer).label('totalRecipientCount'),
             func.round(func.avg(Payment.base_acres), 2).label('averageAreaInAcres'),
             func.cast(func.sum(Payment.recipient_count) / total_years, BigInteger).label('averageRecipientCount'),
             (func.cast(func.sum(Payment.payment) / program_subquery_total_payment * 100, Numeric(5, 2))).label(
@@ -1938,7 +1938,7 @@ def generate_title_i_state_distribution_response(subtitle_id, start_year, end_ye
             state = response_dict['state']
 
             # Cleanup / renaming attributes
-            response_dict["totalCountsInPercentageNationwide"] = response_dict[
+            response_dict["totalRecipientCountInPercentageNationwide"] = response_dict[
                 "averageRecipientCountInPercentageNationwide"]
             response_dict['subPrograms'] = []
             if response_dict['averageAreaInAcres'] is None:
@@ -2020,14 +2020,14 @@ def generate_title_i_state_distribution_response(subtitle_id, start_year, end_ye
                 else:
                     program["totalPaymentInPercentageWithinState"] = 0.0
 
-                if subtitle_response_dict[state]["totalCounts"] != 0:
-                    program["totalCountsInPercentageWithinState"] = (
-                        round(program["totalCounts"] / subtitle_response_dict[state]["totalCounts"] * 100, 2))
+                if subtitle_response_dict[state]["totalRecipientCount"] != 0:
+                    program["totalRecipientCountInPercentageWithinState"] = (
+                        round(program["totalRecipientCount"] / subtitle_response_dict[state]["totalRecipientCount"] * 100, 2))
                     # TODO: Temporary fix. The below attribute may need to be calculated based on the average recipient count or removed if not needed.
-                    program["averageRecipientCountInPercentageWithinState"] = program["totalCountsInPercentageWithinState"]
+                    program["averageRecipientCountInPercentageWithinState"] = program["totalRecipientCountInPercentageWithinState"]
                 else:
                     program["averageRecipientCountInPercentageWithinState"] = 0.0
-                    program["totalCountsInPercentageWithinState"] = 0.0
+                    program["totalRecipientCountInPercentageWithinState"] = 0.0
 
                 for subprogram in program["subPrograms"]:
                     if subtitle_response_dict[state]["totalPaymentInDollars"] != 0.0:
@@ -2060,7 +2060,7 @@ def generate_title_i_summary_response(subtitle_id, start_year, end_year):
     subtitle_query = (session.query(
         Subtitle.name.label('subtitleName'),
         func.sum(Payment.payment).label('totalPaymentInDollars'),
-        func.cast(func.sum(Payment.recipient_count), Integer).label('totalCounts'),
+        func.cast(func.sum(Payment.recipient_count), Integer).label('totalRecipientCount'),
         func.cast(subtitle_avg_recipient_count, BigInteger).label('averageRecipientCount')
     ).join(
         Subtitle, Payment.subtitle_id == Subtitle.id
@@ -2111,7 +2111,7 @@ def generate_title_i_summary_response(subtitle_id, start_year, end_year):
         program_query = (session.query(
             Program.name.label('programName'),
             func.sum(Payment.payment).label('totalPaymentInDollars'),
-            func.cast(func.sum(Payment.recipient_count), Integer).label('totalCounts'),
+            func.cast(func.sum(Payment.recipient_count), Integer).label('totalRecipientCount'),
             func.cast(program_avg_recipient_count, BigInteger).label('averageRecipientCount'),
             (func.cast(func.sum(Payment.payment) / subtitle_subquery * 100, Numeric(5, 2))).label(
                 'totalPaymentInPercentage')
