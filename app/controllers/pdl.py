@@ -214,13 +214,21 @@ def titles_title_i_summary_search():
     min_year, max_year = cfg.TITLE_I_START_YEAR, cfg.TITLE_I_END_YEAR
     start_year = request.args.get('start_year', type=int, default=min_year)
     end_year = request.args.get('end_year', type=int, default=max_year)
-    title_id = 100
+
+    title_id = get_title_id(TITLE_I_NAME)
+    if title_id is None:
+        msg = {
+            "reason": "No record for the given title name " + TITLE_I_NAME,
+            "error": "Not found: " + request.url,
+        }
+        logging.error("Title I: " + json.dumps(msg))
+        return rs_handlers.not_found(msg)
 
     if start_year and end_year and start_year > end_year:
         start_year, end_year = min_year, max_year  # Return all data if invalid range
 
     if start_year is None:
-        start_year = min_year  # Default to earliest available year
+        start_year = min_year  # Default to the earliest available year
 
     if end_year is None:
         end_year = max_year  # Default to latest available year
@@ -234,13 +242,21 @@ def titles_title_i_state_distribution_search():
     min_year, max_year = cfg.TITLE_I_START_YEAR, cfg.TITLE_I_END_YEAR
     start_year = request.args.get('start_year', type=int, default=min_year)
     end_year = request.args.get('end_year', type=int, default=max_year)
-    title_id = 100
+
+    title_id = get_title_id(TITLE_I_NAME)
+    if title_id is None:
+        msg = {
+            "reason": "No record for the given title name " + TITLE_I_NAME,
+            "error": "Not found: " + request.url,
+        }
+        logging.error("Title I: " + json.dumps(msg))
+        return rs_handlers.not_found(msg)
 
     if start_year and end_year and start_year > end_year:
         start_year, end_year = min_year, max_year  # Reset to full range if invalid
 
     if start_year is None:
-        start_year = min_year  # Default to earliest available year
+        start_year = min_year  # Default to the earliest available year
 
     if end_year is None:
         end_year = max_year  # Default to latest available year
@@ -283,7 +299,7 @@ def titles_title_i_subtitles_subtitle_a_state_distribution_search():
         start_year, end_year = min_year, max_year  # Reset to full range if invalid
 
     if start_year is None:
-        start_year = min_year  # Default to earliest available year
+        start_year = min_year  # Default to the earliest available year
 
     if end_year is None:
         end_year = max_year  # Default to latest available year
@@ -311,7 +327,7 @@ def titles_title_i_subtitles_subtitle_a_summary_search():
         start_year, end_year = min_year, max_year  # Reset to full range if invalid
 
     if start_year is None:
-        start_year = min_year  # Default to earliest available year
+        start_year = min_year  # Default to the earliest available year
 
     if end_year is None:
         end_year = max_year  # Default to latest available year
@@ -339,7 +355,7 @@ def titles_title_i_subtitles_subtitle_d_state_distribution_search():
         start_year, end_year = min_year, max_year  # Reset to full range if invalid
 
     if start_year is None:
-        start_year = min_year  # Default to earliest available year
+        start_year = min_year  # Default to the earliest available year
 
     if end_year is None:
         end_year = max_year  # Default to latest available year
@@ -367,7 +383,7 @@ def titles_title_i_subtitles_subtitle_d_summary_search():
         start_year, end_year = min_year, max_year  # Reset to full range if invalid
 
     if start_year is None:
-        start_year = min_year  # Default to earliest available year
+        start_year = min_year  # Default to the earliest available year
 
     if end_year is None:
         end_year = max_year  # Default to latest available year
@@ -395,7 +411,7 @@ def titles_title_i_subtitles_subtitle_e_state_distribution_search():
         start_year, end_year = min_year, max_year  # Reset to full range if invalid
 
     if start_year is None:
-        start_year = min_year  # Default to earliest available year
+        start_year = min_year  # Default to the earliest available year
 
     if end_year is None:
         end_year = max_year  # Default to latest available year
@@ -423,7 +439,7 @@ def titles_title_i_subtitles_subtitle_e_summary_search():
         start_year, end_year = min_year, max_year  # Reset to full range if invalid
 
     if start_year is None:
-        start_year = min_year  # Default to earliest available year
+        start_year = min_year  # Default to the earliest available year
 
     if end_year is None:
         end_year = max_year  # Default to latest available year
@@ -1764,6 +1780,8 @@ def generate_title_i_total_summary_response(title_id, start_year, end_year):
             'totalPaymentInDollars': round(info['totalPaymentInDollars'], 2),
             'totalRecipientCount': info['totalRecipientCount'],
             'averageRecipientCount': round(average_recipient_count, 2),
+            'startYear': start_year,
+            'endYear': end_year,
             'subtitles': subtitle_list
         }
         final_summary.append(title_entry)
@@ -2080,6 +2098,8 @@ def generate_title_i_summary_response(subtitle_id, start_year, end_year):
     subtitle_response_dict = dict()
     for row in subtitle_result:
         subtitle_response_dict = dict(zip(column_names, row))
+        subtitle_response_dict["startYear"] = start_year
+        subtitle_response_dict["endYear"] = end_year
         subtitle_response_dict["programs"] = []
 
     # Find all programs under the subtitle

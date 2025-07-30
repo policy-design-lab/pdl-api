@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Rename totalCounts with totalRecipientCount. [#334](https://github.com/policy-design-lab/pdl-api/issues/334)
+- Update Title I endpoints to include data from 2014 to 2023. [#192](https://github.com/policy-design-lab/pdl-api/issues/192)
 
 ## [0.23.0] - 2025-06-26
 
