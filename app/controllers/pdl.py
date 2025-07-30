@@ -1586,21 +1586,21 @@ def generate_title_i_total_state_distribution_response(title_id, start_year, end
 
     # create a nested dictionary to store data by year and state
     data_by_year_and_state = defaultdict(
-        lambda: defaultdict(lambda: {'totalPaymentInDollars': 0, 'totalRecipients': 0}))
-    all_years_summary = defaultdict(lambda: {'totalPaymentInDollars': 0, 'totalRecipients': 0})
+        lambda: defaultdict(lambda: {'totalPaymentInDollars': 0, 'totalRecipientCount': 0}))
+    all_years_summary = defaultdict(lambda: {'totalPaymentInDollars': 0, 'totalRecipientCount': 0})
 
     for record in result:
         state, title_name, year, payments, recipients = record
         entry = data_by_year_and_state[year][state]
         entry['state'] = state
         entry['totalPaymentInDollars'] += payments
-        entry['totalRecipients'] += recipients
+        entry['totalRecipientCount'] += recipients
 
         # add to all years summary
         summary = all_years_summary[state]
         summary['state'] = state
         summary['totalPaymentInDollars'] += payments
-        summary['totalRecipients'] += recipients
+        summary['totalRecipientCount'] += recipients
 
     # sort by total payment
     sorted_data_by_year = {}
