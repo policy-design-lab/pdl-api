@@ -247,6 +247,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Open API specification file. [#50](https://github.com/policy-design-lab/pdl-api/issues/50)
 
+[0.24.0]: https://github.com/policy-design-lab/pdl-api/compare/0.23.0...0.24.0
 [0.23.0]: https://github.com/policy-design-lab/pdl-api/compare/0.22.0...0.23.0
 [0.22.0]: https://github.com/policy-design-lab/pdl-api/compare/0.21.0...0.22.0
 [0.21.0]: https://github.com/policy-design-lab/pdl-api/compare/0.20.0...0.21.0
