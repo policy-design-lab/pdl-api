@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Add endpoint for ARC PLC reconciliation policy. [#332](https://github.com/policy-design-lab/pdl-api/issues/332)
 
+## [0.24.0] - 2025-07-31
+
+### Changed
+- Rename totalCounts with totalRecipientCount. [#334](https://github.com/policy-design-lab/pdl-api/issues/334)
+- Update Title I endpoints to include data from 2014 to 2023. [#192](https://github.com/policy-design-lab/pdl-api/issues/192)
+
 ## [0.23.0] - 2025-06-26
 
 ### Added
@@ -246,6 +252,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Open API specification file. [#50](https://github.com/policy-design-lab/pdl-api/issues/50)
 
+[0.24.0]: https://github.com/policy-design-lab/pdl-api/compare/0.23.0...0.24.0
 [0.23.0]: https://github.com/policy-design-lab/pdl-api/compare/0.22.0...0.23.0
 [0.22.0]: https://github.com/policy-design-lab/pdl-api/compare/0.21.0...0.22.0
 [0.21.0]: https://github.com/policy-design-lab/pdl-api/compare/0.20.0...0.21.0
