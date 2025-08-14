@@ -1243,7 +1243,7 @@ def generate_allprograms_response(start_year, end_year):
         SUM(CASE WHEN t.name = 'Title II: Conservation' AND p.year BETWEEN {start_year} AND {end_year} AND (sub_program_id IN (SELECT id FROM pdl.sub_programs WHERE pdl.sub_programs.name = 'Total CRP') OR sub_program_id IS NULL) THEN p.payment ELSE 0 END) AS "Title II Total",
         SUM(CASE WHEN t.name = 'Title IV: Nutrition' AND p.year BETWEEN {start_year} AND {end_year} THEN p.payment ELSE 0 END) AS "SNAP Total",
         SUM(CASE WHEN t.name = 'Title IX: Crop Insurance' AND p.year BETWEEN {start_year} AND {end_year} THEN p.net_farmer_benefit_amount ELSE 0 END) AS "Crop Insurance Total",
-        SUM(CASE WHEN (sub_program_id IN (SELECT id FROM pdl.sub_programs WHERE pdl.sub_programs.name IN ('Total CRP', 'Agriculture Risk Coverage County Option (ARC-CO)', 'Agriculture Risk Coverage Individual Coverage (ARC-IC)')) OR sub_program_id IS NULL) THEN COALESCE(p.payment, 0) + COALESCE(p.net_farmer_benefit_amount, 0) ELSE 0 END) AS "{str(start_year)[-2:]}-{str(end_year)[-2:]} All Programs Total"
+        SUM(CASE WHEN (sub_program_id IN (SELECT id FROM pdl.sub_programs WHERE pdl.sub_programs.name IN ('Total CRP', 'Agriculture Risk Coverage County Option (ARC-CO)', 'Agriculture Risk Coverage Individual Coverage (ARC-IC)')) OR sub_program_id IS NULL) THEN COALESCE(p.payment, 0) + COALESCE(p.net_farmer_benefit_amount, 0) ELSE 0 END) AS "{str(start_year)}-{str(end_year)} All Programs Total"
         """
 
         # Combine the query of non-dynamic part
@@ -1268,7 +1268,7 @@ def generate_allprograms_response(start_year, end_year):
 
         state_data = []
         total_row = {"State": "Total"}
-        start_to_end_years_total_key = str(start_year)[-2:] + "-" + str(end_year)[-2:] + " All Programs Total"
+        start_to_end_years_total_key = str(start_year) + "-" + str(end_year) + " All Programs Total"
 
         # Initialize total_row with zero values for all keys in the desired order
         for year in range(start_year, end_year + 1):
