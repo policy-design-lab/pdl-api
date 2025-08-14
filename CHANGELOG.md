@@ -9,9 +9,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Add endpoint for ARC PLC reconciliation policy. [#332](https://github.com/policy-design-lab/pdl-api/issues/332)
 
-### Changed
-- Change all programs key from YY-YY format (start and end years) to YYYY-YYYY format. [#272](https://github.com/policy-design-lab/pdl-api/issues/272)
-
 ## [0.24.0] - 2025-07-31
 
 ### Changed
