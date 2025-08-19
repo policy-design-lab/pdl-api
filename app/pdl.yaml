@@ -415,7 +415,7 @@ paths:
         - "Title I: Commodities - Subtitle A"
       summary: Gets the baseline Title I Subtitle A commodities payment distribution for ARC and PLC based on OBBBA.
       description: |
-        Returns the baseline Title I Subtitle A commodities payment distribution data for ARC and PLC reconciliation in JSON format.
+        Returns the baseline Title I Subtitle A commodities payment distribution data for ARC and PLC based on OBBBA in JSON format.
       responses:
         200:
           description: Ok
