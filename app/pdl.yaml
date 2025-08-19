@@ -393,7 +393,7 @@ paths:
     get:
       tags:
         - "Title I: Commodities - Subtitle A"
-      summary: Gets the proposed Title I Subtitle A commodities payment distribution for ARC and PLC reconciliation.
+      summary: Gets the Title I Subtitle A commodities payment distribution for ARC and PLC based on OBBBA.
       description: |
         Returns the proposed Title I Subtitle A commodities payment distribution data for ARC and PLC reconciliation in JSON format.
       responses:
