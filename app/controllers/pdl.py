@@ -32,6 +32,8 @@ COMMOD_MAP_DATA_JSON = "commodities_map_data.json"
 COMMOD_STATE_DISTRIBUTION_DATA_JSON = "commodities_state_distribution_data.json"
 COMMOD_SUBPROGRAMS_DATA_JSON = "commodities_subprograms_data.json"
 ARC_PLC_DATA_JSON = "arc_plc_payments_current.json.gz"
+ARC_PLC_CURRENT_OBBBA_DATA_JSON = "arc_plc_payments_current_obbba.json.gz" # These variable namings will need to be updated the naming once we finalize the scenario names.
+ARC_PLC_PROPOSED_OBBBA_DATA_JSON = "arc_plc_payments_proposed_obbba.json.gz"
 I_PROPOSALS_SUBTITLE_A_DATA_PATH = os.path.join(TITLE_I_DATA_PATH, "proposals", "subtitle-a")
 ARC_PLC_PROPOSAL_DATA_JSON = "arc_plc_payments_proposed.json.gz"
 I_SUBTITLE_D_DATA_PATH = os.path.join(TITLE_I_DATA_PATH, "subtitle-d")
@@ -460,6 +462,29 @@ def titles_title_i_subtitles_subtitle_a_arc_plc_payments_current_search():
     response.headers['Content-Encoding'] = 'gzip'
     return response
 
+# /pdl/titles/title-i/subtitles/subtitle-a/arc-plc-payments/baseline
+def titles_title_i_subtitles_subtitle_a_arc_plc_payments_baseline_search():
+    # set the file path
+    arc_plc_current_obbba_data = os.path.join(I_SUBTITLE_A_DATA_PATH, ARC_PLC_CURRENT_OBBBA_DATA_JSON)
+
+    with open(arc_plc_current_obbba_data, 'rb') as current_obbba_data:
+        file_data = current_obbba_data.read()
+
+    response = Response(file_data, mimetype='application/json')
+    response.headers['Content-Encoding'] = 'gzip'
+    return response
+
+# /pdl/titles/title-i/subtitles/subtitle-a/arc-plc-payments/obbba
+def titles_title_i_subtitles_subtitle_a_arc_plc_payments_obbba_search():
+    # set the file path
+    arc_plc_proposed_obbba_data = os.path.join(I_PROPOSALS_SUBTITLE_A_DATA_PATH, ARC_PLC_PROPOSED_OBBBA_DATA_JSON)
+
+    with open(arc_plc_proposed_obbba_data, 'rb') as proposed_obbba_data:
+        file_data = proposed_obbba_data.read()
+
+    response = Response(file_data, mimetype='application/json')
+    response.headers['Content-Encoding'] = 'gzip'
+    return response
 
 # /pdl/titles/title-i/subtitles/subtitle-a/arc-plc-payments/proposed
 def titles_title_i_subtitles_subtitle_a_arc_plc_payments_proposed_search():
@@ -1243,7 +1268,7 @@ def generate_allprograms_response(start_year, end_year):
         SUM(CASE WHEN t.name = 'Title II: Conservation' AND p.year BETWEEN {start_year} AND {end_year} AND (sub_program_id IN (SELECT id FROM pdl.sub_programs WHERE pdl.sub_programs.name = 'Total CRP') OR sub_program_id IS NULL) THEN p.payment ELSE 0 END) AS "Title II Total",
         SUM(CASE WHEN t.name = 'Title IV: Nutrition' AND p.year BETWEEN {start_year} AND {end_year} THEN p.payment ELSE 0 END) AS "SNAP Total",
         SUM(CASE WHEN t.name = 'Title IX: Crop Insurance' AND p.year BETWEEN {start_year} AND {end_year} THEN p.net_farmer_benefit_amount ELSE 0 END) AS "Crop Insurance Total",
-        SUM(CASE WHEN (sub_program_id IN (SELECT id FROM pdl.sub_programs WHERE pdl.sub_programs.name IN ('Total CRP', 'Agriculture Risk Coverage County Option (ARC-CO)', 'Agriculture Risk Coverage Individual Coverage (ARC-IC)')) OR sub_program_id IS NULL) THEN COALESCE(p.payment, 0) + COALESCE(p.net_farmer_benefit_amount, 0) ELSE 0 END) AS "{str(start_year)[-2:]}-{str(end_year)[-2:]} All Programs Total"
+        SUM(CASE WHEN (sub_program_id IN (SELECT id FROM pdl.sub_programs WHERE pdl.sub_programs.name IN ('Total CRP', 'Agriculture Risk Coverage County Option (ARC-CO)', 'Agriculture Risk Coverage Individual Coverage (ARC-IC)')) OR sub_program_id IS NULL) THEN COALESCE(p.payment, 0) + COALESCE(p.net_farmer_benefit_amount, 0) ELSE 0 END) AS "{str(start_year)}-{str(end_year)} All Programs Total"
         """
 
         # Combine the query of non-dynamic part
@@ -1268,7 +1293,7 @@ def generate_allprograms_response(start_year, end_year):
 
         state_data = []
         total_row = {"State": "Total"}
-        start_to_end_years_total_key = str(start_year)[-2:] + "-" + str(end_year)[-2:] + " All Programs Total"
+        start_to_end_years_total_key = str(start_year) + "-" + str(end_year) + " All Programs Total"
 
         # Initialize total_row with zero values for all keys in the desired order
         for year in range(start_year, end_year + 1):
