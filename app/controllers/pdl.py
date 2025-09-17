@@ -28,49 +28,30 @@ SUMMARY_DATA_JSON = "summary.json"
 
 TITLE_I_DATA_PATH = os.path.join("controllers", "data", "title-i")
 I_SUBTITLE_A_DATA_PATH = os.path.join(TITLE_I_DATA_PATH, "subtitle-a")
-COMMOD_MAP_DATA_JSON = "commodities_map_data.json"
-COMMOD_STATE_DISTRIBUTION_DATA_JSON = "commodities_state_distribution_data.json"
-COMMOD_SUBPROGRAMS_DATA_JSON = "commodities_subprograms_data.json"
 ARC_PLC_DATA_JSON = "arc_plc_payments_current.json.gz"
 ARC_PLC_CURRENT_OBBBA_DATA_JSON = "arc_plc_payments_current_obbba.json.gz" # These variable namings will need to be updated the naming once we finalize the scenario names.
 ARC_PLC_PROPOSED_OBBBA_DATA_JSON = "arc_plc_payments_proposed_obbba.json.gz"
 I_PROPOSALS_SUBTITLE_A_DATA_PATH = os.path.join(TITLE_I_DATA_PATH, "proposals", "subtitle-a")
 ARC_PLC_PROPOSAL_DATA_JSON = "arc_plc_payments_proposed.json.gz"
 I_SUBTITLE_D_DATA_PATH = os.path.join(TITLE_I_DATA_PATH, "subtitle-d")
-DMC_STATE_DISTRIBUTION_DATA_JSON = "dmc_state_distribution_data.json"
-DMC_SUBPROGRAMS_DATA_JSON = "dmc_subprograms_data.json"
 I_SUBTITLE_E_DATA_PATH = os.path.join(TITLE_I_DATA_PATH, "subtitle-e")
-SADA_STATE_DISTRIBUTION_DATA_JSON = "sada_state_distribution_data.json"
-SADA_SUBPROGRAMS_DATA_JSON = "sada_subprograms_data.json"
 
 TITLE_II_DATA_PATH = os.path.join("controllers", "data", "title-ii")
 II_EQIP_DATA_PATH = os.path.join(TITLE_II_DATA_PATH, "programs", "eqip")
 II_EQIP_IRA_DATA_PATH = os.path.join(TITLE_II_DATA_PATH, "programs", "eqip-ira")
-EQIP_MAP_DATA_JSON = "eqip_map_data.json"
-EQIP_STATE_DISTRIBUTION_DATA_JSON = "eqip_state_distribution_data.json"
-EQIP_PRACTICE_CATEGORIES_DATA_JSON = "eqip_practice_categories_data.json"
 EQIP_IRA_STATE_DISTRIBUTION_DATA_JSON = "eqip_ira_state_distribution.json"
 EQIP_IRA_SUMMARY_DATA_JSON = "eqip_ira_summary.json"
 EQIP_IRA_PRACTICE_CATEGORIES_DATA_JSON = "eqip_ira_practices.json"
 EQIP_IRA_AGGREGATE_DATA_JSON = "eqip_ira_aggregated_prediction.json"
 II_CSP_DATA_PATH = os.path.join(TITLE_II_DATA_PATH, "programs", "csp")
-CSP_MAP_DATA_JSON = "csp_map_data.json"
-CSP_STATE_DISTRIBUTION_DATA_JSON = "csp_state_distribution_data.json"
-CSP_PRACTICE_CATEGORIES_DATA_JSON = "csp_practice_categories_data.json"
 II_CSP_IRA_DATA_PATH = os.path.join(TITLE_II_DATA_PATH, "programs", "csp-ira")
 CSP_IRA_STATE_DISTRIBUTION_DATA_JSON = "csp_ira_state_distribution.json"
 CSP_IRA_SUMMARY_DATA_JSON = "csp_ira_summary.json"
 CSP_IRA_PRACTICE_CATEGORIES_DATA_JSON = "csp_ira_practices.json"
 CSP_IRA_AGGREGATE_DATA_JSON = "csp_ira_aggregated_prediction.json"
 II_CRP_DATA_PATH = os.path.join(TITLE_II_DATA_PATH, "programs", "crp")
-CRP_STATE_DISTRIBUTION_DATA_JSON = "crp_state_distribution_data.json"
-CRP_SUBPROGRAMS_DATA_JSON = "crp_subprograms_data.json"
 II_ACEP_DATA_PATH = os.path.join(TITLE_II_DATA_PATH, "programs", "acep")
-ACEP_STATE_DISTRIBUTION_DATA_JSON = "acep_state_distribution_data.json"
-ACEP_SUBPROGRAMS_DATA_JSON = "acep_subprograms_data.json"
 II_RCPP_DATA_PATH = os.path.join(TITLE_II_DATA_PATH, "programs", "rcpp")
-RCPP_STATE_DISTRIBUTION_DATA_JSON = "rcpp_state_distribution_data.json"
-RCPP_SUBPROGRAMS_DATA_JSON = "rcpp_subprograms_data.json"
 II_PROPOSALS_2024_HOUSE_EQIP_DATA_PATH = os.path.join(TITLE_II_DATA_PATH, "proposals", "2024", "house", "eqip")
 HOUSE_PREDICTED_DATA_JSON = "house_outlay_max.json"
 HOUSE_PREDICTED_PRACTICE_CATEGORIES_DATA_JSON = "house_outlay_practices.json"
@@ -79,8 +60,6 @@ IV_SNAP_DATA_PATH = os.path.join(TITLE_IV_DATA_PATH, "programs", "snap")
 
 TITLE_XI_DATA_PATH = os.path.join("controllers", "data", "title-xi")
 XI_CROP_INS_DATA_PATH = os.path.join(TITLE_XI_DATA_PATH, "programs", "crop-insurance")
-CROP_INSURANCE_SUMMARY_DATA_JSON = "crop_insurance_subprograms_data.json"
-CROP_INSURANCE_STATE_DISTRIBUTION_DATA_JSON = "crop_insurance_state_distribution_data.json"
 
 TITLE_I_NAME = "Title I: Commodities"
 TITLE_II_NAME = "Title II: Conservation"
@@ -265,21 +244,6 @@ def titles_title_i_state_distribution_search():
 
     endpoint_response = generate_title_i_total_state_distribution_response(title_id, start_year, end_year)
     return endpoint_response
-
-
-# /pdl/titles/title-i/subtitles/subtitle-a/map:
-def titles_title_i_subtitles_subtitle_a_map_search():
-    # set the file path
-    subtitle_data = os.path.join(I_SUBTITLE_A_DATA_PATH, COMMOD_MAP_DATA_JSON)
-
-    # open file
-    with open(subtitle_data, 'r') as map_data:
-        file_data = map_data.read()
-
-    # parse file
-    data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
-
-    return data_json
 
 
 # /pdl/titles/title-i/subtitles/subtitle-a/state-distribution:
@@ -556,20 +520,6 @@ def titles_title_ii_state_distribution_search():
 
     return endpoint_response
 
-# /pdl/titles/title-ii/programs/eqip/map
-def titles_title_ii_programs_eqip_map_search():
-    # set the file path
-    eqip_data = os.path.join(II_EQIP_DATA_PATH, EQIP_MAP_DATA_JSON)
-
-    # open file
-    with open(eqip_data, 'r') as map_data:
-        file_data = map_data.read()
-
-        # parse file
-        data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
-
-        return data_json
-
 
 # /pdl/titles/title-ii/programs/eqip/state-distribution
 def titles_title_ii_programs_eqip_state_distribution_search(practice_code=None):
@@ -711,21 +661,6 @@ def titles_title_ii_programs_eqip_ira_predicted_search():
 
     # open file
     with open(eqip_ira_data, 'r') as map_data:
-        file_data = map_data.read()
-
-        # parse file
-        data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
-
-        return data_json
-
-
-# /pdl/titles/title-ii/programs/csp/map
-def titles_title_ii_programs_csp_map_search():
-    # set the file path
-    csp_data = os.path.join(II_CSP_DATA_PATH, CSP_MAP_DATA_JSON)
-
-    # open file
-    with open(csp_data, 'r') as map_data:
         file_data = map_data.read()
 
         # parse file
