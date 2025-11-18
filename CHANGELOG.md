@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Update OBBBA json files. [#347](https://github.com/policy-design-lab/pdl-api/issues/347)
+- Update reconciliation data with November 2025 price data. [#349](https://github.com/policy-design-lab/pdl-api/issues/349)
 
 ## [0.25.0] - 2025-08-20
 
