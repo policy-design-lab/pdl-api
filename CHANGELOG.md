@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Changed
-- Clean up unused JSON file reader functions. [#345](https://github.com/policy-design-lab/pdl-api/issues/345)
+- Removed unused API endpoints and cleaned up unused JSON file reader functions. [#345](https://github.com/policy-design-lab/pdl-api/issues/345)
 
 ## [0.25.0] - 2025-08-20
 
