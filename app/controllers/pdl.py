@@ -1180,11 +1180,11 @@ def generate_title_xi_county_distribution_response(program_id, start_year, end_y
     # Calculate averages and ratios for each county
     for county_fips, values in county_aggregate_dict.items():
         # Calculate average insured area in acres
-        values['averageInsuredAreaInAcres'] = values['totalInsuredAreaInAcres'] / num_years
+        values['averageInsuredAreaInAcres'] = round(values['totalInsuredAreaInAcres'] / num_years)
         del values['totalInsuredAreaInAcres']
 
         # Calculate average liabilities in dollars
-        values['averageLiabilitiesInDollars'] = values['totalLiabilitiesInDollars'] / num_years
+        values['averageLiabilitiesInDollars'] = round(values['totalLiabilitiesInDollars'] / num_years)
         del values['totalLiabilitiesInDollars']
 
         # Loss_ratio is indemnities / premium so create the average loss ratio
