@@ -1127,7 +1127,7 @@ def generate_title_xi_county_distribution_response(program_id, start_year, end_y
         year_dict[year].append({
             'countyFips': county_fips,
             'stateFips': state_fips,
-            'stateCode': state_code,
+            'state': state_code,
             'countyName': county_name,
             'totalIndemnitiesInDollars': indemnity_amount,
             'totalPremiumInDollars': premium_amount,
@@ -1143,7 +1143,7 @@ def generate_title_xi_county_distribution_response(program_id, start_year, end_y
     county_aggregate_dict = defaultdict(lambda: {
         'countyFips': '',
         'stateFips': '',
-        'stateCode': '',
+        'state': '',
         'countyName': '',
         'totalIndemnitiesInDollars': 0,
         'totalPremiumInDollars': 0,
@@ -1166,7 +1166,7 @@ def generate_title_xi_county_distribution_response(program_id, start_year, end_y
             # Sum the values across all years for each county
             county_aggregate_dict[county_fips]['countyFips'] = county_fips
             county_aggregate_dict[county_fips]['stateFips'] = record['stateFips']
-            county_aggregate_dict[county_fips]['stateCode'] = record['stateCode']
+            county_aggregate_dict[county_fips]['state'] = record['state']
             county_aggregate_dict[county_fips]['countyName'] = record['countyName']
             county_aggregate_dict[county_fips]['totalIndemnitiesInDollars'] += record['totalIndemnitiesInDollars']
             county_aggregate_dict[county_fips]['totalPremiumInDollars'] += record['totalPremiumInDollars']
