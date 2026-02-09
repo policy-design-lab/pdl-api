@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Crop Insurance county level API. [#353](https://github.com/policy-design-lab/pdl-api/issues/353)
+- Create APIs for title I. [#356](https://github.com/policy-design-lab/pdl-api/issues/356)
 
 ### Removed
 - Removed unused API endpoints and cleaned up unused JSON file reader functions. [#345](https://github.com/policy-design-lab/pdl-api/issues/345)

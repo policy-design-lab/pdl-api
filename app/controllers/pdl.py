@@ -274,6 +274,32 @@ def titles_title_i_subtitles_subtitle_a_state_distribution_search():
     endpoint_response = generate_title_i_state_distribution_response(subtitle_id, start_year, end_year)
     return endpoint_response
 
+# /pdl/titles/title-i/subtitles/subtitle-a/county-distribution:
+def titles_title_i_subtitles_subtitle_a_county_distribution_search():
+    subtitle_id = get_subtitle_id(TITLE_I_SUBTITLE_A_NAME)
+    if subtitle_id is None:
+        msg = {
+            "reason": "No record for the given subtitle name " + TITLE_I_SUBTITLE_A_NAME,
+            "error": "Not found: " + request.url,
+        }
+        logging.error("Title I Subtitle A: " + json.dumps(msg))
+        return rs_handlers.not_found(msg)
+
+    min_year, max_year = cfg.TITLE_I_START_YEAR, cfg.TITLE_I_END_YEAR
+    start_year = request.args.get('start_year', type=int, default=min_year)
+    end_year = request.args.get('end_year', type=int, default=max_year)
+
+    if start_year and end_year and start_year > end_year:
+        start_year, end_year = min_year, max_year  # Reset to full range if invalid
+
+    if start_year is None:
+        start_year = min_year  # Default to the earliest available year
+
+    if end_year is None:
+        end_year = max_year  # Default to latest available year
+
+    endpoint_response = generate_title_i_subtitle_county_distribution_response(subtitle_id, start_year, end_year)
+    return endpoint_response
 
 # /pdl/titles/title-i/subtitles/subtitle-a/summary:
 def titles_title_i_subtitles_subtitle_a_summary_search():
@@ -330,6 +356,32 @@ def titles_title_i_subtitles_subtitle_d_state_distribution_search():
     endpoint_response = generate_title_i_state_distribution_response(subtitle_id, start_year, end_year)
     return endpoint_response
 
+# /pdl/titles/title-i/subtitles/subtitle-d/county-distribution
+def titles_title_i_subtitles_subtitle_d_county_distribution_search():
+    subtitle_id = get_subtitle_id(TITLE_I_SUBTITLE_D_NAME)
+    if subtitle_id is None:
+        msg = {
+            "reason": "No record for the given subtitle name " + TITLE_I_SUBTITLE_D_NAME,
+            "error": "Not found: " + request.url,
+        }
+        logging.error("Title I Subtitle D: " + json.dumps(msg))
+        return rs_handlers.not_found(msg)
+
+    min_year, max_year = cfg.TITLE_I_START_YEAR, cfg.TITLE_I_END_YEAR
+    start_year = request.args.get('start_year', type=int, default=min_year)
+    end_year = request.args.get('end_year', type=int, default=max_year)
+
+    if start_year and end_year and start_year > end_year:
+        start_year, end_year = min_year, max_year  # Reset to full range if invalid
+
+    if start_year is None:
+        start_year = min_year  # Default to the earliest available year
+
+    if end_year is None:
+        end_year = max_year  # Default to latest available year
+
+    endpoint_response = generate_title_i_subtitle_county_distribution_response(subtitle_id, start_year, end_year)
+    return endpoint_response
 
 # /pdl/titles/title-i/subtitles/subtitle-d/summary:
 def titles_title_i_subtitles_subtitle_d_summary_search():
@@ -386,6 +438,32 @@ def titles_title_i_subtitles_subtitle_e_state_distribution_search():
     endpoint_response = generate_title_i_state_distribution_response(subtitle_id, start_year, end_year)
     return endpoint_response
 
+# /pdl/titles/title-i/subtitles/subtitle-e/county-distribution
+def titles_title_i_subtitles_subtitle_e_county_distribution_search():
+    subtitle_id = get_subtitle_id(TITLE_I_SUBTITLE_E_NAME)
+    if subtitle_id is None:
+        msg = {
+            "reason": "No record for the given subtitle name " + TITLE_I_SUBTITLE_E_NAME,
+            "error": "Not found: " + request.url,
+        }
+        logging.error("Title I Subtitle E: " + json.dumps(msg))
+        return rs_handlers.not_found(msg)
+
+    min_year, max_year = cfg.TITLE_I_START_YEAR, cfg.TITLE_I_END_YEAR
+    start_year = request.args.get('start_year', type=int, default=min_year)
+    end_year = request.args.get('end_year', type=int, default=max_year)
+
+    if start_year and end_year and start_year > end_year:
+        start_year, end_year = min_year, max_year  # Reset to full range if invalid
+
+    if start_year is None:
+        start_year = min_year  # Default to the earliest available year
+
+    if end_year is None:
+        end_year = max_year  # Default to latest available year
+
+    endpoint_response = generate_title_i_subtitle_county_distribution_response(subtitle_id, start_year, end_year)
+    return endpoint_response
 
 # /pdl/titles/title-i/subtitles/subtitle-e/summary:
 def titles_title_i_subtitles_subtitle_e_summary_search():
@@ -462,7 +540,6 @@ def titles_title_i_subtitles_subtitle_a_arc_plc_payments_proposed_search():
     response = Response(file_data, mimetype='application/json')
     response.headers['Content-Encoding'] = 'gzip'
     return response
-
 
 # /pdl/titles/title-ii/summary:
 def titles_title_ii_summary_search():
@@ -2321,6 +2398,107 @@ def generate_title_i_summary_response(subtitle_id, start_year, end_year):
 
     return subtitle_response_dict
 
+
+def generate_title_i_subtitle_county_distribution_response(subtitle_id, start_year, end_year):
+    session = Session()
+
+    # Get Title I ID
+    title_id = get_title_id(TITLE_I_NAME)
+    if title_id is None:
+        logging.error(f"Title ID not found for {TITLE_I_NAME}")
+        return {}
+
+    num_years = end_year - start_year + 1
+
+    # construct the query using PaymentByCounty model with County join
+    subtitle_query = session.query(
+        PaymentByCounty.county_fips_code.label('county_fips'),
+        County.state_code.label('state_code'),
+        County.name.label('county_name'),
+        PaymentByCounty.year.label('year'),
+        PaymentByCounty.payment.label('payment'),
+        PaymentByCounty.recipient_count.label('recipient_count'),
+        PaymentByCounty.base_acres.label('base_acres')).outerjoin(
+        County, PaymentByCounty.county_fips_code == County.fips_code).filter(
+        PaymentByCounty.title_id == title_id,
+        PaymentByCounty.subtitle_id == subtitle_id,
+        PaymentByCounty.year.between(start_year, end_year)
+    )
+
+    # execute the query
+    subtitle_result = subtitle_query.all()
+
+    # create dictionaries
+    subtitle_response_dict = defaultdict(list)
+    year_dict = defaultdict(list)
+
+    # aggregate data
+    for record in subtitle_result:
+        county_fips = record[0]
+        state_code = record[1]
+        county_name = record[2]
+        year = str(record[3])
+        payment = record[4] if record[4] is not None else 0
+        recipient_count = record[5] if record[5] is not None else 0
+        base_acres = record[6] if record[6] is not None else 0
+
+        # Extract state FIPS from county FIPS (first 2 digits)
+        state_fips = county_fips[:2] if county_fips and len(county_fips) >= 2 else ''
+
+        year_dict[year].append({
+            'countyFips': county_fips,
+            'stateFips': state_fips,
+            'state': state_code,
+            'countyName': county_name,
+            'totalPaymentInDollars': payment,
+            'totalRecipientCount': recipient_count,
+            'totalBaseAcres': base_acres
+        })
+
+    county_aggregate_dict = defaultdict(lambda: {
+        'countyFips': '',
+        'stateFips': '',
+        'state': '',
+        'countyName': '',
+        'totalPaymentInDollars': 0,
+        'totalRecipientCount': 0,
+        'averageBaseAcres': 0
+    })
+
+    # Loop through each year and aggregate data by county
+    for year, records in year_dict.items():
+        for record in records:
+            county_fips = record['countyFips']
+
+            # Sum the values across all years for each county
+            county_aggregate_dict[county_fips]['countyFips'] = county_fips
+            county_aggregate_dict[county_fips]['stateFips'] = record['stateFips']
+            county_aggregate_dict[county_fips]['state'] = record['state']
+            county_aggregate_dict[county_fips]['countyName'] = record['countyName']
+            county_aggregate_dict[county_fips]['totalPaymentInDollars'] += record['totalPaymentInDollars']
+            county_aggregate_dict[county_fips]['totalRecipientCount'] += record['totalRecipientCount']
+            county_aggregate_dict[county_fips]['averageBaseAcres'] += record['totalBaseAcres']
+
+    # Calculate averages for each county
+    for county_fips, values in county_aggregate_dict.items():
+        # Calculate average base acres
+        if num_years > 0:
+            values['averageBaseAcres'] = round(values['averageBaseAcres'] / num_years)
+
+    # convert the data into the required format
+    final_output = []
+    for county_fips, values in county_aggregate_dict.items():
+        final_output.append(values)
+
+    # Sort the final output based on totalPaymentInDollars in reverse order
+    final_output = sorted(final_output, key=lambda x: x['totalPaymentInDollars'], reverse=True)
+
+    # Add the total counties data to the subtitle_response_dict
+    subtitle_response_dict[str(start_year) + '-' + str(end_year)] = final_output
+
+    session.close()
+
+    return subtitle_response_dict
 
 def generate_title_ii_state_distribution_response(program_id, start_year, end_year, practice_code=None):
     session = Session()
