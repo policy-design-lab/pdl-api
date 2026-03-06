@@ -1,9 +1,9 @@
-import gzip
 import json
 import logging
 import os
 from collections import OrderedDict
 from app.controllers.configs import Config as cfg
+from app.models.county import County
 from flask import request, Response
 from sqlalchemy import func, desc, Numeric, BigInteger, Integer, text, or_, and_
 
@@ -11,6 +11,7 @@ import app.utils.jsonutils as jsonutils
 import app.utils.rest_handlers as rs_handlers
 from app.models.db import Session
 from app.models.payment import Payment
+from app.models.payment_by_counties import PaymentByCounty
 from app.models.practice import Practice
 from app.models.program import Program
 from app.models.practice_category import PracticeCategory
@@ -28,49 +29,30 @@ SUMMARY_DATA_JSON = "summary.json"
 
 TITLE_I_DATA_PATH = os.path.join("controllers", "data", "title-i")
 I_SUBTITLE_A_DATA_PATH = os.path.join(TITLE_I_DATA_PATH, "subtitle-a")
-COMMOD_MAP_DATA_JSON = "commodities_map_data.json"
-COMMOD_STATE_DISTRIBUTION_DATA_JSON = "commodities_state_distribution_data.json"
-COMMOD_SUBPROGRAMS_DATA_JSON = "commodities_subprograms_data.json"
 ARC_PLC_DATA_JSON = "arc_plc_payments_current.json.gz"
 ARC_PLC_CURRENT_OBBBA_DATA_JSON = "arc_plc_payments_current_obbba.json.gz" # These variable namings will need to be updated the naming once we finalize the scenario names.
 ARC_PLC_PROPOSED_OBBBA_DATA_JSON = "arc_plc_payments_proposed_obbba.json.gz"
 I_PROPOSALS_SUBTITLE_A_DATA_PATH = os.path.join(TITLE_I_DATA_PATH, "proposals", "subtitle-a")
 ARC_PLC_PROPOSAL_DATA_JSON = "arc_plc_payments_proposed.json.gz"
 I_SUBTITLE_D_DATA_PATH = os.path.join(TITLE_I_DATA_PATH, "subtitle-d")
-DMC_STATE_DISTRIBUTION_DATA_JSON = "dmc_state_distribution_data.json"
-DMC_SUBPROGRAMS_DATA_JSON = "dmc_subprograms_data.json"
 I_SUBTITLE_E_DATA_PATH = os.path.join(TITLE_I_DATA_PATH, "subtitle-e")
-SADA_STATE_DISTRIBUTION_DATA_JSON = "sada_state_distribution_data.json"
-SADA_SUBPROGRAMS_DATA_JSON = "sada_subprograms_data.json"
 
 TITLE_II_DATA_PATH = os.path.join("controllers", "data", "title-ii")
 II_EQIP_DATA_PATH = os.path.join(TITLE_II_DATA_PATH, "programs", "eqip")
 II_EQIP_IRA_DATA_PATH = os.path.join(TITLE_II_DATA_PATH, "programs", "eqip-ira")
-EQIP_MAP_DATA_JSON = "eqip_map_data.json"
-EQIP_STATE_DISTRIBUTION_DATA_JSON = "eqip_state_distribution_data.json"
-EQIP_PRACTICE_CATEGORIES_DATA_JSON = "eqip_practice_categories_data.json"
 EQIP_IRA_STATE_DISTRIBUTION_DATA_JSON = "eqip_ira_state_distribution.json"
 EQIP_IRA_SUMMARY_DATA_JSON = "eqip_ira_summary.json"
 EQIP_IRA_PRACTICE_CATEGORIES_DATA_JSON = "eqip_ira_practices.json"
 EQIP_IRA_AGGREGATE_DATA_JSON = "eqip_ira_aggregated_prediction.json"
 II_CSP_DATA_PATH = os.path.join(TITLE_II_DATA_PATH, "programs", "csp")
-CSP_MAP_DATA_JSON = "csp_map_data.json"
-CSP_STATE_DISTRIBUTION_DATA_JSON = "csp_state_distribution_data.json"
-CSP_PRACTICE_CATEGORIES_DATA_JSON = "csp_practice_categories_data.json"
 II_CSP_IRA_DATA_PATH = os.path.join(TITLE_II_DATA_PATH, "programs", "csp-ira")
 CSP_IRA_STATE_DISTRIBUTION_DATA_JSON = "csp_ira_state_distribution.json"
 CSP_IRA_SUMMARY_DATA_JSON = "csp_ira_summary.json"
 CSP_IRA_PRACTICE_CATEGORIES_DATA_JSON = "csp_ira_practices.json"
 CSP_IRA_AGGREGATE_DATA_JSON = "csp_ira_aggregated_prediction.json"
 II_CRP_DATA_PATH = os.path.join(TITLE_II_DATA_PATH, "programs", "crp")
-CRP_STATE_DISTRIBUTION_DATA_JSON = "crp_state_distribution_data.json"
-CRP_SUBPROGRAMS_DATA_JSON = "crp_subprograms_data.json"
 II_ACEP_DATA_PATH = os.path.join(TITLE_II_DATA_PATH, "programs", "acep")
-ACEP_STATE_DISTRIBUTION_DATA_JSON = "acep_state_distribution_data.json"
-ACEP_SUBPROGRAMS_DATA_JSON = "acep_subprograms_data.json"
 II_RCPP_DATA_PATH = os.path.join(TITLE_II_DATA_PATH, "programs", "rcpp")
-RCPP_STATE_DISTRIBUTION_DATA_JSON = "rcpp_state_distribution_data.json"
-RCPP_SUBPROGRAMS_DATA_JSON = "rcpp_subprograms_data.json"
 II_PROPOSALS_2024_HOUSE_EQIP_DATA_PATH = os.path.join(TITLE_II_DATA_PATH, "proposals", "2024", "house", "eqip")
 HOUSE_PREDICTED_DATA_JSON = "house_outlay_max.json"
 HOUSE_PREDICTED_PRACTICE_CATEGORIES_DATA_JSON = "house_outlay_practices.json"
@@ -79,8 +61,6 @@ IV_SNAP_DATA_PATH = os.path.join(TITLE_IV_DATA_PATH, "programs", "snap")
 
 TITLE_XI_DATA_PATH = os.path.join("controllers", "data", "title-xi")
 XI_CROP_INS_DATA_PATH = os.path.join(TITLE_XI_DATA_PATH, "programs", "crop-insurance")
-CROP_INSURANCE_SUMMARY_DATA_JSON = "crop_insurance_subprograms_data.json"
-CROP_INSURANCE_STATE_DISTRIBUTION_DATA_JSON = "crop_insurance_state_distribution_data.json"
 
 TITLE_I_NAME = "Title I: Commodities"
 TITLE_II_NAME = "Title II: Conservation"
@@ -265,21 +245,6 @@ def titles_title_i_state_distribution_search():
 
     endpoint_response = generate_title_i_total_state_distribution_response(title_id, start_year, end_year)
     return endpoint_response
-
-
-# /pdl/titles/title-i/subtitles/subtitle-a/map:
-def titles_title_i_subtitles_subtitle_a_map_search():
-    # set the file path
-    subtitle_data = os.path.join(I_SUBTITLE_A_DATA_PATH, COMMOD_MAP_DATA_JSON)
-
-    # open file
-    with open(subtitle_data, 'r') as map_data:
-        file_data = map_data.read()
-
-    # parse file
-    data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
-
-    return data_json
 
 
 # /pdl/titles/title-i/subtitles/subtitle-a/state-distribution:
@@ -556,20 +521,6 @@ def titles_title_ii_state_distribution_search():
 
     return endpoint_response
 
-# /pdl/titles/title-ii/programs/eqip/map
-def titles_title_ii_programs_eqip_map_search():
-    # set the file path
-    eqip_data = os.path.join(II_EQIP_DATA_PATH, EQIP_MAP_DATA_JSON)
-
-    # open file
-    with open(eqip_data, 'r') as map_data:
-        file_data = map_data.read()
-
-        # parse file
-        data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
-
-        return data_json
-
 
 # /pdl/titles/title-ii/programs/eqip/state-distribution
 def titles_title_ii_programs_eqip_state_distribution_search(practice_code=None):
@@ -711,21 +662,6 @@ def titles_title_ii_programs_eqip_ira_predicted_search():
 
     # open file
     with open(eqip_ira_data, 'r') as map_data:
-        file_data = map_data.read()
-
-        # parse file
-        data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
-
-        return data_json
-
-
-# /pdl/titles/title-ii/programs/csp/map
-def titles_title_ii_programs_csp_map_search():
-    # set the file path
-    csp_data = os.path.join(II_CSP_DATA_PATH, CSP_MAP_DATA_JSON)
-
-    # open file
-    with open(csp_data, 'r') as map_data:
         file_data = map_data.read()
 
         # parse file
@@ -1108,6 +1044,169 @@ def titles_title_xi_programs_crop_insurance_state_distribution_search():
     endpoint_response = generate_title_xi_state_distribution_response(program_id, start_year, end_year)
     return endpoint_response
 
+# /pdl/titles/title-xi/programs/crop-insurance/county-distribution
+def titles_title_xi_programs_crop_insurance_county_distribution_search():
+    program_id = get_program_id(TITLE_XI_CROP_INSURANCE_PROGRAM_NAME)
+    if program_id is None:
+        msg = {
+            "reason": "No record for the given program name " + TITLE_XI_CROP_INSURANCE_PROGRAM_NAME,
+            "error": "Not found: " + request.url,
+        }
+        logging.error("Crop Insurance: " + json.dumps(msg))
+        return rs_handlers.not_found(msg)
+
+    min_year, max_year = cfg.CROP_INSURANCE_START_YEAR, cfg.CROP_INSURANCE_END_YEAR
+    start_year = request.args.get('start_year', type=int, default=min_year)
+    end_year = request.args.get('end_year', type=int, default=max_year)
+
+    if start_year and end_year and start_year > end_year:
+        start_year, end_year = min_year, max_year  # Reset to full range if invalid
+
+    if start_year is None:
+        start_year = min_year  # Default to the earliest available year
+
+    if end_year is None:
+        end_year = max_year  # Default to latest available year
+
+    endpoint_response = generate_title_xi_county_distribution_response(program_id, start_year, end_year)
+    return endpoint_response
+
+def generate_title_xi_county_distribution_response(program_id, start_year, end_year):
+    session = Session()
+
+    num_years = end_year - start_year + 1
+
+    # construct the query using PaymentByCounty model with County join
+    program_query = session.query(
+        PaymentByCounty.county_fips_code.label('county_fips'),
+        County.state_code.label('state_code'),
+        County.name.label('county_name'),
+        Program.name.label('programName'),
+        PaymentByCounty.year.label('year'),
+        PaymentByCounty.base_acres.label('base_acres'),
+        PaymentByCounty.premium_policy_count.label('premium_policy_count'),
+        PaymentByCounty.liability_amount.label('liability_amount'),
+        PaymentByCounty.premium_amount.label('premium_amount'),
+        PaymentByCounty.premium_subsidy_amount.label('premium_subsidy_amount'),
+        PaymentByCounty.indemnity_amount.label('indemnity_amount'),
+        PaymentByCounty.farmer_premium_amount.label('farmer_premium_amount'),
+        PaymentByCounty.loss_ratio.label('loss_ratio'),
+        PaymentByCounty.net_farmer_benefit_amount.label('net_farmer_benefit_amount')).join(
+        Program, PaymentByCounty.program_id == Program.id).outerjoin(
+        County, PaymentByCounty.county_fips_code == County.fips_code).filter(
+        PaymentByCounty.program_id == program_id,
+        PaymentByCounty.year.between(start_year, end_year)
+    )
+
+    # execute the query
+    program_result = program_query.all()
+
+    # create dictionaries
+    program_response_dict = defaultdict(list)
+    year_dict = defaultdict(list)
+
+    # aggregate data
+    for record in program_result:
+        county_fips = record[0]
+        state_code = record[1]
+        county_name = record[2]
+        year = str(record[4])
+        base_acres = record[5]
+        premium_policy_count = record[6]
+        liability_amount = record[7]
+        premium_amount = record[8]
+        premium_subsidy_amount = record[9]
+        indemnity_amount = record[10]
+        farmer_premium_amount = record[11]
+        loss_ratio = record[12]
+        net_farmer_benefit_amount = record[13]
+
+        # Extract state FIPS from county FIPS (first 2 digits)
+        state_fips = county_fips[:2] if county_fips and len(county_fips) >= 2 else ''
+
+        year_dict[year].append({
+            'countyFips': county_fips,
+            'stateFips': state_fips,
+            'state': state_code,
+            'countyName': county_name,
+            'totalIndemnitiesInDollars': indemnity_amount,
+            'totalPremiumInDollars': premium_amount,
+            'totalPremiumSubsidyInDollars': premium_subsidy_amount,
+            'totalFarmerPaidPremiumInDollars': farmer_premium_amount,
+            'totalNetFarmerBenefitInDollars': net_farmer_benefit_amount,
+            'totalPoliciesEarningPremium': premium_policy_count,
+            'totalLiabilitiesInDollars': liability_amount,
+            'totalInsuredAreaInAcres': base_acres,
+            'lossRatio': loss_ratio
+        })
+
+    county_aggregate_dict = defaultdict(lambda: {
+        'countyFips': '',
+        'stateFips': '',
+        'state': '',
+        'countyName': '',
+        'totalIndemnitiesInDollars': 0,
+        'totalPremiumInDollars': 0,
+        'totalPremiumSubsidyInDollars': 0,
+        'totalFarmerPaidPremiumInDollars': 0,
+        'totalNetFarmerBenefitInDollars': 0,
+        'totalPoliciesEarningPremium': 0,
+        'totalLiabilitiesInDollars': 0,
+        'totalInsuredAreaInAcres': 0,
+        'averageLiabilitiesInDollars': 0,
+        'averageInsuredAreaInAcres': 0,
+        'lossRatio': 0
+    })
+
+    # Loop through each year and aggregate data by county
+    for year, records in year_dict.items():
+        for record in records:
+            county_fips = record['countyFips']
+
+            # Sum the values across all years for each county
+            county_aggregate_dict[county_fips]['countyFips'] = county_fips
+            county_aggregate_dict[county_fips]['stateFips'] = record['stateFips']
+            county_aggregate_dict[county_fips]['state'] = record['state']
+            county_aggregate_dict[county_fips]['countyName'] = record['countyName']
+            county_aggregate_dict[county_fips]['totalIndemnitiesInDollars'] += record['totalIndemnitiesInDollars']
+            county_aggregate_dict[county_fips]['totalPremiumInDollars'] += record['totalPremiumInDollars']
+            county_aggregate_dict[county_fips]['totalPremiumSubsidyInDollars'] += record['totalPremiumSubsidyInDollars']
+            county_aggregate_dict[county_fips]['totalFarmerPaidPremiumInDollars'] += record['totalFarmerPaidPremiumInDollars']
+            county_aggregate_dict[county_fips]['totalNetFarmerBenefitInDollars'] += record['totalNetFarmerBenefitInDollars']
+            county_aggregate_dict[county_fips]['totalPoliciesEarningPremium'] += record['totalPoliciesEarningPremium']
+            county_aggregate_dict[county_fips]['totalLiabilitiesInDollars'] += record['totalLiabilitiesInDollars']
+            county_aggregate_dict[county_fips]['totalInsuredAreaInAcres'] += record['totalInsuredAreaInAcres']
+
+    # Calculate averages and ratios for each county
+    for county_fips, values in county_aggregate_dict.items():
+        # Calculate average insured area in acres
+        values['averageInsuredAreaInAcres'] = round(values['totalInsuredAreaInAcres'] / num_years)
+        del values['totalInsuredAreaInAcres']
+
+        # Calculate average liabilities in dollars
+        values['averageLiabilitiesInDollars'] = round(values['totalLiabilitiesInDollars'] / num_years)
+        del values['totalLiabilitiesInDollars']
+
+        # Loss_ratio is indemnities / premium so create the average loss ratio
+        if values['totalPremiumInDollars'] > 0:
+            values['lossRatio'] = values['totalIndemnitiesInDollars'] / values['totalPremiumInDollars']
+            # round the loss ratio to 3 decimal places
+            values['lossRatio'] = round(values['lossRatio'], 3)
+        else:
+            values['lossRatio'] = 0
+
+    # convert the data into the required format
+    final_output = []
+    for county_fips, values in county_aggregate_dict.items():
+        final_output.append(values)
+
+    # Sort the final output based on totalIndemnitiesInDollars in reverse order
+    final_output = sorted(final_output, key=lambda x: x['totalIndemnitiesInDollars'], reverse=True)
+
+    # Add the total counties data to the program_response_dict
+    program_response_dict[str(start_year) + '-' + str(end_year)] = final_output
+
+    return program_response_dict
 
 # /pdl/titles/title-xi/programs/crop-insurance/summary
 def titles_title_xi_programs_crop_insurance_summary_search():
