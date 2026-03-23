@@ -246,6 +246,33 @@ def titles_title_i_state_distribution_search():
     endpoint_response = generate_title_i_total_state_distribution_response(title_id, start_year, end_year)
     return endpoint_response
 
+# /pdl/titles/title-i/county-distribution:
+def titles_title_i_county_distribution_search():
+    min_year, max_year = cfg.TITLE_I_START_YEAR, cfg.TITLE_I_END_YEAR
+    start_year = request.args.get('start_year', type=int, default=min_year)
+    end_year = request.args.get('end_year', type=int, default=max_year)
+
+    title_id = get_title_id(TITLE_I_NAME)
+    if title_id is None:
+        msg = {
+            "reason": "No record for the given title name " + TITLE_I_NAME,
+            "error": "Not found: " + request.url,
+        }
+        logging.error("Title I: " + json.dumps(msg))
+        return rs_handlers.not_found(msg)
+
+    if start_year and end_year and start_year > end_year:
+        start_year, end_year = min_year, max_year  # Reset to full range if invalid
+
+    if start_year is None:
+        start_year = min_year  # Default to the earliest available year
+
+    if end_year is None:
+        end_year = max_year  # Default to latest available year
+
+    endpoint_response = generate_title_i_total_county_distribution_response(title_id, start_year, end_year)
+    return endpoint_response
+
 
 # /pdl/titles/title-i/subtitles/subtitle-a/state-distribution:
 def titles_title_i_subtitles_subtitle_a_state_distribution_search():
@@ -1836,6 +1863,66 @@ def generate_title_i_total_state_distribution_response(title_id, start_year, end
     # round the total payment
     for state in sorted_summary:
         state['totalPaymentInDollars'] = round(state['totalPaymentInDollars'], 2)
+
+    sorted_data_by_year[str(start_year) + '-' + str(end_year)] = sorted_summary
+
+    result_dict = dict(sorted_data_by_year)
+
+    return result_dict
+
+def generate_title_i_total_county_distribution_response(title_id, start_year, end_year):
+    session = Session()
+
+    # construct the query
+    program_query = session.query(
+        PaymentByCounty.county_fips_code.label('countyFips'),
+        Subtitle.name.label('subtitleName'),
+        PaymentByCounty.year.label('year'),
+        PaymentByCounty.payment.label('totalPaymentInDollars'),
+        PaymentByCounty.recipient_count.label('totalRecipientCount')).join(
+        Subtitle, PaymentByCounty.subtitle_id == Subtitle.id).filter(
+        PaymentByCounty.title_id == title_id,
+        PaymentByCounty.year.between(start_year, end_year)
+    )
+
+    # execute the query
+    result = program_query.all()
+
+    # create a nested dictionary to store data by year and county fips
+    data_by_year_and_county = defaultdict(
+        lambda: defaultdict(lambda: {'totalPaymentInDollars': 0, 'totalRecipientCount': 0}))
+    all_years_summary = defaultdict(lambda: {'totalPaymentInDollars': 0, 'totalRecipientCount': 0})
+
+    for record in result:
+        county_fips, title_name, year, payments, recipients = record
+        entry = data_by_year_and_county[year][county_fips]
+        entry['countyFips'] = county_fips
+        entry['totalPaymentInDollars'] += payments
+        entry['totalRecipientCount'] += recipients
+
+        # add to all years summary
+        summary = all_years_summary[county_fips]
+        summary['countyFips'] = county_fips
+        summary['totalPaymentInDollars'] += payments
+        summary['totalRecipientCount'] += recipients
+
+    # sort by total payment
+    sorted_data_by_year = {}
+    for year, counties in data_by_year_and_county.items():
+        sorted_entries = sorted(counties.values(), key=lambda x: x['totalPaymentInDollars'], reverse=True)
+        sorted_data_by_year[year] = sorted_entries
+
+    # round the total payment
+    for year, counties in sorted_data_by_year.items():
+        for county in counties:
+            county['totalPaymentInDollars'] = round(county['totalPaymentInDollars'], 2)
+
+    # all years summary
+    sorted_summary = sorted(all_years_summary.values(), key=lambda x: x['totalPaymentInDollars'], reverse=True)
+
+    # round the total payment
+    for county in sorted_summary:
+        county['totalPaymentInDollars'] = round(county['totalPaymentInDollars'], 2)
 
     sorted_data_by_year[str(start_year) + '-' + str(end_year)] = sorted_summary
 
