@@ -2486,6 +2486,26 @@ def generate_title_i_summary_response(subtitle_id, start_year, end_year):
     return subtitle_response_dict
 
 
+def _title_i_subprogram_metrics_all_zero(subprogram):
+    """True when every payment/recipient metric is zero or absent (omit from JSON)."""
+    for key in (
+        "totalPaymentInDollars",
+        "totalPaymentInPercentageNationwide",
+        "averageAreaInAcres",
+        "averageRecipientCount",
+        "totalPaymentInPercentageWithinState",
+    ):
+        v = subprogram.get(key)
+        if v is None:
+            continue
+        try:
+            if float(v) != 0.0:
+                return False
+        except (TypeError, ValueError):
+            return False
+    return True
+
+
 def generate_title_i_subtitle_county_distribution_response(subtitle_id, start_year, end_year):
     session = Session()
 
@@ -2678,23 +2698,31 @@ def generate_title_i_subtitle_county_distribution_response(subtitle_id, start_ye
         if county_fips in program_response_dict:
             subtitle_response_dict[county_fips].update(program_response_dict[county_fips])
             for program in subtitle_response_dict[county_fips]["programs"]:
+                _sub_pay = subtitle_response_dict[county_fips]["totalPaymentInDollars"]
+                if _sub_pay is None:
+                    _sub_pay = 0.0
+                _sub_recipient_total = subtitle_response_dict[county_fips]["totalRecipientCount"]
+                if _sub_recipient_total is None:
+                    _sub_recipient_total = 0
+
                 if county_fips in subprogram_response_dict and program["programName"] in subprogram_response_dict[
                     county_fips]:
                     program["subPrograms"] = subprogram_response_dict[county_fips][program["programName"]]
 
-                if subtitle_response_dict[county_fips]["totalPaymentInDollars"] != 0.0:
-                    program["totalPaymentInPercentageWithinState"] = (
-                        round(program["totalPaymentInDollars"] / subtitle_response_dict[county_fips][
-                            "totalPaymentInDollars"] * 100, 2))
+                _prog_pay = program["totalPaymentInDollars"]
+                if _prog_pay is None:
+                    _prog_pay = 0.0
+                if _sub_pay != 0.0:
+                    program["totalPaymentInPercentageWithinState"] = round(_prog_pay / _sub_pay * 100, 2)
                 else:
                     program["totalPaymentInPercentageWithinState"] = 0.0
 
-                if subtitle_response_dict[county_fips]["totalRecipientCount"] != 0:
-                    program["totalRecipientCountInPercentageWithinState"] = (
-                        round(
-                            program["totalRecipientCount"] / subtitle_response_dict[county_fips][
-                                "totalRecipientCount"] * 100,
-                            2))
+                _prog_recipient_total = program["totalRecipientCount"]
+                if _prog_recipient_total is None:
+                    _prog_recipient_total = 0
+                if _sub_recipient_total != 0:
+                    program["totalRecipientCountInPercentageWithinState"] = round(
+                        _prog_recipient_total / _sub_recipient_total * 100, 2)
                     # TODO: Temporary fix. The below attribute may need to be calculated based on the average recipient count or removed if not needed.
                     program["averageRecipientCountInPercentageWithinState"] = program[
                         "totalRecipientCountInPercentageWithinState"]
@@ -2703,12 +2731,17 @@ def generate_title_i_subtitle_county_distribution_response(subtitle_id, start_ye
                     program["totalRecipientCountInPercentageWithinState"] = 0.0
 
                 for subprogram in program["subPrograms"]:
-                    if subtitle_response_dict[county_fips]["totalPaymentInDollars"] != 0.0:
-                        subprogram["totalPaymentInPercentageWithinState"] = (
-                            round(subprogram["totalPaymentInDollars"] /
-                                  subtitle_response_dict[county_fips]["totalPaymentInDollars"] * 100, 2))
+                    _subp_pay = subprogram["totalPaymentInDollars"]
+                    if _subp_pay is None:
+                        _subp_pay = 0.0
+                    if _sub_pay != 0.0:
+                        subprogram["totalPaymentInPercentageWithinState"] = round(
+                            _subp_pay / _sub_pay * 100, 2)
                     else:
                         subprogram["totalPaymentInPercentageWithinState"] = 0.0
+                program["subPrograms"] = [
+                    sp for sp in program["subPrograms"] if not _title_i_subprogram_metrics_all_zero(sp)
+                ]
         else:
             subtitle_response_dict[county_fips].update({"programs": []})
 
