@@ -1895,6 +1895,10 @@ def generate_title_i_total_county_distribution_response(title_id, start_year, en
 
     for record in result:
         county_fips, title_name, year, payments, recipients = record
+        if payments is None:
+            payments = 0
+        if recipients is None:
+            recipients = 0
         entry = data_by_year_and_county[year][county_fips]
         entry['countyFips'] = county_fips
         entry['totalPaymentInDollars'] += payments
