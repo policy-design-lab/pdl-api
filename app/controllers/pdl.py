@@ -246,6 +246,33 @@ def titles_title_i_state_distribution_search():
     endpoint_response = generate_title_i_total_state_distribution_response(title_id, start_year, end_year)
     return endpoint_response
 
+# /pdl/titles/title-i/county-distribution:
+def titles_title_i_county_distribution_search():
+    min_year, max_year = cfg.TITLE_I_START_YEAR, cfg.TITLE_I_END_YEAR
+    start_year = request.args.get('start_year', type=int, default=min_year)
+    end_year = request.args.get('end_year', type=int, default=max_year)
+
+    title_id = get_title_id(TITLE_I_NAME)
+    if title_id is None:
+        msg = {
+            "reason": "No record for the given title name " + TITLE_I_NAME,
+            "error": "Not found: " + request.url,
+        }
+        logging.error("Title I: " + json.dumps(msg))
+        return rs_handlers.not_found(msg)
+
+    if start_year and end_year and start_year > end_year:
+        start_year, end_year = min_year, max_year  # Reset to full range if invalid
+
+    if start_year is None:
+        start_year = min_year  # Default to the earliest available year
+
+    if end_year is None:
+        end_year = max_year  # Default to latest available year
+
+    endpoint_response = generate_title_i_total_county_distribution_response(title_id, start_year, end_year)
+    return endpoint_response
+
 
 # /pdl/titles/title-i/subtitles/subtitle-a/state-distribution:
 def titles_title_i_subtitles_subtitle_a_state_distribution_search():
@@ -274,6 +301,32 @@ def titles_title_i_subtitles_subtitle_a_state_distribution_search():
     endpoint_response = generate_title_i_state_distribution_response(subtitle_id, start_year, end_year)
     return endpoint_response
 
+# /pdl/titles/title-i/subtitles/subtitle-a/county-distribution:
+def titles_title_i_subtitles_subtitle_a_county_distribution_search():
+    subtitle_id = get_subtitle_id(TITLE_I_SUBTITLE_A_NAME)
+    if subtitle_id is None:
+        msg = {
+            "reason": "No record for the given subtitle name " + TITLE_I_SUBTITLE_A_NAME,
+            "error": "Not found: " + request.url,
+        }
+        logging.error("Title I Subtitle A: " + json.dumps(msg))
+        return rs_handlers.not_found(msg)
+
+    min_year, max_year = cfg.TITLE_I_START_YEAR, cfg.TITLE_I_END_YEAR
+    start_year = request.args.get('start_year', type=int, default=min_year)
+    end_year = request.args.get('end_year', type=int, default=max_year)
+
+    if start_year and end_year and start_year > end_year:
+        start_year, end_year = min_year, max_year  # Reset to full range if invalid
+
+    if start_year is None:
+        start_year = min_year  # Default to the earliest available year
+
+    if end_year is None:
+        end_year = max_year  # Default to latest available year
+
+    endpoint_response = generate_title_i_subtitle_county_distribution_response(subtitle_id, start_year, end_year)
+    return endpoint_response
 
 # /pdl/titles/title-i/subtitles/subtitle-a/summary:
 def titles_title_i_subtitles_subtitle_a_summary_search():
@@ -330,6 +383,32 @@ def titles_title_i_subtitles_subtitle_d_state_distribution_search():
     endpoint_response = generate_title_i_state_distribution_response(subtitle_id, start_year, end_year)
     return endpoint_response
 
+# /pdl/titles/title-i/subtitles/subtitle-d/county-distribution
+def titles_title_i_subtitles_subtitle_d_county_distribution_search():
+    subtitle_id = get_subtitle_id(TITLE_I_SUBTITLE_D_NAME)
+    if subtitle_id is None:
+        msg = {
+            "reason": "No record for the given subtitle name " + TITLE_I_SUBTITLE_D_NAME,
+            "error": "Not found: " + request.url,
+        }
+        logging.error("Title I Subtitle D: " + json.dumps(msg))
+        return rs_handlers.not_found(msg)
+
+    min_year, max_year = cfg.TITLE_I_START_YEAR, cfg.TITLE_I_END_YEAR
+    start_year = request.args.get('start_year', type=int, default=min_year)
+    end_year = request.args.get('end_year', type=int, default=max_year)
+
+    if start_year and end_year and start_year > end_year:
+        start_year, end_year = min_year, max_year  # Reset to full range if invalid
+
+    if start_year is None:
+        start_year = min_year  # Default to the earliest available year
+
+    if end_year is None:
+        end_year = max_year  # Default to latest available year
+
+    endpoint_response = generate_title_i_subtitle_county_distribution_response(subtitle_id, start_year, end_year)
+    return endpoint_response
 
 # /pdl/titles/title-i/subtitles/subtitle-d/summary:
 def titles_title_i_subtitles_subtitle_d_summary_search():
@@ -386,6 +465,32 @@ def titles_title_i_subtitles_subtitle_e_state_distribution_search():
     endpoint_response = generate_title_i_state_distribution_response(subtitle_id, start_year, end_year)
     return endpoint_response
 
+# /pdl/titles/title-i/subtitles/subtitle-e/county-distribution
+def titles_title_i_subtitles_subtitle_e_county_distribution_search():
+    subtitle_id = get_subtitle_id(TITLE_I_SUBTITLE_E_NAME)
+    if subtitle_id is None:
+        msg = {
+            "reason": "No record for the given subtitle name " + TITLE_I_SUBTITLE_E_NAME,
+            "error": "Not found: " + request.url,
+        }
+        logging.error("Title I Subtitle E: " + json.dumps(msg))
+        return rs_handlers.not_found(msg)
+
+    min_year, max_year = cfg.TITLE_I_START_YEAR, cfg.TITLE_I_END_YEAR
+    start_year = request.args.get('start_year', type=int, default=min_year)
+    end_year = request.args.get('end_year', type=int, default=max_year)
+
+    if start_year and end_year and start_year > end_year:
+        start_year, end_year = min_year, max_year  # Reset to full range if invalid
+
+    if start_year is None:
+        start_year = min_year  # Default to the earliest available year
+
+    if end_year is None:
+        end_year = max_year  # Default to latest available year
+
+    endpoint_response = generate_title_i_subtitle_county_distribution_response(subtitle_id, start_year, end_year)
+    return endpoint_response
 
 # /pdl/titles/title-i/subtitles/subtitle-e/summary:
 def titles_title_i_subtitles_subtitle_e_summary_search():
@@ -462,7 +567,6 @@ def titles_title_i_subtitles_subtitle_a_arc_plc_payments_proposed_search():
     response = Response(file_data, mimetype='application/json')
     response.headers['Content-Encoding'] = 'gzip'
     return response
-
 
 # /pdl/titles/title-ii/summary:
 def titles_title_ii_summary_search():
@@ -1766,6 +1870,70 @@ def generate_title_i_total_state_distribution_response(title_id, start_year, end
 
     return result_dict
 
+def generate_title_i_total_county_distribution_response(title_id, start_year, end_year):
+    session = Session()
+
+    # construct the query
+    program_query = session.query(
+        PaymentByCounty.county_fips_code.label('countyFips'),
+        Subtitle.name.label('subtitleName'),
+        PaymentByCounty.year.label('year'),
+        PaymentByCounty.payment.label('totalPaymentInDollars'),
+        PaymentByCounty.recipient_count.label('totalRecipientCount')).join(
+        Subtitle, PaymentByCounty.subtitle_id == Subtitle.id).filter(
+        PaymentByCounty.title_id == title_id,
+        PaymentByCounty.year.between(start_year, end_year)
+    )
+
+    # execute the query
+    result = program_query.all()
+
+    # create a nested dictionary to store data by year and county fips
+    data_by_year_and_county = defaultdict(
+        lambda: defaultdict(lambda: {'totalPaymentInDollars': 0, 'totalRecipientCount': 0}))
+    all_years_summary = defaultdict(lambda: {'totalPaymentInDollars': 0, 'totalRecipientCount': 0})
+
+    for record in result:
+        county_fips, title_name, year, payments, recipients = record
+        if payments is None:
+            payments = 0
+        if recipients is None:
+            recipients = 0
+        entry = data_by_year_and_county[year][county_fips]
+        entry['countyFips'] = county_fips
+        entry['totalPaymentInDollars'] += payments
+        entry['totalRecipientCount'] += recipients
+
+        # add to all years summary
+        summary = all_years_summary[county_fips]
+        summary['countyFips'] = county_fips
+        summary['totalPaymentInDollars'] += payments
+        summary['totalRecipientCount'] += recipients
+
+    # sort by total payment
+    sorted_data_by_year = {}
+    for year, counties in data_by_year_and_county.items():
+        sorted_entries = sorted(counties.values(), key=lambda x: x['totalPaymentInDollars'], reverse=True)
+        sorted_data_by_year[year] = sorted_entries
+
+    # round the total payment
+    for year, counties in sorted_data_by_year.items():
+        for county in counties:
+            county['totalPaymentInDollars'] = round(county['totalPaymentInDollars'], 2)
+
+    # all years summary
+    sorted_summary = sorted(all_years_summary.values(), key=lambda x: x['totalPaymentInDollars'], reverse=True)
+
+    # round the total payment
+    for county in sorted_summary:
+        county['totalPaymentInDollars'] = round(county['totalPaymentInDollars'], 2)
+
+    sorted_data_by_year[str(start_year) + '-' + str(end_year)] = sorted_summary
+
+    result_dict = dict(sorted_data_by_year)
+
+    return result_dict
+
 def generate_title_ii_total_state_distribution_response(title_id, start_year, end_year):
     session = Session()
 
@@ -2321,6 +2489,273 @@ def generate_title_i_summary_response(subtitle_id, start_year, end_year):
 
     return subtitle_response_dict
 
+
+def _title_i_subprogram_metrics_all_zero(subprogram):
+    """True when every payment/recipient metric is zero or absent (omit from JSON)."""
+    for key in (
+        "totalPaymentInDollars",
+        "totalPaymentInPercentageNationwide",
+        "averageAreaInAcres",
+        "averageRecipientCount",
+        "totalPaymentInPercentageWithinState",
+    ):
+        v = subprogram.get(key)
+        if v is None:
+            continue
+        try:
+            if float(v) != 0.0:
+                return False
+        except (TypeError, ValueError):
+            return False
+    return True
+
+
+def generate_title_i_subtitle_county_distribution_response(subtitle_id, start_year, end_year):
+    session = Session()
+
+    # Construct the subquery
+    subtitle_subquery = (session.query(func.sum(PaymentByCounty.payment))
+                         .filter(PaymentByCounty.subtitle_id == subtitle_id,
+                                 PaymentByCounty.year.between(start_year, end_year)).scalar_subquery())
+    subtitle_subquery_recipient_count = (session.query(func.sum(PaymentByCounty.recipient_count))
+                                         .filter(PaymentByCounty.subtitle_id == subtitle_id,
+                                                 PaymentByCounty.year.between(start_year, end_year)).scalar_subquery())
+
+    # Construct the main query
+    subtitle_query = session.query(
+        PaymentByCounty.county_fips_code.label('countyFips'),
+        County.name.label('countyName'),
+        County.state_code.label("state"),
+        Subtitle.name.label('subtitleName'),
+        (func.cast(func.sum(PaymentByCounty.payment) / subtitle_subquery * 100, Numeric(5, 2))).label(
+            'totalPaymentInPercentageNationwide'),
+        func.sum(PaymentByCounty.payment).label('totalPaymentInDollars'),
+        func.round(func.avg(PaymentByCounty.base_acres), 2).label('averageAreaInAcres'),
+        func.cast(func.avg(PaymentByCounty.recipient_count), BigInteger).label('averageRecipientCount'),
+        func.cast(func.sum(PaymentByCounty.recipient_count), Integer).label('totalRecipientCount'),
+        (func.cast(func.sum(PaymentByCounty.recipient_count) / subtitle_subquery_recipient_count * 100, Numeric(5,
+                                                                                                           2))).label(
+            'averageRecipientCountInPercentageNationwide')
+    ).join(
+        Subtitle, PaymentByCounty.subtitle_id == Subtitle.id
+    ).outerjoin(County, PaymentByCounty.county_fips_code == County.fips_code).filter(
+        PaymentByCounty.subtitle_id == subtitle_id,
+        PaymentByCounty.year.between(start_year, end_year)
+    ).group_by(
+        PaymentByCounty.county_fips_code, County.name, County.state_code, Subtitle.name,
+    ).order_by(
+        desc('totalPaymentInPercentageNationwide')
+    )
+
+    # Extract the column names
+    column_names = [item['name'] for item in subtitle_query.statement.column_descriptions]
+
+    # Execute the query
+    result = subtitle_query.all()
+
+    # Build subtitle response dictionary
+    subtitle_response_dict = dict()
+    for row in result:
+        response_dict = dict(zip(column_names, row))
+
+        # Cleanup / renaming attributes
+        response_dict["totalRecipientCountInPercentageNationwide"] = response_dict[
+            "averageRecipientCountInPercentageNationwide"]
+        if response_dict['averageAreaInAcres'] is None:
+            response_dict['averageAreaInAcres'] = 0.0
+        subtitle_response_dict[response_dict['countyFips']] = response_dict
+
+    # Find all programs under the subtitle
+    subtitle = Subtitle.query.filter_by(id=subtitle_id).first()
+    programs = Program.query.filter_by(subtitle_id=subtitle.id).all()
+    program_ids = [program.id for program in programs]
+
+    # For each program, find the subprograms
+    subprograms = []
+    for program_id in program_ids:
+        subprograms += SubProgram.query.filter_by(program_id=program_id).all()
+    subprogram_ids = [subprogram.id for subprogram in subprograms]
+
+    program_response_dict = dict()
+    # For each program, find state code, total payment, total payment percentage, average recipient count,
+    # and average base acres during the given years
+    for program_id in program_ids:
+
+        # Construct the subquery
+        program_subquery_total_payment = (session.query(func.sum(PaymentByCounty.payment))
+                                          .filter(PaymentByCounty.program_id == program_id,
+                                                  PaymentByCounty.year.between(start_year, end_year))
+                                          .label('totalPaymentInDollars'))
+        program_subquery_recipient_count = (session.query(func.sum(PaymentByCounty.recipient_count))
+                                            .filter(PaymentByCounty.program_id == program_id,
+                                                    PaymentByCounty.year.between(start_year, end_year)).scalar_subquery())
+
+        total_years = end_year - start_year + 1  # Use total years to calculate average recipient count
+
+        # Construct the main query
+        program_query = session.query(
+            PaymentByCounty.county_fips_code.label('countyFips'),
+            Program.name.label('programName'),
+            func.sum(PaymentByCounty.payment).label('totalPaymentInDollars'),
+            func.cast(func.sum(PaymentByCounty.recipient_count), Integer).label('totalRecipientCount'),
+            func.round(func.avg(PaymentByCounty.base_acres), 2).label('averageAreaInAcres'),
+            func.cast(func.sum(PaymentByCounty.recipient_count) / total_years, BigInteger).label(
+                'averageRecipientCount'),
+            (func.cast(func.sum(PaymentByCounty.payment) / program_subquery_total_payment * 100, Numeric(5, 2))).label(
+                'totalPaymentInPercentageNationwide'),
+            (func.cast(func.sum(PaymentByCounty.recipient_count) / program_subquery_recipient_count * 100,
+                       Numeric(5, 2))).label(
+                'averageRecipientCountInPercentageNationwide')
+        ).join(
+            Program, PaymentByCounty.program_id == Program.id
+        ).filter(
+            PaymentByCounty.program_id == program_id,
+            PaymentByCounty.year.between(start_year, end_year)
+        ).group_by(
+            Program.name, PaymentByCounty.county_fips_code
+        ).order_by(
+            PaymentByCounty.county_fips_code, desc('totalPaymentInPercentageNationwide')
+        )
+
+        # Extract the column names
+        column_names = [item['name'] for item in program_query.statement.column_descriptions]
+
+        # Execute the query
+        result = program_query.all()
+
+        for row in result:
+            response_dict = dict(zip(column_names, row))
+            county_fips = response_dict['countyFips']
+
+            # Cleanup / renaming attributes
+            response_dict["totalRecipientCountInPercentageNationwide"] = response_dict[
+                "averageRecipientCountInPercentageNationwide"]
+            response_dict['subPrograms'] = []
+            if response_dict['averageAreaInAcres'] is None:
+                response_dict['averageAreaInAcres'] = 0.0
+            del response_dict['countyFips']
+
+            if county_fips not in program_response_dict:
+                program_response_dict[county_fips] = {"programs": [response_dict]}
+            else:
+                program_response_dict[county_fips]["programs"].append(response_dict)
+
+    subprogram_response_dict = dict()
+    for subprogram_id in subprogram_ids:
+        # Construct the subquery
+        subprogram_subquery = (session.query(func.sum(PaymentByCounty.payment))
+                               .filter(PaymentByCounty.sub_program_id == subprogram_id,
+                                       PaymentByCounty.year.between(start_year, end_year))
+                               .label('totalPaymentInDollars'))
+
+        # Construct the main query
+        subprogram_query = (session.query(
+            PaymentByCounty.county_fips_code.label('countyFips'),
+            Program.name.label('programName'),
+            SubProgram.name.label('subProgramName'),
+            func.sum(PaymentByCounty.payment).label('totalPaymentInDollars'),
+            (func.cast(func.sum(PaymentByCounty.payment) / subprogram_subquery * 100, Numeric(5, 2))).label(
+                'totalPaymentInPercentageNationwide'),
+            func.round(func.avg(PaymentByCounty.base_acres), 2).label('averageAreaInAcres'),
+            func.cast(func.avg(PaymentByCounty.recipient_count), BigInteger).label('averageRecipientCount')
+        ).join(
+            SubProgram, PaymentByCounty.sub_program_id == SubProgram.id
+        ).join(
+            Program, PaymentByCounty.program_id == Program.id
+        ).filter(
+            PaymentByCounty.sub_program_id == subprogram_id,
+            PaymentByCounty.year.between(start_year, end_year)
+        ).group_by(
+            Program.name, SubProgram.name, PaymentByCounty.county_fips_code
+        ).order_by(
+            PaymentByCounty.county_fips_code, desc('totalPaymentInPercentageNationwide')
+        ))
+
+        # Execute the query
+        result = subprogram_query.all()
+
+        # Extract the column names
+        column_names = [item['name'] for item in subprogram_query.statement.column_descriptions]
+
+        for row in result:
+            response_dict = dict(zip(column_names, row))
+            county_fips = response_dict['countyFips']
+            program_name = response_dict['programName']
+
+            # Cleanup / renaming attributes
+            if response_dict['averageAreaInAcres'] is None:
+                response_dict['averageAreaInAcres'] = 0.0
+            del response_dict['countyFips']
+            del response_dict['programName']
+
+            if county_fips not in subprogram_response_dict:
+                subprogram_response_dict[county_fips] = dict()
+                subprogram_response_dict[county_fips][program_name] = [response_dict]
+            else:
+                if program_name in subprogram_response_dict[county_fips]:
+                    subprogram_response_dict[county_fips][program_name].append(response_dict)
+                else:
+                    subprogram_response_dict[county_fips][program_name] = [response_dict]
+
+    # Merge the subtitle and program response dictionaries
+    for county_fips in subtitle_response_dict:
+        if county_fips in program_response_dict:
+            subtitle_response_dict[county_fips].update(program_response_dict[county_fips])
+            for program in subtitle_response_dict[county_fips]["programs"]:
+                _sub_pay = subtitle_response_dict[county_fips]["totalPaymentInDollars"]
+                if _sub_pay is None:
+                    _sub_pay = 0.0
+                _sub_recipient_total = subtitle_response_dict[county_fips]["totalRecipientCount"]
+                if _sub_recipient_total is None:
+                    _sub_recipient_total = 0
+
+                if county_fips in subprogram_response_dict and program["programName"] in subprogram_response_dict[
+                    county_fips]:
+                    program["subPrograms"] = subprogram_response_dict[county_fips][program["programName"]]
+
+                _prog_pay = program["totalPaymentInDollars"]
+                if _prog_pay is None:
+                    _prog_pay = 0.0
+                if _sub_pay != 0.0:
+                    program["totalPaymentInPercentageWithinState"] = round(_prog_pay / _sub_pay * 100, 2)
+                else:
+                    program["totalPaymentInPercentageWithinState"] = 0.0
+
+                _prog_recipient_total = program["totalRecipientCount"]
+                if _prog_recipient_total is None:
+                    _prog_recipient_total = 0
+                if _sub_recipient_total != 0:
+                    program["totalRecipientCountInPercentageWithinState"] = round(
+                        _prog_recipient_total / _sub_recipient_total * 100, 2)
+                    # TODO: Temporary fix. The below attribute may need to be calculated based on the average recipient count or removed if not needed.
+                    program["averageRecipientCountInPercentageWithinState"] = program[
+                        "totalRecipientCountInPercentageWithinState"]
+                else:
+                    program["averageRecipientCountInPercentageWithinState"] = 0.0
+                    program["totalRecipientCountInPercentageWithinState"] = 0.0
+
+                for subprogram in program["subPrograms"]:
+                    _subp_pay = subprogram["totalPaymentInDollars"]
+                    if _subp_pay is None:
+                        _subp_pay = 0.0
+                    if _sub_pay != 0.0:
+                        subprogram["totalPaymentInPercentageWithinState"] = round(
+                            _subp_pay / _sub_pay * 100, 2)
+                    else:
+                        subprogram["totalPaymentInPercentageWithinState"] = 0.0
+                program["subPrograms"] = [
+                    sp for sp in program["subPrograms"] if not _title_i_subprogram_metrics_all_zero(sp)
+                ]
+        else:
+            subtitle_response_dict[county_fips].update({"programs": []})
+
+    # Create endpoint response dictionary
+    endpoint_response_list = []
+    for county_fips in subtitle_response_dict:
+        endpoint_response_list.append(subtitle_response_dict[county_fips])
+    response = {str(start_year) + "-" + str(end_year): endpoint_response_list}
+
+    return response
 
 def generate_title_ii_state_distribution_response(program_id, start_year, end_year, practice_code=None):
     session = Session()
