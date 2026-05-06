@@ -22,6 +22,7 @@ from app.models.subprogram import SubProgram
 from app.models.subtitle import Subtitle
 from app.models.title import Title
 from collections import defaultdict
+import pandas as pd
 
 LANDING_PAGE_DATA_PATH = os.path.join("controllers", "data", "landingpage")
 ALLPROGRAM_DATA_JSON = "allprograms.json"
@@ -61,6 +62,11 @@ IV_SNAP_DATA_PATH = os.path.join(TITLE_IV_DATA_PATH, "programs", "snap")
 
 TITLE_XI_DATA_PATH = os.path.join("controllers", "data", "title-xi")
 XI_CROP_INS_DATA_PATH = os.path.join(TITLE_XI_DATA_PATH, "programs", "crop-insurance")
+
+SOYBEANS_POLICY_DATA_PATH = os.path.join("controllers", "data", "policy", "soybeans")
+COMMODITY_DEMAND_DATA_CSV = "china_pork_poultry_demand.csv"
+SOCIOECONOMIC_DATA_CSV = "china_socioeconomic_data.csv"
+MARKETBALANCE_DATA_CSV = "soybeans_marketbalance_data.csv"
 
 TITLE_I_NAME = "Title I: Commodities"
 TITLE_II_NAME = "Title II: Conservation"
@@ -4093,3 +4099,68 @@ def generate_title_xi_summary_response(program_id, start_year, end_year):
 
     return aggregate_dict
 
+def countries_commodities_search(countrycode=None):
+    # TODO - implement year filter for the CSVs and then later the database
+    # We should determine if we want one common year filter or if each API should have it's own
+    min_year, max_year = cfg.SOYBEAN_STORYBOARD_START_YEAR, cfg.SOYBEAN_STORYBOARD_END_YEAR
+    start_year = request.args.get('start_year', type=int, default=min_year)
+    end_year = request.args.get('end_year', type=int, default=max_year)
+
+    pork_poultry_demand_data = {}
+    if countrycode is not None and countrycode.lower() == 'cn':
+        pork_poultry_demand_csv = os.path.join(SOYBEANS_POLICY_DATA_PATH, COMMODITY_DEMAND_DATA_CSV)
+        pork_poultry_demand_df = pd.read_csv(pork_poultry_demand_csv)
+        pork_poultry_demand_df = pork_poultry_demand_df.replace({pd.NA: None, float('nan'): None})
+        pork_poultry_demand_df['Year'] =  pork_poultry_demand_df['Year'].astype(str)
+        pork_poultry_demand_data = pork_poultry_demand_df.set_index('Year').to_dict(orient='index')
+    return pork_poultry_demand_data
+
+def countries_socioeconomic_search(countrycode=None):
+    # TODO - implement year filter for the CSVs and then later the database
+    # We should determine if we want one common year filter or if each API should have it's own
+    min_year, max_year = cfg.SOYBEAN_STORYBOARD_START_YEAR, cfg.SOYBEAN_STORYBOARD_END_YEAR
+    start_year = request.args.get('start_year', type=int, default=min_year)
+    end_year = request.args.get('end_year', type=int, default=max_year)
+
+    socioeconomic_data = {}
+    if countrycode is not None and countrycode.lower() == 'cn':
+        socioeconomic_csv = os.path.join(SOYBEANS_POLICY_DATA_PATH, SOCIOECONOMIC_DATA_CSV)
+        socioeconomic_df = pd.read_csv(socioeconomic_csv)
+        socioeconomic_df = socioeconomic_df.replace({pd.NA: None, float('nan'): None})
+        socioeconomic_df['Year'] =  socioeconomic_df['Year'].astype(str)
+        socioeconomic_data = socioeconomic_df.set_index('Year').to_dict(orient='index')
+    return socioeconomic_data
+
+def countries_marketbalance_search():
+    # TODO - implement year filter for the CSVs and then later the database
+    # We should determine if we want one common year filter or if each API should have it's own
+    min_year, max_year = cfg.SOYBEAN_STORYBOARD_START_YEAR, cfg.SOYBEAN_STORYBOARD_END_YEAR
+    start_year = request.args.get('start_year', type=int, default=min_year)
+    end_year = request.args.get('end_year', type=int, default=max_year)
+
+    marketbalance_csv = os.path.join(SOYBEANS_POLICY_DATA_PATH, MARKETBALANCE_DATA_CSV)
+    marketbalance_df = pd.read_csv(marketbalance_csv)
+    marketbalance_df = marketbalance_df.replace({pd.NA: None, float('nan'): None})
+
+    result = {}
+    for year, year_df in marketbalance_df.groupby('Year'):
+        year_list = []
+
+        # Group by Country within that year
+        for (country, code), country_df in year_df.groupby(['country', 'code']):
+            # Convert commodity rows into a list of dictionaries
+            # Drop country/year info so it's not in the list of commodity information
+            commodities = country_df.drop(columns=['Year', 'country', 'code']).to_dict(orient='records')
+
+            # 6. Build the country object
+            country_obj = {
+                "country": country,
+                "code": code,
+                "commodity": commodities
+            }
+            year_list.append(country_obj)
+
+        # Assign the list to the specific year key
+        result[str(year)] = year_list
+
+    return result
