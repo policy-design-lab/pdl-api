@@ -67,6 +67,7 @@ SOYBEANS_POLICY_DATA_PATH = os.path.join("controllers", "data", "policy", "soybe
 COMMODITY_DEMAND_DATA_CSV = "china_pork_poultry_demand.csv"
 SOCIOECONOMIC_DATA_CSV = "china_socioeconomic_data.csv"
 MARKETBALANCE_DATA_CSV = "soybeans_marketbalance_data.csv"
+US_PLANTED_ACRES_DATA_CSV = "us_plantedacres_soybeans_2024.csv"
 
 TITLE_I_NAME = "Title I: Commodities"
 TITLE_II_NAME = "Title II: Conservation"
@@ -4164,3 +4165,41 @@ def countries_marketbalance_search():
         result[str(year)] = year_list
 
     return result
+
+def countries_plantedacres_search(countrycode=None):
+    # TODO - implement year filter for the CSVs and then later the database
+    # We should determine if we want one common year filter or if each API should have it's own
+    min_year, max_year = cfg.SOYBEAN_STORYBOARD_START_YEAR, cfg.SOYBEAN_STORYBOARD_END_YEAR
+    start_year = request.args.get('start_year', type=int, default=min_year)
+    end_year = request.args.get('end_year', type=int, default=max_year)
+
+    if countrycode is not None and countrycode.lower() == 'us':
+        soybeans_planted_csv = os.path.join(SOYBEANS_POLICY_DATA_PATH, US_PLANTED_ACRES_DATA_CSV)
+        soybeans_df = pd.read_csv(soybeans_planted_csv)
+        soybeans_df = soybeans_df.replace({pd.NA: None, float('nan'): None})
+        final_output = {}
+        for year, group in soybeans_df.groupby('Year'):
+            year_key = str(year)
+            commodity_name = "soybeans"
+            planted_acres = []
+
+            for _, row in soybeans_df.iterrows():
+                raw_name = str(row['County']).title()
+                display_name = raw_name if "County" in raw_name else f"{raw_name} County"
+                fips_code = str(row['State County Code']).zfill(5)
+
+                planted_acres.append({
+                    "id": fips_code,
+                    "idType": "fips",
+                    "level": "county",
+                    "name": display_name,
+                    "totalAcres": float(row['Total Planted Acres'])
+                })
+
+            final_output[year_key] = {
+                "country": "United States",
+                "code": "US",
+                "commodity": commodity_name,
+                "plantedAcres": planted_acres
+        }
+    return final_output

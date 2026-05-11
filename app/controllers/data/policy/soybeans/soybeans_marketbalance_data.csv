@@ -1,4 +1,4 @@
-Year,country,code,commidityName,productionMT,productionBushels,exportsMT,exportsBushels,importsMT,importsBushels,consumptionMT,consumptionBushels,importPercentageWorldwide,endingStockMT,endingStockBushels
+Year,country,code,commodityName,productionMT,productionBushels,exportsMT,exportsBushels,importsMT,importsBushels,consumptionMT,consumptionBushels,importPercentageWorldwide,endingStockMT,endingStockBushels
 1999,China,CN,soybeans,14250000,523597725,230000,8451051,10100000,371111370,22854000,839740519.8,22.1870743816177,3170000,116477529
 2000,China,CN,soybeans,15409000,566183673.3,208000,7642689.6,13245000,486670306.5,26706000,981277252.2,24.9486710994745,4910000,180411567
 2001,China,CN,soybeans,15410000,566220417,300000,11023110,10385000,381583324.5,28310000,1040214147,19.1051750464522,2095000,76978051.5
