@@ -68,6 +68,7 @@ COMMODITY_DEMAND_DATA_CSV = "china_pork_poultry_demand.csv"
 SOCIOECONOMIC_DATA_CSV = "china_socioeconomic_data.csv"
 MARKETBALANCE_DATA_CSV = "soybeans_marketbalance_data.csv"
 US_PLANTED_ACRES_DATA_CSV = "us_plantedacres_soybeans_2024.csv"
+BR_PLANTED_ACRES_DATA_CSV = "brazil_plantedacres_soybeans.csv"
 
 TITLE_I_NAME = "Title I: Commodities"
 TITLE_II_NAME = "Title II: Conservation"
@@ -4173,33 +4174,59 @@ def countries_plantedacres_search(countrycode=None):
     start_year = request.args.get('start_year', type=int, default=min_year)
     end_year = request.args.get('end_year', type=int, default=max_year)
 
+    country = "United States"
+    countryCode = "US"
+    idType = "fips"
+    level = "county"
+    levelCodeColumn = "State County Code"
+    nameColumn = "County"
+    soybeans_df = None
+
     if countrycode is not None and countrycode.lower() == 'us':
         soybeans_planted_csv = os.path.join(SOYBEANS_POLICY_DATA_PATH, US_PLANTED_ACRES_DATA_CSV)
         soybeans_df = pd.read_csv(soybeans_planted_csv)
         soybeans_df = soybeans_df.replace({pd.NA: None, float('nan'): None})
-        final_output = {}
-        for year, group in soybeans_df.groupby('Year'):
-            year_key = str(year)
-            commodity_name = "soybeans"
-            planted_acres = []
+        
+    elif countrycode is not None and countrycode.lower() == 'br':
+        print("Brazil selected")
+        soybeans_planted_csv = os.path.join(SOYBEANS_POLICY_DATA_PATH, BR_PLANTED_ACRES_DATA_CSV)
+        soybeans_df = pd.read_csv(soybeans_planted_csv)
+        soybeans_df = soybeans_df[(soybeans_df["Year"] == 2024) & (soybeans_df["Attribute"] == "Harvested Area")]
+        soybeans_df = soybeans_df.replace({pd.NA: None, float('nan'): None})
+        levelCodeColumn = "MunicipioID"
+        nameColumn = "Municipio&UF"
+        level = "municipality"
+        idType = "ibge"
+        countryCode = "BR"
+        country = "Brazil"
 
-            for _, row in soybeans_df.iterrows():
-                raw_name = str(row['County']).title()
-                display_name = raw_name if "County" in raw_name else f"{raw_name} County"
-                fips_code = str(row['State County Code']).zfill(5)
+    final_output = {}
+    for year, group in soybeans_df.groupby('Year'):
+        year_key = str(year)
+        commodity_name = "soybeans"
+        planted_acres = []
 
-                planted_acres.append({
-                    "id": fips_code,
-                    "idType": "fips",
-                    "level": "county",
-                    "name": display_name,
-                    "totalAcres": float(row['Total Planted Acres'])
-                })
+        for _, row in soybeans_df.iterrows():
+            raw_name = str(row[nameColumn]).title()
+            display_name = raw_name if level is not "county" or "County" in raw_name else f"{raw_name} County"
+            if level == "County":
+                fips_code = str(row[levelCodeColumn]).zfill(5)
+            else:
+                fips_code = str(row[levelCodeColumn])
 
-            final_output[year_key] = {
-                "country": "United States",
-                "code": "US",
-                "commodity": commodity_name,
-                "plantedAcres": planted_acres
-        }
+            planted_acres.append({
+                "id": fips_code,
+                "idType": idType,
+                "level": level,
+                "name": display_name,
+                "totalAcres": float(row['Total Planted Acres'])
+            })
+
+        final_output[year_key] = {
+            "country": country,
+            "code": countryCode,
+            "commodity": commodity_name,
+            "plantedAcres": planted_acres
+    }
+    
     return final_output
