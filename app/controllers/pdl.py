@@ -4214,12 +4214,18 @@ def countries_plantedacres_search(countrycode=None):
             else:
                 fips_code = str(row[levelCodeColumn])
 
+            total_acres = float(row['Total Planted Acres'])
+
+            # Convert Hectares to Acres
+            if countrycode.lower() == "br":
+                total_acres *= 2.47105
+
             planted_acres.append({
                 "id": fips_code,
                 "idType": idType,
                 "level": level,
                 "name": display_name,
-                "totalAcres": float(row['Total Planted Acres'])
+                "totalAcres": total_acres
             })
 
         final_output[year_key] = {
