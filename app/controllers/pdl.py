@@ -4209,7 +4209,7 @@ def countries_plantedacres_search(countrycode=None):
         for _, row in soybeans_df.iterrows():
             raw_name = str(row[nameColumn]).title()
             display_name = raw_name if level is not "county" or "County" in raw_name else f"{raw_name} County"
-            if level == "County":
+            if level == "county":
                 fips_code = str(row[levelCodeColumn]).zfill(5)
             else:
                 fips_code = str(row[levelCodeColumn])
