@@ -69,6 +69,7 @@ SOCIOECONOMIC_DATA_CSV = "china_socioeconomic_data.csv"
 MARKETBALANCE_DATA_CSV = "soybeans_marketbalance_data.csv"
 US_PLANTED_ACRES_DATA_CSV = "us_plantedacres_soybeans_2024.csv"
 BR_PLANTED_ACRES_DATA_CSV = "brazil_plantedacres_soybeans.csv"
+BR_MUNICIPALITY_MAPPING_CSV = "brazil_IBGEGeoIDs.csv"
 
 TITLE_I_NAME = "Title I: Commodities"
 TITLE_II_NAME = "Title II: Conservation"
@@ -4201,6 +4202,7 @@ def countries_plantedacres_search(countrycode=None):
         country = "Brazil"
 
     final_output = {}
+
     for year, group in soybeans_df.groupby('Year'):
         year_key = str(year)
         commodity_name = "soybeans"
@@ -4235,4 +4237,71 @@ def countries_plantedacres_search(countrycode=None):
             "plantedAcres": planted_acres
     }
     
+    return final_output
+
+
+def countries_plantedacres_summary_search(countrycode=None):
+    # TODO - implement year filter for the CSVs and then later the database
+    # We should determine if we want one common year filter or if each API should have it's own
+    min_year, max_year = cfg.SOYBEAN_STORYBOARD_START_YEAR, cfg.SOYBEAN_STORYBOARD_END_YEAR
+    start_year = request.args.get('start_year', type=int, default=min_year)
+    end_year = request.args.get('end_year', type=int, default=max_year)
+
+    year_col = "Year"
+    state_col = "State"
+    acres_col = "Total Planted Acres"
+    final_output = {}
+    state_totals = None
+    if countrycode is not None and countrycode.lower() == 'us':
+        soybeans_planted_csv = os.path.join(SOYBEANS_POLICY_DATA_PATH, US_PLANTED_ACRES_DATA_CSV)
+        soybeans_df = pd.read_csv(soybeans_planted_csv)
+        soybeans_df = soybeans_df.replace({pd.NA: None, float('nan'): None})
+
+        # Group by year and state, sum acres, then reset index
+        state_totals = (
+            soybeans_df.groupby([year_col, state_col])[acres_col]
+            .sum()
+            .round(2)
+            .reset_index()
+        )
+    elif countrycode is not None and countrycode.lower() == "br":
+        state_col = "Estado"
+        soybeans_planted_csv = os.path.join(SOYBEANS_POLICY_DATA_PATH, BR_PLANTED_ACRES_DATA_CSV)
+        soybeans_df = pd.read_csv(soybeans_planted_csv)
+        soybeans_df = soybeans_df[(soybeans_df["Year"] == 2024) & (soybeans_df["Attribute"] == "Harvested Area")]
+        soybeans_df = soybeans_df.replace({pd.NA: None, float('nan'): None})
+
+        # Mapping file to map Municipality to States
+        municipality_mapping_csv = os.path.join(SOYBEANS_POLICY_DATA_PATH, BR_MUNICIPALITY_MAPPING_CSV)
+        mapping_df = pd.read_csv(municipality_mapping_csv)
+
+        soybeans_df = soybeans_df.merge(mapping_df[["MunicipioID", "Estado"]], on="MunicipioID", how="left")
+
+        # Warn about any MunicipioIDs that didn't match
+        unmatched = soybeans_df[soybeans_df["Estado"].isna()]["MunicipioID"].unique()
+        if len(unmatched):
+            print(f"Warning: {len(unmatched)} unmatched MunicipioID(s): {unmatched}")
+        else:
+            print("none unmatched")
+
+        # Group by year and state, sum acres, then reset index
+        state_totals = (
+            soybeans_df.groupby([year_col, state_col])[acres_col]
+            .sum()
+            .mul(2.47105)
+            .round(2)
+            .reset_index()
+        )
+    if state_totals is not None:
+        for year, group in state_totals.groupby(year_col):
+            state_list = [
+                {"state": row[state_col], "totalAcres": row[acres_col]}
+                for _, row in group.iterrows()
+            ]
+            national_total = round(group[acres_col].sum(), 2)
+            final_output[str(year)] = {
+                "national_total": national_total,
+                "states": state_list,
+            }
+
     return final_output
