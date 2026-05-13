@@ -67,7 +67,7 @@ SOYBEANS_POLICY_DATA_PATH = os.path.join("controllers", "data", "policy", "soybe
 COMMODITY_DEMAND_DATA_CSV = "china_pork_poultry_demand.csv"
 SOCIOECONOMIC_DATA_CSV = "china_socioeconomic_data.csv"
 MARKETBALANCE_DATA_CSV = "soybeans_marketbalance_data.csv"
-US_PLANTED_ACRES_DATA_CSV = "us_plantedacres_soybeans_2024.csv"
+US_PLANTED_ACRES_DATA_CSV = "us_plantedacres_soybeans_2012_2025.csv"
 BR_PLANTED_ACRES_DATA_CSV = "brazil_plantedacres_soybeans.csv"
 BR_MUNICIPALITY_MAPPING_CSV = "brazil_IBGEGeoIDs.csv"
 
@@ -4186,6 +4186,7 @@ def countries_plantedacres_search(countrycode=None):
     if countrycode is not None and countrycode.lower() == 'us':
         soybeans_planted_csv = os.path.join(SOYBEANS_POLICY_DATA_PATH, US_PLANTED_ACRES_DATA_CSV)
         soybeans_df = pd.read_csv(soybeans_planted_csv)
+        soybeans_df = soybeans_df[(soybeans_df["Year"] == 2024)]
         soybeans_df = soybeans_df.replace({pd.NA: None, float('nan'): None})
         
     elif countrycode is not None and countrycode.lower() == 'br':
@@ -4255,7 +4256,10 @@ def countries_plantedacres_summary_search(countrycode=None):
     if countrycode is not None and countrycode.lower() == 'us':
         soybeans_planted_csv = os.path.join(SOYBEANS_POLICY_DATA_PATH, US_PLANTED_ACRES_DATA_CSV)
         soybeans_df = pd.read_csv(soybeans_planted_csv)
+        target_years = [2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025]
+        soybeans_df = soybeans_df[(soybeans_df["Year"].isin(target_years))]
         soybeans_df = soybeans_df.replace({pd.NA: None, float('nan'): None})
+
 
         # Group by year and state, sum acres, then reset index
         state_totals = (
@@ -4267,8 +4271,10 @@ def countries_plantedacres_summary_search(countrycode=None):
     elif countrycode is not None and countrycode.lower() == "br":
         state_col = "Estado"
         soybeans_planted_csv = os.path.join(SOYBEANS_POLICY_DATA_PATH, BR_PLANTED_ACRES_DATA_CSV)
+        target_years = [2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019,
+                        2020, 2021, 2022, 2023, 2024]
         soybeans_df = pd.read_csv(soybeans_planted_csv)
-        soybeans_df = soybeans_df[(soybeans_df["Year"] == 2024) & (soybeans_df["Attribute"] == "Harvested Area")]
+        soybeans_df = soybeans_df[(soybeans_df["Year"].isin(target_years)) & (soybeans_df["Attribute"] == "Harvested Area")]
         soybeans_df = soybeans_df.replace({pd.NA: None, float('nan'): None})
 
         # Mapping file to map Municipality to States
