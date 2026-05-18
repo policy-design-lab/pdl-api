@@ -4171,93 +4171,97 @@ def countries_marketbalance_search():
     return result
 
 def countries_plantedacres_search(countrycode=None):
-    # TODO - implement year filter for the CSVs and then later the database
     # We should determine if we want one common year filter or if each API should have it's own
     min_year, max_year = cfg.SOYBEAN_STORYBOARD_START_YEAR, cfg.SOYBEAN_STORYBOARD_END_YEAR
+
+    filter_csv = False
+    if request.args.get('start_year') is not None and request.args.get('end_year') is not None:
+        filter_csv = True
     start_year = request.args.get('start_year', type=int, default=min_year)
     end_year = request.args.get('end_year', type=int, default=max_year)
 
-    # country = "United States"
-    # countryCode = "US"
-    # idType = "fips"
-    # level = "county"
-    # levelCodeColumn = "State County Code"
-    # nameColumn = "County"
-    # soybeans_df = None
+    country = "United States"
+    countryCode = "US"
+    idType = "fips"
+    level = "county"
+    levelCodeColumn = "State County Code"
+    nameColumn = "County"
+    soybeans_df = None
 
     if countrycode is not None and countrycode.lower() == 'us':
         soybeans_planted_json = os.path.join(SOYBEANS_POLICY_DATA_PATH, US_PLANTED_ACRES_DATA_JSON)
-        # soybeans_planted_csv = os.path.join(SOYBEANS_POLICY_DATA_PATH, US_PLANTED_ACRES_DATA_CSV)
-        # soybeans_df = pd.read_csv(soybeans_planted_csv)
-        # target_years = [2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025]
-        # target_years = [2023]
-        # soybeans_df = soybeans_df[(soybeans_df["Year"].isin(target_years))]
-        # soybeans_df = soybeans_df[(soybeans_df["Year"] == 2024)]
-        # soybeans_df = soybeans_df.replace({pd.NA: None, float('nan'): None})
+        soybeans_planted_csv = os.path.join(SOYBEANS_POLICY_DATA_PATH, US_PLANTED_ACRES_DATA_CSV)
+        # Only read the CSV if we are filtering over years
+        if filter_csv:
+            soybeans_df = pd.read_csv(soybeans_planted_csv)
+            soybeans_df = soybeans_df[soybeans_df["Year"].between(start_year, end_year)]
+            soybeans_df = soybeans_df.replace({pd.NA: None, float('nan'): None})
         
     elif countrycode is not None and countrycode.lower() == 'br':
         soybeans_planted_json = os.path.join(SOYBEANS_POLICY_DATA_PATH, BR_PLANTED_ACRES_DATA_JSON)
-        # soybeans_planted_csv = os.path.join(SOYBEANS_POLICY_DATA_PATH, BR_PLANTED_ACRES_DATA_CSV)
-        # target_years = [2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024]
-        # soybeans_df = pd.read_csv(soybeans_planted_csv)
-        # soybeans_df = soybeans_df[
-        #     (soybeans_df["Year"].isin(target_years)) & (soybeans_df["Attribute"] == "Harvested Area")]
-        # soybeans_df = pd.read_csv(soybeans_planted_csv)
-        # soybeans_df = soybeans_df[(soybeans_df["Year"] == 2024) & (soybeans_df["Attribute"] == "Harvested Area")]
-        # soybeans_df = soybeans_df[(soybeans_df["Attribute"] == "Harvested Area")]
-        # soybeans_df = soybeans_df.replace({pd.NA: None, float('nan'): None})
-        # levelCodeColumn = "MunicipioID"
-        # nameColumn = "Municipio&UF"
-        # level = "municipality"
-        # idType = "ibge"
-        # countryCode = "BR"
-        # country = "Brazil"
+        soybeans_planted_csv = os.path.join(SOYBEANS_POLICY_DATA_PATH, BR_PLANTED_ACRES_DATA_CSV)
 
-    # final_output = {}
+        # Only read the CSV if we are filtering over years
+        if filter_csv:
+            soybeans_df = pd.read_csv(soybeans_planted_csv)
+            soybeans_df = soybeans_df[soybeans_df["Year"].between(start_year, end_year)]
+            soybeans_df = soybeans_df[(soybeans_df["Attribute"] == "Harvested Area")]
+            soybeans_df = soybeans_df.replace({pd.NA: None, float('nan'): None})
 
-    # for year, group in soybeans_df.groupby('Year'):
-    #     year_key = str(year)
-    #     commodity_name = "soybeans"
-    #     planted_acres = []
-    #
-    #     for _, row in soybeans_df.iterrows():
-    #         raw_name = str(row[nameColumn]).title()
-    #         display_name = raw_name if level is not "county" or "County" in raw_name else f"{raw_name} County"
-    #         if level == "county":
-    #             fips_code = str(row[levelCodeColumn]).zfill(5)
-    #         else:
-    #             fips_code = str(row[levelCodeColumn])
-    #
-    #         total_acres = float(row['Total Planted Acres'])
-    #
-    #         # Convert Hectares to Acres
-    #         if countrycode.lower() == "br":
-    #             total_acres *= 2.47105
-    #
-    #         planted_acres.append({
-    #             "id": fips_code,
-    #             "idType": idType,
-    #             "level": level,
-    #             "name": display_name,
-    #             "totalAcres": total_acres
-    #         })
-    #
-    #     final_output[year_key] = {
-    #         "country": country,
-    #         "code": countryCode,
-    #         "commodity": commodity_name,
-    #         "plantedAcres": planted_acres
-    # }
+        levelCodeColumn = "MunicipioID"
+        nameColumn = "Municipio&UF"
+        level = "municipality"
+        idType = "ibge"
+        countryCode = "BR"
+        country = "Brazil"
 
-    with open(soybeans_planted_json, 'rb') as soybeans_planted_acres:
-        file_data = soybeans_planted_acres.read()
+    if filter_csv:
+        final_output = {}
 
-    response = Response(file_data, mimetype='application/json')
-    response.headers['Content-Encoding'] = 'gzip'
+        for year, group in soybeans_df.groupby('Year'):
+            year_key = str(year)
+            commodity_name = "soybeans"
+            planted_acres = []
 
-    print("Return zipped response")
+            for _, row in group.iterrows():
+                raw_name = str(row[nameColumn]).title()
+                display_name = raw_name if level is not "county" or "County" in raw_name else f"{raw_name} County"
+                if level == "county":
+                    fips_code = str(row[levelCodeColumn]).zfill(5)
+                else:
+                    fips_code = str(row[levelCodeColumn])
 
-    return response
+                total_acres = float(row['Total Planted Acres'])
+
+                # Convert Hectares to Acres
+                if countrycode.lower() == "br":
+                    total_acres *= 2.47105
+
+                planted_acres.append({
+                    "id": fips_code,
+                    "idType": idType,
+                    "level": level,
+                    "name": display_name,
+                    "totalAcres": total_acres
+                })
+
+            final_output[year_key] = {
+                "country": country,
+                "code": countryCode,
+                "commodity": commodity_name,
+                "plantedAcres": planted_acres
+        }
+        return final_output
+    else:
+        with open(soybeans_planted_json, 'rb') as soybeans_planted_acres:
+            file_data = soybeans_planted_acres.read()
+
+        response = Response(file_data, mimetype='application/json')
+        response.headers['Content-Encoding'] = 'gzip'
+
+        print("Return zipped response")
+
+        return response
 
 def countries_plantedacres_summary_search(countrycode=None):
     # TODO - implement year filter for the CSVs and then later the database
