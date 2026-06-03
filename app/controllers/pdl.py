@@ -69,7 +69,7 @@ SOCIOECONOMIC_DATA_CSV = "china_socioeconomic_data.csv"
 MARKETBALANCE_DATA_CSV = "soybeans_marketbalance_data.csv"
 US_PLANTED_ACRES_DATA_CSV = "us_plantedacres_soybeans_2012_2025.csv"
 US_PLANTED_ACRES_DATA_JSON = "us_plantedacres_soybeans_2012_2025.json.gz"
-BR_PLANTED_ACRES_DATA_CSV = "brazil_plantedacres_soybeans.csv"
+BR_PLANTED_ACRES_DATA_CSV = "brazil_plantedacres_soybeans_2005_2024.csv"
 BR_PLANTED_ACRES_DATA_JSON = "brazil_plantedacres_soybeans_2005_2024.json.gz"
 BR_MUNICIPALITY_MAPPING_CSV = "brazil_IBGEGeoIDs.csv"
 
