@@ -1,0 +1,27 @@
+{
+   "2024":[
+      {
+         "country":"United States",
+         "code":"US",
+         "commodity": "soybeans",
+         "china": 26808615.1,
+         "rest_of_world": 25397853.8
+      },
+      {
+         "country":"Brazil",
+         "code":"BR",
+         "commodity": "soybeans",
+         "china": null,
+         "rest_of_world": null
+      },
+      {
+         "country":"Argentina",
+         "code":"AR",
+         "commodity": "soybeans",
+         "china": null,
+         "rest_of_world": null
+      }
+   ]
+}
+
+

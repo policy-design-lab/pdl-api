@@ -72,6 +72,7 @@ US_PLANTED_ACRES_DATA_JSON = "us_plantedacres_soybeans_2012_2025.json.gz"
 BR_PLANTED_ACRES_DATA_CSV = "brazil_plantedacres_soybeans_2005_2024.csv"
 BR_PLANTED_ACRES_DATA_JSON = "brazil_plantedacres_soybeans_2005_2024.json.gz"
 BR_MUNICIPALITY_MAPPING_CSV = "brazil_IBGEGeoIDs.csv"
+SOYBEAN_EXPORTS_JSON = "soybean_exports_china.json"
 
 TITLE_I_NAME = "Title I: Commodities"
 TITLE_II_NAME = "Title II: Conservation"
@@ -4333,3 +4334,16 @@ def countries_plantedacres_summary_search(countrycode=None):
             }
 
     return final_output
+
+def countries_exports_search():
+    # set the file path
+    soybean_exports_data = os.path.join(SOYBEANS_POLICY_DATA_PATH, SOYBEAN_EXPORTS_JSON)
+
+    # open file
+    with open(soybean_exports_data, 'r') as exports_data:
+        file_data = exports_data.read()
+
+        # parse file
+        data_json = json.loads(file_data, object_pairs_hook=OrderedDict)
+
+        return data_json
