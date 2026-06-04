@@ -11,15 +11,15 @@
          "country":"Brazil",
          "code":"BR",
          "commodity": "soybeans",
-         "china": null,
-         "rest_of_world": null
+         "china": 72500000,
+         "rest_of_world": 30643000
       },
       {
          "country":"Argentina",
          "code":"AR",
          "commodity": "soybeans",
-         "china": null,
-         "rest_of_world": null
+         "china": 4100000,
+         "rest_of_world": 3774000
       }
    ]
 }
