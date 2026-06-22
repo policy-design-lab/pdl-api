@@ -4093,3 +4093,6 @@ def generate_title_xi_summary_response(program_id, start_year, end_year):
 
     return aggregate_dict
 
+
+def titles_title_xi_crop_insurance_commodities():
+    return {"commodities": cfg.COMMODITIES}

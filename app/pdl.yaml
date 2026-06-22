@@ -1845,3 +1845,24 @@ components:
           nullable: true
           type: number
 
+  /pdl/titles/title-xi/programs/crop-insurance/commodities:
+    get:
+      tags:
+        - "Title XI: Crop insurance"
+    summary: Gets the list of Title XI crop insurance commodities.
+
+    description: |
+      Returns a list of commodities available under Title XI Crop Insurance programs in JSON format.
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: string
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
