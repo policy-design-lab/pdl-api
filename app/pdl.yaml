@@ -1849,10 +1849,9 @@ components:
     get:
       tags:
         - "Title XI: Crop insurance"
-    summary: Gets the list of Title XI crop insurance commodities.
-
-    description: |
-      Returns a list of commodities available under Title XI Crop Insurance programs in JSON format.
+      summary: Gets the list of Title XI crop insurance commodities.
+      description: |
+        Returns a list of commodities available under Title XI Crop Insurance programs in JSON format.
       responses:
         200:
           description: Ok
