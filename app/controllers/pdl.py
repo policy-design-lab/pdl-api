@@ -21,6 +21,7 @@ from app.models.sub_subprogram import SubSubProgram
 from app.models.subprogram import SubProgram
 from app.models.subtitle import Subtitle
 from app.models.title import Title
+from app.models.commodity import Commodity
 from collections import defaultdict
 
 LANDING_PAGE_DATA_PATH = os.path.join("controllers", "data", "landingpage")
@@ -4094,4 +4095,55 @@ def generate_title_xi_summary_response(program_id, start_year, end_year):
     return aggregate_dict
 
 def titles_title_xi_crop_insurance_commodities():
-    return {"commodities": cfg.COMMODITIES}
+    # return {"commodities": cfg.COMMODITIES}
+    session = Session()
+
+    allowed_names = set(cfg.COMMODITIES[:-1])  # exclude "Commodities Not Listed"
+
+    rows = (
+        session.query(
+            PaymentByCounty.year,
+            Commodity.code,
+            Commodity.name,
+            Commodity.abbreviation
+        )
+        .join(Commodity, PaymentByCounty.commodity_code == Commodity.code)
+        .filter(PaymentByCounty.year.isnot(None))
+        .all()
+    )
+
+    grouped = defaultdict(lambda: defaultdict(set))
+
+    for year, code, name, abbrev in rows:
+        year = str(year)
+
+        if name in allowed_names:
+            grouped[year]["allowed"].add((code, name, abbrev))
+        else:
+            grouped[year]["other"] = True
+
+    result = {}
+
+    for year, data in grouped.items():
+        items = []
+        for code, name, abbrev in sorted(data["allowed"]):
+            items.append({
+                "commodityCode": code,
+                "commodityName": name,
+                "commodityAbbrev": abbrev
+            })
+
+        if data.get("other"):
+            items.append({
+                "commodityCode": 8888,
+                "commodityName": "Commodities Not Listed",
+                "commodityAbbrev": "UNLST"
+            })
+
+        result[year] = items
+    if result:
+        years = sorted(int(y) for y in result.keys())
+        start, end = years[0], years[-1]
+        result[f"{start}-{end}"] = result[str(end)]
+
+    return result

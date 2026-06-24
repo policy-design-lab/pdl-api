@@ -30,12 +30,13 @@ class PaymentByCounty(db.Model):
     net_farmer_benefit_amount = db.Column(db.BigInteger)
     practice_code = db.Column(db.String())
     practice_code_variant = db.Column(db.String())
+    commodity_code = db.Column(db.SmallInteger, db.ForeignKey('pdl.commodities.code'))
 
     def __init__(self, title_id, subtitle_id, program_id, sub_program_id, sub_sub_program_id,
                  practice_category_id, county_fips_code, year, payment, recipient_count, base_acres,
                  farm_count, contract_count, premium_policy_count, liability_amount, premium_amount,
                  premium_subsidy_amount, indemnity_amount, farmer_premium_amount, loss_ratio,
-                 net_farmer_benefit_amount, practice_code, practice_code_variant):
+                 net_farmer_benefit_amount, practice_code, practice_code_variant, commodity_code):
         self.title_id = title_id
         self.subtitle_id = subtitle_id
         self.program_id = program_id
@@ -59,6 +60,7 @@ class PaymentByCounty(db.Model):
         self.net_farmer_benefit_amount = net_farmer_benefit_amount
         self.practice_code = practice_code
         self.practice_code_variant = practice_code_variant
+        self.commodity_code = commodity_code
 
     def json(self):
         return {
@@ -84,5 +86,6 @@ class PaymentByCounty(db.Model):
             'loss_ratio': self.loss_ratio,
             'net_farmer_benefit_amount': self.net_farmer_benefit_amount,
             'practice_code': self.practice_code,
-            'practice_code_variant': self.practice_code_variant
+            'practice_code_variant': self.practice_code_variant,
+            'commodity_code': self.commodity_code
         }
