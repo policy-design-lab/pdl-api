@@ -1163,6 +1163,16 @@ def titles_title_xi_programs_crop_insurance_county_distribution_search():
     start_year = request.args.get('start_year', type=int, default=min_year)
     end_year = request.args.get('end_year', type=int, default=max_year)
 
+    # new query params:
+    years = request.args.getlist("year", type=int)
+    years = sorted(set(years)) if years else None
+    commodity_names = request.args.getlist("commodityName")
+    list_commodities_param = str(request.args.get("listCommodities", default=False)).lower()
+    if list_commodities_param == "true":
+        list_commodities = True
+    else:
+        list_commodities = False
+
     if start_year and end_year and start_year > end_year:
         start_year, end_year = min_year, max_year  # Reset to full range if invalid
 
@@ -1172,13 +1182,34 @@ def titles_title_xi_programs_crop_insurance_county_distribution_search():
     if end_year is None:
         end_year = max_year  # Default to latest available year
 
-    endpoint_response = generate_title_xi_county_distribution_response(program_id, start_year, end_year)
+    # endpoint_response = generate_title_xi_county_distribution_response(program_id, start_year, end_year)
+    endpoint_response = generate_title_xi_county_distribution_response(
+        program_id,
+        start_year,
+        end_year,
+        years=years,
+        commodity_names=commodity_names,
+        list_commodities=list_commodities,
+    )
     return endpoint_response
 
-def generate_title_xi_county_distribution_response(program_id, start_year, end_year):
+def generate_title_xi_county_distribution_response(
+    program_id,
+    start_year,
+    end_year,
+    years=None,
+    commodity_names=None,
+    list_commodities=False
+):
     session = Session()
 
-    num_years = end_year - start_year + 1
+    if years:
+        years = sorted(set(years))
+        year_filter = PaymentByCounty.year.in_(years)
+        num_years = len(years)
+    else:
+        year_filter = PaymentByCounty.year.between(start_year, end_year)
+        num_years = end_year - start_year + 1
 
     # construct the query using PaymentByCounty model with County join
     program_query = session.query(
