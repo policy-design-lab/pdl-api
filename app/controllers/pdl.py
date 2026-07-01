@@ -1213,6 +1213,7 @@ def generate_title_xi_county_distribution_response(
         year_filter = PaymentByCounty.year.between(start_year, end_year)
         num_years = end_year - start_year + 1
 
+
     query = session.query(
         PaymentByCounty.county_fips_code.label("county_fips"),
         County.state_code.label("state_code"),
@@ -1278,7 +1279,19 @@ def generate_title_xi_county_distribution_response(
                 "totalPoliciesEarningPremium": 0,
                 "totalLiabilitiesInDollars": 0,
                 "totalInsuredAreaInAcres": 0,
-                "commodities": [] if list_commodities else None
+                "commodities": [] if list_commodities else None,
+                "_commodity_map": defaultdict(lambda: {
+                    "commodityName": "",
+                    "totalIndemnitiesInDollars": 0,
+                    "totalPremiumInDollars": 0,
+                    "totalPremiumSubsidyInDollars": 0,
+                    "totalFarmerPaidPremiumInDollars": 0,
+                    "totalNetFarmerBenefitInDollars": 0,
+                    "totalPoliciesEarningPremium": 0,
+                    "totalLiabilitiesInDollars": 0,
+                    "totalInsuredAreaInAcres": 0,
+                    "lossRatio": 0
+                })
             }
 
         county = year_dict[year][county_fips]
@@ -1307,9 +1320,16 @@ def generate_title_xi_county_distribution_response(
             c["totalLiabilitiesInDollars"] += r.liability_amount
             c["totalInsuredAreaInAcres"] += r.base_acres
 
-            row = dict(r._mapping)
-            if row["county_fips"] == "06019" and row["commodity_name"] == "Wheat":
-                logging.error(json.dumps(row))
+            commodity = county["_commodity_map"][r.commodity_name]
+            commodity["commodityName"] = r.commodity_name
+            commodity["totalIndemnitiesInDollars"] += r.indemnity_amount
+            commodity["totalPremiumInDollars"] += r.premium_amount
+            commodity["totalPremiumSubsidyInDollars"] += r.premium_subsidy_amount
+            commodity["totalFarmerPaidPremiumInDollars"] += r.farmer_premium_amount
+            commodity["totalNetFarmerBenefitInDollars"] += r.net_farmer_benefit_amount
+            commodity["totalPoliciesEarningPremium"] += r.premium_policy_count
+            commodity["totalLiabilitiesInDollars"] += r.liability_amount
+            commodity["totalInsuredAreaInAcres"] += r.base_acres
 
     if list_commodities:
         for county_fips in commodity_map:
@@ -1399,7 +1419,21 @@ def generate_title_xi_county_distribution_response(
                 )
 
                 if list_commodities:
-                    c["commodities"] = list(commodity_map[c["countyFips"]].values())
+                    commodities = list(c["_commodity_map"].values())
+
+                    for commodity in commodities:
+                        premium = commodity["totalPremiumInDollars"]
+                        commodity["lossRatio"] = (
+                            round(
+                                commodity["totalIndemnitiesInDollars"] / premium,
+                                3
+                            )
+                            if premium else 0
+                        )
+
+                    c["commodities"] = commodities
+
+                c.pop("_commodity_map", None)
 
                 final_output.append(c)
 
