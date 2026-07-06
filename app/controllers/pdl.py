@@ -1375,6 +1375,9 @@ def generate_title_xi_county_distribution_response(
             c["totalLiabilitiesInDollars"] += r["totalLiabilitiesInDollars"]
             c["totalInsuredAreaInAcres"] += r["totalInsuredAreaInAcres"]
 
+            if fips == '06019' and r["totalInsuredAreaInAcres"] != 0.0:
+                logging.error("commodity=%s, total=%s", r["totalInsuredAreaInAcres"], c["totalInsuredAreaInAcres"])
+
             if list_commodities:
                 c["commodities"] = list(commodity_map[fips].values())
 
@@ -1393,6 +1396,9 @@ def generate_title_xi_county_distribution_response(
             round(c["totalIndemnitiesInDollars"] / c["totalPremiumInDollars"], 3)
             if c["totalPremiumInDollars"] else 0
         )
+
+        if c.get('countyFips') == '06019':
+            pass
 
         final_output.append(c)
 
