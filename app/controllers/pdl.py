@@ -4165,7 +4165,12 @@ def titles_title_xi_crop_insurance_commodities():
         result[year] = items
     if result:
         years = sorted(int(y) for y in result.keys())
+        commodities = {}
+        for year in years:
+            for commodity in result[str(year)]:
+                key = commodity["commodityCode"]
+                commodities[key] = commodity
         start, end = years[0], years[-1]
-        result[f"{start}-{end}"] = result[str(end)]
+        result[f"{start}-{end}"] = list(commodities.values())
 
     return result
