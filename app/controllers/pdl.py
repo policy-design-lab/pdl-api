@@ -1450,6 +1450,74 @@ def generate_title_xi_county_distribution_response(
             )
 
             program_response_dict[year] = final_output
+            if len(years) > 1:
+                selected_years = defaultdict(lambda: {
+                    "countyFips": "",
+                    "stateFips": "",
+                    "state": "",
+                    "countyName": "",
+                    "totalIndemnitiesInDollars": 0,
+                    "totalPremiumInDollars": 0,
+                    "totalPremiumSubsidyInDollars": 0,
+                    "totalFarmerPaidPremiumInDollars": 0,
+                    "totalNetFarmerBenefitInDollars": 0,
+                    "totalPoliciesEarningPremium": 0,
+                    "totalLiabilitiesInDollars": 0,
+                    "totalInsuredAreaInAcres": 0,
+                    "averageLiabilitiesInDollars": 0,
+                    "averageInsuredAreaInAcres": 0,
+                    "lossRatio": 0,
+                    "commodities": None
+                })
+
+                for year in years:
+                    year = str(year)
+
+                    for county in program_response_dict[year]:
+                        c = selected_years[county["countyFips"]]
+
+                        c["countyFips"] = county["countyFips"]
+                        c["stateFips"] = county["stateFips"]
+                        c["state"] = county["state"]
+                        c["countyName"] = county["countyName"]
+
+                        c["totalIndemnitiesInDollars"] += county["totalIndemnitiesInDollars"]
+                        c["totalPremiumInDollars"] += county["totalPremiumInDollars"]
+                        c["totalPremiumSubsidyInDollars"] += county["totalPremiumSubsidyInDollars"]
+                        c["totalFarmerPaidPremiumInDollars"] += county["totalFarmerPaidPremiumInDollars"]
+                        c["totalNetFarmerBenefitInDollars"] += county["totalNetFarmerBenefitInDollars"]
+                        c["totalPoliciesEarningPremium"] += county["totalPoliciesEarningPremium"]
+                        c["totalLiabilitiesInDollars"] += county["totalLiabilitiesInDollars"]
+                        c["totalInsuredAreaInAcres"] += county["totalInsuredAreaInAcres"]
+
+                selected_output = []
+
+                for c in selected_years.values():
+                    c["averageLiabilitiesInDollars"] = round(
+                        c["totalLiabilitiesInDollars"] / len(years)
+                    )
+
+                    c["averageInsuredAreaInAcres"] = round(
+                        c["totalInsuredAreaInAcres"] / len(years)
+                    )
+
+                    c["lossRatio"] = (
+                        round(
+                            c["totalIndemnitiesInDollars"] /
+                            c["totalPremiumInDollars"],
+                            3
+                        )
+                        if c["totalPremiumInDollars"] else 0
+                    )
+
+                    selected_output.append(c)
+
+                selected_output.sort(
+                    key=lambda x: x["totalIndemnitiesInDollars"],
+                    reverse=True
+                )
+
+                program_response_dict["selectedYears"] = selected_output
     else:
         program_response_dict[f"{start_year}-{end_year}"] = final_output
 
