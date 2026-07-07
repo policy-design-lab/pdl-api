@@ -1721,6 +1721,25 @@ paths:
       summary: Gets the list of Title XI crop insurance commodities.
       description: |
         Returns a list of commodities available under Title XI Crop Insurance programs in JSON format.
+      parameters:
+        - name: start_year
+          in: query
+          description: The start year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2014
+            minimum: 1950
+            maximum: 2050
+        - name: end_year
+          in: query
+          description: The end year for filtering the data.
+          required: false
+          schema:
+            type: integer
+            example: 2021
+            minimum: 1950
+            maximum: 2050
       responses:
         200:
           description: Ok
