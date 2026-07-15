@@ -23,7 +23,7 @@ if debug:
 else:
     logging.basicConfig(datefmt='%Y-%m-%dT%H:%M:%S', format=log_format, level=logging.INFO)
 
-connexion_app = connexion.App("__name__", specification_dir='./')
+connexion_app = connexion.App("__name__", specification_dir='./app')
 connexion_app.add_api('pdl.yaml', base_path=cfg.URL_PREFIX, arguments={'title': 'Policy Design Lab API'},
                       resolver=PdlApiResolver('controllers'), resolver_error=501)
 
@@ -39,4 +39,4 @@ db.init_app(app)
 CORS(app)
 
 if __name__ == '__main__':
-    app.run(port=cfg.API_PORT, host=None, debug=True)
+    app.run(port=cfg.API_PORT, host=None, debug=debug)

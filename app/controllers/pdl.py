@@ -1168,7 +1168,6 @@ def titles_title_xi_programs_crop_insurance_county_distribution_search():
     years = request.args.getlist("year", type=int)
     years = sorted(set(years)) if years else None
     commodity_names = request.args.getlist("commodityName")
-    logging.error("commodity_names: " + json.dumps(commodity_names))
     list_commodities_param = str(request.args.get("listCommodities", default=False)).lower()
     if list_commodities_param == "true":
         list_commodities = True
@@ -1184,7 +1183,6 @@ def titles_title_xi_programs_crop_insurance_county_distribution_search():
     if end_year is None:
         end_year = max_year  # Default to latest available year
 
-    # endpoint_response = generate_title_xi_county_distribution_response(program_id, start_year, end_year)
     endpoint_response = generate_title_xi_county_distribution_response(
         program_id,
         start_year,
@@ -1352,9 +1350,10 @@ def generate_title_xi_county_distribution_response(
         'totalInsuredAreaInAcres': 0,
         'averageLiabilitiesInDollars': 0,
         'averageInsuredAreaInAcres': 0,
-        'lossRatio': 0,
-        'commodities': [] if list_commodities else None
+        'lossRatio': 0
     })
+    if list_commodities:
+        county['commodities'] = []
 
     for year, counties in year_dict.items():
         for r in counties.values():
@@ -1374,9 +1373,6 @@ def generate_title_xi_county_distribution_response(
             c["totalPoliciesEarningPremium"] += r["totalPoliciesEarningPremium"]
             c["totalLiabilitiesInDollars"] += r["totalLiabilitiesInDollars"]
             c["totalInsuredAreaInAcres"] += r["totalInsuredAreaInAcres"]
-
-            if fips == '06019' and r["totalInsuredAreaInAcres"] != 0.0:
-                logging.error("commodity=%s, total=%s", r["totalInsuredAreaInAcres"], c["totalInsuredAreaInAcres"])
 
             if list_commodities:
                 c["commodities"] = list(commodity_map[fips].values())
