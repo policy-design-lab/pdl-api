@@ -1393,9 +1393,6 @@ def generate_title_xi_county_distribution_response(
             if c["totalPremiumInDollars"] else 0
         )
 
-        if c.get('countyFips') == '06019':
-            pass
-
         final_output.append(c)
 
     final_output = sorted(
