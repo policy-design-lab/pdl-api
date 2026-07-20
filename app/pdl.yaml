@@ -240,6 +240,41 @@ paths:
       description: |
         Returns the Title I county distribution data for all counties in JSON format.
       parameters:
+        - name: listCommodities
+          in: query
+          description: Whether to include commodity details in the response.
+          required: false
+          schema:
+            type: boolean
+            default: false
+        - name: year
+          in: query
+          description: Specific years to retrieve. If provided, start_year and end_year are ignored.
+          required: false
+          schema:
+            type: array
+            items:
+              type: integer
+              minimum: 1950
+              maximum: 2050
+            example:
+              - 2014
+              - 2015
+          style: form
+          explode: true
+        - name: commodityName
+          in: query
+          description: Specific commodity names to filter by.
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+            example:
+              - Cotton
+              - Grain Sorghum
+          style: form
+          explode: true
         - name: start_year
           in: query
           description: The start year for filtering the data.
