@@ -21,6 +21,7 @@ from app.models.sub_subprogram import SubSubProgram
 from app.models.subprogram import SubProgram
 from app.models.subtitle import Subtitle
 from app.models.title import Title
+from app.models.commodity import Commodity
 from collections import defaultdict
 
 LANDING_PAGE_DATA_PATH = os.path.join("controllers", "data", "landingpage")
@@ -4093,3 +4094,83 @@ def generate_title_xi_summary_response(program_id, start_year, end_year):
 
     return aggregate_dict
 
+def titles_title_xi_crop_insurance_commodities():
+    min_year, max_year = cfg.TITLE_I_START_YEAR, cfg.TITLE_I_END_YEAR
+    start_year = request.args.get('start_year', type=int, default=min_year)
+    end_year = request.args.get('end_year', type=int, default=max_year)
+
+    program_id = get_program_id(TITLE_XI_CROP_INSURANCE_PROGRAM_NAME)
+
+    session = Session()
+
+    allowed_names = {
+        name for name in cfg.COMMODITIES
+        if name != "Commodities Not Listed"
+    }
+
+    rows = (
+        session.query(
+            PaymentByCounty.year,
+            Commodity.code,
+            Commodity.name,
+            Commodity.abbreviation,
+        )
+        .join(Commodity, PaymentByCounty.commodity_code == Commodity.code)
+        .filter(
+            PaymentByCounty.year.isnot(None),
+            PaymentByCounty.program_id == program_id,
+            PaymentByCounty.year.between(start_year, end_year),
+        )
+        .group_by(
+            PaymentByCounty.year,
+            Commodity.code,
+            Commodity.name,
+            Commodity.abbreviation,
+        )
+        .order_by(
+            PaymentByCounty.year,
+            Commodity.name,
+        )
+        .all()
+    )
+
+    grouped = defaultdict(lambda: {"allowed": [], "other": False})
+
+    for year, code, name, abbrev in rows:
+        year = str(year)
+
+        if name in allowed_names:
+            grouped[year]["allowed"].append((code, name, abbrev))
+        else:
+            grouped[year]["other"] = True
+
+    result = {}
+
+    for year, data in grouped.items():
+        items = []
+        for code, name, abbrev in data["allowed"]:
+            items.append({
+                "commodityCode": code,
+                "commodityName": name,
+                "commodityAbbrev": abbrev
+            })
+
+        if data.get("other"):
+            items.append({
+                "commodityCode": 8888,
+                "commodityName": "Commodities Not Listed",
+                "commodityAbbrev": "UNLST"
+            })
+
+        result[year] = items
+    if result:
+        years = sorted(int(y) for y in result.keys())
+        commodities = {}
+        for year in years:
+            for commodity in result[str(year)]:
+                key = commodity["commodityCode"]
+                commodities[key] = commodity
+        start, end = years[0], years[-1]
+        result[f"{start}-{end}"] = list(commodities.values())
+
+    return result
