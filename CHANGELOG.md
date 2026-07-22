@@ -7,7 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- Soybean policy storyboard APIs to return socioeconomic, soybean market balance and commodity demand data [#365](https://github.com/policy-design-lab/pdl-api/issues/365
+- Soybean policy storyboard APIs to return socioeconomic, soybean market balance and commodity demand data [#365](https://github.com/policy-design-lab/pdl-api/issues/365)
+- Add endpoint to return crop insurance commodities. [#368](https://github.com/policy-design-lab/pdl-api/issues/368)
+
+### Changed
+- Update crop insurance county level distribution endpoint to include commodity details. [#369](https://github.com/policy-design-lab/pdl-api/issues/369)
 
 ## [1.1.0] - 2026-04-09
 

@@ -21,6 +21,7 @@ from app.models.sub_subprogram import SubSubProgram
 from app.models.subprogram import SubProgram
 from app.models.subtitle import Subtitle
 from app.models.title import Title
+from app.models.commodity import Commodity
 from collections import defaultdict
 import pandas as pd
 
@@ -1175,6 +1176,16 @@ def titles_title_xi_programs_crop_insurance_county_distribution_search():
     start_year = request.args.get('start_year', type=int, default=min_year)
     end_year = request.args.get('end_year', type=int, default=max_year)
 
+    # new query params:
+    years = request.args.getlist("year", type=int)
+    years = sorted(set(years)) if years else None
+    commodity_names = request.args.getlist("commodityName")
+    list_commodities_param = str(request.args.get("listCommodities", default=False)).lower()
+    if list_commodities_param == "true":
+        list_commodities = True
+    else:
+        list_commodities = False
+
     if start_year and end_year and start_year > end_year:
         start_year, end_year = min_year, max_year  # Reset to full range if invalid
 
@@ -1184,77 +1195,157 @@ def titles_title_xi_programs_crop_insurance_county_distribution_search():
     if end_year is None:
         end_year = max_year  # Default to latest available year
 
-    endpoint_response = generate_title_xi_county_distribution_response(program_id, start_year, end_year)
+    endpoint_response = generate_title_xi_county_distribution_response(
+        program_id,
+        start_year,
+        end_year,
+        years=years,
+        commodity_names=commodity_names,
+        list_commodities=list_commodities,
+    )
     return endpoint_response
 
-def generate_title_xi_county_distribution_response(program_id, start_year, end_year):
+def generate_title_xi_county_distribution_response(
+    program_id,
+    start_year,
+    end_year,
+    years=None,
+    commodity_names=None,
+    list_commodities=False
+):
     session = Session()
 
-    num_years = end_year - start_year + 1
+    if years:
+        years = sorted(set(years))
+        year_filter = PaymentByCounty.year.in_(years)
+        num_years = len(years)
+    else:
+        year_filter = PaymentByCounty.year.between(start_year, end_year)
+        num_years = end_year - start_year + 1
 
-    # construct the query using PaymentByCounty model with County join
-    program_query = session.query(
-        PaymentByCounty.county_fips_code.label('county_fips'),
-        County.state_code.label('state_code'),
-        County.name.label('county_name'),
-        Program.name.label('programName'),
-        PaymentByCounty.year.label('year'),
-        PaymentByCounty.base_acres.label('base_acres'),
-        PaymentByCounty.premium_policy_count.label('premium_policy_count'),
-        PaymentByCounty.liability_amount.label('liability_amount'),
-        PaymentByCounty.premium_amount.label('premium_amount'),
-        PaymentByCounty.premium_subsidy_amount.label('premium_subsidy_amount'),
-        PaymentByCounty.indemnity_amount.label('indemnity_amount'),
-        PaymentByCounty.farmer_premium_amount.label('farmer_premium_amount'),
-        PaymentByCounty.loss_ratio.label('loss_ratio'),
-        PaymentByCounty.net_farmer_benefit_amount.label('net_farmer_benefit_amount')).join(
-        Program, PaymentByCounty.program_id == Program.id).outerjoin(
-        County, PaymentByCounty.county_fips_code == County.fips_code).filter(
+
+    query = session.query(
+        PaymentByCounty.county_fips_code.label("county_fips"),
+        County.state_code.label("state_code"),
+        County.name.label("county_name"),
+        PaymentByCounty.year.label("year"),
+
+        PaymentByCounty.base_acres.label("base_acres"),
+        PaymentByCounty.premium_policy_count.label("premium_policy_count"),
+        PaymentByCounty.liability_amount.label("liability_amount"),
+        PaymentByCounty.premium_amount.label("premium_amount"),
+        PaymentByCounty.premium_subsidy_amount.label("premium_subsidy_amount"),
+        PaymentByCounty.indemnity_amount.label("indemnity_amount"),
+        PaymentByCounty.farmer_premium_amount.label("farmer_premium_amount"),
+        PaymentByCounty.loss_ratio.label("loss_ratio"),
+        PaymentByCounty.net_farmer_benefit_amount.label("net_farmer_benefit_amount"),
+        Commodity.name.label("commodity_name")
+    ).outerjoin(
+        County,
+        PaymentByCounty.county_fips_code == County.fips_code
+    ).join(
+        Commodity,
+        PaymentByCounty.commodity_code == Commodity.code
+    ).filter(
         PaymentByCounty.program_id == program_id,
-        PaymentByCounty.year.between(start_year, end_year)
+        year_filter
     )
 
-    # execute the query
-    program_result = program_query.all()
+    if commodity_names:
+        query = query.filter(Commodity.name.in_(commodity_names))
 
-    # create dictionaries
-    program_response_dict = defaultdict(list)
-    year_dict = defaultdict(list)
+    rows = query.all()
+    # county-level data by year:
+    year_dict = defaultdict(dict)
 
-    # aggregate data
-    for record in program_result:
-        county_fips = record[0]
-        state_code = record[1]
-        county_name = record[2]
-        year = str(record[4])
-        base_acres = record[5]
-        premium_policy_count = record[6]
-        liability_amount = record[7]
-        premium_amount = record[8]
-        premium_subsidy_amount = record[9]
-        indemnity_amount = record[10]
-        farmer_premium_amount = record[11]
-        loss_ratio = record[12]
-        net_farmer_benefit_amount = record[13]
+    commodity_map = defaultdict(lambda: defaultdict(lambda: {
+        "commodityName": "",
+        "totalIndemnitiesInDollars": 0,
+        "totalPremiumInDollars": 0,
+        "totalPremiumSubsidyInDollars": 0,
+        "totalFarmerPaidPremiumInDollars": 0,
+        "totalNetFarmerBenefitInDollars": 0,
+        "totalPoliciesEarningPremium": 0,
+        "totalLiabilitiesInDollars": 0,
+        "totalInsuredAreaInAcres": 0,
+        "lossRatio": 0
+    }))
 
-        # Extract state FIPS from county FIPS (first 2 digits)
-        state_fips = county_fips[:2] if county_fips and len(county_fips) >= 2 else ''
+    for r in rows:
+        county_fips = r.county_fips
+        year = str(r.year)
 
-        year_dict[year].append({
-            'countyFips': county_fips,
-            'stateFips': state_fips,
-            'state': state_code,
-            'countyName': county_name,
-            'totalIndemnitiesInDollars': indemnity_amount,
-            'totalPremiumInDollars': premium_amount,
-            'totalPremiumSubsidyInDollars': premium_subsidy_amount,
-            'totalFarmerPaidPremiumInDollars': farmer_premium_amount,
-            'totalNetFarmerBenefitInDollars': net_farmer_benefit_amount,
-            'totalPoliciesEarningPremium': premium_policy_count,
-            'totalLiabilitiesInDollars': liability_amount,
-            'totalInsuredAreaInAcres': base_acres,
-            'lossRatio': loss_ratio
-        })
+        if county_fips not in year_dict[year]:
+            year_dict[year][county_fips] = {
+                "countyFips": county_fips,
+                "stateFips": county_fips[:2],
+                "state": r.state_code,
+                "countyName": r.county_name,
+                "totalIndemnitiesInDollars": 0,
+                "totalPremiumInDollars": 0,
+                "totalPremiumSubsidyInDollars": 0,
+                "totalFarmerPaidPremiumInDollars": 0,
+                "totalNetFarmerBenefitInDollars": 0,
+                "totalPoliciesEarningPremium": 0,
+                "totalLiabilitiesInDollars": 0,
+                "totalInsuredAreaInAcres": 0,
+                "commodities": [] if list_commodities else None,
+                "_commodity_map": defaultdict(lambda: {
+                    "commodityName": "",
+                    "totalIndemnitiesInDollars": 0,
+                    "totalPremiumInDollars": 0,
+                    "totalPremiumSubsidyInDollars": 0,
+                    "totalFarmerPaidPremiumInDollars": 0,
+                    "totalNetFarmerBenefitInDollars": 0,
+                    "totalPoliciesEarningPremium": 0,
+                    "totalLiabilitiesInDollars": 0,
+                    "totalInsuredAreaInAcres": 0,
+                    "lossRatio": 0
+                })
+            }
+
+        county = year_dict[year][county_fips]
+
+        # COUNTY LEVEL
+        county["totalIndemnitiesInDollars"] += r.indemnity_amount
+        county["totalPremiumInDollars"] += r.premium_amount
+        county["totalPremiumSubsidyInDollars"] += r.premium_subsidy_amount
+        county["totalFarmerPaidPremiumInDollars"] += r.farmer_premium_amount
+        county["totalNetFarmerBenefitInDollars"] += r.net_farmer_benefit_amount
+        county["totalPoliciesEarningPremium"] += r.premium_policy_count
+        county["totalLiabilitiesInDollars"] += r.liability_amount
+        county["totalInsuredAreaInAcres"] += r.base_acres
+
+        # COMMODITIES
+        if list_commodities:
+            c = commodity_map[county_fips][r.commodity_name]
+
+            c["commodityName"] = r.commodity_name
+            c["totalIndemnitiesInDollars"] += r.indemnity_amount
+            c["totalPremiumInDollars"] += r.premium_amount
+            c["totalPremiumSubsidyInDollars"] += r.premium_subsidy_amount
+            c["totalFarmerPaidPremiumInDollars"] += r.farmer_premium_amount
+            c["totalNetFarmerBenefitInDollars"] += r.net_farmer_benefit_amount
+            c["totalPoliciesEarningPremium"] += r.premium_policy_count
+            c["totalLiabilitiesInDollars"] += r.liability_amount
+            c["totalInsuredAreaInAcres"] += r.base_acres
+
+            commodity = county["_commodity_map"][r.commodity_name]
+            commodity["commodityName"] = r.commodity_name
+            commodity["totalIndemnitiesInDollars"] += r.indemnity_amount
+            commodity["totalPremiumInDollars"] += r.premium_amount
+            commodity["totalPremiumSubsidyInDollars"] += r.premium_subsidy_amount
+            commodity["totalFarmerPaidPremiumInDollars"] += r.farmer_premium_amount
+            commodity["totalNetFarmerBenefitInDollars"] += r.net_farmer_benefit_amount
+            commodity["totalPoliciesEarningPremium"] += r.premium_policy_count
+            commodity["totalLiabilitiesInDollars"] += r.liability_amount
+            commodity["totalInsuredAreaInAcres"] += r.base_acres
+
+    if list_commodities:
+        for county_fips in commodity_map:
+            for c in commodity_map[county_fips].values():
+                premium = c["totalPremiumInDollars"]
+                c["lossRatio"] = round(c["totalIndemnitiesInDollars"] / premium, 3) if premium else 0
 
     county_aggregate_dict = defaultdict(lambda: {
         'countyFips': '',
@@ -1273,54 +1364,168 @@ def generate_title_xi_county_distribution_response(program_id, start_year, end_y
         'averageInsuredAreaInAcres': 0,
         'lossRatio': 0
     })
+    if list_commodities:
+        county['commodities'] = []
 
-    # Loop through each year and aggregate data by county
-    for year, records in year_dict.items():
-        for record in records:
-            county_fips = record['countyFips']
+    for year, counties in year_dict.items():
+        for r in counties.values():
+            fips = r["countyFips"]
+            c = county_aggregate_dict[fips]
 
-            # Sum the values across all years for each county
-            county_aggregate_dict[county_fips]['countyFips'] = county_fips
-            county_aggregate_dict[county_fips]['stateFips'] = record['stateFips']
-            county_aggregate_dict[county_fips]['state'] = record['state']
-            county_aggregate_dict[county_fips]['countyName'] = record['countyName']
-            county_aggregate_dict[county_fips]['totalIndemnitiesInDollars'] += record['totalIndemnitiesInDollars']
-            county_aggregate_dict[county_fips]['totalPremiumInDollars'] += record['totalPremiumInDollars']
-            county_aggregate_dict[county_fips]['totalPremiumSubsidyInDollars'] += record['totalPremiumSubsidyInDollars']
-            county_aggregate_dict[county_fips]['totalFarmerPaidPremiumInDollars'] += record['totalFarmerPaidPremiumInDollars']
-            county_aggregate_dict[county_fips]['totalNetFarmerBenefitInDollars'] += record['totalNetFarmerBenefitInDollars']
-            county_aggregate_dict[county_fips]['totalPoliciesEarningPremium'] += record['totalPoliciesEarningPremium']
-            county_aggregate_dict[county_fips]['totalLiabilitiesInDollars'] += record['totalLiabilitiesInDollars']
-            county_aggregate_dict[county_fips]['totalInsuredAreaInAcres'] += record['totalInsuredAreaInAcres']
+            c["countyFips"] = r["countyFips"]
+            c["stateFips"] = r["stateFips"]
+            c["state"] = r["state"]
+            c["countyName"] = r["countyName"]
 
-    # Calculate averages and ratios for each county
-    for county_fips, values in county_aggregate_dict.items():
-        # Calculate average insured area in acres
-        values['averageInsuredAreaInAcres'] = round(values['totalInsuredAreaInAcres'] / num_years)
-        del values['totalInsuredAreaInAcres']
+            c["totalIndemnitiesInDollars"] += r["totalIndemnitiesInDollars"]
+            c["totalPremiumInDollars"] += r["totalPremiumInDollars"]
+            c["totalPremiumSubsidyInDollars"] += r["totalPremiumSubsidyInDollars"]
+            c["totalFarmerPaidPremiumInDollars"] += r["totalFarmerPaidPremiumInDollars"]
+            c["totalNetFarmerBenefitInDollars"] += r["totalNetFarmerBenefitInDollars"]
+            c["totalPoliciesEarningPremium"] += r["totalPoliciesEarningPremium"]
+            c["totalLiabilitiesInDollars"] += r["totalLiabilitiesInDollars"]
+            c["totalInsuredAreaInAcres"] += r["totalInsuredAreaInAcres"]
 
-        # Calculate average liabilities in dollars
-        values['averageLiabilitiesInDollars'] = round(values['totalLiabilitiesInDollars'] / num_years)
-        del values['totalLiabilitiesInDollars']
+            if list_commodities:
+                c["commodities"] = list(commodity_map[fips].values())
 
-        # Loss_ratio is indemnities / premium so create the average loss ratio
-        if values['totalPremiumInDollars'] > 0:
-            values['lossRatio'] = values['totalIndemnitiesInDollars'] / values['totalPremiumInDollars']
-            # round the loss ratio to 3 decimal places
-            values['lossRatio'] = round(values['lossRatio'], 3)
-        else:
-            values['lossRatio'] = 0
+    program_response_dict = defaultdict(list)
 
-    # convert the data into the required format
     final_output = []
-    for county_fips, values in county_aggregate_dict.items():
-        final_output.append(values)
 
-    # Sort the final output based on totalIndemnitiesInDollars in reverse order
-    final_output = sorted(final_output, key=lambda x: x['totalIndemnitiesInDollars'], reverse=True)
+    for c in county_aggregate_dict.values():
+        c["averageLiabilitiesInDollars"] = round(
+            c["totalLiabilitiesInDollars"] / num_years
+        )
+        c["averageInsuredAreaInAcres"] = round(
+            c["totalInsuredAreaInAcres"] / num_years
+        )
+        c["lossRatio"] = (
+            round(c["totalIndemnitiesInDollars"] / c["totalPremiumInDollars"], 3)
+            if c["totalPremiumInDollars"] else 0
+        )
 
-    # Add the total counties data to the program_response_dict
-    program_response_dict[str(start_year) + '-' + str(end_year)] = final_output
+        final_output.append(c)
+
+    final_output = sorted(
+        final_output,
+        key=lambda x: x["totalIndemnitiesInDollars"],
+        reverse=True
+    )
+
+    if years:
+        for year, counties in year_dict.items():
+            final_output = []
+
+            for c in counties.values():
+                c["averageLiabilitiesInDollars"] = c["totalLiabilitiesInDollars"]
+                c["averageInsuredAreaInAcres"] = c["totalInsuredAreaInAcres"]
+                c["lossRatio"] = (
+                    round(
+                        c["totalIndemnitiesInDollars"] /
+                        c["totalPremiumInDollars"],
+                        3
+                    )
+                    if c["totalPremiumInDollars"] else 0
+                )
+
+                if list_commodities:
+                    commodities = list(c["_commodity_map"].values())
+
+                    for commodity in commodities:
+                        premium = commodity["totalPremiumInDollars"]
+                        commodity["lossRatio"] = (
+                            round(
+                                commodity["totalIndemnitiesInDollars"] / premium,
+                                3
+                            )
+                            if premium else 0
+                        )
+
+                    c["commodities"] = commodities
+
+                c.pop("_commodity_map", None)
+
+                final_output.append(c)
+
+            final_output = sorted(
+                final_output,
+                key=lambda x: x["totalIndemnitiesInDollars"],
+                reverse=True
+            )
+
+            program_response_dict[year] = final_output
+            if len(years) > 1:
+                selected_years = defaultdict(lambda: {
+                    "countyFips": "",
+                    "stateFips": "",
+                    "state": "",
+                    "countyName": "",
+                    "totalIndemnitiesInDollars": 0,
+                    "totalPremiumInDollars": 0,
+                    "totalPremiumSubsidyInDollars": 0,
+                    "totalFarmerPaidPremiumInDollars": 0,
+                    "totalNetFarmerBenefitInDollars": 0,
+                    "totalPoliciesEarningPremium": 0,
+                    "totalLiabilitiesInDollars": 0,
+                    "totalInsuredAreaInAcres": 0,
+                    "averageLiabilitiesInDollars": 0,
+                    "averageInsuredAreaInAcres": 0,
+                    "lossRatio": 0,
+                    "commodities": None
+                })
+
+                for year in years:
+                    year = str(year)
+
+                    for county in program_response_dict[year]:
+                        c = selected_years[county["countyFips"]]
+
+                        c["countyFips"] = county["countyFips"]
+                        c["stateFips"] = county["stateFips"]
+                        c["state"] = county["state"]
+                        c["countyName"] = county["countyName"]
+
+                        c["totalIndemnitiesInDollars"] += county["totalIndemnitiesInDollars"]
+                        c["totalPremiumInDollars"] += county["totalPremiumInDollars"]
+                        c["totalPremiumSubsidyInDollars"] += county["totalPremiumSubsidyInDollars"]
+                        c["totalFarmerPaidPremiumInDollars"] += county["totalFarmerPaidPremiumInDollars"]
+                        c["totalNetFarmerBenefitInDollars"] += county["totalNetFarmerBenefitInDollars"]
+                        c["totalPoliciesEarningPremium"] += county["totalPoliciesEarningPremium"]
+                        c["totalLiabilitiesInDollars"] += county["totalLiabilitiesInDollars"]
+                        c["totalInsuredAreaInAcres"] += county["totalInsuredAreaInAcres"]
+
+                selected_output = []
+
+                for c in selected_years.values():
+                    c["averageLiabilitiesInDollars"] = round(
+                        c["totalLiabilitiesInDollars"] / len(years)
+                    )
+
+                    c["averageInsuredAreaInAcres"] = round(
+                        c["totalInsuredAreaInAcres"] / len(years)
+                    )
+
+                    c["lossRatio"] = (
+                        round(
+                            c["totalIndemnitiesInDollars"] /
+                            c["totalPremiumInDollars"],
+                            3
+                        )
+                        if c["totalPremiumInDollars"] else 0
+                    )
+
+                    selected_output.append(c)
+
+                selected_output.sort(
+                    key=lambda x: x["totalIndemnitiesInDollars"],
+                    reverse=True
+                )
+
+                program_response_dict["selectedYears"] = selected_output
+    else:
+        program_response_dict[f"{start_year}-{end_year}"] = final_output
+
 
     return program_response_dict
 
@@ -4104,6 +4309,87 @@ def generate_title_xi_summary_response(program_id, start_year, end_year):
     del aggregate_dict['totalLiabilitiesInDollars']
 
     return aggregate_dict
+
+def titles_title_xi_crop_insurance_commodities():
+    min_year, max_year = cfg.TITLE_I_START_YEAR, cfg.TITLE_I_END_YEAR
+    start_year = request.args.get('start_year', type=int, default=min_year)
+    end_year = request.args.get('end_year', type=int, default=max_year)
+
+    program_id = get_program_id(TITLE_XI_CROP_INSURANCE_PROGRAM_NAME)
+
+    session = Session()
+
+    allowed_names = {
+        name for name in cfg.COMMODITIES
+        if name != "Commodities Not Listed"
+    }
+
+    rows = (
+        session.query(
+            PaymentByCounty.year,
+            Commodity.code,
+            Commodity.name,
+            Commodity.abbreviation,
+        )
+        .join(Commodity, PaymentByCounty.commodity_code == Commodity.code)
+        .filter(
+            PaymentByCounty.year.isnot(None),
+            PaymentByCounty.program_id == program_id,
+            PaymentByCounty.year.between(start_year, end_year),
+            )
+        .group_by(
+            PaymentByCounty.year,
+            Commodity.code,
+            Commodity.name,
+            Commodity.abbreviation,
+        )
+        .order_by(
+            PaymentByCounty.year,
+            Commodity.name,
+        )
+        .all()
+    )
+
+    grouped = defaultdict(lambda: {"allowed": [], "other": False})
+
+    for year, code, name, abbrev in rows:
+        year = str(year)
+
+        if name in allowed_names:
+            grouped[year]["allowed"].append((code, name, abbrev))
+        else:
+            grouped[year]["other"] = True
+
+    result = {}
+
+    for year, data in grouped.items():
+        items = []
+        for code, name, abbrev in data["allowed"]:
+            items.append({
+                "commodityCode": code,
+                "commodityName": name,
+                "commodityAbbrev": abbrev
+            })
+
+        if data.get("other"):
+            items.append({
+                "commodityCode": 8888,
+                "commodityName": "Commodities Not Listed",
+                "commodityAbbrev": "UNLST"
+            })
+
+        result[year] = items
+    if result:
+        years = sorted(int(y) for y in result.keys())
+        commodities = {}
+        for year in years:
+            for commodity in result[str(year)]:
+                key = commodity["commodityCode"]
+                commodities[key] = commodity
+        start, end = years[0], years[-1]
+        result[f"{start}-{end}"] = list(commodities.values())
+
+    return result
 
 def countries_commodities_search(countrycode=None):
     # TODO - implement year filter for the CSVs and then later the database
