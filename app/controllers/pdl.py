@@ -4512,7 +4512,7 @@ def countries_plantedacres_search(countrycode=None):
 
             for _, row in group.iterrows():
                 raw_name = str(row[nameColumn]).title()
-                display_name = raw_name if level is not "county" or "County" in raw_name else f"{raw_name} County"
+                display_name = raw_name if level != "county" or "County" in raw_name else f"{raw_name} County"
                 if level == "county":
                     fips_code = str(row[levelCodeColumn]).zfill(5)
                 else:
