@@ -46,6 +46,6 @@ class Config:
     SNAP_END_YEAR = int(os.getenv('SNAP_END_YEAR', '2022'))
 
     SOYBEAN_STORYBOARD_START_YEAR=int(os.getenv('SOYBEAN_STORYBOARD_START_YEAR', '1960'))
-    SOYBEAN_STORYBOARD_END_YEAR=int(os.getenv('SOYBEAN_STORYBOARD_START_YEAR', '2026'))
+    SOYBEAN_STORYBOARD_END_YEAR=int(os.getenv('SOYBEAN_STORYBOARD_END_YEAR', '2026'))
 
     COMMODITIES = ast.literal_eval(os.getenv("COMMODITIES", '["Corn", "Cotton", "Grain Sorghum", "Peanuts", "Rice", "Soybeans", "Wheat", "Commodities Not Listed"]'))
