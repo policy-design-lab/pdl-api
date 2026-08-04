@@ -1,6 +1,7 @@
 import json
 import logging
 import os
+import html
 from collections import OrderedDict
 from app.controllers.configs import Config as cfg
 from app.models.county import County
@@ -4511,7 +4512,7 @@ def countries_plantedacres_search(countrycode=None):
             planted_acres = []
 
             for _, row in group.iterrows():
-                raw_name = str(row[nameColumn]).title()
+                raw_name = html.unescape(str(row[nameColumn])).title()
                 display_name = raw_name if level != "county" or "County" in raw_name else f"{raw_name} County"
                 if level == "county":
                     fips_code = str(row[levelCodeColumn]).zfill(5)
