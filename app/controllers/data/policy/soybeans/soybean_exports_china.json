@@ -1,0 +1,159 @@
+{
+   "2022":[
+      {
+         "country":"United States",
+         "code":"US",
+         "commodity": "soybeans",
+         "top_destinations" : [
+            {
+               "country": "China",
+               "amount": 30226936.9
+            },
+            {
+               "country": "Mexico",
+               "amount": 5863661.6
+            },
+            {
+               "country": "Egypt",
+               "amount": 3087192
+            }
+         ],
+         "china": 30226936.9,
+         "rest_of_world": 26685627
+      },
+      {
+         "country":"Brazil",
+         "code":"BR",
+         "commodity": "soybeans",
+         "top_destinations" : [],
+         "china": 53700000,
+         "rest_of_world": 41830000
+      },
+      {
+         "country":"Argentina",
+         "code":"AR",
+         "commodity": "soybeans",
+         "top_destinations" : [],
+         "china": 2740000,
+         "rest_of_world": 2374000
+      }
+   ],
+   "2023":[
+      {
+         "country":"United States",
+         "code":"US",
+         "commodity": "soybeans",
+         "top_destinations" : [
+             {
+               "country": "China",
+               "amount": 26390799.7
+            },
+            {
+               "country": "Mexico",
+               "amount": 4771878.4
+            },
+            {
+               "country": "Germany",
+               "amount": 2967241.9
+            }
+         ],
+         "china": 26390799.7,
+         "rest_of_world": 19875200.3
+      },
+      {
+         "country":"Brazil",
+         "code":"BR",
+         "commodity": "soybeans",
+         "top_destinations" : [],
+         "china": 74500000,
+         "rest_of_world": 29691000
+      },
+      {
+         "country":"Argentina",
+         "code":"AR",
+         "commodity": "soybeans",
+         "top_destinations" : [],
+         "china": 1700000,
+         "rest_of_world": 3414000
+      }
+   ],
+   "2024":[
+      {
+         "country":"United States",
+         "code":"US",
+         "commodity": "soybeans",
+         "top_destinations" : [
+             {
+               "country": "China",
+               "amount": 26808615.1
+            },
+            {
+               "country": "Mexico",
+               "amount": 4988135.2
+            },
+            {
+               "country": "Indonesia",
+               "amount": 2589458.3
+            }
+         ],
+         "china": 26808615.1,
+         "rest_of_world": 25397853.8
+      },
+      {
+         "country":"Brazil",
+         "code":"BR",
+         "commodity": "soybeans",
+         "top_destinations" : [],
+         "china": 72500000,
+         "rest_of_world": 30643000
+      },
+      {
+         "country":"Argentina",
+         "code":"AR",
+         "commodity": "soybeans",
+         "china": 4100000,
+         "rest_of_world": 3774000
+      }
+   ],
+   "2025":[
+      {
+         "country":"United States",
+         "code":"US",
+         "commodity": "soybeans",
+         "top_destinations" : [
+             {
+               "country": "China",
+               "amount": 7372831
+            },
+            {
+               "country": "Mexico",
+               "amount": 5460915.2
+            },
+            {
+               "country": "Egypt",
+               "amount": 3967761
+            }
+         ],
+         "china": 7372831,
+         "rest_of_world": 35491169
+      },
+      {
+         "country":"Brazil",
+         "code":"BR",
+         "commodity": "soybeans",
+         "top_destinations" : [],
+         "china": 83700000,
+         "rest_of_world": 30300000  
+      },
+      {
+         "country":"Argentina",
+         "code":"AR",
+         "commodity": "soybeans",
+         "top_destinations" : [],
+         "china": 6840000,
+         "rest_of_world": 1410000
+      }
+   ]
+}
+
+
