@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Fixed
+- Fix special character encoding in the return of api endpoint. [#372](https://github.com/policy-design-lab/pdl-api/issues/372)
 
 ### Added
 - Soybean policy storyboard APIs to return socioeconomic, soybean market balance and commodity demand data [#365](https://github.com/policy-design-lab/pdl-api/issues/365)
