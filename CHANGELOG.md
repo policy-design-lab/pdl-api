@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Fixed
+- Fix crop insurance county level endpoint to return only specified commodities. [#373](https://github.com/policy-design-lab/pdl-api/issues/373)
 - Fix special character encoding in the return of api endpoint. [#372](https://github.com/policy-design-lab/pdl-api/issues/372)
 
 ### Added
