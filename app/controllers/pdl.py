@@ -1406,6 +1406,51 @@ def generate_title_xi_county_distribution_response(
             if c["totalPremiumInDollars"] else 0
         )
 
+        if list_commodities and c["commodities"]:
+            listed_commodities = set(cfg.COMMODITIES) - {"Commodities Not Listed"}
+
+            commodities_not_listed = {
+                "commodityName": "Commodities Not Listed",
+                "totalIndemnitiesInDollars": 0,
+                "totalPremiumInDollars": 0,
+                "totalPremiumSubsidyInDollars": 0,
+                "totalFarmerPaidPremiumInDollars": 0,
+                "totalNetFarmerBenefitInDollars": 0,
+                "totalPoliciesEarningPremium": 0,
+                "totalLiabilitiesInDollars": 0,
+                "totalInsuredAreaInAcres": 0,
+                "lossRatio": 0,
+            }
+
+            filtered_commodities = []
+
+            for commodity in c["commodities"]:
+                if commodity["commodityName"] in listed_commodities:
+                    filtered_commodities.append(commodity)
+                else:
+                    for key in [
+                        "totalIndemnitiesInDollars",
+                        "totalPremiumInDollars",
+                        "totalPremiumSubsidyInDollars",
+                        "totalFarmerPaidPremiumInDollars",
+                        "totalNetFarmerBenefitInDollars",
+                        "totalPoliciesEarningPremium",
+                        "totalLiabilitiesInDollars",
+                        "totalInsuredAreaInAcres",
+                    ]:
+                        commodities_not_listed[key] += commodity[key]
+
+            if commodities_not_listed["totalPremiumInDollars"]:
+                commodities_not_listed["lossRatio"] = round(
+                    commodities_not_listed["totalIndemnitiesInDollars"]
+                    / commodities_not_listed["totalPremiumInDollars"],
+                    3,
+                )
+
+            filtered_commodities.append(commodities_not_listed)
+
+            c["commodities"] = filtered_commodities
+
         final_output.append(c)
 
     final_output = sorted(
