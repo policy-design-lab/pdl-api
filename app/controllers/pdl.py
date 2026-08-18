@@ -1448,6 +1448,10 @@ def generate_title_xi_county_distribution_response(
                 )
 
             filtered_commodities.append(commodities_not_listed)
+            filtered_commodities = sorted(
+                filtered_commodities,
+                key=lambda x: x["commodityName"]
+            )
 
             c["commodities"] = filtered_commodities
 
@@ -1476,19 +1480,67 @@ def generate_title_xi_county_distribution_response(
                 )
 
                 if list_commodities:
-                    commodities = list(c["_commodity_map"].values())
+                    listed_commodities = set(cfg.COMMODITIES) - {"Commodities Not Listed"}
 
-                    for commodity in commodities:
-                        premium = commodity["totalPremiumInDollars"]
-                        commodity["lossRatio"] = (
-                            round(
-                                commodity["totalIndemnitiesInDollars"] / premium,
-                                3
+                    commodities_not_listed = {
+                        "commodityName": "Commodities Not Listed",
+                        "totalIndemnitiesInDollars": 0,
+                        "totalPremiumInDollars": 0,
+                        "totalPremiumSubsidyInDollars": 0,
+                        "totalFarmerPaidPremiumInDollars": 0,
+                        "totalNetFarmerBenefitInDollars": 0,
+                        "totalPoliciesEarningPremium": 0,
+                        "totalLiabilitiesInDollars": 0,
+                        "totalInsuredAreaInAcres": 0,
+                        "lossRatio": 0,
+                    }
+
+                    filtered_commodities = []
+
+                    for commodity in c["_commodity_map"].values():
+                        if commodity["commodityName"] in listed_commodities:
+                            premium = commodity["totalPremiumInDollars"]
+
+                            commodity["lossRatio"] = (
+                                round(
+                                    commodity["totalIndemnitiesInDollars"] / premium,
+                                    3
+                                )
+                                if premium else 0
                             )
-                            if premium else 0
+
+                            filtered_commodities.append(commodity)
+
+                        else:
+                            for key in [
+                                "totalIndemnitiesInDollars",
+                                "totalPremiumInDollars",
+                                "totalPremiumSubsidyInDollars",
+                                "totalFarmerPaidPremiumInDollars",
+                                "totalNetFarmerBenefitInDollars",
+                                "totalPoliciesEarningPremium",
+                                "totalLiabilitiesInDollars",
+                                "totalInsuredAreaInAcres",
+                            ]:
+                                commodities_not_listed[key] += commodity[key]
+
+                    if commodities_not_listed["totalPremiumInDollars"]:
+                        commodities_not_listed["lossRatio"] = round(
+                            commodities_not_listed["totalIndemnitiesInDollars"]
+                            / commodities_not_listed["totalPremiumInDollars"],
+                            3,
                         )
 
-                    c["commodities"] = commodities
+                    filtered_commodities.append(commodities_not_listed)
+
+                    filtered_commodities.sort(
+                        key=lambda x: (
+                            x["commodityName"] == "Commodities Not Listed",
+                            x["commodityName"],
+                        )
+                    )
+
+                    c["commodities"] = filtered_commodities
 
                 c.pop("_commodity_map", None)
 
@@ -1518,7 +1570,7 @@ def generate_title_xi_county_distribution_response(
                     "averageLiabilitiesInDollars": 0,
                     "averageInsuredAreaInAcres": 0,
                     "lossRatio": 0,
-                    "commodities": None
+                    "commodities": {}
                 })
 
                 for year in years:
@@ -1541,6 +1593,69 @@ def generate_title_xi_county_distribution_response(
                         c["totalLiabilitiesInDollars"] += county["totalLiabilitiesInDollars"]
                         c["totalInsuredAreaInAcres"] += county["totalInsuredAreaInAcres"]
 
+                        if list_commodities and county["commodities"]:
+                            listed_commodities = set(cfg.COMMODITIES) - {"Commodities Not Listed"}
+
+                            for commodity in county["commodities"]:
+                                commodity_name = commodity["commodityName"]
+
+                                if commodity_name in listed_commodities:
+                                    if commodity_name not in c["commodities"]:
+                                        c["commodities"][commodity_name] = {
+                                            "commodityName": commodity_name,
+                                            "totalIndemnitiesInDollars": 0,
+                                            "totalPremiumInDollars": 0,
+                                            "totalPremiumSubsidyInDollars": 0,
+                                            "totalFarmerPaidPremiumInDollars": 0,
+                                            "totalNetFarmerBenefitInDollars": 0,
+                                            "totalPoliciesEarningPremium": 0,
+                                            "totalLiabilitiesInDollars": 0,
+                                            "totalInsuredAreaInAcres": 0,
+                                            "lossRatio": 0,
+                                        }
+
+                                    selected_commodity = c["commodities"][commodity_name]
+
+                                    for key in [
+                                        "totalIndemnitiesInDollars",
+                                        "totalPremiumInDollars",
+                                        "totalPremiumSubsidyInDollars",
+                                        "totalFarmerPaidPremiumInDollars",
+                                        "totalNetFarmerBenefitInDollars",
+                                        "totalPoliciesEarningPremium",
+                                        "totalLiabilitiesInDollars",
+                                        "totalInsuredAreaInAcres",
+                                    ]:
+                                        selected_commodity[key] += commodity[key]
+                                else:
+                                    if "Commodities Not Listed" not in c["commodities"]:
+                                        c["commodities"]["Commodities Not Listed"] = {
+                                            "commodityName": "Commodities Not Listed",
+                                            "totalIndemnitiesInDollars": 0,
+                                            "totalPremiumInDollars": 0,
+                                            "totalPremiumSubsidyInDollars": 0,
+                                            "totalFarmerPaidPremiumInDollars": 0,
+                                            "totalNetFarmerBenefitInDollars": 0,
+                                            "totalPoliciesEarningPremium": 0,
+                                            "totalLiabilitiesInDollars": 0,
+                                            "totalInsuredAreaInAcres": 0,
+                                            "lossRatio": 0,
+                                        }
+
+                                    commodities_not_listed = c["commodities"]["Commodities Not Listed"]
+
+                                    for key in [
+                                        "totalIndemnitiesInDollars",
+                                        "totalPremiumInDollars",
+                                        "totalPremiumSubsidyInDollars",
+                                        "totalFarmerPaidPremiumInDollars",
+                                        "totalNetFarmerBenefitInDollars",
+                                        "totalPoliciesEarningPremium",
+                                        "totalLiabilitiesInDollars",
+                                        "totalInsuredAreaInAcres",
+                                    ]:
+                                        commodities_not_listed[key] += commodity[key]
+
                 selected_output = []
 
                 for c in selected_years.values():
@@ -1560,6 +1675,31 @@ def generate_title_xi_county_distribution_response(
                         )
                         if c["totalPremiumInDollars"] else 0
                     )
+
+                    if list_commodities:
+                        commodities = list(c["commodities"].values())
+
+                        for commodity in commodities:
+                            premium = commodity["totalPremiumInDollars"]
+
+                            commodity["lossRatio"] = (
+                                round(
+                                    commodity["totalIndemnitiesInDollars"] / premium,
+                                    3
+                                )
+                                if premium else 0
+                            )
+
+                        commodities.sort(
+                        key=lambda x: (
+                            x["commodityName"] == "Commodities Not Listed",
+                            x["commodityName"],
+                        )
+                    )
+
+                        c["commodities"] = commodities
+                    else:
+                        c["commodities"] = None
 
                     selected_output.append(c)
 
