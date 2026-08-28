@@ -1461,7 +1461,7 @@ def generate_title_xi_county_distribution_response(
             if c["totalPremiumInDollars"] else 0
         )
 
-        if list_commodities and c["commodities"] and skip_handle_commodities_not_listed:
+        if list_commodities and c["commodities"]:
             c["commodities"] = handle_commodities_not_listed(
                 c["commodities"], skip_handle_commodities_not_listed
             )
