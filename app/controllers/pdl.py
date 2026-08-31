@@ -6,7 +6,7 @@ from collections import OrderedDict
 from app.controllers.configs import Config as cfg
 from app.models.county import County
 from flask import request, Response
-from sqlalchemy import func, desc, Numeric, BigInteger, Integer, text, or_, and_, false
+from sqlalchemy import func, desc, Numeric, BigInteger, Integer, text, or_, and_
 
 import app.utils.jsonutils as jsonutils
 import app.utils.rest_handlers as rs_handlers
@@ -1211,16 +1211,20 @@ def handle_commodities_not_listed(commodities, skip_handle_commodities_not_liste
         "Commodities Not Listed"
     }
 
+    aggregation_keys = [
+        "totalIndemnitiesInDollars",
+        "totalPremiumInDollars",
+        "totalPremiumSubsidyInDollars",
+        "totalFarmerPaidPremiumInDollars",
+        "totalNetFarmerBenefitInDollars",
+        "totalPoliciesEarningPremium",
+        "totalLiabilitiesInDollars",
+        "totalInsuredAreaInAcres",
+    ]
+
     commodities_not_listed = {
         "commodityName": "Commodities Not Listed",
-        "totalIndemnitiesInDollars": 0,
-        "totalPremiumInDollars": 0,
-        "totalPremiumSubsidyInDollars": 0,
-        "totalFarmerPaidPremiumInDollars": 0,
-        "totalNetFarmerBenefitInDollars": 0,
-        "totalPoliciesEarningPremium": 0,
-        "totalLiabilitiesInDollars": 0,
-        "totalInsuredAreaInAcres": 0,
+        **{key: 0 for key in aggregation_keys},
         "lossRatio": 0,
     }
 
@@ -1228,26 +1232,36 @@ def handle_commodities_not_listed(commodities, skip_handle_commodities_not_liste
 
     for commodity in commodities:
         if commodity["commodityName"] in listed_commodities:
+            premium = commodity["totalPremiumInDollars"]
+
+            commodity["lossRatio"] = (
+                round(
+                    commodity["totalIndemnitiesInDollars"] / premium,
+                    3,
+                )
+                if premium
+                else 0
+            )
+
             filtered_commodities.append(commodity)
+
         elif not skip_handle_commodities_not_listed:
-            for key in [
-                "totalIndemnitiesInDollars",
-                "totalPremiumInDollars",
-                "totalPremiumSubsidyInDollars",
-                "totalFarmerPaidPremiumInDollars",
-                "totalNetFarmerBenefitInDollars",
-                "totalPoliciesEarningPremium",
-                "totalLiabilitiesInDollars",
-                "totalInsuredAreaInAcres",
-            ]:
+            for key in aggregation_keys:
                 commodities_not_listed[key] += commodity[key]
+
     if not skip_handle_commodities_not_listed:
-        if commodities_not_listed["totalPremiumInDollars"]:
-            commodities_not_listed["lossRatio"] = round(
-                commodities_not_listed["totalIndemnitiesInDollars"]
-                / commodities_not_listed["totalPremiumInDollars"],
+        premium = commodities_not_listed["totalPremiumInDollars"]
+
+        commodities_not_listed["lossRatio"] = (
+            round(
+                commodities_not_listed[
+                    "totalIndemnitiesInDollars"
+                ] / premium,
                 3,
             )
+            if premium
+            else 0
+        )
 
         filtered_commodities.append(commodities_not_listed)
 
@@ -1397,12 +1411,6 @@ def generate_title_xi_county_distribution_response(
             commodity["totalLiabilitiesInDollars"] += r.liability_amount
             commodity["totalInsuredAreaInAcres"] += r.base_acres
 
-    if list_commodities:
-        for county_fips in commodity_map:
-            for c in commodity_map[county_fips].values():
-                premium = c["totalPremiumInDollars"]
-                c["lossRatio"] = round(c["totalIndemnitiesInDollars"] / premium, 3) if premium else 0
-
     county_aggregate_dict = defaultdict(lambda: {
         'countyFips': '',
         'stateFips': '',
@@ -1420,8 +1428,6 @@ def generate_title_xi_county_distribution_response(
         'averageInsuredAreaInAcres': 0,
         'lossRatio': 0
     })
-    if list_commodities:
-        county['commodities'] = []
 
     for year, counties in year_dict.items():
         for r in counties.values():
