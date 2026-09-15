@@ -668,6 +668,32 @@ def titles_title_ii_programs_eqip_state_distribution_search(practice_code=None):
 
     return endpoint_response
 
+def titles_title_ii_programs_eqip_county_distribution_search(practice_code=None):
+    min_year, max_year = cfg.TITLE_II_START_YEAR, cfg.TITLE_II_END_YEAR
+    start_year = request.args.get('start_year', type=int, default=min_year)
+    end_year = request.args.get('end_year', type=int, default=max_year)
+
+    program_id = get_program_id(TITLE_II_EQIP_PROGRAM_NAME)
+    if program_id is None:
+        msg = {
+            "reason": "No record for the given program name " + TITLE_II_EQIP_PROGRAM_NAME,
+            "error": "Not found: " + request.url,
+        }
+        logging.error("EQIP: " + json.dumps(msg))
+        return rs_handlers.not_found(msg)
+
+    if start_year and end_year and start_year > end_year:
+        start_year, end_year = min_year, max_year  # Return all data if invalid range
+
+    if start_year is None:
+        start_year = min_year  # Default to earliest available year
+
+    if end_year is None:
+        end_year = max_year  # Default to latest available year
+
+    endpoint_response = generate_title_ii_county_distribution_response(program_id, start_year, end_year, practice_code=practice_code)
+
+    return endpoint_response
 
 # /pdl/titles/title-ii/programs/eqip/summary
 def titles_title_ii_programs_eqip_summary_search():
@@ -3799,6 +3825,685 @@ def generate_title_ii_state_distribution_response(program_id, start_year, end_ye
 
     return response
 
+def generate_title_ii_county_distribution_response(program_id, start_year, end_year, practice_code=None):
+    session = Session()
+
+    # Get program name
+    program_name = session.query(Program.name).filter(Program.id == program_id).first()[0]
+
+    total_crp_sub_program_id = None
+    if program_name == TITLE_II_CRP_PROGRAM_NAME:
+        # Find ID of the sub program with name 'Total CRP' for the program
+        total_crp_sub_program_id = session.query(SubProgram.id).filter(SubProgram.program_id == program_id,
+                                                                       SubProgram.name == 'Total CRP').first()[0]
+
+    # Get sub programs for the program
+    sub_programs_query = session.query(SubProgram.id.label('subProgramId'),
+                                       SubProgram.name.label("subProgramName")
+                                       ).filter(SubProgram.program_id == program_id)
+
+    # Extract the column names
+    sub_programs_column_names = [item['name'] for item in sub_programs_query.statement.column_descriptions]
+
+    # Execute the query
+    sub_programs_result = sub_programs_query.all()
+
+    sub_programs_dict = dict()
+    for row in sub_programs_result:
+        response_dict = dict(zip(sub_programs_column_names, row))
+        sub_program_name = response_dict['subProgramName']
+        del response_dict['subProgramName']
+
+        sub_programs_dict[sub_program_name] = response_dict
+
+    # Get sub-sub programs for the sub program
+    for sub_program_name in sub_programs_dict:
+
+        sub_sub_programs_query = session.query(SubSubProgram.id.label('subSubProgramId'),
+                                               SubSubProgram.name.label("subSubProgramName")
+                                               ).filter(SubSubProgram.sub_program_id == sub_programs_dict[sub_program_name]['subProgramId'])
+
+        # Extract the column names
+        sub_sub_programs_column_names = [item['name'] for item in sub_sub_programs_query.statement.column_descriptions]
+
+        # Execute the query
+        sub_sub_programs_result = sub_sub_programs_query.all()
+
+        sub_sub_programs_list = []
+        for row in sub_sub_programs_result:
+            response_dict = dict(zip(sub_sub_programs_column_names, row))
+            sub_sub_programs_list.append(response_dict)
+
+        sub_programs_dict[sub_program_name]["subSubPrograms"] = sub_sub_programs_list
+
+    # Get practice categories for the program
+    practice_categories_query = session.query(
+        PracticeCategory.display_name.label('practiceCategoryName'),
+        PracticeCategory.category_grouping.label('statuteName')
+    ).filter(
+        PracticeCategory.program_id == program_id
+    )
+
+    # Extract the column names
+    practice_categories_column_names = [item['name'] for item in practice_categories_query.statement.column_descriptions]
+
+    # Execute the query
+    practice_categories_result = practice_categories_query.all()
+
+    practice_categories_dict = dict()
+    for row in practice_categories_result:
+        response_dict = dict(zip(practice_categories_column_names, row))
+        statute_name = response_dict['statuteName']
+
+        # Cleanup / renaming attributes
+        del response_dict['statuteName']
+
+        response_dict["totalPaymentInDollars"] = 0.0
+        response_dict["totalPaymentInPercentageNationwide"] = 0.0
+        response_dict["totalPaymentInPercentageWithinState"] = 0.0
+
+        if statute_name not in practice_categories_dict:
+            practice_categories_dict[statute_name] = {'practiceCategories': [response_dict]}
+        else:
+            practice_categories_dict[statute_name]['practiceCategories'].append(response_dict)
+
+    # Extract practice category groupings from the practice categories dict
+    practice_category_groupings = list()
+    for statute_name in practice_categories_dict:
+        practice_category_groupings.append(statute_name)
+
+    # Get total payment for each state based on practice category groupings
+    state_total_payment_by_practice_category_grouping_query = (session.query(
+        PaymentByCounty.state_code.label('state'),
+        PracticeCategory.category_grouping.label('statuteName'),
+        func.sum(PaymentByCounty.payment).label('totalPaymentInDollars')
+    ).join(
+        PracticeCategory, PaymentByCounty.practice_category_id == PracticeCategory.id
+    ).filter(
+        PaymentByCounty.program_id == program_id,
+        PaymentByCounty.year.between(start_year, end_year),
+        PracticeCategory.program_id == program_id
+    ).group_by(
+        PaymentByCounty.state_code, PracticeCategory.category_grouping,
+    ).order_by(
+        PaymentByCounty.state_code, PracticeCategory.category_grouping
+    ))
+
+    # Extract the column names
+    state_total_payment_by_practice_category_grouping_column_names = [item['name'] for item in state_total_payment_by_practice_category_grouping_query.statement.column_descriptions]
+
+    # Execute the query
+    state_total_payment_by_practice_category_grouping_result = state_total_payment_by_practice_category_grouping_query.all()
+
+    # Create result dictionary
+    state_practice_category_grouping_dict = dict()
+    total_payment_by_practice_category_grouping_dict = dict()
+    for row in state_total_payment_by_practice_category_grouping_result:
+        response_dict = dict(zip(state_total_payment_by_practice_category_grouping_column_names, row))
+        state = response_dict['state']
+
+        # Cleanup / renaming attributes
+        del response_dict['state']
+
+        if state in state_practice_category_grouping_dict:
+            state_practice_category_grouping_dict[state]["statutes"].append(response_dict)
+        else:
+            state_practice_category_grouping_dict[state] = {"statutes": [response_dict]}
+
+        # Calculate total payment by practice category groupings
+        if response_dict['statuteName'] in total_payment_by_practice_category_grouping_dict:
+            total_payment_by_practice_category_grouping_dict[response_dict['statuteName']] += response_dict['totalPaymentInDollars']
+        else:
+            total_payment_by_practice_category_grouping_dict[response_dict['statuteName']] = response_dict['totalPaymentInDollars']
+
+    # Add missing statutes with zero payment
+    for state in state_practice_category_grouping_dict:
+        practice_category_groupings_copy = practice_category_groupings.copy()
+
+        for statute in state_practice_category_grouping_dict[state]["statutes"]:
+            if statute["statuteName"] in practice_category_groupings_copy:
+                practice_category_groupings_copy.remove(statute["statuteName"])
+
+        for statute_name in practice_category_groupings_copy:
+            state_practice_category_grouping_dict[state]["statutes"].append({
+                "statuteName": statute_name,
+                "totalPaymentInDollars": 0.0
+            })
+
+    # Get total payment by practice categories
+    state_total_payment_by_practice_category_query = (session.query(
+        PaymentByCounty.state_code.label('state'),
+        PracticeCategory.display_name.label('practiceCategoryName'),
+        PracticeCategory.category_grouping.label('statuteName'),
+        func.sum(PaymentByCounty.payment).label('totalPaymentInDollars')
+    ).join(
+        PracticeCategory, PaymentByCounty.practice_category_id == PracticeCategory.id
+    ).filter(
+        PaymentByCounty.program_id == program_id,
+        PaymentByCounty.year.between(start_year, end_year),
+        PracticeCategory.program_id == program_id
+    ).group_by(
+        PaymentByCounty.state_code, PracticeCategory.category_grouping, PracticeCategory.display_name
+    ).order_by(
+        PaymentByCounty.state_code, PracticeCategory.category_grouping, PracticeCategory.display_name
+    ))
+
+    # Extract the column names
+    state_total_payment_by_practice_categories_column_names = [item['name'] for item in state_total_payment_by_practice_category_query.statement.column_descriptions]
+
+    # Execute the query
+    state_total_payment_by_practice_categories_result = state_total_payment_by_practice_category_query.all()
+
+    # Generate result dictionary
+    state_total_payment_by_practice_categories_dict = dict()
+    for row in state_total_payment_by_practice_categories_result:
+        response_dict = dict(zip(state_total_payment_by_practice_categories_column_names, row))
+        state = response_dict['state']
+        statute_name = response_dict['statuteName']
+
+        # Cleanup / renaming attributes
+        del response_dict['state']
+        del response_dict['statuteName']
+        response_dict["totalPaymentInPercentageNationwide"] = 0.0
+        response_dict["totalPaymentInPercentageWithinState"] = 0.0
+
+        if state in state_total_payment_by_practice_categories_dict:
+            if statute_name in state_total_payment_by_practice_categories_dict[state]:
+                state_total_payment_by_practice_categories_dict[state][statute_name]['practiceCategories'].append(response_dict)
+            else:
+                state_total_payment_by_practice_categories_dict[state][statute_name] = {'practiceCategories': [response_dict]}
+        else:
+            state_total_payment_by_practice_categories_dict[state] = {statute_name: {'practiceCategories': [response_dict]}}
+
+    # add missing practice categories with zero payment
+    for state in state_total_payment_by_practice_categories_dict:
+
+        for statute in state_total_payment_by_practice_categories_dict[state]:
+            statute_dict = state_total_payment_by_practice_categories_dict[state][statute]
+            for practice_category in practice_categories_dict[statute]['practiceCategories']:
+                found = False
+                for practice in statute_dict['practiceCategories']:
+                    if practice['practiceCategoryName'] == practice_category['practiceCategoryName']:
+                        found = True
+                        break
+                if not found:
+                    statute_dict['practiceCategories'].append({
+                        'practiceCategoryName': practice_category['practiceCategoryName'],
+                        'totalPaymentInDollars': 0.0,
+                        'totalPaymentInPercentageNationwide': 0.0,
+                        'totalPaymentInPercentageWithinState': 0.0
+                    })
+
+        for statute_name in practice_categories_dict:
+            if statute_name not in state_total_payment_by_practice_categories_dict[state]:
+                state_total_payment_by_practice_categories_dict[state].update({statute_name: practice_categories_dict[statute_name]})
+
+    for state in state_total_payment_by_practice_categories_dict:
+        for statute in state_total_payment_by_practice_categories_dict[state]:
+            state_total_payment_by_practice_categories_dict[state][statute]['practiceCategories'] = sorted(state_total_payment_by_practice_categories_dict[state][statute]['practiceCategories'], key=lambda x: x['totalPaymentInDollars'], reverse=True)
+
+    # Get practice codes list, if provided in the request
+    practice_codes_list = practice_code.split("|") if practice_code else []
+
+    # Get total payment by practice codes
+    state_total_payment_by_practice_code_query = (session.query(
+        PaymentByCounty.state_code.label('state'),
+        PracticeCategory.display_name.label('practiceCategoryName'),
+        PaymentByCounty.practice_code.label('practiceCode'),
+        Practice.name.label('practiceName'),
+        func.sum(PaymentByCounty.payment).label('totalPaymentInDollars')
+    ).join(
+        PracticeCategory, Payment.practice_category_id == PracticeCategory.id
+    ).join(
+        Practice, Payment.practice_code == Practice.code
+    ).filter(
+        PaymentByCounty.program_id == program_id,
+        PaymentByCounty.year.between(start_year, end_year),
+        PracticeCategory.program_id == program_id,
+        PaymentByCounty.practice_code.in_(practice_codes_list) if practice_codes_list else True
+    ).group_by(
+        PaymentByCounty.state_code, PracticeCategory.display_name,
+        PaymentByCounty.practice_code, Practice.name
+    ).order_by(
+        PaymentByCounty.state_code, PracticeCategory.display_name, Payment.practice_code
+    ))
+
+    # Extract the column names
+    state_total_payment_by_practice_code_column_names = [item['name'] for item in state_total_payment_by_practice_code_query.statement.column_descriptions]
+
+    # Execute the query
+    state_total_payment_by_practice_code_result = state_total_payment_by_practice_code_query.all()
+
+    # Generate result dictionary
+    state_total_payment_by_practice_code_dict = dict()
+
+    for row in state_total_payment_by_practice_code_result:
+        response_dict = dict(zip(state_total_payment_by_practice_code_column_names, row))
+
+        state = response_dict['state']
+        practice_category_name = response_dict['practiceCategoryName']
+        response_dict['practiceName'] = str(response_dict['practiceName']) + ' (' + response_dict['practiceCode'] + ')'
+
+        # Cleanup / renaming attributes
+        del response_dict['state']
+        del response_dict['practiceCode']
+        del response_dict['practiceCategoryName']
+
+        if state in state_total_payment_by_practice_code_dict:
+            if practice_category_name in state_total_payment_by_practice_code_dict[state]:
+                state_total_payment_by_practice_code_dict[state][practice_category_name]['practices'].append(response_dict)
+            else:
+                state_total_payment_by_practice_code_dict[state][practice_category_name] = {'practices': [response_dict]}
+        else:
+            state_total_payment_by_practice_code_dict[state] = {practice_category_name: {'practices': [response_dict]}}
+
+    for state in state_total_payment_by_practice_categories_dict:
+        for statute in state_total_payment_by_practice_categories_dict[state]:
+            for practice_category in state_total_payment_by_practice_categories_dict[state][statute]['practiceCategories']:
+                if state in state_total_payment_by_practice_code_dict and practice_category['practiceCategoryName'] in state_total_payment_by_practice_code_dict[state]:
+                    practice_category['practices'] = state_total_payment_by_practice_code_dict[state][practice_category['practiceCategoryName']]['practices']
+                else:
+                    practice_category['practices'] = []
+
+    # Get sum of payment for the given period grouped by practice category
+    total_payment_by_practice_categories_query = (session.query(
+        PracticeCategory.display_name.label('practiceCategoryName'),
+        func.sum(Payment.payment).label('totalPaymentInDollars')
+    ).join(
+        PracticeCategory, Payment.practice_category_id == PracticeCategory.id
+    ).filter(
+        Payment.program_id == program_id,
+        Payment.year.between(start_year, end_year),
+        PracticeCategory.program_id == program_id
+    ).group_by(
+        PracticeCategory.display_name
+    ).order_by(
+        desc('totalPaymentInDollars')
+    ))
+
+    # Extract the column names
+    total_payment_by_practice_categories_column_names = [item['name'] for item in
+                                                         total_payment_by_practice_categories_query.statement.column_descriptions]
+
+    # Execute the query
+    total_payment_by_practice_categories_result = total_payment_by_practice_categories_query.all()
+
+    # Generate result dictionary
+    total_payment_by_practice_categories_dict = dict()
+    for row in total_payment_by_practice_categories_result:
+        response_dict = dict(zip(total_payment_by_practice_categories_column_names, row))
+        practice_category_name = response_dict['practiceCategoryName']
+
+        # Cleanup / renaming attributes
+        del response_dict['practiceCategoryName']
+
+        total_payment_by_practice_categories_dict[practice_category_name] = response_dict
+
+    # Get total values for by sub programs by state
+    state_total_values_by_sub_programs_query = (session.query(
+        Payment.state_code.label('state'),
+        SubProgram.name.label('subProgramName'),
+        func.sum(Payment.payment).label('totalPaymentInDollars'),
+        func.cast(func.sum(Payment.recipient_count).label('totalRecipients'), Integer),
+        func.cast(func.sum(Payment.farm_count).label('totalFarms'), Integer),
+        func.cast(func.sum(Payment.contract_count).label('totalContracts'), Integer),
+        func.cast(func.sum(Payment.base_acres).label('totalAreaInAcres'), Integer),
+    ).join(
+        SubProgram, Payment.sub_program_id == SubProgram.id
+    ).filter(
+        Payment.program_id == program_id,
+        Payment.year.between(start_year, end_year),
+        Payment.sub_sub_program_id == None  # noqa: Needed for SQLAlchemy
+    ).group_by(
+        Payment.state_code, SubProgram.name
+    ).order_by(
+        desc('totalPaymentInDollars')
+    ))
+
+    # Extract the column names
+    state_total_values_by_sub_programs_column_names = [item['name'] for item in state_total_values_by_sub_programs_query.statement.column_descriptions]
+
+    # Execute the query
+    state_total_values_by_sub_programs_result = state_total_values_by_sub_programs_query.all()
+
+    # Generate result dictionary
+    state_total_values_by_sub_programs_dict = dict()
+
+    for row in state_total_values_by_sub_programs_result:
+        response_dict = dict(zip(state_total_values_by_sub_programs_column_names, row))
+        state = response_dict['state']
+
+        # Cleanup / renaming attributes
+        del response_dict['state']
+        response_dict["totalPaymentInPercentageNationwide"] = 0.0
+        response_dict["totalPaymentInPercentageWithinState"] = 0.0
+        response_dict["totalRecipientsInPercentageWithinState"] = 0.0
+        response_dict["totalRecipientsInPercentageNationwide"] = 0.0
+        response_dict["totalFarmsInPercentageWithinState"] = 0.0
+        response_dict["totalFarmsInPercentageNationwide"] = 0.0
+        response_dict["totalContractsInPercentageWithinState"] = 0.0
+        response_dict["totalContractsInPercentageNationwide"] = 0.0
+        response_dict["totalAreaInPercentageWithinState"] = 0.0
+        response_dict["totalAreaInPercentageNationwide"] = 0.0
+        response_dict["subSubPrograms"] = []
+
+        # In CRP, exclude 'Total CRP' sub program from the response
+        if program_name == TITLE_II_CRP_PROGRAM_NAME and response_dict['subProgramName'] != 'Total CRP':
+            if state in state_total_values_by_sub_programs_dict:
+                state_total_values_by_sub_programs_dict[state]["subPrograms"].append(response_dict)
+            else:
+                state_total_values_by_sub_programs_dict[state] = {"subPrograms": [response_dict]}
+
+    # Get total values by sub programs
+    total_values_by_sub_programs_query = (session.query(
+        SubProgram.name.label('subProgramName'),
+        func.sum(Payment.payment).label('totalPaymentInDollars'),
+        func.cast(func.sum(Payment.recipient_count).label('totalRecipients'), Integer),
+        func.cast(func.sum(Payment.farm_count).label('totalFarms'), Integer),
+        func.cast(func.sum(Payment.contract_count).label('totalContracts'), Integer),
+        func.cast(func.sum(Payment.base_acres).label('totalAreaInAcres'), Integer),
+    ).join(
+        SubProgram, Payment.sub_program_id == SubProgram.id
+    ).filter(
+        Payment.program_id == program_id,
+        Payment.year.between(start_year, end_year),
+        Payment.sub_sub_program_id == None  # noqa: Needed for SQLAlchemy
+    ).group_by(
+        SubProgram.name
+    ).order_by(
+        desc('totalPaymentInDollars')
+    ))
+
+    # Extract the column names
+    total_values_by_sub_programs_column_names = [item['name'] for item in total_values_by_sub_programs_query.statement.column_descriptions]
+
+    # Execute the query
+    total_values_by_sub_programs_result = total_values_by_sub_programs_query.all()
+
+    # Generate result dictionary
+    total_values_by_sub_programs_dict = dict()
+
+    for row in total_values_by_sub_programs_result:
+        response_dict = dict(zip(total_values_by_sub_programs_column_names, row))
+        sub_program_name = response_dict['subProgramName']
+
+        # Cleanup / renaming attributes
+        del response_dict['subProgramName']
+
+        total_values_by_sub_programs_dict[sub_program_name] = response_dict
+
+    # Get total values by sub-sub programs by state
+    state_total_values_by_sub_sub_programs_query = (session.query(
+        Payment.state_code.label('state'),
+        SubSubProgram.name.label('subSubProgramName'),
+        func.sum(Payment.payment).label('totalPaymentInDollars'),
+        func.cast(func.sum(Payment.recipient_count).label('totalRecipients'), Integer),
+        func.cast(func.sum(Payment.farm_count).label('totalFarms'), Integer),
+        func.cast(func.sum(Payment.contract_count).label('totalContracts'), Integer),
+        func.cast(func.sum(Payment.base_acres).label('totalAreaInAcres'), Integer),
+    ).join(
+        SubSubProgram, Payment.sub_sub_program_id == SubSubProgram.id
+    ).filter(
+        Payment.program_id == program_id,
+        Payment.year.between(start_year, end_year)
+    ).group_by(
+        Payment.state_code, SubSubProgram.name
+    ).order_by(
+        desc('totalPaymentInDollars')
+    ))
+
+    # Extract the column names
+    state_total_values_by_sub_sub_programs_column_names = [item['name'] for item in state_total_values_by_sub_sub_programs_query.statement.column_descriptions]
+
+    # Execute the query
+    state_total_values_by_sub_sub_programs_result = state_total_values_by_sub_sub_programs_query.all()
+
+    # Generate result dictionary
+    state_total_values_by_sub_sub_programs_dict = dict()
+
+    for row in state_total_values_by_sub_sub_programs_result:
+        response_dict = dict(zip(state_total_values_by_sub_sub_programs_column_names, row))
+        state = response_dict['state']
+        sub_sub_program_name = response_dict['subSubProgramName']
+
+        # Cleanup / renaming attributes
+        del response_dict['state']
+        # del response_dict['subSubProgramName']
+
+        response_dict["totalPaymentInPercentageNationwide"] = 0.0
+        response_dict["totalPaymentInPercentageWithinState"] = 0.0
+        response_dict["totalRecipientsInPercentageWithinState"] = 0.0
+        response_dict["totalRecipientsInPercentageNationwide"] = 0.0
+        response_dict["totalFarmsInPercentageWithinState"] = 0.0
+        response_dict["totalFarmsInPercentageNationwide"] = 0.0
+        response_dict["totalContractsInPercentageWithinState"] = 0.0
+        response_dict["totalContractsInPercentageNationwide"] = 0.0
+        response_dict["totalAreaInPercentageWithinState"] = 0.0
+        response_dict["totalAreaInPercentageNationwide"] = 0.0
+
+        if state in state_total_values_by_sub_sub_programs_dict:
+            state_total_values_by_sub_sub_programs_dict[state].append({sub_sub_program_name: response_dict})
+        else:
+            state_total_values_by_sub_sub_programs_dict[state] = [{sub_sub_program_name: response_dict}]
+
+    # Sort the sub-sub programs by alphabetical order of their names
+    for state in state_total_values_by_sub_sub_programs_dict:
+        state_total_values_by_sub_sub_programs_dict[state] = sorted(state_total_values_by_sub_sub_programs_dict[state], key=lambda x: list(x.keys())[0])
+
+    # Get total values by sub-sub programs
+    total_values_by_sub_sub_programs_query = (session.query(
+        SubSubProgram.name.label('subSubProgramName'),
+        func.sum(Payment.payment).label('totalPaymentInDollars'),
+        func.cast(func.sum(Payment.recipient_count).label('totalRecipients'), Integer),
+        func.cast(func.sum(Payment.farm_count).label('totalFarms'), Integer),
+        func.cast(func.sum(Payment.contract_count).label('totalContracts'), Integer),
+        func.cast(func.sum(Payment.base_acres).label('totalAreaInAcres'), Integer),
+    ).join(
+        SubSubProgram, Payment.sub_sub_program_id == SubSubProgram.id
+    ).filter(
+        Payment.program_id == program_id,
+        Payment.year.between(start_year, end_year)
+    ).group_by(
+        SubSubProgram.name
+    ).order_by(
+        desc('totalPaymentInDollars')
+    ))
+
+    # Extract the column names
+    total_values_by_sub_sub_programs_column_names = [item['name'] for item in total_values_by_sub_sub_programs_query.statement.column_descriptions]
+
+    # Execute the query
+    total_values_by_sub_sub_programs_result = total_values_by_sub_sub_programs_query.all()
+
+    # Generate result dictionary
+    total_values_by_sub_sub_programs_dict = dict()
+
+    for row in total_values_by_sub_sub_programs_result:
+        response_dict = dict(zip(total_values_by_sub_sub_programs_column_names, row))
+        sub_sub_program_name = response_dict['subSubProgramName']
+
+        # Cleanup / renaming attributes
+        del response_dict['subSubProgramName']
+
+        total_values_by_sub_sub_programs_dict[sub_sub_program_name] = response_dict
+
+    # Total payment for the given period. Special handling for CRP, as its 'Total CRP' sub program contains the total values.
+    if program_name != TITLE_II_CRP_PROGRAM_NAME:
+        total_payments_subquery = session.query(func.sum(Payment.payment).label('totalPaymentInDollars')).filter(
+            Payment.program_id == program_id,
+            Payment.year.between(start_year, end_year),
+            Payment.sub_sub_program_id == None  # noqa: Needed for SQLAlchemy
+        )
+    else:
+        total_payments_subquery = session.query(func.sum(Payment.payment).label('totalPaymentInDollars')).filter(
+            Payment.program_id == program_id,
+            Payment.sub_program_id == total_crp_sub_program_id,
+            Payment.year.between(start_year, end_year),
+            Payment.sub_sub_program_id == None  # noqa: Needed for SQLAlchemy
+        )
+    nationwide_total_payment = total_payments_subquery.scalar()
+
+    # Total recipients for the given period
+    if program_name != TITLE_II_CRP_PROGRAM_NAME:
+        total_recipients_subquery = session.query(func.sum(Payment.recipient_count).label('totalRecipients')).filter(
+            Payment.program_id == program_id,
+            Payment.year.between(start_year, end_year),
+            Payment.sub_sub_program_id == None  # noqa: Needed for SQLAlchemy
+        )
+    else:
+        total_recipients_subquery = session.query(func.sum(Payment.recipient_count).label('totalRecipients')).filter(
+            Payment.program_id == program_id,
+            Payment.sub_program_id == total_crp_sub_program_id,
+            Payment.year.between(start_year, end_year),
+            Payment.sub_sub_program_id == None  # noqa: Needed for SQLAlchemy
+        )
+    nationwide_total_recipients = total_recipients_subquery.scalar()
+
+    # Total contracts for the given period
+    if program_name != TITLE_II_CRP_PROGRAM_NAME:
+        total_contracts_subquery = session.query(func.sum(Payment.contract_count).label('totalContracts')).filter(
+            Payment.program_id == program_id,
+            Payment.year.between(start_year, end_year),
+            Payment.sub_sub_program_id == None  # noqa: Needed for SQLAlchemy
+        )
+    else:
+        total_contracts_subquery = session.query(func.sum(Payment.contract_count).label('totalContracts')).filter(
+            Payment.program_id == program_id,
+            Payment.sub_program_id == total_crp_sub_program_id,
+            Payment.year.between(start_year, end_year),
+            Payment.sub_sub_program_id == None  # noqa: Needed for SQLAlchemy
+        )
+    nationwide_total_contracts = total_contracts_subquery.scalar()
+
+    # Total farms for the given period
+    if program_name != TITLE_II_CRP_PROGRAM_NAME:
+        total_farms_subquery = session.query(func.sum(Payment.farm_count).label('totalFarms')).filter(
+            Payment.program_id == program_id,
+            Payment.year.between(start_year, end_year),
+            Payment.sub_sub_program_id == None  # noqa: Needed for SQLAlchemy
+        )
+    else:
+        total_farms_subquery = session.query(func.sum(Payment.farm_count).label('totalFarms')).filter(
+            Payment.program_id == program_id,
+            Payment.sub_program_id == total_crp_sub_program_id,
+            Payment.year.between(start_year, end_year),
+            Payment.sub_sub_program_id == None  # noqa: Needed for SQLAlchemy
+        )
+    nationwide_total_farms = total_farms_subquery.scalar()
+
+    # Total area in acres for the given period
+    if program_name != TITLE_II_CRP_PROGRAM_NAME:
+        total_area_in_acres_subquery = session.query(func.sum(Payment.base_acres).label('totalAreaInAcres')).filter(
+            Payment.program_id == program_id,
+            Payment.year.between(start_year, end_year),
+            Payment.sub_sub_program_id == None  # noqa: Needed for SQLAlchemy
+        )
+    else:
+        total_area_in_acres_subquery = session.query(func.sum(Payment.base_acres).label('totalAreaInAcres')).filter(
+            Payment.program_id == program_id,
+            Payment.sub_program_id == total_crp_sub_program_id,
+            Payment.year.between(start_year, end_year),
+            Payment.sub_sub_program_id == None  # noqa: Needed for SQLAlchemy
+        )
+    nationwide_total_area_in_acres = total_area_in_acres_subquery.scalar()
+
+    # Top-level query
+    query = session.query(
+        Payment.state_code.label('state'),
+        func.sum(Payment.payment).label('totalPaymentInDollars'),
+        func.cast(func.sum(Payment.recipient_count).label('totalRecipients'), Integer),
+        func.cast(func.sum(Payment.farm_count).label('totalFarms'), Integer),
+        func.cast(func.sum(Payment.contract_count).label('totalContracts'), Integer),
+        func.cast(func.sum(Payment.base_acres).label('totalAreaInAcres'), Integer),
+        (func.cast(func.sum(Payment.payment) / nationwide_total_payment * 100, Numeric(5, 2))).label('totalPaymentInPercentageNationwide'),
+        (func.cast(func.sum(Payment.recipient_count) / nationwide_total_recipients * 100, Numeric(5, 2))).label('totalRecipientsInPercentageNationwide'),
+        (func.cast(func.sum(Payment.farm_count) / nationwide_total_farms * 100, Numeric(5, 2))).label('totalFarmsInPercentageNationwide'),
+        (func.cast(func.sum(Payment.contract_count) / nationwide_total_contracts * 100, Numeric(5, 2))).label('totalContractsInPercentageNationwide'),
+        (func.cast(func.sum(Payment.base_acres) / nationwide_total_area_in_acres * 100, Numeric(5, 2))).label('totalAreaInPercentageNationwide')
+    ).filter(
+        Payment.program_id == program_id,
+        Payment.year.between(start_year, end_year),
+        Payment.sub_sub_program_id == None  # noqa: Needed for SQLAlchemy
+    ).group_by(
+        Payment.state_code
+    ).order_by(
+        desc('totalPaymentInDollars')
+    )
+
+    if program_name != TITLE_II_CRP_PROGRAM_NAME:
+        query = query.filter(
+            Payment.program_id == program_id,
+            Payment.year.between(start_year, end_year),
+            Payment.sub_sub_program_id == None  # noqa: Needed for SQLAlchemy
+        )
+    # In CRP, use the 'Total CRP' sub program to calculate the top-level total values
+    else:
+        query = query.filter(
+            Payment.program_id == program_id,
+            Payment.sub_program_id == total_crp_sub_program_id,
+            Payment.year.between(start_year, end_year),
+            Payment.sub_sub_program_id == None  # noqa: Needed for SQLAlchemy
+        )
+
+    # Extract the column names
+    column_names = [item['name'] for item in query.statement.column_descriptions]
+
+    # Execute the query
+    result = query.all()
+
+    # Generate result dictionary
+    program_response_dict = dict()
+    for row in result:
+        response_dict = dict(zip(column_names, row))
+        state = response_dict['state']
+        program_response_dict[state] = response_dict
+
+    # Complete the program response dictionary
+    for state in program_response_dict:
+        state_dict = program_response_dict[state]
+
+        if state in state_practice_category_grouping_dict:
+            state_dict.update(state_practice_category_grouping_dict[state])
+        if "statutes" in state_dict:
+            for statute in state_dict['statutes']:
+                # skip statutes that have no totals entry yet
+                if statute['statuteName'] not in total_payment_by_practice_category_grouping_dict:
+                    continue
+
+                for practice_category in state_total_payment_by_practice_categories_dict[state][statute['statuteName']]['practiceCategories']:
+                    practice_category_name = practice_category['practiceCategoryName']
+
+                    if practice_category_name in total_payment_by_practice_categories_dict:
+                        practice_category['totalPaymentInPercentageNationwide'] = round(practice_category['totalPaymentInDollars'] / total_payment_by_practice_categories_dict[practice_category["practiceCategoryName"]]['totalPaymentInDollars'] * 100, 2)
+                    practice_category['totalPaymentInPercentageWithinState'] = round(practice_category['totalPaymentInDollars'] / state_dict['totalPaymentInDollars'] * 100, 2)
+
+                statute.update(state_total_payment_by_practice_categories_dict[state][statute['statuteName']])
+                statute['totalPaymentInPercentageWithinState'] = round(statute['totalPaymentInDollars'] / state_dict['totalPaymentInDollars'] * 100, 2)
+                statute['totalPaymentInPercentageNationwide'] = round(statute['totalPaymentInDollars'] / total_payment_by_practice_category_grouping_dict[statute['statuteName']] * 100, 2)
+
+        if state in state_total_values_by_sub_programs_dict:
+            state_dict.update(state_total_values_by_sub_programs_dict[state])
+
+            for sub_program in state_dict["subPrograms"]:
+                sub_program_name = sub_program["subProgramName"]
+                if sub_program_name in total_values_by_sub_programs_dict:
+                    __calculate_and_add_percentages(state_dict, sub_program, total_values_by_sub_programs_dict, sub_program_name)
+
+                if sub_program_name in sub_programs_dict and "subSubPrograms" in sub_programs_dict[sub_program_name] and len(sub_programs_dict[sub_program_name]["subSubPrograms"]) > 0 and state in state_total_values_by_sub_sub_programs_dict:
+                    for sub_sub_program_dict in state_total_values_by_sub_sub_programs_dict[state]:
+                        for sub_sub_program_temp in sub_programs_dict[sub_program_name]["subSubPrograms"]:
+                            sub_sub_program_name = list(sub_sub_program_dict.keys())[0]
+                            sub_sub_program = sub_sub_program_dict[sub_sub_program_name]
+                            if sub_sub_program_name == sub_sub_program_temp["subSubProgramName"]:
+                                __calculate_and_add_percentages(state_dict, sub_sub_program, total_values_by_sub_sub_programs_dict, sub_sub_program_name)
+                                sub_program["subSubPrograms"].append(sub_sub_program)
+    # Create endpoint response dictionary
+    endpoint_response_list = []
+    for state in program_response_dict:
+        endpoint_response_list.append(program_response_dict[state])
+    response = {str(start_year) + "-" + str(end_year): endpoint_response_list}
+
+    return response
 
 def generate_title_xi_state_distribution_response(program_id, start_year, end_year):
     session = Session()
