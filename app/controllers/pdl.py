@@ -3916,10 +3916,15 @@ def generate_title_ii_county_distribution_response(program_id, start_year, end_y
     # Get total payment for each county based on practice category groupings
     county_total_payment_by_practice_category_grouping_query = (session.query(
         PaymentByCounty.county_fips_code.label('countyFips'),
+        County.name.label('countyName'),
+        County.state_code.label('state'),
         PracticeCategory.category_grouping.label('statuteName'),
         func.sum(PaymentByCounty.payment).label('totalPaymentInDollars')
     ).join(
         PracticeCategory, PaymentByCounty.practice_category_id == PracticeCategory.id
+    ).outerjoin(
+        County,
+        PaymentByCounty.county_fips_code == County.fips_code
     ).filter(
         PaymentByCounty.program_id == program_id,
         PaymentByCounty.year.between(start_year, end_year),
@@ -3927,10 +3932,10 @@ def generate_title_ii_county_distribution_response(program_id, start_year, end_y
     ).group_by(
         # PaymentByCounty.state_code, PracticeCategory.category_grouping,
         # PaymentByCounty.county_fips_code, County.name, County.state_code, Subtitle.name,
-        PaymentByCounty.county_fips_code, PracticeCategory.category_grouping,
+        PaymentByCounty.county_fips_code, PracticeCategory.category_grouping, County.name, County.state_code
     ).order_by(
         # PaymentByCounty.state_code, PracticeCategory.category_grouping
-        PaymentByCounty.county_fips_code, PracticeCategory.category_grouping,
+        PaymentByCounty.county_fips_code, PracticeCategory.category_grouping, County.name, County.state_code
     ))
 
     # Extract the column names
