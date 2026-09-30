@@ -930,7 +930,7 @@ paths:
             single:
               value: "314"
             multiple:
-              value: "314,315"
+              value: "314|315"
         - name: start_year
           in: query
           description: The start year for filtering the data.
