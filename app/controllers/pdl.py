@@ -815,6 +815,33 @@ def titles_title_ii_programs_eqip_ira_predicted_search():
         return data_json
 
 
+def titles_title_ii_programs_csp_county_distribution_search(practice_code=None):
+    min_year, max_year = cfg.TITLE_II_START_YEAR, cfg.TITLE_II_END_YEAR
+    start_year = request.args.get('start_year', type=int, default=min_year)
+    end_year = request.args.get('end_year', type=int, default=max_year)
+
+    program_id = get_program_id(TITLE_II_CSP_PROGRAM_NAME)
+    if program_id is None:
+        msg = {
+            "reason": "No record for the given program name " + TITLE_II_CSP_PROGRAM_NAME,
+            "error": "Not found: " + request.url,
+        }
+        logging.error("CSP: " + json.dumps(msg))
+        return rs_handlers.not_found(msg)
+
+    if start_year and end_year and start_year > end_year:
+        start_year, end_year = min_year, max_year  # Return all data if invalid range
+
+    if start_year is None:
+        start_year = min_year  # Default to earliest available year
+
+    if end_year is None:
+        end_year = max_year  # Default to latest available year
+
+    endpoint_response = generate_title_ii_county_distribution_response(program_id, start_year, end_year, practice_code=practice_code)
+
+    return endpoint_response
+
 # /pdl/titles/title-ii/programs/csp/state-distribution
 def titles_title_ii_programs_csp_state_distribution_search(practice_code=None):
     min_year, max_year = cfg.TITLE_II_START_YEAR, cfg.TITLE_II_END_YEAR
