@@ -3916,26 +3916,18 @@ def generate_title_ii_county_distribution_response(program_id, start_year, end_y
     # Get total payment for each county based on practice category groupings
     county_total_payment_by_practice_category_grouping_query = (session.query(
         PaymentByCounty.county_fips_code.label('countyFips'),
-        County.name.label('countyName'),
-        County.state_code.label('state'),
         PracticeCategory.category_grouping.label('statuteName'),
         func.sum(PaymentByCounty.payment).label('totalPaymentInDollars')
     ).join(
         PracticeCategory, PaymentByCounty.practice_category_id == PracticeCategory.id
-    ).outerjoin(
-        County,
-        PaymentByCounty.county_fips_code == County.fips_code
     ).filter(
         PaymentByCounty.program_id == program_id,
         PaymentByCounty.year.between(start_year, end_year),
         PracticeCategory.program_id == program_id
     ).group_by(
-        # PaymentByCounty.state_code, PracticeCategory.category_grouping,
-        # PaymentByCounty.county_fips_code, County.name, County.state_code, Subtitle.name,
-        PaymentByCounty.county_fips_code, PracticeCategory.category_grouping, County.name, County.state_code
+        PaymentByCounty.county_fips_code, PracticeCategory.category_grouping
     ).order_by(
-        # PaymentByCounty.state_code, PracticeCategory.category_grouping
-        PaymentByCounty.county_fips_code, PracticeCategory.category_grouping, County.name, County.state_code
+        PaymentByCounty.county_fips_code, PracticeCategory.category_grouping
     ))
 
     # Extract the column names
@@ -4423,22 +4415,31 @@ def generate_title_ii_county_distribution_response(program_id, start_year, end_y
     # Top-level query
     query = session.query(
         PaymentByCounty.county_fips_code.label('countyFips'),
+        County.name.label('countyName'),
+        County.state_code.label('state'),
         func.sum(PaymentByCounty.payment).label('totalPaymentInDollars'),
         func.cast(func.sum(PaymentByCounty.recipient_count).label('totalRecipients'), Integer),
         func.cast(func.sum(PaymentByCounty.farm_count).label('totalFarms'), Integer),
         func.cast(func.sum(PaymentByCounty.contract_count).label('totalContracts'), Integer),
         func.cast(func.sum(PaymentByCounty.base_acres).label('totalAreaInAcres'), Integer),
-        (func.cast(func.sum(PaymentByCounty.payment) / nationwide_total_payment * 100, Numeric(5, 2))).label('totalPaymentInPercentageNationwide'),
-        (func.cast(func.sum(PaymentByCounty.recipient_count) / nationwide_total_recipients * 100, Numeric(5, 2))).label('totalRecipientsInPercentageNationwide'),
-        (func.cast(func.sum(PaymentByCounty.farm_count) / nationwide_total_farms * 100, Numeric(5, 2))).label('totalFarmsInPercentageNationwide'),
-        (func.cast(func.sum(PaymentByCounty.contract_count) / nationwide_total_contracts * 100, Numeric(5, 2))).label('totalContractsInPercentageNationwide'),
-        (func.cast(func.sum(PaymentByCounty.base_acres) / nationwide_total_area_in_acres * 100, Numeric(5, 2))).label('totalAreaInPercentageNationwide')
+        (func.cast(func.sum(PaymentByCounty.payment) / nationwide_total_payment * 100, Numeric(5, 2))).label(
+            'totalPaymentInPercentageNationwide'),
+        (func.cast(func.sum(PaymentByCounty.recipient_count) / nationwide_total_recipients * 100, Numeric(5, 2))).label(
+            'totalRecipientsInPercentageNationwide'),
+        (func.cast(func.sum(PaymentByCounty.farm_count) / nationwide_total_farms * 100, Numeric(5, 2))).label(
+            'totalFarmsInPercentageNationwide'),
+        (func.cast(func.sum(PaymentByCounty.contract_count) / nationwide_total_contracts * 100, Numeric(5, 2))).label(
+            'totalContractsInPercentageNationwide'),
+        (func.cast(func.sum(PaymentByCounty.base_acres) / nationwide_total_area_in_acres * 100, Numeric(5, 2))).label(
+            'totalAreaInPercentageNationwide')
+    ).outerjoin(
+        County, PaymentByCounty.county_fips_code == County.fips_code
     ).filter(
         PaymentByCounty.program_id == program_id,
         PaymentByCounty.year.between(start_year, end_year),
         PaymentByCounty.sub_sub_program_id == None  # noqa: Needed for SQLAlchemy
     ).group_by(
-        PaymentByCounty.county_fips_code
+        PaymentByCounty.county_fips_code, County.name, County.state_code
     ).order_by(
         desc('totalPaymentInDollars')
     )
