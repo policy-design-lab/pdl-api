@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- Add EQIP county endpoint. [#378](https://github.com/policy-design-lab/pdl-api/issues/378)
+- Add EQIP county endpoint. [#357](https://github.com/policy-design-lab/pdl-api/issues/357)
 
 
 ## [1.2.0] - 2026-08-25
