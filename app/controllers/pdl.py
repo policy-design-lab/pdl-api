@@ -814,6 +814,7 @@ def titles_title_ii_programs_eqip_ira_predicted_search():
 
         return data_json
 
+# /pdl/titles/title-ii/programs/csp/county-distribution
 def titles_title_ii_programs_csp_county_distribution_search(practice_code=None):
     min_year, max_year = cfg.TITLE_II_START_YEAR, cfg.TITLE_II_END_YEAR
     start_year = request.args.get('start_year', type=int, default=min_year)
