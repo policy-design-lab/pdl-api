@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add EQIP county endpoint. [#357](https://github.com/policy-design-lab/pdl-api/issues/357)
 - Add CSP county endpoint. [#380](https://github.com/policy-design-lab/pdl-api/issues/380)
 
+### Changed
+- Gzip EQIP and CSP county-distribution responses. [#385](https://github.com/policy-design-lab/pdl-api/issues/385)
+
 ## [1.2.0] - 2026-08-25
 
 ### Fixed
