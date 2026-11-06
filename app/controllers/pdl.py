@@ -24,6 +24,7 @@ from app.models.subtitle import Subtitle
 from app.models.title import Title
 from app.models.commodity import Commodity
 from collections import defaultdict
+from app.models.payment_by_state_from_counties import PaymentByStateFromCounties
 import pandas as pd
 
 LANDING_PAGE_DATA_PATH = os.path.join("controllers", "data", "landingpage")
@@ -4526,21 +4527,21 @@ def generate_title_xi_state_distribution_response(program_id, start_year, end_ye
 
     # construct the query
     program_query = session.query(
-        Payment.state_code.label('state'),
+        PaymentByStateFromCounties.state_code.label('state'),
         Program.name.label('programName'),
-        Payment.year.label('year'),
-        Payment.base_acres.label('base_acres'),
-        Payment.premium_policy_count.label('premium_policy_count'),
-        Payment.liability_amount.label('liability_amount'),
-        Payment.premium_amount.label('premium_amount'),
-        Payment.premium_subsidy_amount.label('premium_subsidy_amount'),
-        Payment.indemnity_amount.label('indemnity_amount'),
-        Payment.farmer_premium_amount.label('farmer_premium_amount'),
-        Payment.loss_ratio.label('loss_ratio'),
-        Payment.net_farmer_benefit_amount.label('net_farmer_benefit_amount')).join(
-        Program, Payment.program_id == Program.id).filter(
-        Payment.program_id == program_id,
-        Payment.year.between(start_year, end_year)
+        PaymentByStateFromCounties.year.label('year'),
+        PaymentByStateFromCounties.base_acres.label('base_acres'),
+        PaymentByStateFromCounties.premium_policy_count.label('premium_policy_count'),
+        PaymentByStateFromCounties.liability_amount.label('liability_amount'),
+        PaymentByStateFromCounties.premium_amount.label('premium_amount'),
+        PaymentByStateFromCounties.premium_subsidy_amount.label('premium_subsidy_amount'),
+        PaymentByStateFromCounties.indemnity_amount.label('indemnity_amount'),
+        PaymentByStateFromCounties.farmer_premium_amount.label('farmer_premium_amount'),
+        PaymentByStateFromCounties.loss_ratio.label('loss_ratio'),
+        PaymentByStateFromCounties.net_farmer_benefit_amount.label('net_farmer_benefit_amount')).join(
+        Program, PaymentByStateFromCounties.program_id == Program.id).filter(
+        PaymentByStateFromCounties.program_id == program_id,
+        PaymentByStateFromCounties.year.between(start_year, end_year)
     )
 
     # execute the query
