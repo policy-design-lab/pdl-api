@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Switch Crop Insurance state distribution and summary endpoints to use the state-level view.. [#355](https://github.com/policy-design-lab/pdl-api/issues/355)
+
 ### Added
 - Add EQIP county endpoint. [#357](https://github.com/policy-design-lab/pdl-api/issues/357)
 
