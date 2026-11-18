@@ -1,8 +1,8 @@
 import gzip
 import json
-from decimal import Decimal
 
 import flask
+from connexion.apps.flask_app import FlaskJSONEncoder
 from flask import Response, jsonify, request
 
 
@@ -10,17 +10,11 @@ app = flask.Flask(__name__)
 app.config['JSON_SORT_KEYS'] = False
 
 
-def _json_default(o):
-    # Match connexion.apps.flask_app.FlaskJSONEncoder for Decimal values
-    # returned from SQLAlchemy Numeric aggregates.
-    if isinstance(o, Decimal):
-        return float(o)
-    raise TypeError(f'Object of type {o.__class__.__name__} is not JSON serializable')
-
-
 def gzip_json_response(data):
-    payload = json.dumps(data, separators=(',', ':'), default=_json_default).encode('utf-8')
-    response = Response(gzip.compress(payload), mimetype='application/json')
+    # Reuse Connexion's encoder (Decimal, date, datetime) so this shared helper
+    # stays compatible with normal API JSON responses.
+    payload = json.dumps(data, cls=FlaskJSONEncoder, separators=(',', ':')).encode('utf-8')
+    response = Response(gzip.compress(payload, compresslevel=6), mimetype='application/json')
     response.headers['Content-Encoding'] = 'gzip'
     return response
 
