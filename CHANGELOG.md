@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Update title II end year to be 2025. [#389](https://github.com/policy-design-lab/pdl-api/issues/389)
+
 ### Added
 - Add CSP county endpoint. [#380](https://github.com/policy-design-lab/pdl-api/issues/380)
 
