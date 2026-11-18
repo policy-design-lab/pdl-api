@@ -11,8 +11,8 @@ servers:
 - url: https://localhost
   description: Development server
 tags:
-- name: "Summary"
-  description: "Farm Bill summary data."
+- name: "FSA Yields"
+  description: "FSA Yields"
 - name: "All Programs"
   description: "All programs data."
 - name: "States"
@@ -42,6 +42,43 @@ tags:
 - name: "Title XI: Crop insurance"
   description: "Title XI Crop Insurance data."
 paths:
+  /pdl/yields:
+    get:
+      tags:
+        - "FSA and RMA Yields"
+      summary: Gets the FSA and RMA Yields for crops.
+      description: |
+        Returns the FSA or RMA crop yields in JSON format.
+      parameters:
+        - name: program
+          in: query
+          description: The parameter for searching by yield data source
+          required: true
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: crop
+          in: query
+          description: The parameter for searching by crop
+          required: true
+          style: form
+          explode: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: string
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
   /pdl/summary:
     get:
       tags:
