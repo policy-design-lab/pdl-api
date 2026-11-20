@@ -1,9 +1,22 @@
+import gzip
+import json
+
 import flask
-from flask import jsonify, request
+from connexion.apps.flask_app import FlaskJSONEncoder
+from flask import Response, jsonify, request
 
 
 app = flask.Flask(__name__)
 app.config['JSON_SORT_KEYS'] = False
+
+
+def gzip_json_response(data):
+    # Reuse Connexion's encoder (Decimal, date, datetime) so this shared helper
+    # stays compatible with normal API JSON responses.
+    payload = json.dumps(data, cls=FlaskJSONEncoder, separators=(',', ':')).encode('utf-8')
+    response = Response(gzip.compress(payload, compresslevel=6), mimetype='application/json')
+    response.headers['Content-Encoding'] = 'gzip'
+    return response
 
 
 @app.errorhandler(400)

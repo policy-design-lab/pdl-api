@@ -694,7 +694,7 @@ def titles_title_ii_programs_eqip_county_distribution_search(practice_code=None)
 
     endpoint_response = generate_title_ii_county_distribution_response(program_id, start_year, end_year, practice_code=practice_code)
 
-    return endpoint_response
+    return rs_handlers.gzip_json_response(endpoint_response)
 
 # /pdl/titles/title-ii/programs/eqip/summary
 def titles_title_ii_programs_eqip_summary_search():
@@ -840,7 +840,7 @@ def titles_title_ii_programs_csp_county_distribution_search(practice_code=None):
 
     endpoint_response = generate_title_ii_county_distribution_response(program_id, start_year, end_year, practice_code=practice_code)
 
-    return endpoint_response
+    return rs_handlers.gzip_json_response(endpoint_response)
 
 # /pdl/titles/title-ii/programs/csp/state-distribution
 def titles_title_ii_programs_csp_state_distribution_search(practice_code=None):
