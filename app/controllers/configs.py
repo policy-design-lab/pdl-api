@@ -37,7 +37,7 @@ class Config:
     TITLE_I_END_YEAR = int(os.getenv('TITLE_I_END_YEAR', '2023'))
 
     TITLE_II_START_YEAR = int(os.getenv('TITLE_II_START_YEAR', '2014'))
-    TITLE_II_END_YEAR = int(os.getenv('TITLE_II_END_YEAR', '2023'))
+    TITLE_II_END_YEAR = int(os.getenv('TITLE_II_END_YEAR', '2025'))
 
     CROP_INSURANCE_START_YEAR = int(os.getenv('CROP_INSURANCE_START_YEAR', '2014'))
     CROP_INSURANCE_END_YEAR = int(os.getenv('CROP_INSURANCE_END_YEAR', '2023'))
